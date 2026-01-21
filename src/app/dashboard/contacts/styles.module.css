@@ -506,16 +506,49 @@
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
+    height: 100vh;
+    /* Full viewport height on mobile */
+  }
+
+  .contentArea {
+    position: relative;
+    /* Context for absolute positioning */
   }
 
   .sidebar {
     width: 100%;
-    height: 40vh;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    /* Sit on top of detail view */
+    border-right: none;
+  }
+
+  .sidebarClosed {
+    display: none;
   }
 
   .detailView {
-    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    z-index: 10;
+  }
+
+  /* Adjust expand button to be more visible/accessible on mobile */
+  .expandButton {
+    top: 10px;
+    left: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .expandButton i {
+    transform: rotate(180deg);
   }
 }
 
@@ -533,4 +566,7 @@
     font-size: 0.875rem;
     padding: 0.5rem 0.25rem;
   }
+
+  /* Hide FAB in detail view (optional, but prevents overlap with content) */
+  /* We can leave it, or handle it in JS */
 }

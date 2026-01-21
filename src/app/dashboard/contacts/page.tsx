@@ -222,13 +222,19 @@ export default function ContactsPage() {
         <div className={styles.navTabsContainer}>
           <button
             className={`${styles.navTab} ${activeTab === 'contacts' ? styles.active : ''}`}
-            onClick={() => setActiveTab('contacts')}
+            onClick={() => {
+              setActiveTab('contacts');
+              setIsSidebarOpen(true);
+            }}
           >
             Contacts
           </button>
           <button
             className={`${styles.navTab} ${activeTab === 'companies' ? styles.active : ''}`}
-            onClick={() => setActiveTab('companies')}
+            onClick={() => {
+              setActiveTab('companies');
+              setIsSidebarOpen(true);
+            }}
           >
             Companies
           </button>
@@ -314,7 +320,10 @@ export default function ContactsPage() {
                     <div
                       key={contact.id}
                       className={`${styles.listItem} ${selectedContact?.id === contact.id ? styles.selected : ''}`}
-                      onClick={() => setSelectedContact(contact)}
+                      onClick={() => {
+                        setSelectedContact(contact);
+                        if (window.innerWidth <= 768) setIsSidebarOpen(false);
+                      }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>{`${contact.first_name} ${contact.last_name}`}</h3>
@@ -343,7 +352,10 @@ export default function ContactsPage() {
                     <div
                       key={company.id}
                       className={`${styles.listItem} ${selectedCompany?.id === company.id ? styles.selected : ''}`}
-                      onClick={() => setSelectedCompany(company)}
+                      onClick={() => {
+                        setSelectedCompany(company);
+                        if (window.innerWidth <= 768) setIsSidebarOpen(false);
+                      }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>{company.name}</h3>
@@ -434,6 +446,7 @@ export default function ContactsPage() {
           onClose={() => setShowContactModal(false)}
           onSuccess={handleCreateSuccess}
           companyId={activeTab === 'companies' ? selectedCompany?.id : undefined}
+          isOpen={true}
         />
       )}
 
@@ -441,6 +454,7 @@ export default function ContactsPage() {
         <CompanyModal
           onClose={() => setShowCompanyModal(false)}
           onSuccess={handleCreateSuccess}
+          isOpen={true}
         />
       )}
 

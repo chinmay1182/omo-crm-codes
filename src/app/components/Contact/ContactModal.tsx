@@ -22,9 +22,10 @@ type ContactModalProps = {
   userId?: string;
   contact?: Contact;
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: (id?: string, name?: string) => void;
   companyId?: string;
   companyName?: string;
+  isOpen: boolean;
 };
 
 type CompanyOption = {
@@ -37,7 +38,8 @@ export default function ContactModal({
   onClose,
   onSuccess,
   companyId,
-  companyName
+  companyName,
+  isOpen
 }: ContactModalProps) {
   // Debug logging
 
@@ -219,7 +221,7 @@ export default function ContactModal({
       // Add error handling for onSuccess callback
       try {
         if (typeof onSuccess === 'function') {
-          onSuccess();
+          onSuccess(result.id, `${result.first_name} ${result.last_name}`);
         } else {
           console.error('onSuccess is not a function:', typeof onSuccess, onSuccess);
           // Don't throw an error, just log it and continue
@@ -237,6 +239,8 @@ export default function ContactModal({
       setIsSubmitting(false);
     }
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className={styles.modalOverlay}>

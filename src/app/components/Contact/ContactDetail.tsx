@@ -705,6 +705,7 @@ export default function ContactDetail({
           }}
           companyId={contact.company_id}
           companyName={contact.company_name}
+          isOpen={true}
         />
       )}
     </div>

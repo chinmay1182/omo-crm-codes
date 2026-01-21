@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { toast, Toaster } from 'react-hot-toast';
 import styles from './email-setup.module.css';
-import Gatekeeper from '../components/Gatekeeper';
+import Gatekeeper from '../components/Auth/Gatekeeper';
 
 type EmailConfig = {
     id: string;

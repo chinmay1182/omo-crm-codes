@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import styles from './LeadForm.module.css';
-import ContactModal from '../ContactModal/ContactModal';
-import CompanyModal from '../CompanyModal/CompanyModal';
+import ContactModal from '../Contact/ContactModal';
+import CompanyModal from '../Company/CompanyModal';
 import ServiceCreationModal from '../ServiceCreationModal/ServiceCreationModal';
 import SourceModal from '../SourceModal/SourceModal';
 
@@ -256,7 +256,8 @@ export default function LeadForm({ initialData }: LeadFormProps) {
     }
   };
 
-  const handleContactCreated = async (contactId: string, contactName: string) => {
+  const handleContactCreated = async (contactId?: string, contactName?: string) => {
+    if (!contactId) return;
     // Refresh contacts list
     const contactsRes = await fetch('/api/contacts');
     const contactsData = await contactsRes.json();
@@ -271,7 +272,8 @@ export default function LeadForm({ initialData }: LeadFormProps) {
     setShowContactModal(false);
   };
 
-  const handleCompanyCreated = async (companyId: string, companyName: string) => {
+  const handleCompanyCreated = async (companyId?: string, companyName?: string) => {
+    if (!companyId) return;
     // Refresh companies list
     const companiesRes = await fetch('/api/companies');
     const companiesData = await companiesRes.json();

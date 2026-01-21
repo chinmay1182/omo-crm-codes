@@ -1497,6 +1497,7 @@ export default function AgentWhatsApp({ agentData }: AgentWhatsAppProps) {
             first_name: chats.find((c) => c.id === activeChat)?.name?.split(' ')[0] || "",
             last_name: chats.find((c) => c.id === activeChat)?.name?.split(' ').slice(1).join(' ') || ""
           }}
+          isOpen={true}
         />
       )}
 

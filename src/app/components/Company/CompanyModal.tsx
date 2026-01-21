@@ -18,13 +18,15 @@ type Company = {
 type CompanyModalProps = {
   company?: Company;
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: (id?: string, name?: string) => void;
+  isOpen: boolean;
 };
 
 export default function CompanyModal({
   company,
   onClose,
-  onSuccess
+  onSuccess,
+  isOpen
 }: CompanyModalProps) {
   const [formData, setFormData] = useState<Company>({
     name: '',
@@ -89,7 +91,8 @@ export default function CompanyModal({
         throw new Error('Failed to save company');
       }
 
-      onSuccess();
+      const result = await response.json();
+      onSuccess(result.id, result.name);
     } catch (err) {
       console.error('Error saving company:', err);
       setError('Failed to save company. Please try again.');
@@ -97,6 +100,8 @@ export default function CompanyModal({
       setIsSubmitting(false);
     }
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className={styles.modalOverlay}>
