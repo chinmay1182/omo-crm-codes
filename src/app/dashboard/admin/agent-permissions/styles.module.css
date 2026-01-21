@@ -1,0 +1,421 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.header h4 {
+  font-size: 1.3rem;
+  margin: 0;
+  color: #333;
+}
+
+.header p {
+  font-size: 15px;
+  margin-top: 8px;
+  color: #666;
+}
+
+.headerActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.primaryButton {
+  background-color: #15426d;
+  color: white;
+  border: none;
+  padding: 0.55rem 1.3rem;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background-color: #12385a;
+}
+
+.primaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  background-color: white;
+  color: #15426d;
+  border: 1px solid #15426d;
+  padding: 0.55rem 1.3rem;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.secondaryButton:hover:not(:disabled) {
+  background-color: #f0f7ff;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.agentsList {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.agentsList h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+}
+
+.agentItem {
+  padding: 1rem;
+  border: 1px solid #e1e5e9;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.agentItem:hover {
+  background: #f8f9fa;
+  border-color: #4caf50;
+}
+
+.agentItem.selected {
+  background: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.agentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.agentInfo strong {
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+.agentInfo span {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.permissionsPanel {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.agentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+
+}
+
+.agentHeader h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.permissionLevels {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.permissionLevels label {
+  font-weight: 500;
+  color: #495057;
+}
+
+.permissionLevels select {
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: white;
+}
+
+.serviceSection {
+  margin-bottom: 2rem;
+}
+
+.serviceSection h4 {
+  margin: 0 0 1rem 0;
+  color: #495057;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.permissionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.permissionItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.permissionItem:hover {
+  background: #f8f9fa;
+}
+
+.permissionItem input[type="checkbox"] {
+  margin: 0;
+}
+
+.permissionItem span {
+  font-size: 0.9rem;
+  color: #495057;
+  text-transform: capitalize;
+}
+
+.actions {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e1e5e9;
+  text-align: right;
+}
+
+.saveButton {
+  padding: 0.75rem 2rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.saveButton:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.saveButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.refreshButton {
+  background: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+  transition: background-color 0.2s;
+}
+
+.refreshButton:hover:not(:disabled) {
+  background: #138496;
+}
+
+.refreshButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .agentHeader {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .permissionsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modalContent h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-weight: 500;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancelButton {
+  padding: 0.75rem 1.5rem;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.createButton {
+  padding: 0.75rem 1.5rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.createButton:disabled {
+  background: #94d3a2;
+  cursor: not-allowed;
+}
+
+.createButton:hover:not(:disabled) {
+  background: #218838;
+}
+
+.credentialsBox {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  margin: 1.5rem 0;
+}
+
+.credentialRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.credentialRow:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.credentialLabel {
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.credentialValue {
+  font-family: monospace;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+/* Floating Action Button */
+.floatingButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #15426d;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.floatingButton:hover {
+  background-color: #12385a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}

@@ -1,0 +1,166 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.editButton {
+  padding: 8px 16px;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.editButton:hover {
+  background-color: #0b7dda;
+}
+
+.deleteButton {
+  padding: 8px 16px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.deleteButton:hover {
+  background-color: #da190b;
+}
+
+.deleteButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #ef9a9a;
+}
+
+.detailCard {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.detailRow {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: bold;
+  width: 150px;
+  color: #555;
+}
+
+.value {
+  flex: 1;
+}
+
+.detailSection {
+  margin-top: 20px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.description {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Priority styles */
+.priority {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+.highPriority {
+  background-color: #ffdddd;
+  color: #d32f2f;
+}
+
+.mediumPriority {
+  background-color: #fff4e5;
+  color: #ff9800;
+}
+
+.lowPriority {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+/* Stage styles */
+.stage {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+.stageNew {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.stageQualify {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.stageProposal {
+  background-color: #fff8e1;
+  color: #ffa000;
+}
+
+.stageReview {
+  background-color: #f3e5f5;
+  color: #8e24aa;
+}
+
+.stageWON {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.stageDROP {
+  background-color: #ffebee;
+  color: #c62828;
+  text-decoration: line-through;
+}

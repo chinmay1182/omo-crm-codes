@@ -1,0 +1,154 @@
+.tagDisplay, .tagEditor {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.tagHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+}
+
+.tagIcon {
+  color: #007bff;
+  font-size: 1rem;
+}
+
+.tagLabel {
+  font-weight: 600;
+  color: #495057;
+  flex: 1;
+}
+
+.editButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.editButton:hover {
+  background: #0056b3;
+}
+
+.currentTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  border-radius: 12px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.contactTag {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border-color: #bbdefb;
+}
+
+.companyTag {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+  border-color: #ce93d8;
+}
+
+.noTags {
+  color: #6c757d;
+  font-style: italic;
+  font-size: 0.875rem;
+}
+
+.tagOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.tagOption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.tagOption:hover {
+  background-color: #e9ecef;
+}
+
+.tagCheckbox {
+  margin: 0;
+}
+
+.noTagsAvailable {
+  color: #6c757d;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+  margin: 0;
+}
+
+.tagActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.cancelButton {
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #545b62;
+}
+
+.saveButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover:not(:disabled) {
+  background: #218838;
+}
+
+.cancelButton:disabled,
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

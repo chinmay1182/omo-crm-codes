@@ -1,0 +1,70 @@
+.locationListContainer {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.loading, .error, .noLocations {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.loading {
+  color: #64748b;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.noLocations {
+  color: #64748b;
+}
+
+.locationsWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.locationsMap {
+  height: 300px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.locationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.locationItem {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.locationItem:last-child {
+  border-bottom: none;
+}
+
+.locationName {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.locationAddress {
+  margin: 0 0 0.25rem 0;
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+.locationCoords {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-family: monospace;
+}

@@ -1,0 +1,290 @@
+/* Agent Info Dashboard Styles - Matching Project Standards */
+.container {
+  display: flex;
+  height: 100%;
+  /* Adjust for header if needed, or 100vh if nested correctly */
+  width: 100%;
+  background-color: #fff;
+  font-family: 'Open Sauce One', sans-serif;
+  overflow: hidden;
+}
+
+/* Sidebar (30%) - User Profile Info */
+.sidebar {
+  width: 20%;
+  min-width: 300px;
+  max-width: 400px;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  overflow-y: auto;
+  padding: 24px;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Main Content (70%) - Permissions */
+.mainContent {
+  flex: 1;
+  background-color: #f8fafc;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.mainContent::-webkit-scrollbar {
+  display: none;
+}
+
+/* Profile Section Styles */
+.profileHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.avatarCircle {
+  width: 70px;
+  height: 70px;
+  color: white;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.profileName {
+  font-size: 20px;
+  font-weight: 300;
+  color: #1e293b;
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+
+.profileEmail {
+  color: #64748b;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.infoGroup {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.infoGroup:last-child {
+  border-bottom: none;
+}
+
+.label {
+  display: block;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 300;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-size: 16px;
+  color: #334155;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.agentTypeBadge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 300;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+/* Action Buttons in Sidebar */
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.refreshButton {
+  background: transparent;
+  color: #11a454;
+  border: 1px solid #11a454;
+  border-radius: 50px;
+  padding: 0.6rem;
+  font-size: 15px;
+  font-weight: 300;
+  font-family: 'Open Sauce One', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-transform: capitalize;
+}
+
+.manageButton {
+  background: #FFCC00;
+  color: #000;
+  border: none;
+  border-radius: 50px;
+  padding: 0.6rem;
+  font-size: 15px;
+  font-weight: 300;
+  font-family: 'Open Sauce One', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.manageButton:hover {
+  background: #E6B800;
+  transform: translateY(-1px);
+}
+
+
+/* Permissions Grid in Main Content */
+.sectionTitle {
+  font-size: 20px;
+  color: #1e293b;
+  font-weight: 300;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-transform: capitalize;
+}
+
+.permissionsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.serviceCard {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  /* border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); */
+  transition: transform 0.2s;
+}
+
+.serviceCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.serviceHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-weight: 300;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.serviceIcon {
+  width: 32px;
+  height: 32px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+}
+
+.serviceName {
+  font-weight: 300;
+  color: #1e293b;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.permissionList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.permissionTag {
+  background: #f8fafc;
+  border: none;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+
+.noPermissions {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+  background: white;
+  border-radius: 12px;
+  border: 1px dashed #e2e8f0;
+}
+
+/* Loading State */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 16px;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .mainContent {
+    height: auto;
+    overflow: visible;
+  }
+}

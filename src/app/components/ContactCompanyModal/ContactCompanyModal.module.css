@@ -1,0 +1,173 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 8px;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #202124;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #5f6368;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background-color: #f5f5f5;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.detailRow strong {
+  color: #5f6368;
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.detailRow span {
+  color: #202124;
+  flex: 1;
+  text-align: right;
+}
+
+.detailRow span a {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+.detailRow span a:hover {
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  justify-content: center;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  min-width: 100px;
+  justify-content: center;
+}
+
+.actionButton:first-child {
+  background-color: #4285f4;
+  color: white;
+}
+
+.actionButton:first-child:hover:not(:disabled) {
+  background-color: #3367d6;
+}
+
+.actionButton:nth-child(2) {
+  background-color: #25d366;
+  color: white;
+}
+
+.actionButton:nth-child(2):hover:not(:disabled) {
+  background-color: #1da851;
+}
+
+.actionButton:last-child {
+  background-color: #34a853;
+  color: white;
+}
+
+.actionButton:last-child:hover:not(:disabled) {
+  background-color: #2d8f47;
+}
+
+.actionButton:disabled {
+  background-color: #f5f5f5;
+  color: #9aa0a6;
+  cursor: not-allowed;
+}
+
+.actionButton i {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    margin: 1rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+  
+  .actionButton {
+    width: 100%;
+  }
+  
+  .detailRow {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .detailRow span {
+    text-align: left;
+  }
+}

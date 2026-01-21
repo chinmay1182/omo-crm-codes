@@ -1,0 +1,150 @@
+.meetingListContainer {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  background-color: white;
+}
+
+.loading,
+.error,
+.noMeetings {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.loading {
+  color: #64748b;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.noMeetings {
+  color: #64748b;
+}
+
+.meetingList {
+  list-style: none;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  padding: 0;
+  margin: 0;
+}
+
+.meetingItem {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.meetingItem:last-child {
+  border-bottom: none;
+}
+
+.meetingInfo {
+  margin-bottom: 0.75rem;
+}
+
+.meetingTitle {
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.meetingTime {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.meetingLocation {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.meetingDescription {
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  color: #475569;
+  white-space: pre-wrap;
+}
+
+.meetingParticipants {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.meetingActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.deleteButton {
+  padding: 0.375rem 0.75rem;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #dc2626;
+}
+
+.meetLink {
+  color: #1a73e8;
+  text-decoration: none;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.meetLink:hover {
+  text-decoration: underline;
+}
+
+.meetLink::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a73e8'%3E%3Cpath d='M6 12c0-1.657 1.347-3 3-3s3 1.343 3 3-1.347 3-3 3-3-1.343-3-3zm16 0c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10zm-2 0c0-4.411-3.589-8-8-8S4 7.589 4 12s3.589 8 8 8 8-3.589 8-8z'/%3E%3C/svg%3E");
+  background-size: contain;
+}
+
+.note {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.checkbox {
+  margin-right: 0.5rem;
+}

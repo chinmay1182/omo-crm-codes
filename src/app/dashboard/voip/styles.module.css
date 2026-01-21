@@ -1,0 +1,1307 @@
+.dashboardContainer {
+  font-family: 'Open Sauce One', sans-serif;
+  padding: 2rem;
+  margin: 0 auto;
+  color: #333;
+  max-width: 800px;
+
+  letter-spacing: -1px;
+}
+
+.cpaasHeading {
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.statusContainer {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 15px;
+  border-left: 4px solid #4caf50;
+}
+
+.statusContainer strong {
+  color: #4caf50;
+}
+
+.errorStatus {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  display: inline-block;
+  border: 1px solid #ef9a9a;
+}
+
+.tabsContainer {
+  background-color: white;
+  border-radius: 8px;
+  letter-spacing: -0.75px;
+}
+
+.voipFlex {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+/* New 3-column grid layout */
+.voipGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.column {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.column h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 0.5rem;
+}
+
+.featureSection {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #4caf50;
+}
+
+.featureSection h4 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.featureSection p {
+  margin: 0 0 0.5rem 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.featureSection ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.featureSection li {
+  margin-bottom: 0.25rem;
+}
+
+/* Compact styles for VoIP Controls in 3-column layout */
+.compactContainer {
+  padding: 0;
+}
+
+.compactSection {
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+}
+
+.settingsTitle {
+  font-size: 1.3rem;
+  color: #333;
+  margin: 0;
+}
+
+.settingsDescription {
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.compactStatus {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  border-left: 4px solid #4caf50;
+}
+
+.compactStatus strong {
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+.statusText {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin: 0.25rem 0;
+  font-family: monospace;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+/* Admin container */
+.adminContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Split column for combining multiple sections */
+.splitColumn {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.halfSection {
+  flex: 1;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.halfSection:last-child {
+  margin-bottom: 0;
+}
+
+.sectionHeading {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+/* Responsive design for 3-column layout */
+@media (max-width: 1200px) {
+  .voipGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .column:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .splitColumn {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .halfSection {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .voipGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .column {
+    padding: 1rem;
+  }
+
+  .splitColumn {
+    flex-direction: column;
+  }
+
+  .halfSection {
+    margin-bottom: 1rem;
+  }
+
+  .halfSection:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.tabButtons {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  letter-spacing: -0.75px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Keypad Button Styles - Rounded */
+.keypadButton {
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 1.25rem;
+  padding: 0.75rem 0;
+  border-radius: 50%;
+  /* Changed from 50px to 50% for perfect circles */
+  min-width: 80px;
+  height: 80px;
+  /* Added fixed height to match width */
+  background-color: #d6e4f0;
+  color: #555;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  /* Ensures perfect circle */
+}
+
+/* Adjust the keypad container for better spacing with round buttons */
+.keypadContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  user-select: none;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  height: fit-content;
+  min-width: 300px;
+  justify-items: center;
+  /* Center the round buttons */
+}
+
+/* Clear button remains rectangular */
+.keypadClearButton {
+  grid-column: span 3;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  font-size: 15px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  /* Keep rectangular shape */
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  /* Full width */
+}
+
+.keypadClearButton:hover {
+  background-color: #d32f2f;
+}
+
+.keypadInput {
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Open Sauce One', sans-serif;
+
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+  transition: all 0.2s;
+}
+
+.keypadInput:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.activeTab {
+  color: rgb(239, 164, 52);
+  letter-spacing: -0.75px;
+  font-weight: 500;
+  border-radius: 50px;
+  background-color: #f8f9fa;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 15px;
+  font-family: 'Open Sauce One', sans-serif;
+
+  margin-bottom: 0.5rem;
+  transition: all 0.2s;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-family: 'Open Sauce One', sans-serif;
+
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.buttonSecondary {
+  background-color: #f5f5f5;
+  color: #555;
+}
+
+.buttonSecondary:hover {
+  background-color: #e0e0e0;
+}
+
+.buttonDanger {
+  background-color: #f44336;
+}
+
+.buttonDanger:hover {
+  background-color: #d32f2f;
+}
+
+.controlsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.statusDisplay {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.tabNav {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
+.fileInput {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.loading,
+.noData {
+  color: #666;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #ef9a9a;
+}
+
+.contactsList,
+.historyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 0.75rem;
+}
+
+.contactItem:last-child {
+  border-bottom: none;
+}
+
+.contactAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarIcon {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.contactInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.contactName {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contactNumber {
+  font-size: 0.85rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contactCompany {
+  font-size: 0.75rem;
+  color: #888;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.callButton {
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.callButton:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.callIcon {
+  font-size: 1rem;
+}
+
+.historyItem {
+  padding: 1rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.historyItem:last-child {
+  border-bottom: none;
+}
+
+.historyCaller {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.historyParty {
+  font-weight: 500;
+}
+
+.historyArrow {
+  color: #666;
+}
+
+.historyDetails {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.historySuccess {
+  color: #4caf50;
+}
+
+.historyFailed {
+  color: #f44336;
+}
+
+.historyReference {
+  font-size: 0.8rem;
+  color: #888;
+  font-family: monospace;
+}
+
+@media (max-width: 768px) {
+  .dashboardContainer {
+    padding: 1rem;
+  }
+
+  .tabButtons {
+    flex-direction: column;
+  }
+
+  .tabButton {
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  .activeTab {
+    border-bottom: 2px solid #4caf50;
+    border-left: 4px solid #4caf50;
+  }
+
+  .button {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .controlsContainer {
+    flex-direction: column;
+  }
+}
+
+/* 
+Agent-specific styles */
+.agentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  margin-bottom: 3rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.agentInfo h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+}
+
+.refreshButton {
+  background: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-start;
+}
+
+.refreshButton:hover:not(:disabled) {
+  background: #138496;
+}
+
+.refreshButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.permissions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.permissionsLabel {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.permissionTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.permissionTag {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+  transition: all 0.2s ease;
+}
+
+.permissionTag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
+}
+
+.noPermission {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+  color: #666;
+}
+
+.noPermission h2 {
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+.debugInfo {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+}
+
+.debugInfo h4 {
+  color: #495057;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.debugInfo p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.debugInfo pre {
+  background: #e9ecef;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+.transferSelect {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.permissionInfo {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.permissionInfo h4 {
+  margin: 0 0 1rem 0;
+  color: #15426d;
+}
+
+.permissionInfo ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.permissionInfo li {
+  margin-bottom: 0.5rem;
+  color: #666;
+  text-transform: capitalize;
+}
+
+.incomingPopup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: 2px solid #4caf50;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 250px;
+}
+
+.incomingPopup strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4caf50;
+}
+
+.incomingPopup p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.incomingPopup button {
+  margin: 0.5rem 0.5rem 0 0;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/*
+ Call History Panel Styles */
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e1e5e9;
+}
+
+.historyControls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filterSelect {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background: white;
+}
+
+.refreshButton {
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.refreshButton:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.refreshButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.exportButton {
+  padding: 0.5rem 1rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.exportButton:hover:not(:disabled) {
+  background: #218838;
+}
+
+.exportButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Contacts Search Styles */
+.contactsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e1e5e9;
+}
+
+.searchContainer {
+  flex: 1;
+  max-width: 400px;
+  margin-left: 1rem;
+}
+
+.searchInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: #6c757d;
+  font-size: 0.9rem;
+  z-index: 1;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  background: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.contactsListContainer {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+}
+
+.contactsCount {
+  padding: 0.75rem 1rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.clearSearchButton {
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.clearSearchButton:hover {
+  background: #0056b3;
+}
+
+/* Responsive design for contacts search */
+@media (max-width: 768px) {
+  .contactsHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .searchContainer {
+    margin-left: 0;
+    max-width: none;
+  }
+}
+
+.historyList {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+}
+
+.callLogItem {
+  padding: 1rem;
+  border-bottom: 1px solid #f1f3f4;
+  transition: background-color 0.2s ease;
+}
+
+.callLogItem:hover {
+  background-color: #f8f9fa;
+}
+
+.callLogItem:last-child {
+  border-bottom: none;
+}
+
+.callLogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.callDirection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statusIcon {
+  font-size: 1.2rem;
+}
+
+.callNumbers {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+.callStatus {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.callLogDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.callTime,
+.callReference,
+.callCli {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.loadingState,
+.errorState,
+.emptyState {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.retryButton,
+.clearFilterButton {
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.retryButton:hover,
+.clearFilterButton:hover {
+  background: #0056b3;
+}
+
+/* Responsive design for call history */
+@media (max-width: 768px) {
+  .historyHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .historyControls {
+    justify-content: space-between;
+  }
+
+  .callLogDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .callLogHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* 
+CLI Number Selection Styles */
+
+.cliSelection label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-weight: 500;
+}
+
+.cliSelect {
+  width: 100%;
+  padding: 0.55rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 15px;
+  background: white;
+  color: #495057;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.cliSelect:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+.cliSelect option {
+  padding: 0.5rem;
+}
+
+.cliNumberInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  font-family: "Courier New", monospace;
+  text-align: center;
+  cursor: not-allowed;
+}
+
+/* Settings Bar Styles */
+.settingsBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+
+  background: #ffffff;
+
+  margin: 0 auto;
+}
+
+.settingsTitle {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.settingsDescription {
+  font-size: 0.95rem;
+  color: #6c757d;
+  margin: 0.25rem 0 0 0;
+  font-weight: 400;
+}
+
+.settingsButtons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settingsButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border: none;
+  border-radius: 50px;
+  background: #212529;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+/* CLI Selection in Settings Bar */
+.cliSelection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 15px;
+  padding: 0.55rem 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.cliSelection label {
+  font-size: 0.9rem;
+  font-weight: 300;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.cliSelect {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  min-width: 180px;
+  background: white;
+  color: #495057;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.cliSelect:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .settingsBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .settingsButtons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cliSelection {
+    order: -1;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .cliSelect {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .settingsBar {
+    padding: 1rem;
+  }
+
+  .settingsTitle {
+    font-size: 1.3rem;
+  }
+
+  .settingsButtons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .settingsButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cliSelection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .cliSelect {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .settingsBar {
+    padding: 0.75rem;
+  }
+
+  .settingsTitle {
+    font-size: 1.2rem;
+  }
+
+  .settingsDescription {
+    font-size: 0.9rem;
+  }
+}

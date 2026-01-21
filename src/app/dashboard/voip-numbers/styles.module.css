@@ -1,0 +1,319 @@
+.numbersContainer {
+  max-width: 1400px;
+  font-family: 'Open Sauce One', sans-serif;
+
+  margin: 0 auto;
+  padding: 1rem;
+  min-height: calc(100vh - 120px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  color: #333;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.addButton {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Open Sauce One', sans-serif;
+
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.addButton:hover {
+  background-color: #1976d2;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.searchContainer {
+  flex: 1;
+  min-width: 300px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Open Sauce One', sans-serif;
+
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.filterSelect {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Open Sauce One', sans-serif;
+
+  min-width: 200px;
+}
+
+.numbersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.numberCard {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.numberCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.numberInfo {
+  flex: 1;
+}
+
+.displayName {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.phoneNumber {
+  margin: 0 0 0.25rem 0;
+  color: #2196f3;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.provider {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.badges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.defaultBadge {
+  background-color: #2196f3;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statusBadge.active {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.statusBadge.inactive {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.statusBadge.suspended {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.cardContent {
+  margin-bottom: 1.5rem;
+}
+
+.configInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.configInfo p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.configInfo strong {
+  color: #333;
+}
+
+.activeText {
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.inactiveText {
+  color: #f57c00;
+  font-weight: 500;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.defaultButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Open Sauce One', sans-serif;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.2s;
+}
+
+.defaultButton:hover {
+  background-color: #388e3c;
+}
+
+.editButton,
+.deleteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+.editButton {
+  color: #28a745;
+}
+
+.editButton:hover {
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.deleteButton {
+  color: #dc3545;
+}
+
+.deleteButton:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 2px dashed #ddd;
+}
+
+.noResults p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+}
+
+.loadingSpinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #2196f3;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .numbersContainer {
+    padding: 0.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .numbersGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardActions {
+    flex-wrap: wrap;
+  }
+}

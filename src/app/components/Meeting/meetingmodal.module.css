@@ -1,0 +1,192 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContainer {
+  background-color: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h4 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #64748b;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  color: #334155;
+}
+
+.modalContent {
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.meetingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.inputField {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease;
+}
+
+.inputField:hover {
+  border-color: #cbd5e1;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.textareaField {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  resize: vertical;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  transition: border-color 0.15s ease;
+}
+
+.textareaField:hover {
+  border-color: #cbd5e1;
+}
+
+.textareaField:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.formRow .formGroup {
+  flex: 1;
+}
+
+.modalFooter {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.submitButton {
+  padding: 0.625rem 1.25rem;
+  background-color: #3b82f6;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.submitButton:hover {
+  background-color: #2563eb;
+}
+
+.submitButton:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  padding: 0.625rem 1.25rem;
+  background-color: white;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.cancelButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+}

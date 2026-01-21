@@ -1,0 +1,164 @@
+.container {
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.ticketTitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+}
+
+.ticketMeta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Ticket Info */
+.infoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.infoLabel {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.infoValue {
+    font-size: 15px;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+/* Comments Section */
+.commentsSection {
+    margin-top: 2rem;
+}
+
+.comment {
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #fff;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.commentBody {
+    font-size: 15px;
+    color: #334155;
+    line-height: 1.5;
+}
+
+.commentInputArea {
+    margin-top: 1.5rem;
+}
+
+.textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: inherit;
+    margin-bottom: 8px;
+}
+
+.submitButton {
+    background: #15426d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Sidebar in detail view */
+.sidebarSection {
+    margin-bottom: 2rem;
+}
+
+.sidebarTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: white;
+}
+
+.slaBadge {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Status Colors (reuse from main) */
+.statusBadge {
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+}
+
+.statusOpen {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.statusClosed {
+    background: #dcfce7;
+    color: #15803d;
+}

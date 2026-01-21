@@ -1,0 +1,100 @@
+.container {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    font-family: 'Open Sauce One', sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 16px;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #15426d 0%, #0f2f4a 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.submitButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 47, 74, 0.2);
+}
+
+.submitButton:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.successMessage {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.successIcon {
+    font-size: 48px;
+    color: #22c55e;
+    margin-bottom: 1rem;
+}

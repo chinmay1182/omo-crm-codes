@@ -1,0 +1,424 @@
+.servicesContainer {
+  font-family: 'Open Sauce One', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  /* Fill parent, minus header offset if needed */
+  overflow: hidden;
+  background-color: white;
+  /* Or #faf9fa if you want background like detailView */
+}
+
+/* EXACT Top Navigation Bar from Contacts */
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Allow spacing between tabs and actions */
+  padding: 0 24px;
+  height: 40px;
+  border-bottom: 1px solid #e0e0e0;
+  background: white;
+  flex-shrink: 0;
+}
+
+.navTabsContainer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 100%;
+}
+
+.navTab {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: #212121;
+  font-size: 14px;
+  font-weight: 300;
+  background: none;
+  border: none;
+  padding: 0 4px;
+  transition: all 0.2s;
+}
+
+
+
+.navTab.active {
+  color: #11a454;
+  border-bottom-color: #11a454;
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* Space between search, filter, export, manage */
+}
+
+/* Search */
+.searchWrapper {
+  position: relative;
+  width: 220px;
+  margin-right: auto;
+  margin-left: 24px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0;
+  font-size: 18px;
+  color: #7b8188;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.searchInput {
+  width: 100%;
+  padding: 6px 0 6px 30px;
+  border: none;
+  border-bottom: 1px solid #e1e5e9;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 14px;
+  outline: none;
+  background: transparent;
+  transition: all 0.2s;
+  color: #212121;
+  height: 32px;
+  letter-spacing: -0.2px;
+  border-radius: 0;
+}
+
+.searchInput:focus,
+.searchInput:hover {
+  border-bottom-color: #212121;
+}
+
+.searchInput::placeholder {
+  color: #aeb4b9;
+  font-weight: 300;
+}
+
+/* Filter Select */
+.filterWrapper {
+  position: relative;
+}
+
+.filterSelect {
+  padding: 6px 24px 6px 0;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 14px;
+  /* Updated to 14px */
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  min-width: 140px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  background-size: 16px;
+  font-weight: 300;
+  color: #212121;
+  height: 32px;
+}
+
+.filterSelect:focus {
+  border-bottom-color: #11a454;
+}
+
+.tagsButton {
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  /* Already 14px, confirmed */
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #212121;
+  gap: 8px;
+  transition: all 0.2s;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.tagsButton i {
+  font-size: 18px;
+  /* Already 18px, confirmed */
+  color: #212121;
+}
+
+
+/* Table Area */
+.tableContainer {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+}
+
+.servicesTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.servicesTable thead {
+  background-color: #f8f9fa;
+}
+
+.servicesTable th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 300;
+  font-size: 14px;
+  color: #666;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.servicesTable td {
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-weight: 300;
+}
+
+.servicesTable tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.serviceRow {
+  transition: background-color 0.2s;
+}
+
+
+
+/* Badges & Tags */
+.typeBadge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 250px;
+}
+
+.serviceTag {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  background-color: #f0fdf4;
+  color: #166534;
+  border: 1px solid #dcfce7;
+}
+
+.categoryTag {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  background-color: #fff7ed;
+  color: #9a3412;
+  border: 1px solid #ffedd5;
+}
+
+.noTags {
+  color: #cbd5e1;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.totalAmount {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Row Actions */
+/* Row Actions */
+.infoButton,
+.editButton,
+.deleteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 50px;
+  transition: all 0.2s;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Open Sauce One', sans-serif;
+  font-weight: 400;
+}
+
+.infoButton {
+  color: #0288d1;
+  background-color: rgba(2, 136, 209, 0.1);
+}
+
+.infoButton:hover {
+  background-color: rgba(2, 136, 209, 0.2);
+}
+
+.editButton {
+  color: #15426d;
+  background-color: rgba(21, 66, 109, 0.1);
+}
+
+.editButton:hover {
+  background-color: rgba(21, 66, 109, 0.2);
+}
+
+.deleteButton {
+  color: #f44336;
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.deleteButton:hover {
+  background-color: rgba(244, 67, 54, 0.2);
+}
+
+
+
+.actionButtons {
+  display: flex;
+  gap: 4px;
+}
+
+/* Loading & Empty States */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+}
+
+.loadingSpinner {
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid #11a454;
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+}
+
+.noResults {
+  text-align: center;
+  padding: 3rem;
+  color: #94a3b8;
+}
+
+/* Floating Action Button */
+.floatingButton {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #11a454;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(17, 164, 84, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  z-index: 100;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floatingButton:hover {
+  background-color: #10964d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(17, 164, 84, 0.4);
+}
+
+/* Tooltip */
+.serviceTooltip {
+  position: fixed;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  max-width: 300px;
+  z-index: 1000;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tooltipContent h4 {
+  margin: 0 0 12px 0;
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.tooltipSection {
+  margin-bottom: 12px;
+}
+
+.tooltipSection strong {
+  color: #212121;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.tooltipSection ul {
+  margin: 0;
+  padding-left: 16px;
+  list-style-type: disc;
+}
+
+.tooltipSection li {
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1024px) {
+  .topNav {
+    height: auto;
+    overflow-x: auto;
+  }
+}

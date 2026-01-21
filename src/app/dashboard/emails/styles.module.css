@@ -1,0 +1,631 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+.container {
+    font-family: 'Open Sauce One', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* Top Navigation Bar */
+.topNav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    flex-shrink: 0;
+}
+
+.navTabsContainer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+}
+
+.navTab {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 300;
+    background: none;
+    border: none;
+    padding: 0 4px;
+    transition: all 0.2s;
+    text-transform: capitalize;
+}
+
+.navTabActive {
+    color: #11a454;
+    border-bottom: 2px solid #11a454;
+}
+
+.topActions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.topActionButton {
+    background: none;
+    border: none;
+    color: #212121;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: 'Open Sauce One', sans-serif;
+    padding: 4px 8px;
+    transition: color 0.2s;
+    height: 100%;
+}
+
+.topActionButton:hover {
+    color: #11a454;
+}
+
+/* Main Content Area */
+.contentArea {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    position: relative;
+}
+
+/* Email List Styles */
+.emailList {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.emailItem {
+    padding: 16px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: grid;
+    grid-template-columns: minmax(100px, 200px) 1fr auto;
+    gap: 16px;
+    align-items: center;
+}
+
+.emailItem:hover {
+    background-color: #f8fafc;
+}
+
+.sender {
+    font-weight: 400;
+    color: #334155;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.subjectSnippet {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.subject {
+    color: #1e293b;
+    font-weight: 400;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.snippet {
+    color: #64748b;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.date {
+    font-size: 12px;
+    color: #64748b;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.metaInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* Avatar Styles */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* Thread Counter */
+.threadCounter {
+    background-color: #e2e8f0;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 6px;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+/* Attachment Indicator */
+.attachmentIndicator {
+    font-size: 12px;
+    color: #64748b;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+/* Modals - Standardized */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modalContent {
+    background-color: white;
+    width: 90%;
+    max-width: 900px;
+    /* Slightly wider for emails */
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modalTitle {
+    font-weight: 300;
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.closeButton {
+    background: #f5f5f5;
+    border: none;
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.closeButton:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.modalBody {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Compose Specifics */
+.composeContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.inputGroup {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0;
+    margin-bottom: 12px;
+}
+
+/* Matching Service Modal Form Group */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.formGroup label {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    width: 100%;
+    padding: 6px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    background: transparent;
+    transition: all 0.2s;
+    font-weight: 300 !important;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    border-bottom-color: #11a454;
+}
+
+.formGroup textarea {
+    min-height: 80px;
+    border: 1px solid #e0e0e0;
+    padding: 0.8rem;
+    resize: vertical;
+}
+
+/* Editor */
+.editorContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.editorContainer :global(.quill) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.editorContainer :global(.ql-container) {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0 !important;
+    border-top: none !important;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.editorContainer :global(.ql-toolbar) {
+    flex-shrink: 0;
+    border: 1px solid #e0e0e0 !important;
+    background: #f8fafc;
+}
+
+/* Footer Actions - Matching Service Modal */
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.saveBtn {
+    background-color: #11a454;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 300;
+    transition: background-color 0.2s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.saveBtn:hover {
+    background-color: #0e8a46;
+}
+
+.cancelBtn {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #64748b;
+    font-size: 15px;
+    font-weight: 300;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cancelBtn:hover {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.secondaryBtn {
+    background: #f1f5f9;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #475569;
+    font-size: 15px;
+    font-weight: 300;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.secondaryBtn:hover {
+    background: #e2e8f0;
+}
+
+/* Message Thread Styles */
+.messageThread {
+    padding: 24px;
+    background: #f8fafc;
+}
+
+.messageCard {
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.messageHeader {
+    background-color: #f8fafc;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.messageBody {
+    padding: 32px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1e293b;
+    overflow-x: auto;
+    background-color: white;
+}
+
+/* Search bar styling in Top Nav */
+.searchBar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.searchBar i {
+    font-size: 18px !important;
+    left: 10px !important;
+}
+
+.searchBar input {
+    padding: 6px 12px;
+    padding-left: 40px;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: transparent;
+    color: #334155;
+    font-size: 14px;
+    width: 250px;
+    transition: border-color 0.2s;
+    font-family: 'Open Sauce One', sans-serif;
+    font-weight: 300;
+}
+
+.searchBar input:focus {
+    outline: none;
+    border-bottom-color: #11a454;
+}
+
+/* Select in Top Nav */
+.emailCountSelect {
+    padding: 6px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: transparent;
+    color: #64748b;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    font-weight: 300;
+    font-family: 'Open Sauce One', sans-serif;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #11a454;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Attachments */
+.attachmentChip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #f1f5f9;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+}
+
+.attachmentRemove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 2px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    color: #64748b;
+    height: 100%;
+}
+
+.emptyState i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+/* Floating Action Button */
+/* Floating Action Button */
+.fab {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #11a454;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 50;
+    font-size: 20px;
+}
+
+.fab:hover {
+    background-color: #10964d;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}

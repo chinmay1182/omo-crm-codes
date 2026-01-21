@@ -1,0 +1,204 @@
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.imageSection {
+    width: 70%;
+    height: 100%;
+    background-image: url("/Group%205.svg");
+    /* Ensure matched with login page or use appropriate image */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-right: 1px solid #e1e5e9;
+}
+
+.formSection {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    overflow-y: auto;
+    /* Allow scrolling if register form is tall */
+    padding: 2rem;
+}
+
+.contentWrapper {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto 0;
+}
+
+.header {
+    text-align: left;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.header h1 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #212121;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0;
+    font-weight: 300;
+}
+
+.error {
+    background-color: #ffe6e6;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    width: 100%;
+    margin-bottom: 1.2rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+    color: #333;
+    font-size: 0.85rem;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 0.5rem 0;
+    font-family: 'Open Sauce One', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: -0.5px;
+
+    /* Input border styling: Bottom border only */
+    border: none;
+    border-bottom: 1px solid #e1e5e9;
+    border-radius: 0;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.formGroup input:focus {
+    outline: none;
+    border-bottom-color: #15426d;
+    box-shadow: none;
+}
+
+
+.form input::placeholder {
+    color: #aaa;
+    font-weight: 300;
+
+}
+
+.formGroup input:disabled {
+    background: transparent;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #11a454;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Open Sauce One', sans-serif;
+    font-weight: 300;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.submitBtn:hover:not(:disabled) {
+    /* Removed hover effect as requested */
+    background-color: #15426d;
+    color: white !important;
+    transform: none;
+    box-shadow: none;
+    opacity: 1;
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.footer a {
+    color: #15426d;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        overflow-y: auto;
+        /* Allow full page scroll on mobile if needed */
+    }
+
+    .imageSection {
+        display: none;
+    }
+
+    .formSection {
+        width: 100%;
+        padding: 1.5rem;
+        height: auto;
+        min-height: 100vh;
+    }
+}

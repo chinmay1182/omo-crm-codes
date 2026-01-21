@@ -1,0 +1,224 @@
+.settingsContainer {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Open Sauce One', sans-serif;
+
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.addButton {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Open Sauce One', sans-serif;
+
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.addButton:hover {
+  background-color: #1976d2;
+}
+
+.numbersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.numberItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.numberItem:hover {
+  border-color: #2196f3;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.numberInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.numberDetails h4 {
+  margin: 0 0 0.25rem 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.phoneNumber {
+  margin: 0 0 0.25rem 0;
+  color: #2196f3;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.provider {
+  margin: 0;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.defaultBadge {
+  background-color: #2196f3;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.statusBadge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statusBadge.active {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.statusBadge.inactive {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.statusBadge.suspended {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.defaultButton,
+.editButton,
+.deleteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.defaultButton {
+  color: #4caf50;
+}
+
+.defaultButton:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.editButton {
+  color: #28a745;
+}
+
+.editButton:hover {
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.deleteButton {
+  color: #dc3545;
+}
+
+.deleteButton:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  border: 2px dashed #ddd;
+}
+
+.emptyState p {
+  margin-bottom: 1rem;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.loadingSpinner {
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid #2196f3;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .numberItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .numberInfo {
+    margin-right: 0;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}

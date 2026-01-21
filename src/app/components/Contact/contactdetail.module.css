@@ -1,0 +1,545 @@
+/* Contact Detail Styles */
+.container {
+  background: white;
+
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  margin: 0 auto;
+  font-family: 'Open Sauce One', sans-serif;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #202124;
+  flex: 1;
+  min-width: 200px;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Tab Styles */
+.tabContainer {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.tabContainer::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+.tab {
+  padding: 0 4px;
+  height: 40px;
+  font-family: 'Open Sauce One', sans-serif;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  color: #64748b;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.activeTab {
+  color: #11a454;
+  border-bottom-color: #11a454;
+  font-weight: 300;
+}
+
+.tabContent {
+  font-family: 'Open Sauce One', sans-serif;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Info Tab Styles */
+.infoTab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 300;
+  color: #5f6368;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.value {
+  color: #202124;
+  text-align: right;
+  flex: 1;
+  font-weight: 300;
+}
+
+.value a {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+.value a:hover {
+  text-decoration: underline;
+}
+
+.icon {
+  color: #5f6368;
+  font-size: 0.875rem;
+}
+
+/* Tab Panel Styles */
+.tabPanel {
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.tabPanel h3 {
+  margin-top: 0;
+  color: #202124;
+  font-size: 1.125rem;
+}
+
+/* Container styles for different tabs */
+.notesContainer,
+.tasksContainer,
+.meetingsContainer,
+.filesContainer,
+.locationsContainer {
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.myHeadingTwo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.locationFlex {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/* Action Buttons */
+.editButton,
+.deleteButton,
+.addButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 50px;
+  /* Pill shape */
+  transition: all 0.2s;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Space between icon and text */
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.editButton {
+  color: #15426d !important;
+  background-color: rgba(21, 66, 109, 0.1);
+}
+
+.editButton:hover {
+  background-color: rgba(21, 66, 109, 0.2);
+}
+
+.deleteButton {
+  color: #f44336;
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.deleteButton:hover {
+  background-color: rgba(244, 67, 54, 0.2);
+}
+
+.addButton {
+  color: #4caf50;
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.addButton:hover {
+  background-color: rgba(76, 175, 80, 0.2);
+}
+
+.addButtonTwo {
+  color: white;
+  border: none;
+  cursor: pointer;
+  background-color: #15426d !important;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  font-family: 'Open Sauce One', sans-serif;
+
+}
+
+.uploadButton {
+  padding: 0.5rem 1rem;
+  background-color: #38a169;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Open Sauce One', sans-serif;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .label {
+    min-width: auto;
+  }
+
+  .value {
+    text-align: left;
+  }
+
+  .tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+    border-radius: 0;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .editButton,
+  .deleteButton,
+  .addButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tabContainer {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Edit Input Styles */
+.editInput {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  width: 100%;
+  font-family: 'Open Sauce One', sans-serif;
+  transition: border-color 0.2s;
+}
+
+.editInput:focus {
+  outline: none;
+  border-color: #38a169;
+}
+
+/* Save Button Styles */
+.saveButton {
+  padding: 0.5rem 1rem;
+  background-color: #38a169;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #2f855a;
+}
+
+.saveButton:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Cancel Button Styles */
+.cancelButton {
+  padding: 0.5rem 1rem;
+  background-color: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #edf2f7;
+}
+
+/* Form Group Styles (for edit mode) */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-weight: 500;
+  color: #5f6368;
+  font-size: 0.875rem;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: 'Open Sauce One', sans-serif;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #2f855a;
+}
+
+.formGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* =========================
+   MOBILE OPTIMIZATION
+   ========================= */
+
+@media (max-width: 768px) {
+
+  /* Root container */
+  .container {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Top navigation */
+  .topNav {
+    height: 48px;
+    padding: 0 12px;
+  }
+
+  .navTabsContainer {
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .navTabsContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navTab {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* Content becomes stacked */
+  .contentArea {
+    flex-direction: column;
+  }
+
+  /* Sidebar becomes bottom sheet */
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: 45vh;
+    border-right: none;
+    border-top: 1px solid #e0e0e0;
+    position: relative;
+  }
+
+  .sidebarClosed {
+    height: 0;
+  }
+
+  /* Sidebar header */
+  .sidebarHeader {
+    padding: 10px 12px;
+  }
+
+  /* List items */
+  .listItem {
+    padding: 14px 12px;
+  }
+
+  .listItem h3 {
+    font-size: 15px;
+  }
+
+  .listItem p {
+    font-size: 13px;
+  }
+
+  /* Detail view takes remaining space */
+  .detailView {
+    flex: 1;
+    padding: 12px;
+  }
+
+  /* Expand button reposition */
+  .expandButton {
+    top: 8px;
+    left: 8px;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  /* Floating Action Button */
+  .fab {
+    width: 52px;
+    height: 52px;
+    bottom: 16px;
+    right: 16px;
+    font-size: 18px;
+  }
+
+  /* Modal */
+  .modalContent {
+    width: 95%;
+    padding: 1.5rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  /* Forms */
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    font-size: 16px;
+    /* prevents iOS zoom */
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .topNav {
+    padding: 0 8px;
+  }
+
+  .navTab {
+    font-size: 12px;
+  }
+
+  .sidebar {
+    height: 50vh;
+  }
+
+  .tagsButton {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+
+  .fab {
+    width: 48px;
+    height: 48px;
+  }
+}

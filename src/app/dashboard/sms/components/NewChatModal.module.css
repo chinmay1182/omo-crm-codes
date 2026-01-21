@@ -1,0 +1,245 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: #374151;
+  background-color: #f9fafb;
+}
+
+.activeTab {
+  color: #25d366;
+  border-bottom-color: #25d366;
+}
+
+.content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #25d366;
+  box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.1);
+}
+
+.searchBar {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.contactItem:hover {
+  background-color: #f3f4f6;
+}
+
+.contactAvatar {
+  width: 40px;
+  height: 40px;
+  background-color: #e5e7eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  font-size: 1.1rem;
+}
+
+.contactInfo {
+  flex: 1;
+}
+
+.contactName {
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.contactPhone {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.divider {
+  border-top: 1px solid #e5e7eb;
+  margin: 16px 0;
+}
+
+.footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelButton {
+  padding: 8px 16px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submitButton {
+  padding: 8px 16px;
+  background-color: #25d366;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #1fad53;
+}
+
+.submitButton:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  color: #6b7280;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 20px;
+  color: #9ca3af;
+}

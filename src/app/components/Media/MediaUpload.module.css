@@ -1,0 +1,218 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  background: #f8f9fa;
+}
+
+.header h3 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+  color: #333;
+}
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  padding: 5px;
+  border-radius: 4px;
+}
+.closeBtn:hover {
+  background: #f0f0f0;
+}
+
+.content {
+  padding: 20px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.formField input,
+.formField select,
+.formField textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.formField input:focus,
+.formField select:focus,
+.formField textarea:focus {
+  border-color: #25d366;
+  box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.1);
+  outline: none;
+}
+
+.uploadArea {
+  margin-bottom: 20px;
+}
+.fileInput {
+  display: none;
+}
+.uploadLabel {
+  display: block;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.uploadLabel:hover {
+  border-color: #25d366;
+  background: #f8fff8;
+}
+.uploadPrompt {
+  font-size: 14px;
+  color: #666;
+}
+.selectedFile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.preview {
+  max-width: 200px;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.fileInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  width: 100%;
+}
+.fileName {
+  font-weight: 500;
+  color: #333;
+  word-break: break-all;
+}
+.fileSize {
+  font-size: 12px;
+  color: #666;
+}
+.fileIcon {
+  font-size: 24px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 10px 20px;
+  border-top: 1px solid #eee;
+  background: #f8f9fa;
+}
+.cancelBtn {
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cancelBtn:hover {
+  background: #ebebeb;
+}
+.sendBtn {
+  background: #25d366;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.sendBtn:hover:not(:disabled) {
+  background: #20b358;
+}
+.sendBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+.inputField {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #25d366;
+  box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.1);
+}
+
+.uploadLabel img, .uploadLabel video {
+  max-width: 200px;
+  max-height: 150px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+}
+
+
+/* ---------------- Message Type Selector ---------------- */
+.messageTypeSelector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.messageTypeBtn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.messageTypeBtn.active {
+  border-color: #25d366;
+  background: #e6f8ed;
+  color: #25d366;
+}
+
+

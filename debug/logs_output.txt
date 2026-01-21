@@ -1,0 +1,49 @@
+[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[
+  {
+    "payload": {
+      "ts": "2026-01-18T02:09:59+05:30",
+      "url": "",
+      "text": "",
+      "uuid": "wamid.HBgMOTE4ODgxMTE2MDcyFQIAEhggQTUwQkI4M0IwOTBFRjkyRUE1NkE1QUQ4Nzg2RDRBQjMA_hello",
+      "crqid": "",
+      "button": "{\"payload\":\"Reply\",\"text\":\"Reply\"}",
+      "orders": "",
+      "reason": "",
+      "caption": "",
+      "contacts": "[{\"profile\":{\"name\":\"ConsoLegal\"},\"wa_id\":\"918881116072\"}]",
+      "filename": "",
+      "latitude": "",
+      "messages": "[{\"context\":{\"from\":\"918810878185\",\"id\":\"wamid.HBgMOTE4ODgxMTE2MDcyFQIAERgSREFDNUM5QTdDQTdFNDEyRTM5AA==\"},\"from\":\"918881116072\",\"id\":\"wamid.HBgMOTE4ODgxMTE2MDcyFQIAEhggQTUwQkI4M0IwOTBFRjkyRUE1NkE1QUQ4Nzg2RDRBQjMA\",\"timestamp\":\"1768682393\",\"type\":\"button\",\"button\":{\"payload\":\"Reply\",\"text\":\"Reply\"}}]",
+      "reaction": "",
+      "companyId": "424608",
+      "eventName": "submitted",
+      "longitude": "",
+      "requestId": "e8746e5995154beda02edb34f705516d",
+      "replyMsgId": "wamid.HBgMOTE4ODgxMTE2MDcyFQIAERgSREFDNUM5QTdDQTdFNDEyRTM5AA==",
+      "contentType": "button",
+      "interactive": "",
+      "requestedAt": "2026-01-18T02:09:55+05:30",
+      "customerName": "ConsoLegal",
+      "pluginsource": "",
+      "templateName": "initiate",
+      "customerNumber": "918881116072",
+      "integratedNumber": "918810878185",
+      "templateLanguage": "en",
+      "conversationExpTimestamp": ""
+    },
+    "created_at": "2026-01-17T20:39:59.94792+00:00"
+  },
+  {
+    "payload": {
+      "status": "submitted"
+    },
+    "created_at": "2026-01-17T20:39:39.856165+00:00"
+  },
+  {
+    "payload": {
+      "status": "failed"
+    },
+    "created_at": "2026-01-17T20:38:35.516802+00:00"
+  }
+]

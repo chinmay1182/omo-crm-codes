@@ -1,0 +1,7 @@
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: inherit; /* inherit from html which has Poppins now */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

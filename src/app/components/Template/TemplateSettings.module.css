@@ -1,0 +1,292 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid #eee;
+  background: #f8f9fa;
+}
+
+.header h5 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.closeBtn:hover {
+  background: #f0f0f0;
+}
+
+.content {
+  padding: 20px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+
+
+.refreshBtn,
+.filterSelect {
+  color:white;
+  background: #15426d;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+.createForm {
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.createForm h4 {
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: #25d366;
+  box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.1);
+}
+
+.field small {
+  margin-top: 4px;
+  color: #666;
+  font-size: 12px;
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cancelBtn {
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background: #ebebeb;
+}
+
+.submitBtn {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.submitBtn:hover {
+  background: #20b358;
+}
+
+.templatesList h4 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.noTemplates {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.noTemplates p {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+
+.templates {
+  display: grid;
+  gap: 16px;
+}
+
+.templateCard {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+  background: white;
+}
+
+.templateHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.templateActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.templateInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.templateName {
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
+
+.templateCategory {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.statusBadge {
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.templateBody {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.templateMeta {
+  color: #666;
+  font-size: 12px;
+}
+
+.deleteBtn {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.deleteBtn:hover {
+  background: #cc0000;
+}
+
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    width: 98%;
+    margin: 10px;
+  }
+}

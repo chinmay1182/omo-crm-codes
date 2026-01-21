@@ -1,0 +1,608 @@
+.container {
+    font-family: 'Open Sauce One', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* Top Navigation Bar */
+.topNav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    flex-shrink: 0;
+}
+
+.navTabsContainer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+}
+
+.navTab {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 300;
+    background: none;
+    border: none;
+    padding: 0 4px;
+    transition: all 0.2s;
+}
+
+.navTabActive {
+    color: #11a454;
+    border-bottom: 2px solid #11a454;
+}
+
+.topActions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.topActionButton {
+    background: none;
+    border: none;
+    color: #212121;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: 'Open Sauce One', sans-serif;
+    padding: 4px 8px;
+    transition: color 0.2s;
+    height: 100%;
+}
+
+.topActionButton:hover {
+    color: #11a454;
+}
+
+/* ... (Tabs container remains same, just ensure height inherits or allows 40px) ... */
+
+/* Modals - Matching ServiceModal Design */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modalContent {
+    background-color: white;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modalTitle {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: 300;
+}
+
+.closeButton {
+    background: #f5f5f5;
+    border: none;
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.closeButton:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.modalBody {
+    padding: 2rem;
+}
+
+/* Form Grid & Styles */
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+}
+
+.formGroup {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    width: 100%;
+    padding: 6px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
+    font-size: 14px;
+    font-family: 'Open Sauce One', sans-serif;
+    outline: none;
+    background: transparent;
+    transition: all 0.2s;
+    font-weight: 300;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    border-bottom-color: #11a454;
+}
+
+.formGroup textarea {
+    min-height: 80px;
+    border: 1px solid #e0e0e0;
+    padding: 0.8rem;
+    resize: vertical;
+}
+
+.formGroupFull {
+    grid-column: 1 / -1;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    grid-column: 1 / -1;
+}
+
+.saveBtn {
+    background-color: #11a454;
+    color: white;
+    border: none;
+    padding: .6rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 300;
+    transition: background-color 0.2s;
+}
+
+.saveBtn:hover {
+    background-color: #0e8a46;
+}
+
+.cancelBtn {
+    background-color: #f5f5f5;
+    color: #333;
+    border: none;
+    padding: .7rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.cancelBtn:hover {
+    background-color: #e0e0e0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.cancelBtn {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    padding: 8px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #64748b;
+    font-family: 'Open Sauce One', sans-serif;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.cancelBtn:hover {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.saveBtn {
+    background: #11a454;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Open Sauce One', sans-serif;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.saveBtn:hover {
+    background: #10964d;
+    transform: translateY(-1px);
+}
+
+/* FAB */
+.fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #11a454;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    z-index: 100;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fab:hover {
+    background-color: #10964d;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Badge statuses */
+.statusBadge {
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 300;
+    text-transform: capitalize;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #64748b;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 40px;
+    color: #64748b;
+    font-size: 15px;
+    grid-column: 1 / -1;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px dashed #e2e8f0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.createButton {
+    background: #15426d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+    font-family: 'Open Sauce One', sans-serif;
+}
+
+.createButton:hover {
+    background: #12385a;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Distinctive color strip */
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.cardHeader h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.duration {
+    font-size: 0.75rem;
+    color: #666;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.description {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    min-height: 40px;
+    line-height: 1.5;
+}
+
+/* Card Action Buttons - Matching Services Table Design */
+.cardActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+    margin-top: auto;
+}
+
+.actionButtonsRight {
+    display: flex;
+    gap: 4px;
+}
+
+.editButton,
+.deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 50px;
+    transition: all 0.2s;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Open Sauce One', sans-serif;
+    font-weight: 400;
+}
+
+.editButton {
+    color: #15426d;
+    background-color: rgba(21, 66, 109, 0.1);
+}
+
+.editButton:hover {
+    background-color: rgba(21, 66, 109, 0.2);
+}
+
+.deleteButton {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.deleteButton:hover {
+    background-color: rgba(244, 67, 54, 0.2);
+}
+
+.previewLink {
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+    font-family: 'Open Sauce One', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.previewLink:hover {
+    color: #333;
+    background-color: #f3f4f6;
+}
+
+/* Table Container and Styles for Bookings */
+.tableContainer {
+    flex: 1;
+    overflow: auto;
+    padding: 24px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 300;
+    font-size: 14px;
+    color: #666;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table td {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 300;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    min-height: 200px;
+    background-color: white;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #11a454;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.emptyState {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    color: #666;
+    border: 1px solid #eee;
+    margin: 24px;
+}
+
+/* Status Badges - Specific */
+.online {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.offline {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.link {
+    color: #15426d;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

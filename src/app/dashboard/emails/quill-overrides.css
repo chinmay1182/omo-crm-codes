@@ -1,0 +1,475 @@
+/* Consistent Email Dashboard Styles (Matching Tickets) */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+.container {
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  /* Match Tickets */
+  min-height: 100vh;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.searchBar input {
+  padding: 8px 12px;
+  padding-left: 36px;
+  /* Space for icon */
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: white;
+  color: #334155;
+  font-size: 14px;
+  width: 300px;
+  transition: border-color 0.2s;
+}
+
+.searchBar input:focus {
+  outline: none;
+  border-color: #15426d;
+}
+
+/* Auth/Action Buttons - Matching Tickets .createButton or .actionButton */
+.fetchButton,
+.authButton {
+  background: #15426d;
+  /* Match Tickets Primary */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.fetchButton:hover,
+.authButton:hover {
+  background: #0f2f4a;
+  transform: translateY(-1px);
+}
+
+.fetchButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Secondary/Icon Buttons - Matching Tickets .actionButton */
+.iconButton {
+  background: white;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.iconButton:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+  border-color: #94a3b8;
+}
+
+/* Dropdown Select - Matching Tickets .select */
+.emailCountSelect {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: white;
+  color: #334155;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.emailCountSelect:focus {
+  border-color: #15426d;
+}
+
+/* Layout */
+.mainLayout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  /* height: calc(100vh - 150px); Optional fixed height */
+}
+
+/* Sidebar - Card Style */
+.sidebar {
+  width: 250px;
+  background: white;
+  border-radius: 12px;
+  /* Match Tickets .statCard */
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.folderItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #64748b;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  gap: 12px;
+}
+
+.folderItem:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.activeFolder {
+  background: #e0f2fe;
+  /* Similar to Tickets Status Open Badge or muted blue */
+  color: #0369a1;
+  font-weight: 600;
+}
+
+.folderItem i {
+  width: 20px;
+  text-align: center;
+}
+
+/* Main Content - Card Style */
+.mainContent {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  /* Match Tickets .tableContainer */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  /* Match Tickets */
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+  /* Ensure height matches visual weight */
+}
+
+/* Stats Header inside Main Content */
+.emailStats {
+  padding: 1.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  /* Match Tickets Table Header border */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  background: white;
+}
+
+.emailCount {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Email List */
+.emailList {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.emailItem {
+  padding: 16px;
+  /* Match Tickets td padding */
+  border-bottom: 1px solid #f1f5f9;
+  /* Match Tickets row border */
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.emailItem:hover {
+  background-color: #f8fafc;
+  /* Match Tickets hover */
+}
+
+.emailItem:last-child {
+  border-bottom: none;
+}
+
+.emailHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.sender {
+  font-weight: 600;
+  color: #334155;
+  /* Match Tickets table text */
+  font-size: 14px;
+}
+
+.date {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.subject {
+  color: #1e293b;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.snippet {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* States */
+.loading,
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.emptyState i {
+  font-size: 48px;
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.emptyState h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+/* Modals - Clean Style */
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emailModal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  padding: 2rem;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.emailModalHeader {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.emailModalHeader h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.emailMeta {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 13px;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  font-size: 18px;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: #1e293b;
+}
+
+/* Inputs in Modal */
+.emailModal input,
+.emailModal textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #334155;
+  transition: border-color 0.2s;
+}
+
+.emailModal input:focus,
+.emailModal textarea:focus {
+  outline: none;
+  border-color: #15426d;
+}
+
+/* Global ReactQuill Overrides */
+
+/* ReactQuill Font Families */
+:global(.ql-font-arial) {
+  font-family: 'Arial', sans-serif !important;
+}
+
+:global(.ql-font-verdana) {
+  font-family: 'Verdana', sans-serif !important;
+}
+
+:global(.ql-font-times-new-roman) {
+  font-family: 'Times New Roman', serif !important;
+}
+
+:global(.ql-font-georgia) {
+  font-family: 'Georgia', serif !important;
+}
+
+:global(.ql-font-courier-new) {
+  font-family: 'Courier New', monospace !important;
+}
+
+:global(.ql-font-trebuchet-ms) {
+  font-family: 'Trebuchet MS', sans-serif !important;
+}
+
+:global(.ql-font-plus-jakarta-sans) {
+  font-family: 'Open Sauce One', sans-serif !important;
+}
+
+/* Quill Font Picker Labels */
+:global(.ql-snow .ql-picker.ql-font .ql-picker-label::before),
+:global(.ql-snow .ql-picker.ql-font .ql-picker-item::before) {
+  content: 'Sans Serif';
+}
+
+:global(.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="arial"]::before),
+:global(.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="arial"]::before) {
+  content: "Arial";
+  font-family: 'Arial', sans-serif;
+}
+
+:global(.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="verdana"]::before),
+:global(.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="verdana"]::before) {
+  content: "Verdana";
+  font-family: 'Verdana', sans-serif;
+}
+
+:global(.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="times-new-roman"]::before),
+:global(.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="times-new-roman"]::before) {
+  content: "Times New Roman";
+  font-family: 'Times New Roman', serif;
+}
+
+:global(.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="georgia"]::before),
+:global(.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="georgia"]::before) {
+  content: "Georgia";
+  font-family: 'Georgia', serif;
+}
+
+:global(.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="courier-new"]::before),
+:global(.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="courier-new"]::before) {
+  content: "Courier New";
+  font-family: 'Courier New', monospace;
+}
+
+:global(.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="trebuchet-ms"]::before),
+:global(.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="trebuchet-ms"]::before) {
+  content: "Trebuchet MS";
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+:global(.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="plus-jakarta-sans"]::before),
+:global(.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="plus-jakarta-sans"]::before) {
+  content: 'Open Sauce One';
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mainLayout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchBar input {
+    width: 100%;
+  }
+}

@@ -1,0 +1,277 @@
+/* LeadForm.module.css */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #ef9a9a;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formRow {
+  display: flex;
+  gap: 20px;
+}
+
+.formRow > .formGroup {
+  flex: 1;
+}
+
+.formLabel {
+  font-weight: bold;
+  color: #555;
+  font-size: 14px;
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #2196F3;
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.formDateInput {
+  padding: 9px 12px;
+}
+
+.formNumberInput {
+  -moz-appearance: textfield;
+}
+
+.formNumberInput::-webkit-outer-spin-button,
+.formNumberInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #0b7dda;
+}
+
+.submitButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.cancelButton:hover {
+  background-color: #e0e0e0;
+}
+
+.newItemForm {
+  margin-top: 12px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 8px;
+  border: 2px solid #dee2e6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.newItemForm:hover {
+  border-color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+}
+
+.newItemForm h4 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.newItemForm h4::before {
+  content: "✨";
+  font-size: 14px;
+}
+
+.newItemFormGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.newItemFormGrid.single {
+  grid-template-columns: 1fr;
+}
+
+.newItemForm input,
+.newItemForm select {
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Open Sauce One', sans-serif;
+
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.newItemForm input:focus,
+.newItemForm select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.newItemForm input::placeholder {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.newItemActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #dee2e6;
+}
+
+.createButton {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Open Sauce One', sans-serif;
+
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.createButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.createButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.createButton::before {
+  content: "➕";
+  font-size: 12px;
+}
+
+.newItemCancelButton {
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Open Sauce One', sans-serif;
+
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.newItemCancelButton:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+  color: #495057;
+  transform: translateY(-1px);
+}
+
+.newItemCancelButton::before {
+  content: "✖️";
+  font-size: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

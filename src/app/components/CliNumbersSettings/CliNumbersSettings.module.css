@@ -1,0 +1,409 @@
+.settingsContainer {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ddd;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f3f4;
+}
+
+.header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.45rem 1rem;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 300;
+  transition: all 0.2s ease;
+}
+
+.addButton:hover {
+  background: #45a049;
+  transform: translateY(-1px);
+}
+
+.numbersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.numberItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background: #f8f9fa;
+  transition: all 0.2s ease;
+}
+
+.numberItem:hover {
+  border-color: #4CAF50;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+}
+
+.numberInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.numberDetails h4 {
+  margin: 0 0 0.25rem 0;
+  color: #2c3e50;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.phoneNumber {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+  color: #495057;
+  font-weight: 500;
+}
+
+.apartyNumber {
+  margin: 0.25rem 0;
+  color: #28a745;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.numberType {
+  margin: 0.25rem 0 0 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.badges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.defaultBadge {
+  background: #28a745;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.typeBadge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.typeBadge.voip {
+  background: #007bff;
+  color: white;
+}
+
+.typeBadge.whatsapp {
+  background: #25d366;
+  color: white;
+}
+
+.typeBadge.both {
+  background: #6f42c1;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editButton, .deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editButton {
+  background: #ffc107;
+  color: #212529;
+}
+
+.editButton:hover {
+  background: #e0a800;
+  transform: translateY(-1px);
+}
+
+.deleteButton {
+  background: #dc3545;
+  color: white;
+}
+
+.deleteButton:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6c757d;
+}
+
+.emptyState p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #6c757d;
+}
+
+.loadingSpinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #4CAF50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.modal::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 20px;
+padding-right: 20px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modalHeader h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 18px!important;
+  font-weight: 700;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #f8f9fa;
+  color: #495057;
+}
+
+.modalForm {
+  padding: 1.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 0.45rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+.formGroup small {
+  display: block;
+  margin-top: 0.25rem;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+.checkboxLabel {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: auto !important;
+  margin: 0;
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.cancelButton {
+  padding: 0.45rem 1.5rem;
+  border: 1px solid #6c757d;
+  background: white;
+  color: #6c757d;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background: #6c757d;
+  color: white;
+}
+
+.saveButton {
+  padding: 0.45rem 1.5rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.saveButton:hover {
+  background: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .numberItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .numberInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .badges {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .actions {
+    justify-content: center;
+  }
+  
+  .modal {
+    width: 95%;
+    margin: 1rem;
+  }
+  
+  .modalActions {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,440 @@
+.detailHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.detailHeader h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #202124;
+  flex: 1;
+  min-width: 200px;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.detailActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Tab Styles */
+.tabContainer {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.tabContainer::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+.tab {
+  padding: 0 4px;
+  height: 40px;
+  font-family: 'Open Sauce One', sans-serif;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  color: #64748b;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.activeTab {
+  color: #11a454;
+  border-bottom-color: #11a454;
+  font-weight: 300;
+}
+
+.tabContent {
+  font-family: 'Open Sauce One', sans-serif;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Info Tab Styles */
+.infoTab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detailSection {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 6px solid #efa434;
+}
+
+.detailSection h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #202124;
+  margin: 0 0 1rem;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.detailLabel {
+  font-weight: 300;
+  color: #5f6368;
+  min-width: 160px;
+}
+
+.detailValue {
+  color: #202124;
+  text-align: right;
+  font-weight: 300;
+  flex: 1;
+}
+
+.detailValue a {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+.detailValue a:hover {
+  text-decoration: underline;
+}
+
+.detailDescription {
+  background: white;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  color: #5f6368;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Edit Form Styles */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-weight: 500;
+  color: #5f6368;
+  font-size: 0.875rem;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: 'Open Sauce One', sans-serif;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #2f855a;
+}
+
+.formGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Tab Panel Styles */
+.tabPanel {
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.tabPanel h3 {
+  margin-top: 0;
+  color: #202124;
+  font-size: 1.125rem;
+}
+
+/* Action Buttons in Tab Content */
+.tabActions {
+  display: flex;
+  justify-content: flex-end;
+  font-family: 'Open Sauce One', sans-serif;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .detailContainer {
+    padding: 1.5rem;
+  }
+
+  .detailHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detailActions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .detailLabel {
+    min-width: auto;
+  }
+
+  .detailValue {
+    text-align: left;
+  }
+
+  .tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .detailContainer {
+    padding: 1rem;
+    border-radius: 0;
+  }
+
+  .detailActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .editButton,
+  .deleteButton,
+  .addButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tabContainer {
+    margin-bottom: 1rem;
+  }
+
+  .detailSection {
+    padding: 1rem;
+  }
+}
+
+/* Empty State Styles */
+.emptyTabContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: #5f6368;
+}
+
+.emptyTabContent svg {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #dadce0;
+}
+
+/* Loading State */
+.loadingTabContent {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Edit Input Styles */
+.editInput {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  width: 100%;
+  font-family: 'Open Sauce One', sans-serif;
+  transition: border-color 0.2s;
+}
+
+.editInput:focus {
+  outline: none;
+  border-color: #38a169;
+}
+
+/* Save Button Styles */
+.saveButton {
+  padding: 0.5rem 1rem;
+  background-color: #38a169;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #2f855a;
+}
+
+.saveButton:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Cancel Button Styles */
+.cancelButton {
+  padding: 0.5rem 1rem;
+  background-color: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #edf2f7;
+}
+
+.uploadButton {
+  padding: 0.5rem 1rem;
+  background-color: #38a169;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.myHeadingTwo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.editButton,
+.deleteButton,
+.addButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 50px;
+  /* Pill shape */
+  transition: all 0.2s;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Space between icon and text */
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.editButton {
+  color: #15426d !important;
+  background-color: rgba(21, 66, 109, 0.1);
+  /* Light blue background on hover */
+}
+
+.editButton:hover {
+  background-color: rgba(21, 66, 109, 0.2);
+  /* Light blue background on hover */
+}
+
+.deleteButton {
+  color: #f44336;
+  background-color: rgba(244, 67, 54, 0.1);
+  /* Light red background on hover */
+}
+
+.deleteButton:hover {
+  background-color: rgba(244, 67, 54, 0.2);
+  /* Light red background on hover */
+}
+
+.addButton {
+  color: #4caf50;
+  /* Green for "Add" */
+  background-color: rgba(76, 175, 80, 0.1);
+  /* Same light green as edit hover */
+}
+
+.addButton:hover {
+  background-color: rgba(76, 175, 80, 0.2);
+  /* Same light green as edit hover */
+}
+
+
+.addButtonTwo {
+  color: white;
+  border: none;
+  cursor: pointer;
+  background-color: #15426d !important;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  font-family: 'Open Sauce One', sans-serif;
+
+
+}
+
+.locationFlex {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}

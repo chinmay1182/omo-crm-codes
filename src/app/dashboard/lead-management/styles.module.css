@@ -1,0 +1,89 @@
+.container {
+  padding: 1.5rem;
+  margin: 0 auto;
+  font-family: 'Open Sauce One', sans-serif;
+
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.leadPara{
+  font-size: 15px;
+ margin-top: 8px; 
+}
+
+.tabs {
+  display: flex;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 0.55rem 1.5rem;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6c757d;
+  transition: all 0.3s ease;
+  font-family: 'Open Sauce One', sans-serif;
+
+}
+
+.tab:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.activeTab {
+  background-color: #15426d !important;
+  color: white !important;
+  box-shadow: 0 2px 4px rgba(21, 66, 109, 0.2);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .tabs {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .tab {
+    flex: 1;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+}

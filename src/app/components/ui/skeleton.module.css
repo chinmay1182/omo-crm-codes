@@ -1,0 +1,35 @@
+.skeleton {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    display: inline-block;
+    animation: shimmer 1.5s infinite linear;
+    background-image: linear-gradient(to right,
+            #e0e0e0 0%,
+            #f0f0f0 20%,
+            #e0e0e0 40%,
+            #e0e0e0 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+/* Dark mode support if you have a class for it, otherwise relying on media query */
+@media (prefers-color-scheme: dark) {
+    .skeleton {
+        background-color: #2a2a2a;
+        background-image: linear-gradient(to right,
+                #2a2a2a 0%,
+                #3a3a3a 20%,
+                #2a2a2a 40%,
+                #2a2a2a 100%);
+    }
+}
