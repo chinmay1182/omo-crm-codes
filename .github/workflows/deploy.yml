@@ -43,6 +43,9 @@ jobs:
                   push: true
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
+                  build-args: |
+                      NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+                      NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
     deploy:
         needs: build-and-push
@@ -77,6 +80,25 @@ jobs:
                         -p 3027:3027 \
                         -e PORT=3027 \
                         -e NODE_ENV=production \
+                        -e NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }} \
+                        -e NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} \
+                        -e SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }} \
+                        -e DB_HOST=${{ secrets.DB_HOST }} \
+                        -e DB_USER=${{ secrets.DB_USER }} \
+                        -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+                        -e DB_NAME=${{ secrets.DB_NAME }} \
+                        -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+                        -e MSG91_API_KEY=${{ secrets.MSG91_API_KEY }} \
+                        -e SENDER_NUMBER=${{ secrets.SENDER_NUMBER }} \
+                        -e MSG91_PRIMARY_NUMBER=${{ secrets.MSG91_PRIMARY_NUMBER }} \
+                        -e MSG91_SECONDARY_NUMBER=${{ secrets.MSG91_SECONDARY_NUMBER }} \
+                        -e EMAIL_USER=${{ secrets.EMAIL_USER }} \
+                        -e ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }} \
+                        -e NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }} \
+                        -e NEXT_PUBLIC_GOOGLE_MAPS_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_KEY }} \
+                        -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
+                        -e GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} \
+                        -e GOOGLE_MEET_REDIRECT_URI=${{ secrets.GOOGLE_MEET_REDIRECT_URI }} \
                         "$IMAGE_NAME:latest"
 
                       # Cleanup unused images to save space
