@@ -1368,43 +1368,7 @@
     color: #000000 !important;
 }
 
-/* Global Checkbox Styling */
-input[type="checkbox"] {
-    border: 0;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 16px;
-    height: 16px;
-    background-color: white;
-    border-radius: 0;
-    cursor: pointer;
-    position: relative;
-    outline: none;
-    box-shadow: 0 0 0 1px #d1d5db;
-    transition: all 0.2s;
-}
 
-input[type="checkbox"]:hover {
-    box-shadow: 0 0 0 1px #9ca3af;
-}
-
-input[type="checkbox"]:checked {
-    background-color: #11a454;
-    box-shadow: 0 0 0 1px #11a454;
-}
-
-input[type="checkbox"]:checked::after {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 2px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
 
 /* =========================================================
    MOBILE RESPONSIVE LAYOUT (≤768px)
