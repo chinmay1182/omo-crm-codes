@@ -46,7 +46,10 @@ type ContactTag = {
   type: 'contact_tag' | 'company_tag';
 };
 
-export default function ContactsPage() {
+
+import { Suspense } from 'react';
+
+function ContactsContent() {
   const { hasPermission, isModuleEnabled, user } = usePermission();
   const [activeTab, setActiveTab] = useState<TabType>('contacts');
   const [searchQuery, setSearchQuery] = useState('');
@@ -467,5 +470,13 @@ export default function ContactsPage() {
         />
       )}
     </div>
+  );
+}
+
+export default function ContactsPage() {
+  return (
+    <Suspense fallback={<div>Loading contacts...</div>}>
+      <ContactsContent />
+    </Suspense>
   );
 }
