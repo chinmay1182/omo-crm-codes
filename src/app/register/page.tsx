@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './register.module.css';
-import Gatekeeper from '../components/Gatekeeper';
+import Gatekeeper from '../components/Auth/Gatekeeper';
 
 export default function RegisterPage() {
   const router = useRouter();

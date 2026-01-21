@@ -216,7 +216,7 @@ export default function ContactsPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${!isSidebarOpen ? styles.sidebarHidden : ''}`}>
       {/* Top Navigation Bar for Tabs */}
       <div className={styles.topNav}>
         <div className={styles.navTabsContainer}>

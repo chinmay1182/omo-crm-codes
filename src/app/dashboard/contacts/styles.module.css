@@ -506,7 +506,7 @@
 
 @media (max-width: 768px) {
   .container {
-    height: 100vh;
+    height: 100%;
     /* Full viewport height on mobile */
   }
 
@@ -549,6 +549,11 @@
 
   .expandButton i {
     transform: rotate(180deg);
+  }
+
+  /* Hide FAB when sidebar is hidden (i.e. in Detail View on mobile) */
+  .sidebarHidden .fab {
+    display: none;
   }
 }
 

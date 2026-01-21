@@ -3,7 +3,7 @@
 import { useState } from 'react';
 // import { useRouter } from 'next/navigation';
 import styles from './reset-password.module.css';
-import Gatekeeper from '../components/Gatekeeper';
+import Gatekeeper from '../components/Auth/Gatekeeper';
 
 export default function ResetPasswordPage() {
     // const router = useRouter(); // Unused
