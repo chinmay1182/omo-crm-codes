@@ -1,5 +1,5 @@
-const API_KEY = process.env.MSG91_API_KEY!;
-const SENDER_NUMBER = process.env.SENDER_NUMBER!;
+const API_KEY = process.env.MSG91_API_KEY || '424608A3Z7MMnI0Q68751e0dP1';
+const SENDER_NUMBER = process.env.SENDER_NUMBER || '918810878185';
 
 const WHATSAPP_NUMBERS = {
   primary: process.env.MSG91_PRIMARY_NUMBER || '918810878185',

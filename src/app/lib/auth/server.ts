@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import pool from '../../lib/db';
 import bcrypt from 'bcryptjs';
 
-const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_SECRET = process.env.JWT_SECRET || '8f7d2c9a4e1b6f0e3a9c2d5f7b1e4c6a9d8e0f2b3a5c7e9f1d4b6a8c0e2';
 const COOKIE_NAME = 'auth-token';
 
 export async function createSession(userId: number) {
@@ -23,7 +23,7 @@ export async function createSession(userId: number) {
       [userId, token]
     );
 
-    cookies().set({
+    (await cookies()).set({
       name: COOKIE_NAME,
       value: token,
       httpOnly: true,
@@ -42,7 +42,7 @@ export async function createSession(userId: number) {
 
 export async function verifySession() {
   try {
-    const token = cookies().get(COOKIE_NAME)?.value;
+    const token = (await cookies()).get(COOKIE_NAME)?.value;
     if (!token) return null;
 
     const { userId } = jwt.verify(token, JWT_SECRET) as { userId: number };
@@ -61,11 +61,12 @@ export async function verifySession() {
 
 export async function destroySession() {
   try {
-    const token = cookies().get(COOKIE_NAME)?.value;
+    const cookieStore = await cookies();
+    const token = cookieStore.get(COOKIE_NAME)?.value;
     if (token) {
       await pool.query('DELETE FROM sessions WHERE session_token = ?', [token]);
     }
-    cookies().delete(COOKIE_NAME);
+    cookieStore.delete(COOKIE_NAME);
   } catch (error) {
     console.error('Error destroying session:', error);
   }
