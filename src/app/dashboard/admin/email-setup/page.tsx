@@ -4,7 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { createBrowserClient } from '@supabase/ssr';
 
-export default function EmailSetupPage() {
+
+import { Suspense } from 'react';
+
+function EmailSetupContent() {
     const [agents, setAgents] = useState<any[]>([]);
     const [assignedEmails, setAssignedEmails] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -239,5 +242,13 @@ export default function EmailSetupPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function EmailSetupPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <EmailSetupContent />
+        </Suspense>
     );
 }
