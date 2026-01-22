@@ -371,6 +371,12 @@
   border-bottom-color: #11a454;
 }
 
+.formGroup input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
 .fullWidth {
   grid-column: 1 / -1;
 }

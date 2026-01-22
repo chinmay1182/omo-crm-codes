@@ -2,7 +2,7 @@
 // This file acts as the source of truth for default role configurations.
 
 export const PERMISSION_OPTIONS: Record<string, string[]> = {
-    whatsapp: [
+    /* whatsapp: [
         'reply_all', // Reply to any chat
         'reply_assigned', // Reply to assigned chats only
         'view_all', // View all chats
@@ -14,7 +14,7 @@ export const PERMISSION_OPTIONS: Record<string, string[]> = {
         'make_calls',
         'transfer_calls', // Transfer active calls
         'conference_calls' // Add people to calls
-    ],
+    ], */
     admin: [
         'view_reports',
         'manage_agents', // Edit other agents

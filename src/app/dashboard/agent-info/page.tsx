@@ -195,20 +195,22 @@ export default function AgentInfo() {
 
         {user.permissions && Object.keys(user.permissions).length > 0 ? (
           <div className={styles.permissionsGrid}>
-            {Object.entries(user.permissions).map(([service, perms]) => (
-              <div key={service} className={styles.serviceCard}>
-                <div className={styles.serviceHeader}>
-                  <h4 className={styles.serviceName}>{getServiceDisplayName(service)}</h4>
+            {Object.entries(user.permissions)
+              .filter(([service]) => !['whatsapp', 'voip', 'Whatsapp', 'Voip'].includes(service))
+              .map(([service, perms]) => (
+                <div key={service} className={styles.serviceCard}>
+                  <div className={styles.serviceHeader}>
+                    <h4 className={styles.serviceName}>{getServiceDisplayName(service)}</h4>
+                  </div>
+                  <div className={styles.permissionList}>
+                    {Array.isArray(perms) && perms.map((permission, index) => (
+                      <span key={index} className={styles.permissionTag}>
+                        {getPermissionDisplayName(permission)}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className={styles.permissionList}>
-                  {Array.isArray(perms) && perms.map((permission, index) => (
-                    <span key={index} className={styles.permissionTag}>
-                      {getPermissionDisplayName(permission)}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         ) : (
           <div className={styles.noPermissions}>

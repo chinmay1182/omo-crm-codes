@@ -388,7 +388,17 @@ export default function AgentPermissionsPage() {
       {showCreateModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContent}>
-            <h2>Create New Agent</h2>
+            <div className={styles.modalHeader}>
+              <h2>Create New Agent</h2>
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={() => setShowCreateModal(false)}
+                style={{ width: '32px', height: '32px', borderRadius: '50%', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', color: '#666' }}
+              >
+                <i className="fa-light fa-xmark"></i>
+              </button>
+            </div>
             <form onSubmit={handleCreateAgent} className={styles.formContent}>
               <div className={styles.gridForm}>
                 <div className={styles.formGroup}>
@@ -429,7 +439,7 @@ export default function AgentPermissionsPage() {
                   />
                 </div>
 
-                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                {/* <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                   <label>Assign CLI Numbers</label>
                   <div className={styles.cliBox}>
                     {cliNumbers.length === 0 ? (
@@ -456,7 +466,7 @@ export default function AgentPermissionsPage() {
                       ))
                     )}
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className={styles.modalActions}>
