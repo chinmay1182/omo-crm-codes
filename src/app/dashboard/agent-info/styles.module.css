@@ -268,23 +268,144 @@
   color: #64748b;
 }
 
+/* ===========================
+   AGENT INFO – MOBILE LAYOUT
+   Matches Appointments UX
+   =========================== */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    height: auto;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Sidebar becomes top profile card */
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+    max-width: unset;
+    padding: 16px;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    overflow: visible;
+  }
+
+  .profileHeader {
+    margin-bottom: 20px;
+  }
+
+  .avatarCircle {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .profileName {
+    font-size: 18px;
+  }
+
+  .profileEmail {
+    font-size: 13px;
+  }
+
+  /* Info groups become compact cards */
+  .infoGroup {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+
+  .value {
+    font-size: 14px;
+  }
+
+  .agentTypeBadge {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  /* Action buttons – full width */
+  .actionButtons {
+    gap: 10px;
+  }
+
+  .refreshButton,
+  .manageButton {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* Main content */
+  .mainContent {
+    padding: 16px;
     overflow-y: auto;
   }
 
-  .sidebar {
-    width: 100%;
-    max-width: none;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid #e0e0e0;
+  .sectionTitle {
+    font-size: 18px;
+    margin-bottom: 16px;
   }
 
-  .mainContent {
-    height: auto;
-    overflow: visible;
+  /* Permissions – single column like task cards */
+  .permissionsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-bottom: 80px;
+  }
+
+  .serviceCard {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .serviceHeader {
+    gap: 8px;
+  }
+
+  .serviceIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .serviceName {
+    font-size: 15px;
+  }
+
+  .permissionList {
+    gap: 6px;
+  }
+
+  .permissionTag {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .noPermissions {
+    padding: 24px;
+    font-size: 14px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .profileName {
+    font-size: 16px;
+  }
+
+  .sectionTitle {
+    font-size: 16px;
+  }
+
+  .serviceCard {
+    padding: 14px;
+  }
+
+  .permissionTag {
+    font-size: 11px;
   }
 }

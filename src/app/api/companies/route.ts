@@ -80,6 +80,29 @@ export async function POST(req: Request) {
       );
     }
 
+    // Deduplication Logic
+    const duplicates = [];
+    if (email) {
+      const { data: dupEmail } = await supabase.from('companies').select('id').eq('email', email).single();
+      if (dupEmail) duplicates.push(`Email (${email})`);
+    }
+    if (phone) {
+      const { data: dupPhone } = await supabase.from('companies').select('id').eq('phone', phone).single();
+      if (dupPhone) duplicates.push(`Phone (${phone})`);
+    }
+    // Also checking Registration Number if provided as it is unique
+    if (registration_number) {
+      const { data: dupReg } = await supabase.from('companies').select('id').eq('registration_number', registration_number).single();
+      if (dupReg) duplicates.push(`Registration Number (${registration_number})`);
+    }
+
+    if (duplicates.length > 0) {
+      return NextResponse.json(
+        { error: `Duplicate detected: Company with same ${duplicates.join(', ')} already exists.` },
+        { status: 409 }
+      );
+    }
+
     const { data, error } = await supabase
       .from('companies')
       .insert([

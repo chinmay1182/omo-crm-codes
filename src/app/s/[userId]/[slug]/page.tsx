@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { format, addDays, startOfToday, isSameDay, addMinutes, parseISO } from 'date-fns';
 import { useParams } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
+import styles from './page.module.css';
 
 // Simple types
 interface EventType {
@@ -142,100 +143,73 @@ export default function BookingPage() {
 
     if (bookingStatus === 'success') {
         return (
-            <div style={{
-                maxWidth: '600px', margin: '60px auto', padding: '40px',
-                background: 'white', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)',
-                textAlign: 'center', fontFamily: 'sans-serif'
-            }}>
-                <img src="/consolegal.jpeg" alt="Logo" style={{ height: '40px', marginBottom: '24px', opacity: 0.8 }} />
+            <div className={styles.bookingContainer}>
+                <div className={styles.successContainer}>
+                    <img src="/consolegal.jpeg" alt="Logo" className={styles.successLogo} />
 
-                <div style={{
-                    width: '60px', height: '60px', background: '#ecfdf5', borderRadius: '50%',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px',
-                    color: '#059669', fontSize: '30px'
-                }}>
-                    ✓
-                </div>
-
-                <h2 style={{ fontSize: '24px', color: '#111827', marginBottom: '10px' }}>Booking Scheduled</h2>
-                <p style={{ color: '#6b7280', fontSize: '16px' }}>You are scheduled with <strong style={{ color: '#374151' }}>{eventType.title}</strong></p>
-
-                <div style={{ border: '1px solid #e5e7eb', padding: '24px', margin: '30px 0 0', borderRadius: '12px', textAlign: 'left' }}>
-                    <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
-                        <span style={{ fontSize: '18px' }}>📅</span>
-                        <div>
-                            <div style={{ fontWeight: 600, color: '#111827' }}>{format(selectedDate, 'EEEE, MMMM do, yyyy')}</div>
-                            <div style={{ color: '#6b7280', fontSize: '14px' }}>{selectedTime} ({eventType.duration} mins)</div>
-                        </div>
+                    <div className={styles.successIcon}>
+                        ✓
                     </div>
-                    <p style={{ fontSize: '13px', color: '#9ca3af', margin: '12px 0 0 30px' }}>A calendar intimation has been sent to your email address.</p>
+
+                    <h2>Booking Scheduled</h2>
+                    <p>You are scheduled with <strong>{eventType.title}</strong></p>
+
+                    <div className={styles.successDetails}>
+                        <div className={styles.successDetailsRow}>
+                            <span>📅</span>
+                            <div>
+                                <div>{format(selectedDate, 'EEEE, MMMM do, yyyy')}</div>
+                                <div>{selectedTime} ({eventType.duration} mins)</div>
+                            </div>
+                        </div>
+                        <p className={styles.successNote}>A calendar intimation has been sent to your email address.</p>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div style={{
-            minHeight: '100vh', background: '#f8f9fa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif'
-        }}>
-            <div style={{
-                display: 'flex', maxWidth: '1000px', width: '90%', background: 'white',
-                borderRadius: '8px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)', overflow: 'hidden',
-                flexDirection: 'row', minHeight: '500px'
-            }}>
+        <div className={styles.bookingContainer}>
+            <div className={styles.bookingCard}>
                 {/* Left Panel: Details */}
-                <div style={{ flex: 1, padding: '30px', borderRight: '1px solid #f0f0f0', background: '#fafafa' }}>
-                    <div style={{ marginBottom: '24px' }}>
-                        <img src="/consolegal.jpeg" alt="Consolegal Logo" style={{ height: '40px', objectFit: 'contain' }} />
+                <div className={styles.leftPanel}>
+                    <div>
+                        <img src="/consolegal.jpeg" alt="Consolegal Logo" className={styles.logo} />
                     </div>
 
-                    <p
-                        style={{
-                            color: '#666', fontWeight: 600, fontSize: '13px',
-                            letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: '8px',
-                            display: 'inline-block'
-                        }}
-                    >
-                        {eventType.header_text || 'CONSOLEGAL CONSULTATION'}
+                    <p className={styles.headerText}>
+                        {eventType.header_text}
                     </p>
 
-                    <h1 style={{ margin: '0 0 16px 0', fontSize: '22px', fontWeight: 700, color: '#1a1a1a', lineHeight: 1.3 }}>{eventType.title}</h1>
+                    <h1 className={styles.eventTitle}>{eventType.title}</h1>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#555', marginBottom: '24px', fontSize: '15px' }}>
-                        <i className="fa-regular fa-clock"></i>
-                        <span style={{ fontWeight: 500 }}>{eventType.duration} min</span>
+                    <div className={styles.durationInfo}>
+                        Meeting Duration:
+                        <span>{eventType.duration} min</span>
                     </div>
 
                     {eventType.description && (
-                        <div style={{ borderTop: '1px solid #eee', paddingTop: '16px' }}>
-                            <p style={{ color: '#4a4a4a', lineHeight: '1.6', fontSize: '15px', margin: 0 }}>{eventType.description}</p>
+                        <div className={styles.description}>
+                            <p>{eventType.description}</p>
                         </div>
                     )}
                 </div>
 
                 {/* Right Panel: Picker */}
-                <div style={{ flex: 1, padding: '24px', display: 'flex', flexDirection: 'column' }}>
-                    <h3 style={{ marginBottom: '20px' }}>Select a Date & Time</h3>
+                <div className={styles.rightPanel}>
+                    <h3>Select a Date & Time</h3>
 
                     {!selectedTime ? (
-                        <div style={{ display: 'flex', gap: '20px', height: '100%' }}>
+                        <div className={styles.pickerContainer}>
                             {/* Date List */}
-                            <div style={{ flex: 1, overflowY: 'auto', maxHeight: '400px', borderRight: '1px solid #f0f0f0', paddingRight: '10px' }}>
-                                <div style={{ display: 'grid', gap: '8px' }}>
+                            <div className={styles.dateList}>
+                                <div>
                                     {days.map(day => (
                                         <button
                                             key={day.toISOString()}
                                             onClick={() => setSelectedDate(day)}
-                                            style={{
-                                                padding: '12px',
-                                                background: isSameDay(day, selectedDate) ? '#e6f0ff' : 'transparent',
-                                                border: isSameDay(day, selectedDate) ? '1px solid #0069ff' : '1px solid transparent',
-                                                borderRadius: '6px',
-                                                textAlign: 'left',
-                                                cursor: 'pointer',
-                                                color: isSameDay(day, selectedDate) ? '#0069ff' : '#333',
-                                                fontWeight: isSameDay(day, selectedDate) ? 600 : 400
-                                            }}
+                                            className={`${styles.dateButton} ${isSameDay(day, selectedDate) ? styles.selected : ''}`}
                                         >
                                             {format(day, 'EEE, d MMM yyyy')}
                                         </button>
@@ -244,36 +218,14 @@ export default function BookingPage() {
                             </div>
 
                             {/* Time List */}
-                            <div style={{ flex: 1, overflowY: 'auto', maxHeight: '400px' }}>
-                                <div style={{ display: 'grid', gap: '8px' }}>
+                            <div className={styles.timeList}>
+                                <div>
                                     {generateSlots().map(slot => (
                                         <button
                                             key={slot.time}
                                             onClick={() => !slot.isPast && setSelectedTime(slot.time)}
                                             disabled={slot.isPast}
-                                            style={{
-                                                padding: '10px',
-                                                border: slot.isPast ? '1px solid #d1d5db' : '1px solid #0069ff',
-                                                background: slot.isPast ? '#f3f4f6' : 'white',
-                                                color: slot.isPast ? '#9ca3af' : '#0069ff',
-                                                borderRadius: '4px',
-                                                cursor: slot.isPast ? 'not-allowed' : 'pointer',
-                                                fontWeight: 600,
-                                                transition: 'all 0.2s',
-                                                opacity: slot.isPast ? 0.6 : 1
-                                            }}
-                                            onMouseOver={(e) => {
-                                                if (!slot.isPast) {
-                                                    e.currentTarget.style.background = '#0069ff';
-                                                    e.currentTarget.style.color = 'white';
-                                                }
-                                            }}
-                                            onMouseOut={(e) => {
-                                                if (!slot.isPast) {
-                                                    e.currentTarget.style.background = 'white';
-                                                    e.currentTarget.style.color = '#0069ff';
-                                                }
-                                            }}
+                                            className={styles.timeButton}
                                         >
                                             {slot.time}
                                         </button>
@@ -282,72 +234,64 @@ export default function BookingPage() {
                             </div>
                         </div>
                     ) : (
-                        <div style={{ animation: 'fadeIn 0.3s' }}>
+                        <div className={styles.formContainer}>
                             <button
                                 onClick={() => setSelectedTime(null)}
-                                style={{ background: 'none', border: 'none', color: '#666', cursor: 'pointer', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '5px' }}
+                                className={styles.backButton}
                             >
-                                ← Back to times
+                                <i className="fa-thin fa-sharp fa-arrow-left" style={{ marginRight: '10px', fontSize: '20px' }}></i> Back to times
                             </button>
 
-                            <h4 style={{ marginBottom: '15px' }}>Enter Details</h4>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: 600 }}>Name *</label>
+                            <h4>Enter Details</h4>
+                            <div className={styles.formFields}>
+                                <div className={styles.formGroup}>
+                                    <label>Name *</label>
                                     <input
                                         type="text"
                                         required
                                         value={bookingForm.name}
                                         onChange={e => setBookingForm({ ...bookingForm, name: e.target.value })}
-                                        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                                     />
                                 </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: 600 }}>Email *</label>
+                                <div className={styles.formGroup}>
+                                    <label>Email *</label>
                                     <input
                                         type="email"
                                         required
                                         value={bookingForm.email}
                                         onChange={e => setBookingForm({ ...bookingForm, email: e.target.value })}
-                                        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                                     />
                                 </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: 600 }}>Mobile Number *</label>
+                                <div className={styles.formGroup}>
+                                    <label>Mobile Number *</label>
                                     <input
                                         type="tel"
                                         required
                                         value={bookingForm.mobile}
                                         onChange={e => setBookingForm({ ...bookingForm, mobile: e.target.value })}
-                                        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                                     />
                                 </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: 600 }}>Company/Business Name (Optional)</label>
+                                <div className={styles.formGroup}>
+                                    <label>Company/Business Name (Optional)</label>
                                     <input
                                         type="text"
                                         value={bookingForm.company_name}
                                         onChange={e => setBookingForm({ ...bookingForm, company_name: e.target.value })}
-                                        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                                     />
                                 </div>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: 600 }}>Notes</label>
+                                <div className={styles.formGroup}>
+                                    <label>Notes</label>
                                     <textarea
                                         rows={3}
                                         value={bookingForm.notes}
                                         onChange={e => setBookingForm({ ...bookingForm, notes: e.target.value })}
-                                        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                                     />
                                 </div>
 
                                 <button
                                     onClick={handleBook}
                                     disabled={bookingStatus === 'submitting'}
-                                    style={{
-                                        marginTop: '10px', padding: '12px', background: '#0069ff', color: 'white',
-                                        border: 'none', borderRadius: '40px', fontWeight: 600, cursor: 'pointer', fontSize: '16px'
-                                    }}
+                                    className={styles.submitButton}
                                 >
                                     {bookingStatus === 'submitting' ? 'Scheduling...' : 'Schedule Event'}
                                 </button>

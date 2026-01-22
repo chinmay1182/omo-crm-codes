@@ -354,22 +354,13 @@ export default function SchedulingPage() {
                 ) : (
                     <div className={styles.tableContainer}>
                         {/* Status Filters */}
-                        <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', padding: '16px' }}>
+                        {/* Status Filters */}
+                        <div className={styles.filtersContainer}>
                             {['all', 'confirmed', 'cancelled', 'completed'].map(status => (
                                 <button
                                     key={status}
                                     onClick={() => setStatusFilter(status)}
-                                    style={{
-                                        padding: '6px 12px',
-                                        borderRadius: '50px',
-                                        border: '1px solid #ddd',
-                                        background: statusFilter === status ? '#15426d' : 'white',
-                                        color: statusFilter === status ? 'white' : '#64748b',
-                                        cursor: 'pointer',
-                                        textTransform: 'capitalize',
-                                        fontSize: '13px',
-                                        fontWeight: 300
-                                    }}
+                                    className={`${styles.filterButton} ${statusFilter === status ? styles.filterButtonActive : ''}`}
                                 >
                                     {status}
                                 </button>
@@ -397,8 +388,8 @@ export default function SchedulingPage() {
                                         .filter(b => statusFilter === 'all' || (b.status || 'confirmed') === statusFilter)
                                         .map((booking) => (
                                             <tr key={booking.id}>
-                                                <td>{booking.title}</td>
-                                                <td>
+                                                <td data-label="Title">{booking.title}</td>
+                                                <td data-label="Date & Time">
                                                     {new Date(booking.start_time).toLocaleDateString('en-IN', {
                                                         year: 'numeric',
                                                         month: 'short',
@@ -410,16 +401,16 @@ export default function SchedulingPage() {
                                                         timeZone: 'Asia/Kolkata'
                                                     })}
                                                 </td>
-                                                <td>
+                                                <td data-label="Client">
                                                     <div style={{ fontWeight: 500 }}>{booking.client_name}</div>
                                                     {booking.company_name && <div style={{ fontSize: '12px', color: '#666' }}>{booking.company_name}</div>}
                                                 </td>
-                                                <td>
+                                                <td data-label="Participant Type">
                                                     <span className={`${styles.statusBadge} ${styles[booking.participant_type] || ''}`} style={{ background: '#e0e7ff', color: '#0369a1' }}>
                                                         {booking.participant_type || booking.type || '-'}
                                                     </span>
                                                 </td>
-                                                <td>
+                                                <td data-label="Status">
                                                     <span style={{
                                                         padding: '4px 8px',
                                                         borderRadius: '50px',
@@ -437,7 +428,7 @@ export default function SchedulingPage() {
                                                         {booking.status || 'Confirmed'}
                                                     </span>
                                                 </td>
-                                                <td>
+                                                <td data-label="Actions">
                                                     <div className={styles.actionButtonsRight}>
                                                         <button
                                                             onClick={() => handleEditBooking(booking)}

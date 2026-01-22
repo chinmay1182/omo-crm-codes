@@ -269,9 +269,9 @@ const ServicesPage = () => {
                   onMouseEnter={() => setHoveredService(service.id)}
                   onMouseLeave={() => setHoveredService(null)}
                 >
-                  <td>{service.service_code}</td>
-                  <td>{service.unique_service_code}</td>
-                  <td>
+                  <td data-label="Service Code">{service.service_code}</td>
+                  <td data-label="Unique Code">{service.unique_service_code}</td>
+                  <td data-label="Service Names">
                     <div className={styles.tagsContainer}>
                       {service.service_names &&
                         Array.isArray(service.service_names) &&
@@ -286,7 +286,7 @@ const ServicesPage = () => {
                       )}
                     </div>
                   </td>
-                  <td>
+                  <td data-label="Categories">
                     <div className={styles.tagsContainer}>
                       {service.service_categories &&
                         Array.isArray(service.service_categories) &&
@@ -301,22 +301,22 @@ const ServicesPage = () => {
                       )}
                     </div>
                   </td>
-                  <td>
+                  <td data-label="Service Type">
                     {service.service_type === 'pre_engagement' ? 'Pre Engagement' :
                       service.service_type === 'post_engagement' ? 'Post Engagement' : service.service_type}
                   </td>
-                  <td>{service.service_tat} days</td>
-                  <td>₹{(Number(service.service_fee) || 0).toFixed(2)}</td>
-                  <td>
+                  <td data-label="TAT">{service.service_tat} days</td>
+                  <td data-label="Service Fee">₹{(Number(service.service_fee) || 0).toFixed(2)}</td>
+                  <td data-label="Professional Fee">
                     ₹{(Number(service.professional_fee) || 0).toFixed(2)}
                   </td>
-                  <td>₹{(Number(service.discount) || 0).toFixed(2)}</td>
-                  <td>₹{(Number(service.gst_amount) || 0).toFixed(2)}</td>
-                  <td className={styles.totalAmount}>
+                  <td data-label="Discount">₹{(Number(service.discount) || 0).toFixed(2)}</td>
+                  <td data-label="GST (18%)">₹{(Number(service.gst_amount) || 0).toFixed(2)}</td>
+                  <td data-label="Total Amount" className={styles.totalAmount}>
                     ₹{(Number(service.total_amount) || 0).toFixed(2)}
                   </td>
-                  <td>{service.challan_associated}</td>
-                  <td>
+                  <td data-label="Challan">{service.challan_associated}</td>
+                  <td data-label="Actions">
                     <div className={styles.actionButtons}>
                       <button
                         onClick={() => {

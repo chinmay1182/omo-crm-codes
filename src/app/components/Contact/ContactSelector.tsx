@@ -65,7 +65,7 @@ export default function ContactSelector({
                 value={selectedContactId}
                 onChange={handleChange}
                 disabled={disabled || loading}
-                style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ddd' }}
+                style={{ width: '100%', padding: '8px', borderRadius: '4px' }}
             >
                 <option value="">-- Select Contact to Associate --</option>
                 {contacts.map(contact => {

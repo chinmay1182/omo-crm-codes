@@ -39,6 +39,7 @@
     border: none;
     padding: 0 4px;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 .navTabActive {
@@ -72,7 +73,40 @@
     color: #11a454;
 }
 
-/* ... (Tabs container remains same, just ensure height inherits or allows 40px) ... */
+/* Filters */
+.filtersContainer {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 16px;
+    flex-wrap: wrap;
+}
+
+.filterButton {
+    padding: 6px 16px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #64748b;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-size: 13px;
+    font-weight: 300;
+    font-family: 'Open Sauce One', sans-serif;
+    transition: all 0.2s;
+}
+
+.filterButtonActive {
+    background: #15426d;
+    color: white;
+    border-color: #15426d;
+}
+
+.filterButton:hover:not(.filterButtonActive) {
+    background-color: #f8fafc;
+    color: #334155;
+}
+
 
 /* Modals - Matching ServiceModal Design */
 .modalOverlay {
@@ -272,40 +306,6 @@
     margin-top: 16px;
 }
 
-.cancelBtn {
-    background: transparent;
-    border: 1px solid #cbd5e1;
-    padding: 8px 16px;
-    border-radius: 50px;
-    cursor: pointer;
-    color: #64748b;
-    font-family: 'Open Sauce One', sans-serif;
-    font-size: 14px;
-    transition: all 0.2s;
-}
-
-.cancelBtn:hover {
-    background: #f1f5f9;
-    color: #334155;
-}
-
-.saveBtn {
-    background: #11a454;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-family: 'Open Sauce One', sans-serif;
-    font-size: 14px;
-    transition: all 0.2s;
-}
-
-.saveBtn:hover {
-    background: #10964d;
-    transform: translateY(-1px);
-}
-
 /* FAB */
 .fab {
     position: fixed;
@@ -340,215 +340,6 @@
     font-size: 12px;
     font-weight: 300;
     text-transform: capitalize;
-}
-
-.loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    color: #64748b;
-}
-
-.emptyState {
-    text-align: center;
-    padding: 40px;
-    color: #64748b;
-    font-size: 15px;
-    grid-column: 1 / -1;
-    background: #f8fafc;
-    border-radius: 8px;
-    border: 1px dashed #e2e8f0;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-}
-
-.header h1 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #333;
-}
-
-.createButton {
-    background: #15426d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 40px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background 0.2s;
-    font-family: 'Open Sauce One', sans-serif;
-}
-
-.createButton:hover {
-    background: #12385a;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem;
-}
-
-.card {
-    background: white;
-    border: 1px solid #eee;
-    border-radius: 20px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Distinctive color strip */
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
-
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.cardHeader h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #333;
-    font-weight: 600;
-}
-
-.duration {
-    font-size: 0.75rem;
-    color: #666;
-    background: #f3f4f6;
-    padding: 2px 8px;
-    border-radius: 12px;
-}
-
-.description {
-    color: #555;
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    min-height: 40px;
-    line-height: 1.5;
-}
-
-/* Card Action Buttons - Matching Services Table Design */
-.cardActions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #eee;
-    padding-top: 16px;
-    margin-top: auto;
-}
-
-.actionButtonsRight {
-    display: flex;
-    gap: 4px;
-}
-
-.editButton,
-.deleteButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px 12px;
-    border-radius: 50px;
-    transition: all 0.2s;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-family: 'Open Sauce One', sans-serif;
-    font-weight: 400;
-}
-
-.editButton {
-    color: #15426d;
-    background-color: rgba(21, 66, 109, 0.1);
-}
-
-.editButton:hover {
-    background-color: rgba(21, 66, 109, 0.2);
-}
-
-.deleteButton {
-    color: #f44336;
-    background-color: rgba(244, 67, 54, 0.1);
-}
-
-.deleteButton:hover {
-    background-color: rgba(244, 67, 54, 0.2);
-}
-
-.previewLink {
-    color: #666;
-    font-size: 14px;
-    text-decoration: none;
-    font-family: 'Open Sauce One', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-}
-
-.previewLink:hover {
-    color: #333;
-    background-color: #f3f4f6;
-}
-
-/* Table Container and Styles for Bookings */
-.tableContainer {
-    flex: 1;
-    overflow: auto;
-    padding: 24px;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.table thead {
-    background-color: #f8f9fa;
-}
-
-.table th {
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 300;
-    font-size: 14px;
-    color: #666;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.table td {
-    padding: 16px;
-    border-bottom: 1px solid #f0f0f0;
-    font-weight: 300;
-}
-
-.table tbody tr:hover {
-    background-color: #f8f9fa;
 }
 
 .loading {
@@ -605,4 +396,318 @@
 
 .link:hover {
     text-decoration: underline;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.cardHeader h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.duration {
+    font-size: 0.75rem;
+    color: #666;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.description {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    min-height: 40px;
+    line-height: 1.5;
+}
+
+.cardActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+    margin-top: auto;
+}
+
+.actionButtonsRight {
+    display: flex;
+    gap: 4px;
+}
+
+.editButton,
+.deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 50px;
+    transition: all 0.2s;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Open Sauce One', sans-serif;
+    font-weight: 400;
+}
+
+.editButton {
+    color: #15426d;
+    background-color: rgba(21, 66, 109, 0.1);
+}
+
+.editButton:hover {
+    background-color: rgba(21, 66, 109, 0.2);
+}
+
+.deleteButton {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.deleteButton:hover {
+    background-color: rgba(244, 67, 54, 0.2);
+}
+
+.previewLink {
+    color: #15426d;
+    font-size: 14px;
+    text-decoration: none;
+    font-family: 'Open Sauce One', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 50px;
+    background-color: rgba(21, 66, 109, 0.05);
+    transition: all 0.2s;
+    font-weight: 400;
+}
+
+.previewLink:hover {
+    background-color: rgba(21, 66, 109, 0.15);
+    color: #15426d;
+}
+
+/* Table Container and Styles for Bookings */
+.tableContainer {
+    flex: 1;
+    overflow: auto;
+    padding: 24px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 300;
+    font-size: 14px;
+    color: #666;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table td {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 300;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+
+/* ===========================
+   MOBILE RESPONSIVENESS
+   =========================== */
+@media (max-width: 768px) {
+    .container {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Top Nav */
+    .topNav {
+        padding: 0 12px;
+        overflow-x: auto;
+    }
+
+    .navTabsContainer {
+        gap: 12px;
+    }
+
+    .navTab {
+        font-size: 14px;
+        white-space: nowrap;
+        padding: 0 2px;
+    }
+
+    /* Hide text on small screens, show only icon if possible, or just adjust padding */
+    .topActionButton span {
+        display: none;
+    }
+
+    .topActionButton {
+        padding: 4px;
+    }
+
+    /* Event Types Grid */
+    .grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    /* Filters */
+    .filtersContainer {
+        padding: 12px;
+        margin-bottom: 0;
+        gap: 8px;
+        overflow-x: auto;
+        /* Enables horizontal scrolling if wrap is disabled, but wrap is safer for buttons */
+        flex-wrap: nowrap;
+        /* We'll use scroll for filters mostly on mobile to save vertical space */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .filtersContainer::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filterButton {
+        white-space: nowrap;
+        padding: 6px 14px;
+        flex-shrink: 0;
+        /* Prevents squishing */
+    }
+
+    /* Table Mobile (Card View) */
+    .tableContainer {
+        padding: 12px;
+    }
+
+    .table {
+        box-shadow: none;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        background: white;
+        margin-bottom: 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        padding: 12px;
+    }
+
+    .table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 8px 0;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 14px;
+        text-align: right;
+    }
+
+    .table td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        padding-top: 12px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Inject labels via attr(data-label) */
+    .table td::before {
+        content: attr(data-label);
+        font-weight: 500;
+        color: #64748b;
+        margin-right: 12px;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    /* Modals */
+    .modalContent {
+        width: 95%;
+        padding: 0;
+    }
+
+    .modalBody {
+        padding: 1.5rem;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .formActions {
+        flex-direction: column-reverse;
+    }
+
+    .saveBtn,
+    .cancelBtn {
+        width: 100%;
+    }
+
+    /* FAB */
+    .fab {
+        bottom: 16px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+    }
 }

@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
 import { generateOTP, sendMail } from '../../../lib/email';
 import { storeOTP } from '../../../lib/otpStore';
-import db from '../../../lib/db';
+import { supabase } from '../../../lib/supabase';
 
 export async function POST(request: Request) {
   const { email } = await request.json();
-
 
   if (!email) {
     return NextResponse.json(
@@ -28,22 +27,19 @@ export async function POST(request: Request) {
 
   try {
     // Check if user exists using normalized email
-    const [users] = await db.execute(
-      'SELECT email FROM users WHERE LOWER(email) = ? LIMIT 1',
-      [normalizedEmail]
-    );
+    const { data: users, error } = await supabase
+      .from('users')
+      .select('email')
+      .ilike('email', normalizedEmail)
+      .limit(1);
 
+    if (error) throw error;
 
-    if (Array.isArray(users) && users.length > 0) {
+    if (users && users.length > 0) {
 
       const otp = generateOTP();
 
-      // Clear any existing OTPs for this email first
-      await db.execute(
-        'DELETE FROM password_reset_tokens WHERE email = ?',
-        [normalizedEmail]
-      );
-
+      // storeOTP will handle clearing existing tokens
       await storeOTP(normalizedEmail, otp);
 
       const mailSent = await sendMail({

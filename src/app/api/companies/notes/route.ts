@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 
 export async function POST(request: Request) {
   try {
-    const { companyId, title, content } = await request.json();
+    const { companyId, title = '', content = '' } = await request.json();
 
     // Check Agent Permissions and Get ID
     const cookieStore = await cookies();
@@ -30,9 +30,9 @@ export async function POST(request: Request) {
       }
     }
 
-    if (!companyId || !title || !content) {
+    if (!companyId) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Company ID is required' },
         { status: 400 }
       );
     }

@@ -114,7 +114,13 @@ function ContactsContent() {
     setError(null);
     try {
       const endpoint = activeTab === 'contacts' ? '/api/contacts' : '/api/companies';
-      const res = await fetch(endpoint);
+      // Add timestamp to prevent caching
+      const res = await fetch(`${endpoint}?t=${new Date().getTime()}`, {
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
+        }
+      });
 
       if (!res.ok) {
         throw new Error(`Failed to fetch ${activeTab}`);
@@ -124,10 +130,20 @@ function ContactsContent() {
 
       if (activeTab === 'contacts') {
         setContacts(data);
-        setSelectedContact(data.length > 0 ? data[0] : null);
+        if (selectedContact) {
+          const updatedContact = data.find((c: Contact) => c.id === selectedContact.id);
+          setSelectedContact(updatedContact || (data.length > 0 ? data[0] : null));
+        } else {
+          setSelectedContact(data.length > 0 ? data[0] : null);
+        }
       } else {
         setCompanies(data);
-        setSelectedCompany(data.length > 0 ? data[0] : null);
+        if (selectedCompany) {
+          const updatedCompany = data.find((c: Company) => c.id === selectedCompany.id);
+          setSelectedCompany(updatedCompany || (data.length > 0 ? data[0] : null));
+        } else {
+          setSelectedCompany(data.length > 0 ? data[0] : null);
+        }
       }
     } catch (err) {
       console.error('Error fetching data:', err);

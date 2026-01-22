@@ -529,25 +529,25 @@ ${meetingNotes || 'No notes added yet'}
                   <tbody>
                     {meetings.map(meeting => (
                       <tr key={meeting.id}>
-                        <td>
+                        <td data-label="Title">
                           <div style={{ fontWeight: 300, color: '#1a1a1a' }}>{meeting.title}</div>
                           <div style={{ fontSize: '14px', color: '#666', marginTop: '2px', fontWeight: 300 }}>{meeting.type}</div>
                         </td>
-                        <td>
+                        <td data-label="Date & Time">
                           <div style={{ fontWeight: 300 }}>{new Date(meeting.start_time).toLocaleDateString()}</div>
                           <div style={{ fontSize: '14px', color: '#666', fontWeight: 300 }}>
                             {formatTime(meeting.start_time)} - {formatTime(meeting.end_time)}
                           </div>
                         </td>
-                        <td>
+                        <td data-label="Client">
                           <div style={{ fontWeight: 300 }}>{meeting.client_name || meeting.company_name || 'Client'}</div>
                         </td>
-                        <td>
+                        <td data-label="Status">
                           <span className={`${styles.statusBadge} ${styles[meeting.status || 'scheduled'] || ''}`}>
                             {meeting.status || 'Scheduled'}
                           </span>
                         </td>
-                        <td>
+                        <td data-label="Actions">
                           <div style={{ display: 'flex', gap: '8px' }}>
                             {hasPermission('meetings', 'edit') && (
                               <button

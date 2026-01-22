@@ -38,31 +38,37 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const { contactId, title, content, tags } = await req.json();
+    const { contactId, title = '', content = '' } = await req.json();
 
-    if (!contactId || !title || !content) {
+    if (!contactId) {
       return NextResponse.json(
-        { error: 'Contact ID, title, and content are required' },
+        { error: 'Contact ID is required' },
         { status: 400 }
       );
     }
 
-    // Insert note
+    // Construct the note content based on available fields
+    let noteContent = '';
+    if (title && content) {
+      noteContent = `**${title}**\n\n${content}`;
+    } else if (title) {
+      noteContent = `**${title}**`;
+    } else {
+      noteContent = content;
+    }
+
     // Insert note
     const { data: note, error: noteError } = await supabase
       .from('contact_notes')
       .insert({
         contact_id: contactId,
-        content: `**${title}**\n\n${content}`, // Pack title
-        tags: tags || null,
+        content: noteContent,
         created_at: new Date().toISOString()
       })
       .select()
       .single();
 
     if (noteError) throw noteError;
-
-    // Redundant activity logging removed (GET activities now aggregates notes)
 
     return NextResponse.json({
       success: true,

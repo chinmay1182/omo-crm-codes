@@ -379,3 +379,182 @@
   color: #8e24aa;
   text-transform: capitalize;
 }
+
+/* ===========================
+   MOBILE RESPONSIVENESS
+   =========================== */
+@media (max-width: 768px) {
+  .container {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Top Nav */
+  .topNav {
+    padding: 0 12px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 40px;
+    gap: 0;
+  }
+
+  .navTabsContainer {
+    gap: 20px;
+    height: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
+  }
+
+  .navTab {
+    font-size: 14px;
+    white-space: nowrap;
+    padding: 0 4px;
+  }
+
+  /* Search - Full width on new line */
+  .searchWrapper {
+    width: 100%;
+    margin: 8px 0;
+    order: 3;
+  }
+
+
+
+  /* Top Actions - Filters on separate line */
+  .topActions {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 8px 0;
+    gap: 8px;
+  }
+
+  .dateInput {
+    flex: 1;
+    max-width: 110px;
+    font-size: 13px;
+    padding: 6px 4px;
+  }
+
+  .filterSelect {
+    font-size: 13px;
+    padding: 6px 4px;
+    flex: 1;
+    max-width: 140px;
+  }
+
+  /* Content Area */
+  .contentArea {
+    padding: 1rem;
+  }
+
+  /* Task Grid - Single Column */
+  .taskGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 80px;
+  }
+
+  /* Task Cards */
+  .taskCard {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .taskHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .taskTitle {
+    font-size: 1rem;
+  }
+
+  .taskDescription {
+    font-size: 0.9rem;
+  }
+
+  .taskMeta {
+    font-size: 0.8rem;
+  }
+
+  .taskMeta span {
+    font-size: 0.8rem;
+  }
+
+  .taskFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .taskBadges {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .editButton,
+  .deleteButton {
+    flex: 1;
+    justify-content: center;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  /* Empty State */
+  .emptyStateImage {
+    width: 200px;
+    height: 200px;
+  }
+
+  .emptyTitle {
+    font-size: 20px;
+  }
+
+  .emptySubtitle {
+    font-size: 14px;
+  }
+
+  /* FAB */
+  .fab {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topNav {
+    padding: 0 8px;
+  }
+
+  .contentArea {
+    padding: 1rem;
+  }
+
+  .taskCard {
+    padding: 0.875rem;
+  }
+
+  .taskGrid {
+    gap: 0.75rem;
+  }
+
+  .dateInput {
+    max-width: 100px;
+    font-size: 12px;
+  }
+
+  .filterSelect {
+    max-width: 120px;
+    font-size: 12px;
+  }
+
+  .editButton,
+  .deleteButton {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,370 @@
+.container {
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 1rem;
+  background-color: white;
+  min-height: 100vh;
+  background-image: url(/Capa%201.svg), url(/Topographic%204.svg);
+  background-repeat: no-repeat, no-repeat;
+  background-size: 400px 400px, 400px 400px;
+  background-position: left 790px, right 120px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 24px !important;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: #64748b;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Billing Toggle */
+.billingToggle {
+  display: flex;
+  background-color: #e9ecef;
+  border-radius: 999px;
+  /* 🔥 Full pill */
+  padding: 4px;
+  margin: 0 auto;
+  width: fit-content;
+  position: relative;
+}
+
+
+.toggleButton {
+  padding: 10px 28px;
+  border-radius: 999px;
+  /* 🔥 Inner pill */
+  border: none;
+  background: transparent;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 15px;
+  color: #6c757d;
+  position: relative;
+  z-index: 2;
+}
+
+
+.toggleButton.active {
+  background-color: #8686FC;
+  color: white;
+  box-shadow: 0 4px 12px rgba(21, 66, 109, 0.25);
+}
+
+
+.billingToggle[data-active='monthly']::before {
+  transform: translateX(0);
+}
+
+.billingToggle[data-active='yearly']::before {
+  transform: translateX(100%);
+}
+
+/* Plans Grid */
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.planCard {
+  background: white;
+  border-radius: 0;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.planCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.popularPlan {
+  border: 2px solid #8686FC;
+  transform: scale(1.05);
+}
+
+
+.planHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.planName {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #212121;
+  margin-bottom: 1rem;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.planPrice {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.currency {
+  font-size: 1.25rem;
+  color: #64748b;
+  margin-right: 4px;
+}
+
+.amount {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #212121;
+}
+
+.period {
+  font-size: 1rem;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+.originalPrice {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.originalPrice span {
+  color: #94a3b8;
+  text-decoration: line-through;
+  font-size: 0.875rem;
+}
+
+.planDescription {
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.planFeatures {
+  flex: 1;
+  margin-bottom: 2rem;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 300;
+  padding: 12px 0;
+  font-size: 15px;
+  letter-spacing: -0.2px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.feature:last-child {
+  border-bottom: none;
+}
+
+
+.planFooter {
+  margin-top: auto;
+}
+
+.planButton {
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 300;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.planButton.primary {
+  background: linear-gradient(135deg, #11a454, #0d8043);
+  color: white;
+}
+
+.planButton.primary:hover {
+  transform: translateY(-2px);
+}
+
+.planButton.secondary {
+  background: white;
+  color: #11a454;
+  border: 1px solid #11a454;
+}
+
+.planButton.secondary:hover {
+  background: #11a454;
+  color: white;
+}
+
+.planButton.premium {
+  background: #15426d;
+  color: white;
+}
+
+
+
+.planButton.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.planButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* FAQ Section */
+.faqSection {
+  background: white;
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.faqTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2rem;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.faqGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.faqItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 999px;
+  /* 🔥 pill shape */
+  border: 1px solid #e2e8f0;
+  transition: all 0.25s ease;
+}
+
+
+.faqItem h4 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #1e293b;
+  margin: 0;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.faqItem p {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+  font-weight: 300;
+  margin: 0;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .plansGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .popularPlan {
+    transform: none;
+  }
+
+
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .faqSection {
+    padding: 2rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .planCard {
+    padding: 1.5rem;
+  }
+
+  .amount {
+    font-size: 2.5rem;
+  }
+
+  .toggleButton {
+    padding: 10px 16px;
+    font-size: 0.875rem;
+  }
+}

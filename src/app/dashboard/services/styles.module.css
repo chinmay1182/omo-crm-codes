@@ -416,9 +416,142 @@
   }
 }
 
-@media (max-width: 1024px) {
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .servicesContainer {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Top Nav */
   .topNav {
+    padding: 0 12px;
+    flex-wrap: wrap;
     height: auto;
-    overflow-x: auto;
+    min-height: 40px;
+    gap: 8px;
+  }
+
+  .searchWrapper {
+    width: 100%;
+    margin: 8px 0;
+    order: 3;
+  }
+
+  .topActions {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* Hide button text on mobile, show only icons */
+  .tagsButton span {
+    display: none;
+  }
+
+  .tagsButton {
+    padding: 6px;
+    min-width: 36px;
+  }
+
+  .filterSelect {
+    min-width: 100px;
+    font-size: 13px;
+  }
+
+  /* Table Container */
+  .tableContainer {
+    padding: 12px;
+  }
+
+  /* Mobile Card View for Table */
+  .servicesTable {
+    box-shadow: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .servicesTable thead {
+    display: none;
+  }
+
+  .servicesTable tbody tr {
+    display: block;
+    background: white;
+    margin-bottom: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 12px;
+  }
+
+  .servicesTable td {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+    text-align: right;
+  }
+
+  .servicesTable td:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    padding-top: 12px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Inject labels via attr(data-label) */
+  .servicesTable td::before {
+    content: attr(data-label);
+    font-weight: 500;
+    color: #64748b;
+    margin-right: 12px;
+    text-align: left;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+
+  /* Tags container on mobile */
+  .tagsContainer {
+    max-width: none;
+    justify-content: flex-end;
+  }
+
+  /* Action buttons on mobile */
+  .actionButtons {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  /* FAB */
+  .floatingButton {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topNav {
+    padding: 0 8px;
+  }
+
+  .tableContainer {
+    padding: 8px;
+  }
+
+  .servicesTable tbody tr {
+    padding: 10px;
+  }
+
+  .infoButton,
+  .editButton,
+  .deleteButton {
+    padding: 4px 10px;
+    font-size: 13px;
   }
 }

@@ -1,17 +1,23 @@
-import db from '../lib/db';
+import { supabase } from './supabase';
 
 export const checkRateLimit = async (email: string, limit: number, windowMinutes: number) => {
   try {
-    const [results] = await db.execute(
-      `SELECT COUNT(*) as count FROM password_reset_tokens 
-       WHERE email = ? AND created_at > DATE_SUB(NOW(), INTERVAL ? MINUTE)`,
-      [email, windowMinutes]
-    );
+    const windowStart = new Date(Date.now() - windowMinutes * 60 * 1000).toISOString();
 
-    const count = Array.isArray(results) && results[0] ? (results[0] as any).count : 0;
-    return count < limit;
+    const { count, error } = await supabase
+      .from('password_reset_tokens')
+      .select('*', { count: 'exact', head: true })
+      .eq('email', email)
+      .gt('created_at', windowStart);
+
+    if (error) {
+      console.error('Rate limit check failed:', error);
+      return true; // Fail open
+    }
+
+    return (count || 0) < limit;
   } catch (error) {
     console.error('Rate limit check failed:', error);
-    return true; // Fail open in case of error
+    return true; // Fail open
   }
 };

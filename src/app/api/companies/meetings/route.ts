@@ -12,7 +12,11 @@ export async function POST(request: Request) {
       end_time,
       location,
       participants,
-      createGoogleMeet
+      createGoogleMeet,
+      type,
+      meeting_link,
+      client_email,
+      client_name
     } = await request.json();
 
     // Check Agent Permissions and Get ID
@@ -61,8 +65,12 @@ export async function POST(request: Request) {
           meeting_date: start_time, // Map start_time to meeting_date
           duration: duration, // Map end_time to duration
           location: location || null,
-          // participants: participants || null, // participants column might not exist in DB schema based on 04 migration
-          created_by: createdBy
+          participants: participants || null,
+          created_by: createdBy,
+          type: type || 'online',
+          meeting_link: meeting_link || null,
+          client_email: client_email || null,
+          client_name: client_name || null
         }
       ])
       .select()

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import styles from './ContactTagsModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faPlus, faTrash, faTag } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 
 interface ContactTag {
@@ -137,29 +137,29 @@ const ContactTagsModal: React.FC<ContactTagsModalProps> = ({
 
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContainer}>
+      <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h2>Contact & Company Tags</h2>
+          <h2 className={styles.modalTitle}>Contact & Company Tags</h2>
           <button onClick={onClose} className={styles.closeButton}>
-           <i className="fa-light fa-xmark"></i>
+            <i className="fa-light fa-xmark"></i>
           </button>
         </div>
 
-        <div className={styles.modalContent}>
+        <div className={styles.modalBody}>
           <div className={styles.sectionsContainer}>
             {/* Contact Tags Section */}
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>
                 Contact Tags
               </h3>
-              
+
               <div className={styles.addItemContainer}>
                 <input
                   type="text"
                   value={newContactTag}
                   onChange={(e) => setNewContactTag(e.target.value)}
                   placeholder="Add new contact tag..."
-                  className={styles.input}
+                  className={styles.tagInput}
                   onKeyPress={(e) => e.key === 'Enter' && handleAddContactTag()}
                 />
                 <button
@@ -168,7 +168,7 @@ const ContactTagsModal: React.FC<ContactTagsModalProps> = ({
                   className={styles.addButton}
                   disabled={!newContactTag.trim() || isSubmitting}
                 >
-<i className="fa-light fa-plus"></i>
+                  Add
                 </button>
               </div>
 
@@ -185,7 +185,7 @@ const ContactTagsModal: React.FC<ContactTagsModalProps> = ({
                         className={styles.removeButton}
                         title="Delete tag"
                       >
-                        <FontAwesomeIcon icon={faTrash} />
+                        <i className="fa-light fa-xmark"></i>
                       </button>
                     </div>
                   ))
@@ -198,14 +198,14 @@ const ContactTagsModal: React.FC<ContactTagsModalProps> = ({
               <h3 className={styles.sectionTitle}>
                 Company Tags
               </h3>
-              
+
               <div className={styles.addItemContainer}>
                 <input
                   type="text"
                   value={newCompanyTag}
                   onChange={(e) => setNewCompanyTag(e.target.value)}
                   placeholder="Add new company tag..."
-                  className={styles.input}
+                  className={styles.tagInput}
                   onKeyPress={(e) => e.key === 'Enter' && handleAddCompanyTag()}
                 />
                 <button
@@ -214,7 +214,7 @@ const ContactTagsModal: React.FC<ContactTagsModalProps> = ({
                   className={styles.addButton}
                   disabled={!newCompanyTag.trim() || isSubmitting}
                 >
-    <i className="fa-light fa-plus"></i>
+                  Add
                 </button>
               </div>
 
@@ -231,7 +231,7 @@ const ContactTagsModal: React.FC<ContactTagsModalProps> = ({
                         className={styles.removeButton}
                         title="Delete tag"
                       >
-                        <FontAwesomeIcon icon={faTrash} />
+                        <i className="fa-light fa-xmark"></i>
                       </button>
                     </div>
                   ))
@@ -242,7 +242,7 @@ const ContactTagsModal: React.FC<ContactTagsModalProps> = ({
 
           {error && <div className={styles.error}>{error}</div>}
 
-          <div className={styles.modalFooter}>
+          <div className={styles.formActions}>
             <button
               type="button"
               onClick={() => {

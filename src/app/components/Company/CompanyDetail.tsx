@@ -256,7 +256,7 @@ export default function CompanyDetail({ company, onAddContact, onUpdate, onDelet
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className={styles.editInput}
+              className={styles.headerEditInput}
             />
           ) : (
             <h2>{company.name}</h2>
@@ -361,128 +361,204 @@ export default function CompanyDetail({ company, onAddContact, onUpdate, onDelet
             <div className={styles.infoTab}>
               {isEditing ? (
                 <div className={styles.editForm}>
-                  <div className={styles.formGroup}>
-                    <label>Type</label>
-                    <select
-                      name="type"
-                      value={formData.type || ''}
-                      onChange={handleInputChange}
-                      className={styles.editInput}
-                      style={{ padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                    >
-                      <option value="">Select Type</option>
-                      <option value="Private Limited">Private Limited</option>
-                      <option value="Public Limited">Public Limited</option>
-                      <option value="LLP">LLP</option>
-                      <option value="Partnership">Partnership</option>
-                      <option value="Sole Proprietorship">Sole Proprietorship</option>
-                    </select>
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>GSTIN Number</label>
-                    <input
-                      title="none"
-                      type="text"
-                      name="registration_number"
-                      value={(formData as any).registration_number || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Phone</label>
-                    <input
-                      title="none"
-                      type="text"
-                      name="phone"
-                      value={formData.phone || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Email</label>
-                    <input
-                      title="none"
-                      type="email"
-                      name="email"
-                      value={formData.email || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Website</label>
-                    <input
-                      title="none"
-                      type="url"
-                      name="website"
-                      value={formData.website || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Address</label>
-                    <input
-                      title="none"
-                      type="text"
-                      name="address"
-                      value={(formData as any).address || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>City</label>
-                    <input
-                      title="none"
-                      type="text"
-                      name="city"
-                      value={(formData as any).city || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>State</label>
-                    <input
-                      title="none"
-                      type="text"
-                      name="state"
-                      value={(formData as any).state || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Country</label>
-                    <input
-                      title="none"
-                      type="text"
-                      name="country"
-                      value={(formData as any).country || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Postal Code</label>
-                    <input
-                      title="none"
-                      type="text"
-                      name="postal_code"
-                      value={(formData as any).postal_code || ''}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Description</label>
-                    <textarea
-                      title="none"
-                      name="description"
-                      value={formData.description || ''}
-                      onChange={handleInputChange}
-                      rows={4}
-                    />
-                  </div>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label>Type</label>
+                      <select
+                        name="type"
+                        value={formData.type || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      >
+                        <option value="">Select Type</option>
+                        <option value="Private Limited">Private Limited</option>
+                        <option value="Public Limited">Public Limited</option>
+                        <option value="LLP">LLP</option>
+                        <option value="Partnership">Partnership</option>
+                        <option value="Sole Proprietorship">Sole Proprietorship</option>
+                      </select>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>GSTIN Number</label>
+                      <input
+                        title="none"
+                        type="text"
+                        name="registration_number"
+                        value={(formData as any).registration_number || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Phone</label>
+                      <input
+                        title="none"
+                        type="text"
+                        name="phone"
+                        value={formData.phone || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Email</label>
+                      <input
+                        title="none"
+                        type="email"
+                        name="email"
+                        value={formData.email || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Website</label>
+                      <input
+                        title="none"
+                        type="url"
+                        name="website"
+                        value={formData.website || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      />
+                    </div>
 
-                  <div className={styles.formGroup} style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #eee' }}>
-                    <ContactSelector
-                      onContactSelect={setAssociatedContactId}
-                    />
+                    <div className={`${styles.formGroup} ${styles.formGroupFull}`} style={{ marginTop: '10px', marginBottom: '10px' }}>
+                      <h4 style={{ fontSize: '14px', borderBottom: '1px solid #eee', paddingBottom: '5px', color: '#666', margin: 0 }}>Address Details</h4>
+                    </div>
+
+                    <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+                      <label>Address</label>
+                      <input
+                        title="none"
+                        type="text"
+                        name="address"
+                        value={(formData as any).address || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>City</label>
+                      <input
+                        title="none"
+                        type="text"
+                        name="city"
+                        value={(formData as any).city || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>State</label>
+                      <select
+                        name="state"
+                        value={(formData as any).state || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      >
+                        <option value="">Select State</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                      </select>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Country</label>
+                      <select
+                        name="country"
+                        value={(formData as any).country || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      >
+                        <option value="">Select Country</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="UK">UK</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="UAE">UAE</option>
+                      </select>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Postal Code</label>
+                      <input
+                        title="none"
+                        type="text"
+                        name="postal_code"
+                        value={(formData as any).postal_code || ''}
+                        onChange={handleInputChange}
+                        className={styles.editInput}
+                      />
+                    </div>
+                    <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+                      <label>Description</label>
+                      <textarea
+                        title="none"
+                        name="description"
+                        value={formData.description || ''}
+                        onChange={handleInputChange}
+                        rows={4}
+                        className={styles.editInput}
+                      />
+                    </div>
+
+                    <div className={`${styles.formGroup} ${styles.formGroupFull}`} style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #eee' }}>
+                      <label style={{ display: 'block', marginBottom: '10px', fontWeight: 600, color: '#444' }}>Contact Association</label>
+                      <div style={{ display: 'flex', gap: '15px', marginBottom: '10px' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', cursor: 'pointer' }}>
+                          <input
+                            type="radio"
+                            name="contactAs"
+                            checked={associatedContactId !== 'new' && associatedContactId !== 'none'}
+                            onChange={() => { }}
+                          />
+                          Select Existing
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', cursor: 'pointer', opacity: 0.5 }}>
+                          <input type="radio" name="contactAs" disabled /> Create New (Coming Soon)
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', cursor: 'pointer' }}>
+                          <input
+                            type="radio"
+                            name="contactAs"
+                            checked={associatedContactId === ''}
+                            onChange={() => setAssociatedContactId('')}
+                          />
+                          Not Applicable
+                        </label>
+                      </div>
+
+                      <ContactSelector
+                        onContactSelect={setAssociatedContactId}
+                      />
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -557,13 +633,13 @@ export default function CompanyDetail({ company, onAddContact, onUpdate, onDelet
                   )}
 
                   {!isEditing && (
-                    <div style={{ backgroundColor: '#fff5f5', border: '1px solid #ffcdd2', borderRadius: '8px', padding: '16px', marginBottom: '16px', marginTop: '16px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <h4 style={{ margin: 0, color: '#c62828', fontSize: '1rem', fontWeight: 600 }}>Key Contact Person</h4>
+                    <div className={styles.keyPersonCard}>
+                      <div className={styles.keyPersonHeader}>
+                        <h4>Key Contact Person</h4>
                         {!isEditingKeyPerson && (
                           <button
                             onClick={() => setIsEditingKeyPerson(true)}
-                            style={{ background: 'none', border: 'none', color: '#c62828', cursor: 'pointer', fontSize: '14px' }}
+                            className={styles.editKeyPersonBtn}
                             title={keyPerson ? "Edit Key Person" : "Add Key Person"}
                           >
                             {keyPerson ? 'Edit' : 'Add'}
@@ -574,60 +650,60 @@ export default function CompanyDetail({ company, onAddContact, onUpdate, onDelet
                       {isEditingKeyPerson ? (
                         <div className={styles.editForm}>
                           <div className={styles.formGroup}>
-                            <label style={{ color: '#c62828' }}>Name</label>
+                            <label>Name</label>
                             <input
                               type="text"
                               value={keyPersonForm.name}
                               onChange={(e) => setKeyPersonForm(prev => ({ ...prev, name: e.target.value }))}
                               placeholder="Name"
-                              style={{ border: '1px solid #ffcdd2', padding: '8px', borderRadius: '4px', width: '100%' }}
+                              className={styles.keyPersonInput}
                             />
                           </div>
                           <div className={styles.formGroup}>
-                            <label style={{ color: '#c62828' }}>Designation</label>
+                            <label>Designation</label>
                             <input
                               type="text"
                               value={keyPersonForm.designation}
                               onChange={(e) => setKeyPersonForm(prev => ({ ...prev, designation: e.target.value }))}
                               placeholder="Designation"
-                              style={{ border: '1px solid #ffcdd2', padding: '8px', borderRadius: '4px', width: '100%' }}
+                              className={styles.keyPersonInput}
                             />
                           </div>
                           <div className={styles.formGroup}>
-                            <label style={{ color: '#c62828' }}>Mobile</label>
+                            <label>Mobile</label>
                             <input
                               type="text"
                               value={keyPersonForm.mobile}
                               onChange={(e) => setKeyPersonForm(prev => ({ ...prev, mobile: e.target.value }))}
                               placeholder="Mobile"
-                              style={{ border: '1px solid #ffcdd2', padding: '8px', borderRadius: '4px', width: '100%' }}
+                              className={styles.keyPersonInput}
                             />
                           </div>
                           <div className={styles.formGroup}>
-                            <label style={{ color: '#c62828' }}>Email</label>
+                            <label>Email</label>
                             <input
                               type="text"
                               value={keyPersonForm.email}
                               onChange={(e) => setKeyPersonForm(prev => ({ ...prev, email: e.target.value }))}
                               placeholder="Email"
-                              style={{ border: '1px solid #ffcdd2', padding: '8px', borderRadius: '4px', width: '100%' }}
+                              className={styles.keyPersonInput}
                             />
                           </div>
                           <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
-                            <button onClick={handleSaveKeyPerson} style={{ backgroundColor: '#c62828', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer' }}>Save</button>
-                            <button onClick={() => setIsEditingKeyPerson(false)} style={{ backgroundColor: '#fff', color: '#c62828', border: '1px solid #c62828', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer' }}>Cancel</button>
+                            <button onClick={handleSaveKeyPerson} className={styles.saveButton}>Save</button>
+                            <button onClick={() => setIsEditingKeyPerson(false)} className={styles.cancelButton}>Cancel</button>
                           </div>
                         </div>
                       ) : (
                         keyPerson ? (
-                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                            <div><strong style={{ color: '#b71c1c' }}>Name:</strong> {keyPerson.name}</div>
-                            <div><strong style={{ color: '#b71c1c' }}>Designation:</strong> {keyPerson.designation || '-'}</div>
-                            <div><strong style={{ color: '#b71c1c' }}>Mobile:</strong> {keyPerson.mobile || '-'}</div>
-                            <div><strong style={{ color: '#b71c1c' }}>Email:</strong> {keyPerson.email || '-'}</div>
+                          <div className={styles.keyPersonGrid}>
+                            <div><strong>Name:</strong> {keyPerson.name}</div>
+                            <div><strong>Designation:</strong> {keyPerson.designation || '-'}</div>
+                            <div><strong>Mobile:</strong> {keyPerson.mobile || '-'}</div>
+                            <div><strong>Email:</strong> {keyPerson.email || '-'}</div>
                           </div>
                         ) : (
-                          <p style={{ color: '#d32f2f', fontSize: '14px', fontStyle: 'italic' }}>No key person details added.</p>
+                          <p className={styles.noData}>No key person details added.</p>
                         )
                       )}
                     </div>
@@ -657,7 +733,7 @@ export default function CompanyDetail({ company, onAddContact, onUpdate, onDelet
           {activeTab === 'meetings' && (
             <div className={styles.tabPanel}>
               <div className={styles.meetingsContainer}>
-                <div className={styles.locationFlex}>
+                <div className={styles.myHeadingTwo}>
                   <h3>Meetings</h3>
                   <button
                     onClick={() => {
@@ -782,7 +858,7 @@ export default function CompanyDetail({ company, onAddContact, onUpdate, onDelet
 
               <div className={styles.locationsContainer}>
 
-                <div className={styles.locationFlex}>
+                <div className={styles.myHeadingTwo}>
                   <h3>Locations</h3>
                   <button
                     onClick={() => setIsLocationModalOpen(true)}

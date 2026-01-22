@@ -39,8 +39,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     appPassword: '',
   });
 
-  // ✅ Settings popup state
-  const [showSettingsPopup, setShowSettingsPopup] = useState(false);
+  // ✅ Email settings popup state
+  const [showEmailSettingsPopup, setShowEmailSettingsPopup] = useState(false);
   // ✅ Profile dropdown state
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   // ✅ Theme selector state
@@ -219,7 +219,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       if (data.authUrl) {
         window.location.href = data.authUrl;
-        setShowSettingsPopup(false); // Close settings popup after clicking
+        setShowEmailSettingsPopup(false); // Close settings popup after clicking
       } else {
         toast.error('Failed to get authorization URL');
       }
@@ -282,7 +282,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       if (res.ok) {
         toast.success(`Fetched ${data.count || 0} emails successfully`);
         setIsGmailImapModalOpen(false);
-        setShowSettingsPopup(false);
+        setShowEmailSettingsPopup(false);
         setConnectedEmail(gmailImapForm.email);
         // Clear form
         setGmailImapForm({ email: '', appPassword: '' });
@@ -381,11 +381,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     ),
     { label: 'Documentation', href: 'https://docs.consolegal.com/', icon: 'fa-sharp fa-thin fa-book', target: '_blank', svgIcon: '/icons-products/mem_wave-8.svg' },
     {
-      label: 'Settings',
-      href: '#settings', // Dummy href for key
-      icon: 'fa-sharp fa-thin fa-gear',
-      svgIcon: '/icons-products/mem_3d_block2.svg',
-      onClick: () => setShowSettingsPopup(true)
+      label: 'Subscriptions',
+      href: '/dashboard/subscriptions',
+      icon: 'fa-sharp fa-thin fa-credit-card',
+      svgIcon: '/icons-products/mem_3d_block2.svg'
     },
   ];
 
@@ -524,10 +523,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <span>Docs</span>
                   </Link>
 
-                  <button className={styles.appDropdownItem} onClick={() => { setShowAppDropdown(false); setShowSettingsPopup(true); }}>
-                    <Image src="/icons-products/mem_3d_block2.svg" alt="Settings" width={32} height={32} />
-                    <span>Settings</span>
-                  </button>
+                  <Link href="/dashboard/subscriptions" className={styles.appDropdownItem} onClick={() => setShowAppDropdown(false)}>
+                    <Image src="/icons-products/mem_3d_block2.svg" alt="Subscriptions" width={32} height={32} />
+                    <span>Subscriptions</span>
+                  </Link>
                 </div>
               </>
             )}
@@ -701,10 +700,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <div className={styles.topBarUserInfo}>
                       <div className={styles.topBarUserName}>{user.full_name || user.username || user.email}</div>
                       <div className={styles.topBarCompanyName}>{user.company_name || 'Company Name'}</div>
-                    </div>
-                  )}
 
-                  {/* Settings Button removed from here and moved to sidebar */}
+                    </div>
+
+
+                  )}
+                  <span className={styles.trialPill2}>Starter</span>
+
+
 
                   {/* Profile Dropdown */}
                   <div style={{ position: 'relative' }}>
@@ -748,30 +751,32 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             </div>
                             <button
                               onClick={() => setShowProfileDropdown(false)}
-                              style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: '#6b7280' }}
+                              style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '24px', color: '#6b7280' }}
                             >
                               <i className="fa-sharp fa-thin fa-times"></i>
                             </button>
                           </div>
 
-                          {isAgent && (
-                            <Link href="/dashboard/agent-info" className={styles.profileDropdownItem} onClick={() => setShowProfileDropdown(false)}>
-                              <i className="fa-sharp fa-thin fa-user"></i>
-                              My Profile
-                            </Link>
-                          )}
+                          <div className={styles.profileDropdownContent}>
 
-                          {/* Profile Settings Button */}
-                          <button
-                            className={styles.profileDropdownItem}
-                            onClick={() => {
-                              setShowProfileDropdown(false);
-                              setIsProfileModalOpen(true);
-                            }}
-                          >
-                            <i className="fa-sharp fa-thin fa-user-pen"></i>
-                            Profile Settings
-                          </button>
+
+                            {isAgent && (
+                              <Link href="/dashboard/agent-info" className={styles.profileDropdownItem} onClick={() => setShowProfileDropdown(false)}>
+                                My Profile
+                              </Link>
+                            )}
+
+                            {/* Profile Settings Button */}
+                            <button
+                              className={styles.profileDropdownItem}
+                              onClick={() => {
+                                setShowProfileDropdown(false);
+                                setIsProfileModalOpen(true);
+                              }}
+                            >
+                              Profile Settings
+                            </button>
+                          </div>
 
                           <div className={styles.themeToggleContainer}>
                             <span className={styles.themeToggleLabel}>Switch to Old Theme</span>
@@ -815,6 +820,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
                           <div className={styles.profileDropdownDivider}></div>
 
+                          <button
+                            onClick={() => {
+                              setShowEmailSettingsPopup(true);
+                              setShowProfileDropdown(false);
+                            }}
+                            className={styles.profileDropdownItem}
+                          >
+                            <i className="fa-sharp fa-thin fa-envelope-open"></i>
+                            Email Settings
+                          </button>
+
                           <button onClick={handleLogout} className={`${styles.profileDropdownItem} ${styles.logoutItem}`}>
                             <i className="fa-sharp fa-thin fa-sign-out-alt"></i>
                             Logout
@@ -826,13 +842,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </div>
               </header>
 
-              {/* Settings Popup */}
-              {showSettingsPopup && (
+              {/* Email Settings Popup */}
+              {showEmailSettingsPopup && (
                 <div className={styles.settingsPopup}>
                   <div className={styles.settingsPopupHeader}>
                     <h3>Email Settings</h3>
                     <button
-                      onClick={() => setShowSettingsPopup(false)}
+                      onClick={() => setShowEmailSettingsPopup(false)}
                       className={styles.closePopupButton}
                       aria-label="Close settings"
                     >

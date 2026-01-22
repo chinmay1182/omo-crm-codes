@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './TagSelector.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTag, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 import toast from 'react-hot-toast';
 
 interface Tag {
@@ -52,10 +51,10 @@ const TagSelector: React.FC<TagSelectorProps> = ({
 
   const fetchCurrentTagIds = async () => {
     try {
-      const endpoint = entityType === 'contact' 
+      const endpoint = entityType === 'contact'
         ? `/api/contacts/${entityId}/tags`
         : `/api/companies/${entityId}/tags`;
-      
+
       const response = await fetch(endpoint);
       if (response.ok) {
         const tags = await response.json();
@@ -67,7 +66,7 @@ const TagSelector: React.FC<TagSelectorProps> = ({
   };
 
   const handleTagToggle = (tagId: string) => {
-    setSelectedTagIds(prev => 
+    setSelectedTagIds(prev =>
       prev.includes(tagId)
         ? prev.filter(id => id !== tagId)
         : [...prev, tagId]
@@ -77,7 +76,7 @@ const TagSelector: React.FC<TagSelectorProps> = ({
   const handleSave = async () => {
     setIsLoading(true);
     try {
-      const endpoint = entityType === 'contact' 
+      const endpoint = entityType === 'contact'
         ? `/api/contacts/${entityId}/tags`
         : `/api/companies/${entityId}/tags`;
 
@@ -113,14 +112,17 @@ const TagSelector: React.FC<TagSelectorProps> = ({
     return (
       <div className={styles.tagDisplay}>
         <div className={styles.tagHeader}>
-          <FontAwesomeIcon icon={faTag} className={styles.tagIcon} />
           <span className={styles.tagLabel}>Tags</span>
           <button
             onClick={() => setIsEditing(true)}
             className={styles.editButton}
+            style={{
+              backgroundColor: 'white',
+              color: '#15426d',
+            }}
             title="Edit tags"
           >
-            <FontAwesomeIcon icon={faPlus} />
+            Edit Tags
           </button>
         </div>
         <div className={styles.currentTags}>
@@ -141,10 +143,9 @@ const TagSelector: React.FC<TagSelectorProps> = ({
   return (
     <div className={styles.tagEditor}>
       <div className={styles.tagHeader}>
-        <FontAwesomeIcon icon={faTag} className={styles.tagIcon} />
         <span className={styles.tagLabel}>Edit Tags</span>
       </div>
-      
+
       <div className={styles.tagOptions}>
         {availableTags.length > 0 ? (
           availableTags.map(tag => (
@@ -173,7 +174,6 @@ const TagSelector: React.FC<TagSelectorProps> = ({
           className={styles.cancelButton}
           disabled={isLoading}
         >
-          <FontAwesomeIcon icon={faTimes} />
           Cancel
         </button>
         <button

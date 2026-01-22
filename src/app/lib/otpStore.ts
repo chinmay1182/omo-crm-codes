@@ -1,14 +1,25 @@
-import db from './db';
+import { supabase } from './supabase';
 
 export const storeOTP = async (email: string, otp: string) => {
   try {
-    const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes expiry
+    const expiresAt = new Date(Date.now() + 15 * 60 * 1000).toISOString(); // 15 minutes expiry
 
-    const result = await db.execute(
-      'INSERT INTO password_reset_tokens (email, token, expires_at, created_at) VALUES (?, ?, ?, NOW())',
-      [email, otp, expiresAt]
-    );
+    // Delete existing tokens for this email first (optional, to keep clean)
+    await supabase
+      .from('password_reset_tokens')
+      .delete()
+      .eq('email', email);
 
+    const { error } = await supabase
+      .from('password_reset_tokens')
+      .insert({
+        email,
+        token: otp,
+        expires_at: expiresAt,
+        created_at: new Date().toISOString()
+      });
+
+    if (error) throw error;
     return true;
   } catch (error) {
     throw error;
@@ -17,17 +28,18 @@ export const storeOTP = async (email: string, otp: string) => {
 
 export const verifyOTP = async (email: string, otp: string) => {
   try {
+    const { data, error } = await supabase
+      .from('password_reset_tokens')
+      .select('*')
+      .eq('email', email)
+      .eq('token', otp)
+      .gt('expires_at', new Date().toISOString())
+      .order('created_at', { ascending: false })
+      .limit(1);
 
-    const [rows] = await db.execute(
-      `SELECT * FROM password_reset_tokens 
-       WHERE email = ? AND token = ? AND expires_at > NOW()
-       ORDER BY created_at DESC LIMIT 1`,
-      [email, otp]
-    );
+    if (error) throw error;
 
-    const isValid = Array.isArray(rows) && rows.length > 0;
-
-    return isValid;
+    return data && data.length > 0;
   } catch (error) {
     console.error('Error verifying OTP:', error);
     throw error;
@@ -36,12 +48,12 @@ export const verifyOTP = async (email: string, otp: string) => {
 
 export const clearOTP = async (email: string) => {
   try {
+    const { error } = await supabase
+      .from('password_reset_tokens')
+      .delete()
+      .eq('email', email);
 
-    const result = await db.execute(
-      'DELETE FROM password_reset_tokens WHERE email = ?',
-      [email]
-    );
-
+    if (error) throw error;
     return true;
   } catch (error) {
     throw error;
@@ -51,11 +63,12 @@ export const clearOTP = async (email: string) => {
 // Helper function to clean up expired OTPs
 export const cleanupExpiredOTPs = async () => {
   try {
+    const { error } = await supabase
+      .from('password_reset_tokens')
+      .delete()
+      .lte('expires_at', new Date().toISOString());
 
-    const result = await db.execute(
-      'DELETE FROM password_reset_tokens WHERE expires_at <= NOW()'
-    );
-
+    if (error) throw error;
     return true;
   } catch (error) {
     console.error('Error cleaning up expired OTPs:', error);

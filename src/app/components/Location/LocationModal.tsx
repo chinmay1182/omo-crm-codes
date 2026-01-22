@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import styles from './locationmodal.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 interface LocationModalProps {
   companyId?: string;
@@ -115,162 +117,149 @@ export default function LocationModal({ companyId, contactId, onSuccess, onClose
 
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContainer}>
+      <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h4>Add New Location</h4>
+          <h2 className={styles.modalTitle}>Add New Location</h2>
           <button onClick={onClose} className={styles.closeButton}>
-            &times;
+            <i className="fa-thin fa-xmark"></i>
           </button>
         </div>
-        <div className={styles.modalContent}>
-          <div className={styles.locationForm}>
-            <div className={styles.formGroup}>
+        <div className={styles.modalBody}>
+          <div className={styles.formGrid}>
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
               <label>Name*</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className={styles.inputField}
               />
             </div>
 
-            <div className={styles.formGroup}>
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
               <label>Address*</label>
               <input
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className={styles.inputField}
               />
             </div>
 
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label>City*</label>
-                <input
-                  type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className={styles.inputField}
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <label>State</label>
-                {country === 'India' ? (
-                  <select
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    className={styles.inputField}
-                  >
-                    <option value="">Select State</option>
-                    {indianStates.map((s) => (
-                      <option key={s} value={s}>{s}</option>
-                    ))}
-                  </select>
-                ) : (
-                  <input
-                    type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    className={styles.inputField}
-                    placeholder="Enter State"
-                  />
-                )}
-              </div>
+            <div className={styles.formGroup}>
+              <label>City*</label>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
             </div>
 
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label>Country*</label>
+            <div className={styles.formGroup}>
+              <label>State</label>
+              {country === 'India' ? (
                 <select
-                  value={countries.includes(country) ? country : 'Other'}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    if (val === 'Other') {
-                      setCountry('');
-                    } else {
-                      setCountry(val);
-                      if (val === 'India') {
-                        setState(''); // Reset state if switching back to India to force selection logic
-                      }
-                    }
-                  }}
-                  className={styles.inputField}
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
                 >
-                  <option value="">Select Country</option>
-                  {countries.map((c) => (
-                    <option key={c} value={c}>{c}</option>
+                  <option value="">Select State</option>
+                  {indianStates.map((s) => (
+                    <option key={s} value={s}>{s}</option>
                   ))}
-                  <option value="Other">Other</option>
                 </select>
-                {!countries.includes(country) && (
-                  <input
-                    type="text"
-                    placeholder="Enter Country Name"
-                    value={country}
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                      if (e.target.value === 'India') setState('');
-                    }}
-                    className={styles.inputField}
-                    style={{ marginTop: '8px' }}
-                  />
-                )}
-              </div>
-              <div className={styles.formGroup}>
-                <label>Postal Code</label>
+              ) : (
                 <input
                   type="text"
-                  value={postalCode}
-                  onChange={(e) => setPostalCode(e.target.value)}
-                  className={styles.inputField}
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  placeholder="Enter State"
                 />
-              </div>
+              )}
             </div>
 
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label>Latitude</label>
+            <div className={styles.formGroup}>
+              <label>Country*</label>
+              <select
+                value={countries.includes(country) ? country : 'Other'}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val === 'Other') {
+                    setCountry('');
+                  } else {
+                    setCountry(val);
+                    if (val === 'India') {
+                      setState('');
+                    }
+                  }
+                }}
+              >
+                <option value="">Select Country</option>
+                {countries.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+                <option value="Other">Other</option>
+              </select>
+              {!countries.includes(country) && (
                 <input
-                  type="number"
-                  step="any"
-                  value={latitude}
-                  onChange={(e) => setLatitude(e.target.value)}
-                  className={styles.inputField}
-                  placeholder="e.g., 40.7128"
+                  type="text"
+                  placeholder="Enter Country Name"
+                  value={country}
+                  onChange={(e) => {
+                    setCountry(e.target.value);
+                    if (e.target.value === 'India') setState('');
+                  }}
+                  style={{ marginTop: '8px' }}
                 />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Longitude</label>
-                <input
-                  type="number"
-                  step="any"
-                  value={longitude}
-                  onChange={(e) => setLongitude(e.target.value)}
-                  className={styles.inputField}
-                  placeholder="e.g., -74.0060"
-                />
-              </div>
+              )}
             </div>
 
-            {error && <p className={styles.errorText}>{error}</p>}
+            <div className={styles.formGroup}>
+              <label>Postal Code</label>
+              <input
+                type="text"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Latitude</label>
+              <input
+                type="number"
+                step="any"
+                value={latitude}
+                onChange={(e) => setLatitude(e.target.value)}
+                placeholder="e.g., 40.7128"
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Longitude</label>
+              <input
+                type="number"
+                step="any"
+                value={longitude}
+                onChange={(e) => setLongitude(e.target.value)}
+                placeholder="e.g., -74.0060"
+              />
+            </div>
+
+            {error && <div className={`${styles.error} ${styles.formGroupFull}`}>{error}</div>}
           </div>
-        </div>
-        <div className={styles.modalFooter}>
-          <button
-            onClick={onClose}
-            className={styles.cancelButton}
-            disabled={isSubmitting}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={isSubmitting || !name.trim() || !address.trim() || !city.trim() || !country.trim()}
-            className={styles.submitButton}
-          >
-            {isSubmitting ? 'Saving...' : 'Save Location'}
-          </button>
+
+          <div className={styles.formActions}>
+            <button
+              onClick={onClose}
+              className={styles.cancelButton}
+              disabled={isSubmitting}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              disabled={isSubmitting || !name.trim() || !address.trim() || !city.trim() || !country.trim()}
+              className={styles.submitButton}
+            >
+              {isSubmitting ? 'Saving...' : 'Save Location'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

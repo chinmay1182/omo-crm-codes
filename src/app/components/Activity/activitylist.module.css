@@ -5,7 +5,9 @@
   background-color: white;
 }
 
-.loading, .error, .noActivities {
+.loading,
+.error,
+.noActivities {
   padding: 2rem;
   text-align: center;
   font-size: 0.875rem;
@@ -35,12 +37,14 @@
   padding: 1rem 1.25rem;
   border-bottom: 1px solid #f1f5f9;
   display: flex;
+  border-radius: 20px;
   gap: 1rem;
   align-items: flex-start;
 }
 
 .activityItem:last-child {
   border-bottom: none;
+  border-radius: 20px;
 }
 
 .activityIcon {

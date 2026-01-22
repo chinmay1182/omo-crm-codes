@@ -97,7 +97,7 @@ export default function ContactDetail({
     participants?: string;
   }>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -173,17 +173,21 @@ export default function ContactDetail({
       <div className={styles.container}>
         <div className={styles.header}>
           {isEditing ? (
-            <div style={{ display: 'flex', gap: '8px', width: '100%', alignItems: 'center' }}>
-              <input
+            <div style={{ display: 'flex', gap: '12px', width: '70%', alignItems: 'center' }}>
+              <select
                 title="Title"
-                type="text"
                 name="title"
-                placeholder="Title"
                 value={formData.title || ''}
                 onChange={handleInputChange}
-                className={styles.editInput}
-                style={{ width: '80px', padding: '6px', fontSize: '1.2rem', borderRadius: '4px', border: '1px solid #ccc' }}
-              />
+                className={styles.headerEditInput}
+                style={{ width: '100px' }}
+              >
+                <option value="">Title</option>
+                <option value="Mr.">Mr.</option>
+                <option value="Mrs.">Mrs.</option>
+                <option value="Ms.">Ms.</option>
+                <option value="Dr.">Dr.</option>
+              </select>
               <input
                 title="First Name"
                 type="text"
@@ -191,8 +195,8 @@ export default function ContactDetail({
                 placeholder="First Name"
                 value={formData.first_name || ''}
                 onChange={handleInputChange}
-                className={styles.editInput}
-                style={{ flex: 1, padding: '6px', fontSize: '1.2rem', borderRadius: '4px', border: '1px solid #ccc' }}
+                className={styles.headerEditInput}
+                style={{ flex: 1 }}
               />
               <input
                 title="Last Name"
@@ -201,8 +205,8 @@ export default function ContactDetail({
                 placeholder="Last Name"
                 value={formData.last_name || ''}
                 onChange={handleInputChange}
-                className={styles.editInput}
-                style={{ flex: 1, padding: '6px', fontSize: '1.2rem', borderRadius: '4px', border: '1px solid #ccc' }}
+                className={styles.headerEditInput}
+                style={{ flex: 1 }}
               />
             </div>
           ) : (
@@ -215,9 +219,9 @@ export default function ContactDetail({
                   onClick={handleSave}
                   className={styles.saveButton}
                   disabled={isSaving}
-                  style={{ backgroundColor: '#2e7d32', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
                 >
-                  <FontAwesomeIcon icon={faEdit} /> {isSaving ? 'Saving...' : 'Save'}
+
+                  {isSaving ? 'Saving...' : 'Save'}
                 </button>
                 <button
                   onClick={() => {
@@ -225,7 +229,6 @@ export default function ContactDetail({
                     setFormData(contact); // Reset on cancel
                   }}
                   className={styles.cancelButton}
-                  style={{ backgroundColor: '#c62828', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', marginLeft: '8px' }}
                 >
                   Cancel
                 </button>
@@ -326,84 +329,103 @@ export default function ContactDetail({
           {activeTab === 'info' && (
             <div className={styles.infoTab}>
               {isEditing ? (
-                <div className={styles.editForm}>
-                  {/* ... Inputs ... */}
-                  {/* For inputs, we probably shouldn't mask value, only initially? */}
-                  {/* If they can edit, they can probably see. But permission says \"restriction to edit\". */}
-                  {/* If canEdit is true, they see inputs. If false, they see masked text below. */}
-                  {/* Reuse existing inputs as isEditing prevents entry if canEdit=false */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                    <div className={styles.formGroup}>
-                      <label>Phone</label>
-                      <input
-                        type="text"
-                        name="phone"
-                        value={formData.phone || ''}
-                        onChange={handleInputChange}
-                        className={styles.editInput}
-                        style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                      />
+                <div className={styles.formGrid}>
+                  <div className={styles.formGroup}>
+                    <label>Phone</label>
+                    <input
+                      type="text"
+                      name="phone"
+                      value={formData.phone || ''}
+                      onChange={handleInputChange}
+                      className={styles.editInput}
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Mobile</label>
+                    <input
+                      type="text"
+                      name="mobile"
+                      value={formData.mobile || ''}
+                      onChange={handleInputChange}
+                      className={styles.editInput}
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email || ''}
+                      onChange={handleInputChange}
+                      className={styles.editInput}
+                    />
+                  </div>
+
+                  <div className={`${styles.formGroup} ${styles.formGroupFull}`} style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #eee' }}>
+                    <label style={{ display: 'block', marginBottom: '10px', fontWeight: 600, color: '#444' }}>Company Association</label>
+                    <div style={{ display: 'flex', gap: '15px', marginBottom: '10px' }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', cursor: 'pointer' }}>
+                        <input
+                          type="radio"
+                          name="companyMode"
+                          checked={formData.company_id !== undefined && formData.company_id !== '' && formData.company_id !== null}
+                          onChange={() => { }}
+                        />
+                        Select Existing
+                      </label>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', cursor: 'pointer', opacity: 0.5 }}>
+                        <input type="radio" name="companyMode" disabled /> Create New (Coming Soon)
+                      </label>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '14px', cursor: 'pointer' }}>
+                        <input
+                          type="radio"
+                          name="companyMode"
+                          checked={!formData.company_id}
+                          onChange={() => setFormData(prev => ({ ...prev, company_id: '' }))}
+                        />
+                        Not Applicable
+                      </label>
                     </div>
-                    <div className={styles.formGroup}>
-                      <label>Mobile</label>
-                      <input
-                        type="text"
-                        name="mobile"
-                        value={formData.mobile || ''}
-                        onChange={handleInputChange}
-                        style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label>Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email || ''}
-                        onChange={handleInputChange}
-                        style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label>Company</label>
-                      <CompanySelector
-                        selectedCompanyId={formData.company_id || ''}
-                        onCompanyChange={(companyId) => {
-                          setFormData(prev => ({ ...prev, company_id: companyId || undefined }));
-                        }}
-                      />
-                    </div>
-                    {/* ... Date inputs ... */}
-                    <div className={styles.formGroup}>
-                      <label>Date of Birth</label>
-                      <input
-                        type="date"
-                        name="date_of_birth"
-                        value={formData.date_of_birth ? new Date(formData.date_of_birth).toISOString().split('T')[0] : ''}
-                        onChange={handleInputChange}
-                        style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label>Anniversary</label>
-                      <input
-                        type="date"
-                        name="date_of_anniversary"
-                        value={formData.date_of_anniversary ? new Date(formData.date_of_anniversary).toISOString().split('T')[0] : ''}
-                        onChange={handleInputChange}
-                        style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label>Description</label>
-                      <textarea
-                        name="description"
-                        value={formData.description || ''}
-                        onChange={handleInputChange}
-                        rows={4}
-                        style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                      />
-                    </div>
+
+                    <CompanySelector
+                      selectedCompanyId={formData.company_id || ''}
+                      onCompanyChange={(companyId) => {
+                        setFormData(prev => ({ ...prev, company_id: companyId || undefined }));
+                      }}
+                      className={styles.editInput}
+                      hideModeSelector={true}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label>Date of Birth</label>
+                    <input
+                      type="date"
+                      name="date_of_birth"
+                      value={formData.date_of_birth ? new Date(formData.date_of_birth).toISOString().split('T')[0] : ''}
+                      onChange={handleInputChange}
+                      className={styles.editInput}
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Anniversary</label>
+                    <input
+                      type="date"
+                      name="date_of_anniversary"
+                      value={formData.date_of_anniversary ? new Date(formData.date_of_anniversary).toISOString().split('T')[0] : ''}
+                      onChange={handleInputChange}
+                      className={styles.editInput}
+                    />
+                  </div>
+                  <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+                    <label>Description</label>
+                    <textarea
+                      name="description"
+                      value={formData.description || ''}
+                      onChange={handleInputChange}
+                      rows={4}
+                      className={styles.editInput}
+                    />
                   </div>
                 </div>
               ) : (
@@ -493,7 +515,7 @@ export default function ContactDetail({
             <div className={styles.tabPanel}>
               {/* ... Meeting List ... */}
               <div className={styles.meetingsContainer}>
-                <div className={styles.locationFlex}>
+                <div className={styles.myHeadingTwo}>
                   <h3>Meetings</h3>
                   <button
                     onClick={() => {
@@ -620,7 +642,7 @@ export default function ContactDetail({
           {activeTab === 'locations' && (
             <div className={styles.tabPanel}>
               <div className={styles.locationsContainer}>
-                <div className={styles.locationFlex}>
+                <div className={styles.myHeadingTwo}>
                   <h3>Locations</h3>
                   <button
                     onClick={() => setIsLocationModalOpen(true)}

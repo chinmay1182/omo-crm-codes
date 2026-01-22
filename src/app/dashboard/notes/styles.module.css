@@ -703,3 +703,195 @@
   animation: spin 1s linear infinite;
   margin-right: 8px;
 }
+
+.formLabel {
+  font-weight: 300;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ===========================
+   MOBILE RESPONSIVENESS
+   =========================== */
+@media (max-width: 768px) {
+  .notesContainer {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Top Nav */
+  .topNav {
+    padding: 0 12px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 40px;
+    gap: 0;
+  }
+
+  .navTabsContainer {
+    gap: 20px;
+    height: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
+  }
+
+  .navTab {
+    font-size: 14px;
+    white-space: nowrap;
+    padding: 0 4px;
+  }
+
+  .topActions {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 8px 0;
+  }
+
+  .dateFilters {
+    gap: 8px;
+    align-items: center;
+  }
+
+  .dateInput {
+    flex: 1;
+    max-width: 140px;
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  /* Content Area */
+  .contentArea {
+    padding: 1rem;
+  }
+
+  /* Notes Grid - Single Column */
+  .notesList {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 80px;
+  }
+
+  /* Note Cards */
+  .noteCard {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .noteHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .noteHeaderActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .checkboxText {
+    font-size: 0.75rem;
+  }
+
+  .noteTitle {
+    font-size: 1rem;
+  }
+
+  .noteContent {
+    font-size: 0.9rem;
+  }
+
+  .noteActions {
+    gap: 0.5rem;
+  }
+
+  .editButton,
+  .deleteButton {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  /* Empty State */
+  .emptyStateImage {
+    width: 200px;
+    height: 200px;
+  }
+
+  .emptyTitle {
+    font-size: 20px;
+  }
+
+  .emptySubtitle {
+    font-size: 14px;
+  }
+
+  /* Modal */
+  .modalContent {
+    width: 95%;
+    max-width: 95%;
+  }
+
+  .modalBody {
+    padding: 1.5rem;
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  .addButton,
+  .saveButton,
+  .cancelButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .noteTextarea,
+  .editTextarea {
+    min-height: 100px;
+    font-size: 16px;
+    /* Prevents iOS zoom */
+  }
+
+  .titleInput,
+  .searchInput,
+  .relatedSelect {
+    font-size: 16px;
+    /* Prevents iOS zoom */
+  }
+
+  /* FAB */
+  .fab {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topNav {
+    padding: 0 8px;
+  }
+
+  .contentArea {
+    padding: 1rem;
+  }
+
+  .noteCard {
+    padding: 0.875rem;
+  }
+
+  .modalBody {
+    padding: 1rem;
+  }
+
+  .notesList {
+    gap: 0.75rem;
+  }
+}

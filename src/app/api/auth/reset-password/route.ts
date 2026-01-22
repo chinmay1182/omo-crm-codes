@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import db from '../../../lib/db';
+import { supabase } from '../../../lib/supabase';
 import { verifyOTP, clearOTP } from '../../../lib/otpStore';
 
 export async function POST(request: Request) {
@@ -63,19 +63,20 @@ export async function POST(request: Request) {
     }
 
     // Find user in database using normalized email
-    const [users] = await db.execute(
-      'SELECT * FROM users WHERE LOWER(email) = ? LIMIT 1',
-      [normalizedEmail]
-    );
+    const { data: users, error: userError } = await supabase
+      .from('users')
+      .select('*')
+      .ilike('email', normalizedEmail)
+      .limit(1);
 
-    if (!Array.isArray(users) || users.length === 0) {
+    if (userError || !users || users.length === 0) {
       return NextResponse.json(
         { error: 'This email is not registered with us. Please register first.' },
         { status: 404 }
       );
     }
 
-    const user = users[0] as any;
+    const user = users[0];
 
     // Check if new password is different from current
     const isSamePassword = await bcrypt.compare(newPassword, user.password);
@@ -89,12 +90,16 @@ export async function POST(request: Request) {
     // Hash new password
     const hashedPassword = await bcrypt.hash(newPassword, 12);
 
-    // Update user password in database using normalized email
-    const updateResult = await db.execute(
-      'UPDATE users SET password = ?, updated_at = NOW() WHERE LOWER(email) = ?',
-      [hashedPassword, normalizedEmail]
-    );
+    // Update user password in database
+    const { error: updateError } = await supabase
+      .from('users')
+      .update({
+        password: hashedPassword,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', user.id);
 
+    if (updateError) throw updateError;
 
     await clearOTP(normalizedEmail);
 

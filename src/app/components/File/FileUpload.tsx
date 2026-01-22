@@ -2,6 +2,8 @@
 
 import { useState, useRef, ChangeEvent } from 'react';
 import styles from './fileupload.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 interface FileUploadProps {
   companyId?: string;
@@ -11,12 +13,12 @@ interface FileUploadProps {
   isOpen: boolean; // New prop to control modal visibility
 }
 
-export default function FileUpload({ 
-  companyId, 
+export default function FileUpload({
+  companyId,
   contactId,
-  onUploadSuccess, 
+  onUploadSuccess,
   onClose,
-  isOpen 
+  isOpen
 }: FileUploadProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [description, setDescription] = useState('');
@@ -46,10 +48,10 @@ export default function FileUpload({
         try {
           const fileContent = e.target?.result as ArrayBuffer;
           const byteArray = Array.from(new Uint8Array(fileContent));
-          
+
           let url = '';
           let bodyData = {};
-          
+
           if (companyId) {
             url = '/api/companies/files';
             bodyData = {
@@ -99,11 +101,11 @@ export default function FileUpload({
           setIsUploading(false);
         }
       };
-      
+
       reader.onerror = () => {
         throw new Error('Failed to read file');
       };
-      
+
       reader.readAsArrayBuffer(selectedFile);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to upload file');
@@ -115,45 +117,52 @@ export default function FileUpload({
 
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContainer}>
+      <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h4>Upload New File</h4>
+          <h2 className={styles.modalTitle}>Upload New File</h2>
           <button onClick={onClose} className={styles.closeButton}>
-            &times;
+            <i className="fa-thin fa-xmark"></i>
           </button>
         </div>
-        <div className={styles.modalContent}>
-          <div className={styles.uploadForm}>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              className={styles.fileInput}
-            />
-            <textarea
-              placeholder="File description (optional)"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className={styles.descriptionInput}
-            />
-            {error && <p className={styles.errorText}>{error}</p>}
+        <div className={styles.modalBody}>
+          <div className={styles.formGrid}>
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+              <label>Select File *</label>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+              />
+            </div>
+
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+              <label>Description (Optional)</label>
+              <textarea
+                placeholder="File description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+
+            {error && <div className={`${styles.error} ${styles.formGroupFull}`}>{error}</div>}
           </div>
-        </div>
-        <div className={styles.modalFooter}>
-          <button
-            onClick={onClose}
-            className={styles.cancelButton}
-            disabled={isUploading}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleUpload}
-            disabled={isUploading || !selectedFile}
-            className={styles.uploadButton}
-          >
-            {isUploading ? 'Uploading...' : 'Upload File'}
-          </button>
+
+          <div className={styles.formActions}>
+            <button
+              onClick={onClose}
+              className={styles.cancelButton}
+              disabled={isUploading}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleUpload}
+              disabled={isUploading || !selectedFile}
+              className={styles.submitButton}
+            >
+              {isUploading ? 'Uploading...' : 'Upload File'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

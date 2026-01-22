@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import styles from './notemodal.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 interface NoteModalProps {
   companyId?: string;
@@ -18,18 +20,13 @@ export default function NoteModal({ companyId, contactId, onSuccess, onClose, is
   const [error, setError] = useState('');
 
   const handleSubmit = async () => {
-    if (!title.trim() || !content.trim()) {
-      setError('Title and content are required');
-      return;
-    }
-
     setIsSubmitting(true);
     setError('');
 
     try {
       let url = '';
       let bodyData = {};
-      
+
       if (companyId) {
         url = '/api/companies/notes';
         bodyData = { companyId, title, content };
@@ -67,46 +64,52 @@ export default function NoteModal({ companyId, contactId, onSuccess, onClose, is
 
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContainer}>
+      <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h4>Add New Note</h4>
+          <h2 className={styles.modalTitle}>Add New Note</h2>
           <button onClick={onClose} className={styles.closeButton}>
-            &times;
-          </button>
+            <i className="fa-sharp fa-thin fa-xmark"></i>           </button>
         </div>
-        <div className={styles.modalContent}>
-          <div className={styles.noteForm}>
-            <input
-              type="text"
-              placeholder="Note title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className={styles.titleInput}
-            />
-            <textarea
-              placeholder="Note content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className={styles.contentInput}
-            />
-            {error && <p className={styles.errorText}>{error}</p>}
+        <div className={styles.modalBody}>
+          <div className={styles.formGrid}>
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+              <label>Note Title</label>
+              <input
+                type="text"
+                placeholder="Note title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+              <label>Content</label>
+              <textarea
+                placeholder="Note content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </div>
+
+            {error && <div className={`${styles.error} ${styles.formGroupFull}`}>{error}</div>}
           </div>
-        </div>
-        <div className={styles.modalFooter}>
-          <button
-            onClick={onClose}
-            className={styles.cancelButton}
-            disabled={isSubmitting}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={isSubmitting || !title.trim() || !content.trim()}
-            className={styles.submitButton}
-          >
-            {isSubmitting ? 'Saving...' : 'Save Note'}
-          </button>
+
+          <div className={styles.formActions}>
+            <button
+              onClick={onClose}
+              className={styles.cancelButton}
+              disabled={isSubmitting}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className={styles.submitButton}
+            >
+              {isSubmitting ? 'Saving...' : 'Save Note'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

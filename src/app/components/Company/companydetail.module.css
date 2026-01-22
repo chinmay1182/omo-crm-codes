@@ -63,6 +63,51 @@
   align-items: center;
 }
 
+/* Save Button (Submit) matching ServiceModal */
+.saveButton {
+  background-color: #11a454;
+  color: white;
+  border: none;
+  font-family: 'Open Sauce One', sans-serif;
+  padding: .6rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 300;
+  transition: background-color 0.2s;
+  display: flex !important;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.saveButton:hover {
+  background-color: #0e8a46;
+}
+
+.saveButton:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Cancel Button matching ServiceModal */
+.cancelButton {
+  background-color: white;
+  color: #333;
+  font-family: 'Open Sauce One', sans-serif;
+  border: none;
+  padding: .7rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 300;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+  margin-left: 8px;
+}
+
+.cancelButton:hover {
+  background-color: #e0e0e0;
+}
+
 .activeTab {
   color: #11a454;
   border-bottom-color: #11a454;
@@ -146,6 +191,22 @@
   gap: 1rem;
 }
 
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formGroupFull {
+  grid-column: 1 / -1;
+}
+
 .formGroup {
   display: flex;
   flex-direction: column;
@@ -158,27 +219,61 @@
   font-size: 0.875rem;
 }
 
+
 .formGroup input,
 .formGroup textarea,
 .formGroup select {
-  padding: 0.75rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  font-size: 0.875rem;
+  width: 100%;
+  font-weight: 300;
+  padding: 6px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 14px;
   font-family: 'Open Sauce One', sans-serif;
-  transition: border-color 0.2s;
+  background: transparent;
+  transition: all 0.2s;
+  box-shadow: none !important;
 }
 
 .formGroup input:focus,
 .formGroup textarea:focus,
 .formGroup select:focus {
   outline: none;
-  border-color: #2f855a;
+  font-weight: 300;
+  border-bottom-color: #11a454;
 }
 
 .formGroup textarea {
-  min-height: 120px;
+  min-height: 100px;
   resize: vertical;
+  font-family: 'Open Sauce One', sans-serif;
+  border: 1px solid #e0e0e0;
+  padding: 0.8rem;
+  font-weight: 300;
+  border-radius: 0;
+}
+
+
+.headerEditInput {
+  width: 70%;
+  font-weight: 300;
+  padding: 6px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 14px;
+  /* Larger for header */
+  font-family: 'Open Sauce One', sans-serif;
+  background: transparent;
+  transition: all 0.2s;
+  box-shadow: none !important;
+}
+
+.headerEditInput:focus {
+  outline: none;
+  font-weight: 300;
+  border-bottom-color: #11a454;
 }
 
 /* Tab Panel Styles */
@@ -293,7 +388,7 @@
   padding: 0.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
-  width: 100%;
+  width: 70%;
   font-family: 'Open Sauce One', sans-serif;
   transition: border-color 0.2s;
 }
@@ -305,38 +400,29 @@
 
 /* Save Button Styles */
 .saveButton {
-  padding: 0.5rem 1rem;
-  background-color: #38a169;
+  padding: 0.6rem;
+  background-color: #11a454;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px;
   font-family: 'Open Sauce One', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 300;
   margin-left: 12px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.saveButton:hover {
-  background-color: #2f855a;
-}
-
-.saveButton:disabled {
-  background-color: #a0aec0;
-  cursor: not-allowed;
-}
-
 /* Cancel Button Styles */
 .cancelButton {
   padding: 0.5rem 1rem;
-  background-color: #f7fafc;
+  background-color: white;
   color: #4a5568;
-  border: 1px solid #e2e8f0;
-  border-radius: 4px;
+  border: none;
+  border-radius: 50px;
   font-family: 'Open Sauce One', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 300;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -423,18 +509,83 @@
   color: white;
   border: none;
   cursor: pointer;
-  background-color: #15426d !important;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  font-size: 14px;
+  background-color: #11a454 !important;
+  padding: 0.6rem 1rem;
+  border-radius: 50px;
+  font-size: 12px;
   transition: background-color 0.2s;
   font-family: 'Open Sauce One', sans-serif;
 
 
 }
 
-.locationFlex {
+/* Key Person Styles */
+.keyPersonCard {
+  background-color: #f8fafc;
+  border: none;
+  border-radius: 20px;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.keyPersonHeader {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
+}
+
+.keyPersonHeader h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #1a202c;
+}
+
+.editKeyPersonBtn {
+  background: white;
+  border: none;
+  color: #3182ce;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 6px 12px;
+  border-radius: 50px;
+}
+
+.editKeyPersonBtn:hover {
+  text-decoration: underline;
+}
+
+.keyPersonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.keyPersonGrid strong {
+  color: #4a5568;
+}
+
+.noData {
+  color: #718096;
+  font-style: italic;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.keyPersonInput {
+  padding: 0.5rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+.keyPersonInput:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.1);
 }

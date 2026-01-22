@@ -38,7 +38,6 @@
     "leaflet": "^1.9.4",
     "mailparser": "^3.7.4",
     "moment": "^2.30.1",
-    "mysql2": "^3.14.4",
     "nanoid": "^5.1.6",
     "next": "15.3.8",
     "next-auth": "^4.24.11",

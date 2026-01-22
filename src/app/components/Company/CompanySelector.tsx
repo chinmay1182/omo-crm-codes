@@ -7,18 +7,23 @@ type CompanyOption = {
     name: string;
 };
 
+
 type CompanySelectorProps = {
     selectedCompanyId: string | null;
-    selectedCompanyName?: string | null; // For new company matching
+    selectedCompanyName?: string | null;
     onCompanyChange: (companyId: string | null, companyName?: string | null) => void;
     disabled?: boolean;
+    className?: string; // CSS class for inputs
+    hideModeSelector?: boolean; // Option to hide built-in radio buttons
 };
 
 export default function CompanySelector({
     selectedCompanyId,
     selectedCompanyName,
     onCompanyChange,
-    disabled = false
+    disabled = false,
+    className,
+    hideModeSelector = false
 }: CompanySelectorProps) {
     const [companies, setCompanies] = useState<CompanyOption[]>([]);
     const [loading, setLoading] = useState(false);
@@ -30,12 +35,13 @@ export default function CompanySelector({
         if (selectedCompanyId) {
             setMode('existing');
         } else if (selectedCompanyName && !selectedCompanyId) {
-            // If we have a name but no ID, it might be a "new" company or just unlinked text (if logic supported it)
-            // Assume 'new' for now if name is provided but no ID
             setMode('new');
             setNewCompanyName(selectedCompanyName);
         } else {
-            setMode('none');
+            // If strictly controlled by external props (like ContactDetail), 
+            // empty ID might mean 'none' or just 'not selected yet'.
+            // If hideModeSelector is on, we might default to existing or rely on parent.
+            setMode(selectedCompanyId === '' ? 'none' : 'existing');
         }
     }, [selectedCompanyId, selectedCompanyName]);
 
@@ -56,7 +62,6 @@ export default function CompanySelector({
             }
         };
 
-        // Fetch only if needed or generally available
         fetchCompanies();
     }, []);
 
@@ -65,12 +70,7 @@ export default function CompanySelector({
         if (newMode === 'none') {
             onCompanyChange(null, null);
         } else if (newMode === 'existing') {
-            // Keep existing ID if present
-            if (selectedCompanyId) {
-                onCompanyChange(selectedCompanyId, null);
-            } else {
-                onCompanyChange('', null);
-            }
+            onCompanyChange('', null);
         } else if (newMode === 'new') {
             onCompanyChange(null, newCompanyName);
         }
@@ -87,55 +87,64 @@ export default function CompanySelector({
         onCompanyChange(null, val);
     };
 
+    // If hiding mode selector, we assume parent handles logic or we default to 'existing' dropdown behavior
+    // but we need to ensure we show the dropdown if mode is existing/none
+    const showDropdown = mode === 'existing' || (hideModeSelector && mode !== 'new');
+
     return (
-        <div style={{ border: '1px solid #eee', padding: '10px', borderRadius: '4px' }}>
-            <label style={{ marginBottom: '8px', display: 'block', fontWeight: 'bold' }}>Company Association</label>
+        <div style={hideModeSelector ? {} : { border: '1px solid #eee', padding: '10px', borderRadius: '4px' }}>
+            {!hideModeSelector && (
+                <>
+                    <label style={{ marginBottom: '8px', display: 'block', fontWeight: 'bold' }}>Company Association</label>
+                    <div style={{ display: 'flex', gap: '15px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'normal', cursor: 'pointer' }}>
+                            <input
+                                type="radio"
+                                name="companyModeSelector"
+                                value="existing"
+                                checked={mode === 'existing'}
+                                onChange={() => handleModeChange('existing')}
+                                disabled={disabled}
+                                style={{ marginRight: '5px' }}
+                            />
+                            Select Existing
+                        </label>
+                        {/* ... other radios ... */}
+                        <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'normal', cursor: 'pointer' }}>
+                            <input
+                                type="radio"
+                                name="companyModeSelector"
+                                value="new"
+                                checked={mode === 'new'}
+                                onChange={() => handleModeChange('new')}
+                                disabled={disabled}
+                                style={{ marginRight: '5px' }}
+                            />
+                            Create New
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'normal', cursor: 'pointer' }}>
+                            <input
+                                type="radio"
+                                name="companyModeSelector"
+                                value="none"
+                                checked={mode === 'none'}
+                                onChange={() => handleModeChange('none')}
+                                disabled={disabled}
+                                style={{ marginRight: '5px' }}
+                            />
+                            Not Applicable
+                        </label>
+                    </div>
+                </>
+            )}
 
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '10px', flexWrap: 'wrap' }}>
-                <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'normal', cursor: 'pointer' }}>
-                    <input
-                        type="radio"
-                        name="companyModeSelector"
-                        value="existing"
-                        checked={mode === 'existing'}
-                        onChange={() => handleModeChange('existing')}
-                        disabled={disabled}
-                        style={{ marginRight: '5px' }}
-                    />
-                    Select Existing
-                </label>
-                <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'normal', cursor: 'pointer' }}>
-                    <input
-                        type="radio"
-                        name="companyModeSelector"
-                        value="new"
-                        checked={mode === 'new'}
-                        onChange={() => handleModeChange('new')}
-                        disabled={disabled}
-                        style={{ marginRight: '5px' }}
-                    />
-                    Create New
-                </label>
-                <label style={{ display: 'flex', alignItems: 'center', fontWeight: 'normal', cursor: 'pointer' }}>
-                    <input
-                        type="radio"
-                        name="companyModeSelector"
-                        value="none"
-                        checked={mode === 'none'}
-                        onChange={() => handleModeChange('none')}
-                        disabled={disabled}
-                        style={{ marginRight: '5px' }}
-                    />
-                    Not Applicable
-                </label>
-            </div>
-
-            {mode === 'existing' && (
+            {showDropdown && (
                 <select
                     value={selectedCompanyId || ''}
                     onChange={handleExistingChange}
                     disabled={disabled || loading}
-                    style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ddd' }}
+                    className={className}
+                    style={className ? {} : { width: '100%', padding: '8px', borderRadius: '4px' }}
                 >
                     <option value="">-- Select Company --</option>
                     {companies.map(comp => (
@@ -153,11 +162,12 @@ export default function CompanySelector({
                     onChange={handleNewNameChange}
                     disabled={disabled}
                     placeholder="Enter new company name"
-                    style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ddd' }}
+                    className={className}
+                    style={className ? {} : { width: '100%', padding: '8px' }}
                 />
             )}
 
-            {mode === 'none' && (
+            {!hideModeSelector && mode === 'none' && (
                 <div style={{ fontSize: '0.9em', color: '#666', fontStyle: 'italic' }}>
                     This contact will not be linked to any company.
                 </div>

@@ -151,6 +151,28 @@ export async function POST(req: Request) {
       );
     }
 
+    // Deduplication Logic
+    const duplicates = [];
+    if (email) {
+      const { data: dupEmail } = await supabase.from('contacts').select('id').eq('email', email).single();
+      if (dupEmail) duplicates.push(`Email (${email})`);
+    }
+    if (phone) {
+      const { data: dupPhone } = await supabase.from('contacts').select('id').eq('phone', phone).single();
+      if (dupPhone) duplicates.push(`Phone (${phone})`);
+    }
+    if (mobile) {
+      const { data: dupMobile } = await supabase.from('contacts').select('id').eq('mobile', mobile).single();
+      if (dupMobile) duplicates.push(`Mobile (${mobile})`);
+    }
+
+    if (duplicates.length > 0) {
+      return NextResponse.json(
+        { error: `Duplicate detected: Contact with same ${duplicates.join(', ')} already exists.` },
+        { status: 409 }
+      );
+    }
+
     let finalCompanyId = null;
 
     // Handle company assignment

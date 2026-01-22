@@ -1,7 +1,8 @@
-.tagDisplay, .tagEditor {
+.tagDisplay,
+.tagEditor {
   background: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
+  border: none;
+  border-radius: 20px;
   padding: 1rem;
   margin: 1rem 0;
 }
@@ -13,30 +14,26 @@
   gap: 0.5rem;
 }
 
-.tagIcon {
-  color: #007bff;
-  font-size: 1rem;
-}
-
 .tagLabel {
-  font-weight: 600;
+  font-weight: 400;
   color: #495057;
   flex: 1;
 }
 
 .editButton {
-  background: #007bff;
-  color: white;
+  background: white;
+  color: #15426d;
+  background: none;
+  font-weight: 300;
   border: none;
-  border-radius: 4px;
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
-  font-size: 0.75rem;
-  transition: background-color 0.2s;
-}
-
-.editButton:hover {
-  background: #0056b3;
+  border-radius: 50px;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-family: Open Sauce One, sans-serif;
+  font-size: 14px;
+  transition: all .2s;
+  display: flex;
 }
 
 .currentTags {
@@ -54,21 +51,31 @@
 }
 
 .contactTag {
-  background-color: #e3f2fd;
+  background-color: none;
   color: #1976d2;
-  border-color: #bbdefb;
+  border-radius: 50px;
+  font-weight: 300;
+  border-color: none;
+  font-size: 13px;
 }
 
 .companyTag {
-  background-color: #f3e5f5;
+  background-color: none;
   color: #7b1fa2;
-  border-color: #ce93d8;
+  border-color: none;
+  border-radius: 50px;
+  font-weight: 300;
+  border-color: none;
+  font-size: 13px;
 }
 
 .noTags {
   color: #6c757d;
   font-style: italic;
-  font-size: 0.875rem;
+  border-radius: 50px;
+  font-weight: 300;
+  border-color: none;
+  font-size: 13px;
 }
 
 .tagOptions {
@@ -78,6 +85,10 @@
   margin-bottom: 1rem;
   max-height: 200px;
   overflow-y: auto;
+}
+
+.cancelButton:hover {
+  background-color: #e9ecef;
 }
 
 .tagOption {
@@ -90,9 +101,6 @@
   transition: background-color 0.2s;
 }
 
-.tagOption:hover {
-  background-color: #e9ecef;
-}
 
 .tagCheckbox {
   margin: 0;
@@ -115,11 +123,11 @@
 }
 
 .cancelButton {
-  background: #6c757d;
-  color: white;
+  background: white;
+  color: #495057;
   border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  padding: 0.6rem;
   cursor: pointer;
   font-size: 0.875rem;
   display: flex;
@@ -128,27 +136,15 @@
   transition: background-color 0.2s;
 }
 
-.cancelButton:hover:not(:disabled) {
-  background: #545b62;
-}
+
 
 .saveButton {
   background: #28a745;
   color: white;
   border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  padding: 0.6rem;
   cursor: pointer;
   font-size: 0.875rem;
   transition: background-color 0.2s;
-}
-
-.saveButton:hover:not(:disabled) {
-  background: #218838;
-}
-
-.cancelButton:disabled,
-.saveButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
