@@ -287,7 +287,7 @@
 }
 
 .planButton.primary {
-  background: linear-gradient(135deg, #11a454, #0d8043);
+  background: #11a454;
   color: white;
 }
 
@@ -301,10 +301,7 @@
   border: 1px solid #11a454;
 }
 
-.planButton.secondary:hover {
-  background: #11a454;
-  color: white;
-}
+
 
 .planButton.premium {
   background: #15426d;
@@ -324,8 +321,9 @@
 }
 
 .planButton.currentPlan {
-  background: #e2e8f0;
-  color: #64748b;
+  background: white;
+  color: #212121;
+  border: 1px solid #212121;
   cursor: default;
 }
 

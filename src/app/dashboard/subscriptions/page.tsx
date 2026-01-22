@@ -387,15 +387,12 @@ export default function SubscriptionsPage() {
               <div className={styles.planFooter}>
                 <button
                   className={`${styles.planButton} ${styles[plan.buttonStyle]} ${selectedPlan === plan.id && isLoading ? styles.loading : ''
-                    } ${currentSubscription?.plan_id === plan.id ? styles.currentPlan : ''}`}
+                    } ${currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'active' ? styles.currentPlan : ''}`}
                   onClick={() => handlePlanSelect(plan)}
                   disabled={isLoading || (currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'active')}
                 >
                   {selectedPlan === plan.id && isLoading ? (
-                    <>
-                      <i className="fa-sharp fa-solid fa-spinner fa-spin" />
-                      Processing...
-                    </>
+                    'Processing...'
                   ) : currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'active' ? (
                     'Current Plan'
                   ) : currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'trial' ? (
