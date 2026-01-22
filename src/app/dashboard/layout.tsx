@@ -57,6 +57,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
+  // ✅ Subscription & Payment States
+  const [currentSubscription, setCurrentSubscription] = useState<any>(null);
+  const [trialDaysRemaining, setTrialDaysRemaining] = useState<number>(0);
+  const [paymentHistory, setPaymentHistory] = useState<any[]>([]);
+  const [refundHistory, setRefundHistory] = useState<any[]>([]);
+  const [showPaymentHistory, setShowPaymentHistory] = useState(false);
+
   // Get user type from auth context
   // MOVED UP to fix reference error
   const { user } = useAuth();
@@ -66,6 +73,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       setSelectedIcon(user.profile_image);
     }
   }, [user]);
+
 
 
   useEffect(() => {
@@ -190,7 +198,50 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     if (savedUseNewTheme !== null) {
       setUseNewTheme(savedUseNewTheme === 'true');
     }
-  }, []);
+
+    // Fetch subscription and payment data
+    if (user?.id) {
+      fetchSubscription();
+      fetchPaymentHistory();
+    }
+  }, [user]);
+
+  // Fetch subscription data
+  const fetchSubscription = async () => {
+    if (!user?.id) return;
+
+    try {
+      const response = await fetch(`/api/subscriptions?userId=${user.id}`);
+      const data = await response.json();
+
+      if (data.subscription) {
+        setCurrentSubscription(data.subscription);
+        setTrialDaysRemaining(data.trialDaysRemaining || 0);
+      }
+    } catch (error) {
+      console.error('Error fetching subscription:', error);
+    }
+  };
+
+  // Fetch payment history
+  const fetchPaymentHistory = async () => {
+    if (!user?.id) return;
+
+    try {
+      const response = await fetch(`/api/payments/history?userId=${user.id}`);
+      const data = await response.json();
+
+      if (data.payments) {
+        setPaymentHistory(data.payments);
+      }
+      if (data.refunds) {
+        setRefundHistory(data.refunds);
+      }
+    } catch (error) {
+      console.error('Error fetching payment history:', error);
+    }
+  };
+
 
   const checkGmailConnection = async () => {
     try {
@@ -530,9 +581,29 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </div>
               </>
             )}
-            <span>Your trial is remaining for</span>
-            <span className={styles.trialPill}>3 days</span>
-            <button className={styles.buyButton}>Buy Subscription</button>
+            {currentSubscription?.status === 'trial' ? (
+              <>
+                <span>Your trial is remaining for</span>
+                <span className={styles.trialPill}>
+                  {trialDaysRemaining} {trialDaysRemaining === 1 ? 'day' : 'days'}
+                </span>
+                <Link href="/dashboard/subscriptions">
+                  <button className={styles.buyButton}>Buy Subscription</button>
+                </Link>
+              </>
+            ) : currentSubscription?.status === 'active' ? (
+              <>
+                <span>Active Plan:</span>
+                <span className={styles.trialPill}>{currentSubscription.plan_name}</span>
+              </>
+            ) : (
+              <>
+                <span>Start your free trial today!</span>
+                <Link href="/dashboard/subscriptions">
+                  <button className={styles.buyButton}>View Plans</button>
+                </Link>
+              </>
+            )}
           </div>
           <div className={styles.dashboardLayout}>
             {/* Sidebar */}
@@ -705,7 +776,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
 
                   )}
-                  <span className={styles.trialPill2}>Starter</span>
+                  <span className={styles.trialPill2}>
+                    {currentSubscription?.plan_name || 'Free Trial'}
+                  </span>
+
 
 
 
@@ -820,15 +894,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
                           <div className={styles.profileDropdownDivider}></div>
 
+                          {/* Payment History Button */}
                           <button
                             onClick={() => {
-                              setShowEmailSettingsPopup(true);
+                              setShowPaymentHistory(true);
                               setShowProfileDropdown(false);
                             }}
                             className={styles.profileDropdownItem}
                           >
-                            <i className="fa-sharp fa-thin fa-envelope-open"></i>
-                            Email Settings
+                            <i className="fa-sharp fa-thin fa-receipt"></i>
+                            Payment History
                           </button>
 
                           <button onClick={handleLogout} className={`${styles.profileDropdownItem} ${styles.logoutItem}`}>
@@ -1155,7 +1230,169 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </button>
               </div>
             </Modal>
+
+            {/* Payment History Modal */}
+            <Modal
+              isOpen={showPaymentHistory}
+              onRequestClose={() => setShowPaymentHistory(false)}
+              className={styles.modal}
+              overlayClassName={styles.modalOverlay}
+              contentLabel="Payment History"
+            >
+              <div className={styles.modalHeader}>
+                <h2 className={styles.modalTitle}>Payment History</h2>
+                <button
+                  onClick={() => setShowPaymentHistory(false)}
+                  className={styles.modalCloseButton}
+                >
+                  <i className="fa-sharp fa-thin fa-times"></i>
+                </button>
+              </div>
+
+              <div className={styles.modalBody} style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                {/* Payments Section */}
+                <div style={{ marginBottom: '2rem' }}>
+                  <h3 style={{ fontSize: '18px', fontWeight: 500, marginBottom: '1rem', color: '#1e293b' }}>
+                    Payments
+                  </h3>
+                  {paymentHistory.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      {paymentHistory.map((payment) => (
+                        <div
+                          key={payment.id}
+                          style={{
+                            padding: '1rem',
+                            border: '1px solid #e2e8f0',
+                            borderRadius: '8px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <div>
+                            <div style={{ fontWeight: 500, color: '#1e293b' }}>
+                              {payment.subscriptions?.plan_name || 'Subscription'}
+                            </div>
+                            <div style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>
+                              {new Date(payment.payment_date || payment.created_at).toLocaleDateString('en-IN', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                              })}
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px' }}>
+                              ID: {payment.razorpay_payment_id || payment.id}
+                            </div>
+                          </div>
+                          <div style={{ textAlign: 'right' }}>
+                            <div style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b' }}>
+                              ₹{payment.amount}
+                            </div>
+                            <div
+                              style={{
+                                fontSize: '12px',
+                                marginTop: '4px',
+                                padding: '4px 8px',
+                                borderRadius: '999px',
+                                display: 'inline-block',
+                                backgroundColor:
+                                  payment.status === 'success'
+                                    ? '#dcfce7'
+                                    : payment.status === 'pending'
+                                      ? '#fef3c7'
+                                      : '#fee2e2',
+                                color:
+                                  payment.status === 'success'
+                                    ? '#166534'
+                                    : payment.status === 'pending'
+                                      ? '#854d0e'
+                                      : '#991b1b',
+                              }}
+                            >
+                              {payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p style={{ color: '#64748b', textAlign: 'center', padding: '2rem' }}>
+                      No payment history found
+                    </p>
+                  )}
+                </div>
+
+                {/* Refunds Section */}
+                {refundHistory.length > 0 && (
+                  <div>
+                    <h3 style={{ fontSize: '18px', fontWeight: 500, marginBottom: '1rem', color: '#1e293b' }}>
+                      Refunds
+                    </h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      {refundHistory.map((refund) => (
+                        <div
+                          key={refund.id}
+                          style={{
+                            padding: '1rem',
+                            border: '1px solid #e2e8f0',
+                            borderRadius: '8px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <div>
+                            <div style={{ fontWeight: 500, color: '#1e293b' }}>Refund</div>
+                            <div style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>
+                              {new Date(refund.refund_date || refund.created_at).toLocaleDateString('en-IN', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                              })}
+                            </div>
+                            {refund.reason && (
+                              <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px' }}>
+                                {refund.reason}
+                              </div>
+                            )}
+                          </div>
+                          <div style={{ textAlign: 'right' }}>
+                            <div style={{ fontSize: '18px', fontWeight: 600, color: '#dc2626' }}>
+                              -₹{refund.amount}
+                            </div>
+                            <div
+                              style={{
+                                fontSize: '12px',
+                                marginTop: '4px',
+                                padding: '4px 8px',
+                                borderRadius: '999px',
+                                display: 'inline-block',
+                                backgroundColor:
+                                  refund.status === 'processed'
+                                    ? '#dcfce7'
+                                    : refund.status === 'pending'
+                                      ? '#fef3c7'
+                                      : '#fee2e2',
+                                color:
+                                  refund.status === 'processed'
+                                    ? '#166534'
+                                    : refund.status === 'pending'
+                                      ? '#854d0e'
+                                      : '#991b1b',
+                              }}
+                            >
+                              {refund.status.charAt(0).toUpperCase() + refund.status.slice(1)}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Modal>
           </div>
+
         </div>
 
         {/* Global Incoming Call Listener - Rendered outside dashboardLayout to avoid overflow clipping */}

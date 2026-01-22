@@ -44,6 +44,7 @@
     "nodemailer": "^6.9.3",
     "puppeteer-core": "^24.19.0",
     "rate-limiter-flexible": "^7.1.1",
+    "razorpay": "^2.9.6",
     "react": "^19.0.0",
     "react-big-calendar": "^1.19.4",
     "react-bootstrap": "^2.10.10",

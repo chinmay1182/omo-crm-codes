@@ -82,6 +82,62 @@
   transform: translateX(100%);
 }
 
+/* Save Badge */
+.saveBadge {
+  background: linear-gradient(135deg, #11a454, #0d8043);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+/* Current Plan Banner */
+.currentPlanBanner {
+  background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+  border: 1px solid #7dd3fc;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 700px;
+  text-align: center;
+}
+
+.currentPlanBanner p {
+  margin: 0;
+  color: #0c4a6e;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.currentPlanBanner strong {
+  font-weight: 600;
+  color: #0369a1;
+}
+
+.trialExpired {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* Popular Badge */
+.popularBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #8686FC, #6b6bf5);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(134, 134, 252, 0.3);
+}
+
+
 /* Plans Grid */
 .plansGrid {
   display: grid;
@@ -266,6 +322,17 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.planButton.currentPlan {
+  background: #e2e8f0;
+  color: #64748b;
+  cursor: default;
+}
+
+.planButton.currentPlan:hover {
+  transform: none;
+}
+
 
 
 /* FAQ Section */
