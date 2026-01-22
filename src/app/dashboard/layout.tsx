@@ -45,7 +45,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   // ✅ Theme selector state
   const [showThemeModal, setShowThemeModal] = useState(false);
-  const [selectedTheme, setSelectedTheme] = useState('Group 1.png');
+  const [selectedTheme, setSelectedTheme] = useState('Group 3.png');
   // ✅ App Dropdown state
   const [showAppDropdown, setShowAppDropdown] = useState(false);
   // ✅ New Theme state (Controls Sidebar White mode, SVG Icons, Notification Bar)
