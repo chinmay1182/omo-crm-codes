@@ -93,6 +93,7 @@
 .activeTab {
     color: #11a454;
     border-bottom-color: #11a454;
+    font-weight: 300;
 }
 
 .modalBody {

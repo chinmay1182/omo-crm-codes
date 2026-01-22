@@ -220,15 +220,15 @@
 }
 
 /* React Big Calendar Overrides */
-:global(.rbc-calendar) {
+.calendarWrapper :global(.rbc-calendar) {
   font-family: 'Open Sauce One', sans-serif !important;
 }
 
-:global(.rbc-toolbar) {
+.calendarWrapper :global(.rbc-toolbar) {
   margin-bottom: 20px !important;
 }
 
-:global(.rbc-toolbar button) {
+.calendarWrapper :global(.rbc-toolbar button) {
   font-family: 'Open Sauce One', sans-serif !important;
   font-weight: 300 !important;
   border-radius: 6px !important;
@@ -237,19 +237,19 @@
   font-size: 14px !important;
 }
 
-:global(.rbc-toolbar button:hover) {
+.calendarWrapper :global(.rbc-toolbar button:hover) {
   background-color: #f8fafc !important;
   color: #11a454 !important;
 }
 
-:global(.rbc-toolbar button.rbc-active) {
+.calendarWrapper :global(.rbc-toolbar button.rbc-active) {
   background-color: #11a454 !important;
   color: white !important;
   border-color: #11a454 !important;
   box-shadow: none !important;
 }
 
-:global(.rbc-header) {
+.calendarWrapper :global(.rbc-header) {
   padding: 12px 4px !important;
   font-weight: 600 !important;
   color: #64748b !important;
@@ -258,7 +258,7 @@
   letter-spacing: 0.5px !important;
 }
 
-:global(.rbc-event) {
+.calendarWrapper :global(.rbc-event) {
   border-radius: 4px !important;
   font-size: 12px !important;
   padding: 2px 6px !important;
@@ -266,11 +266,11 @@
   font-weight: 400 !important;
 }
 
-:global(.rbc-off-range-bg) {
+.calendarWrapper :global(.rbc-off-range-bg) {
   background: #f8fafc !important;
 }
 
-:global(.rbc-today) {
+.calendarWrapper :global(.rbc-today) {
   background-color: #f0fdf4 !important;
 }
 
@@ -291,36 +291,36 @@
   }
 
   /* Force RBC toolbar to stack on mobile */
-  :global(.rbc-toolbar) {
+  .calendarWrapper :global(.rbc-toolbar) {
     flex-direction: column;
     gap: 12px;
     align-items: center;
   }
 
-  :global(.rbc-toolbar-label) {
+  .calendarWrapper :global(.rbc-toolbar-label) {
     font-size: 18px !important;
     font-weight: 500 !important;
     margin: 8px 0 !important;
   }
 
-  :global(.rbc-btn-group) {
+  .calendarWrapper :global(.rbc-btn-group) {
     width: 100%;
     display: flex;
     justify-content: center;
   }
 
-  :global(.rbc-btn-group button) {
+  .calendarWrapper :global(.rbc-btn-group button) {
     flex: 1;
     font-size: 12px !important;
     padding: 8px 4px !important;
   }
 
-  :global(.rbc-header) {
+  .calendarWrapper :global(.rbc-header) {
     font-size: 11px !important;
     padding: 8px 2px !important;
   }
 
-  :global(.rbc-event) {
+  .calendarWrapper :global(.rbc-event) {
     font-size: 10px !important;
     padding: 1px 2px !important;
   }

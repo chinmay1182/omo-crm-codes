@@ -41,7 +41,7 @@ const pricingPlans: PricingPlan[] = [
       'Roles & Permissions - Granular access control',
       'Admin Controls - Centralized management',
       '5 GB Storage',
-      'Get organized fast'
+      'Get organized fast' // Business Impact
     ],
     buttonText: 'Start Free Trial',
     buttonStyle: 'secondary'
@@ -65,7 +65,7 @@ const pricingPlans: PricingPlan[] = [
       'Feedback Management - Voice of customer insights',
       'Admin Controls - Centralized management',
       '10 GB Storage',
-      'Faster growth & efficiency'
+      'Faster growth & efficiency' // Business Impact
     ],
     popular: true,
     buttonText: 'Start Free Trial',
@@ -92,7 +92,7 @@ const pricingPlans: PricingPlan[] = [
       'Advanced Reporting - Data-driven decisions',
       'Admin Controls - Centralized management',
       '15 GB Storage',
-      'Maximum performance & control'
+      'Maximum performance & control' // Business Impact
     ],
     buttonText: 'Contact Sales',
     buttonStyle: 'premium'
@@ -307,7 +307,7 @@ export default function SubscriptionsPage() {
     <div>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Choose Your Plan</h1>
+          <h1 className={styles.title}>Choose the Plan That Grows With Your Business</h1>
           <p className={styles.subtitle}>
             Select the perfect plan for your business needs. All plans include a 14-day free trial.
           </p>
@@ -429,6 +429,8 @@ export default function SubscriptionsPage() {
             </div>
           ))}
         </div>
+
+
       </div>
     </div>
   );

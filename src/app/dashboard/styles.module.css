@@ -1082,6 +1082,8 @@
     color: #000;
     font-weight: 300;
     position: relative;
+    height: 42px;
+    /* Fixed height to prevent jumping */
 }
 
 .trialPill {

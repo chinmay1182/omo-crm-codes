@@ -1,0 +1,147 @@
+/* Wrapper to fit inside the existing layout container */
+.searchWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* EXACT STYLES FROM styles.module.css to match original look */
+.searchInput {
+    width: 100%;
+    padding: 6px 0 6px 30px;
+    /* Space for icon */
+    font-family: 'Open Sauce One', sans-serif;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    border: none;
+    border-bottom: 1px solid #e1e5e9;
+    background: transparent;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    color: #212121;
+}
+
+.searchInput:focus,
+.searchInput:hover {
+    outline: none;
+    border-bottom-color: #212121;
+    /* Dark border on hover/focus */
+}
+
+.searchInput::placeholder {
+    color: #aeb4b9;
+    font-weight: 300;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+    color: #7b8188;
+    pointer-events: none;
+}
+
+/* Dropdown Results - Styled to match premium feel */
+.searchResultsDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 350px;
+    /* Slightly wider for better readability */
+    min-width: 100%;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    max-height: 450px;
+    overflow-y: auto;
+    padding: 8px 0;
+    margin-top: 10px;
+    font-family: 'Open Sauce One', sans-serif;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.searchSection {
+    padding: 10px 16px 6px 16px;
+    font-size: 11px;
+    color: #9ca3af;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-top: 1px solid #f3f4f6;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+}
+
+.searchSection:first-child {
+    border-top: none;
+    font-size: 15px;
+    letter-spacing: -0.2px;
+    font-weight: 300;
+}
+
+.searchItem {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.searchItem:hover {
+    background-color: #f8fafc;
+}
+
+.itemContent {
+    flex: 1;
+    overflow: hidden;
+}
+
+.itemTitle {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itemSubtitle {
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 300;
+}
+
+.noResults {
+    padding: 24px;
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.loadingSpinner {
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+    color: #94a3b8;
+}

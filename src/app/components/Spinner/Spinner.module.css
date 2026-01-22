@@ -8,7 +8,7 @@
 
 .spinner {
   border: 3px solid #f3f3f3;
-  border-top: 3px solid #007bff;
+  border-top: 3px solid #11a454;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -32,8 +32,8 @@
 }
 
 .spinner.primary {
-  border-color: #f3f3f3;
-  border-top-color: #007bff;
+  border-color: rgba(17, 164, 84, 0.2);
+  border-top-color: #11a454;
 }
 
 .spinner.secondary {
@@ -58,8 +58,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Inline spinner for buttons */
