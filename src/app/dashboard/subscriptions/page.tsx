@@ -166,6 +166,7 @@ export default function SubscriptionsPage() {
       const data = await response.json();
 
       if (data.subscription) {
+        console.log('Current Subscription:', data.subscription);
         setCurrentSubscription(data.subscription);
         setTrialDaysRemaining(data.trialDaysRemaining || 0);
       }
@@ -358,6 +359,7 @@ export default function SubscriptionsPage() {
             >
               {plan.popular && <div className={styles.popularBadge}>Most Popular</div>}
 
+
               <div className={styles.planHeader}>
                 <h3 className={styles.planName}>{plan.name}</h3>
                 <div className={styles.planPrice}>
@@ -385,22 +387,44 @@ export default function SubscriptionsPage() {
               </div>
 
               <div className={styles.planFooter}>
-                <button
-                  className={`${styles.planButton} ${styles[plan.buttonStyle]} ${selectedPlan === plan.id && isLoading ? styles.loading : ''
-                    } ${currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'active' ? styles.currentPlan : ''}`}
-                  onClick={() => handlePlanSelect(plan)}
-                  disabled={isLoading || (currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'active')}
-                >
-                  {selectedPlan === plan.id && isLoading ? (
-                    'Processing...'
-                  ) : currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'active' ? (
-                    'Current Plan'
-                  ) : currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'trial' ? (
-                    'Upgrade Now'
-                  ) : (
-                    plan.buttonText
-                  )}
-                </button>
+                {(currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'active') || (plan.id === 'basic' && !currentSubscription) ? (
+                  <button
+                    className={`${styles.planButton} ${styles.currentPlan}`}
+                    disabled
+                  >
+                    Current Plan
+                  </button>
+                ) : (
+                  <>
+                    {/* Show Current Plan button if it's the current plan (even if trial) */}
+                    {currentSubscription?.plan_id === plan.id && (
+                      <button
+                        className={`${styles.planButton} ${styles.currentPlan}`}
+                        style={{ marginBottom: '8px' }}
+                        disabled
+                      >
+                        Current Plan
+                      </button>
+                    )}
+
+                    {/* Main Action Button */}
+                    <button
+                      className={`${styles.planButton} ${styles[plan.buttonStyle]} ${selectedPlan === plan.id && isLoading ? styles.loading : ''}`}
+                      onClick={() => handlePlanSelect(plan)}
+                      disabled={isLoading}
+                    >
+                      {selectedPlan === plan.id && isLoading ? (
+                        'Processing...'
+                      ) : currentSubscription?.plan_id === plan.id && currentSubscription?.status === 'trial' ? (
+                        'Upgrade Now'
+                      ) : (
+                        plan.buttonText
+                      )}
+                    </button>
+                  </>
+                )}
+
+
               </div>
             </div>
           ))}

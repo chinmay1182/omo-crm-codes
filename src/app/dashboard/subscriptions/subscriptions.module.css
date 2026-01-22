@@ -95,26 +95,30 @@
 
 /* Current Plan Banner */
 .currentPlanBanner {
-  background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+  background: transparent;
   border: none;
   border-radius: 0;
   padding: 1rem 1.5rem;
+  border: 1px solid #212121;
   margin: 1.5rem auto;
-  max-width: 700px;
+  margin-bottom: 4rem;
+  max-width: 550px;
   text-align: center;
 }
 
 .currentPlanBanner p {
   margin: 0;
-  color: #0c4a6e;
+  color: #212121;
   font-size: 15px;
+  font-weight: 300;
   line-height: 1.6;
 }
 
 .currentPlanBanner strong {
-  font-weight: 600;
-  color: #0369a1;
+  font-weight: 400;
+  color: #212121;
 }
+
 
 .trialExpired {
   color: #dc2626;
@@ -124,9 +128,8 @@
 /* Popular Badge */
 .popularBadge {
   position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 12px;
+  right: 20px;
   background: linear-gradient(135deg, #8686FC, #6b6bf5);
   color: white;
   padding: 6px 20px;
@@ -134,8 +137,27 @@
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(134, 134, 252, 0.3);
+  box-shadow: 0 2px 8px rgba(134, 134, 252, 0.3);
+  z-index: 1;
 }
+
+/* Current Plan Badge */
+.currentPlanBadge {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  background: #11a454;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(17, 164, 84, 0.3);
+  z-index: 1;
+}
+
+
 
 
 /* Plans Grid */
@@ -178,7 +200,6 @@
 
 .popularPlan {
   border: 2px solid #8686FC;
-  transform: scale(1.05);
 }
 
 
@@ -287,7 +308,7 @@
 }
 
 .planButton.primary {
-  background: #11a454;
+  background: #6b6bf5;
   color: white;
 }
 
@@ -301,10 +322,13 @@
   border: 1px solid #11a454;
 }
 
-
+.planButton.secondary:hover {
+  background-color: #11a454;
+  color: white;
+}
 
 .planButton.premium {
-  background: #15426d;
+  background: #212121;
   color: white;
 }
 
