@@ -20,36 +20,20 @@ export default function LeadManagementPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Lead Management</h1>
-          <p className={styles.leadPara}>
-            Track, update, and manage all your leads in one place
-          </p>
-        </div>
-        <div className={styles.tabs}>
+      <div className={styles.topNav}>
+        <div className={styles.navTabsContainer}>
           <button
-            className={`${styles.tab} ${
-              activeTab === "leads" ? styles.activeTab : ""
-            }`}
+            className={`${styles.navTab} ${activeTab === "leads" ? styles.activeTab : ""
+              }`}
             onClick={() => setActiveTab("leads")}
           >
-            <i
-              className="fa-light fa-user-plus"
-              style={{ marginRight: "8px" }}
-            ></i>
             Leads
           </button>
           <button
-            className={`${styles.tab} ${
-              activeTab === "proposals" ? styles.activeTab : ""
-            }`}
+            className={`${styles.navTab} ${activeTab === "proposals" ? styles.activeTab : ""
+              }`}
             onClick={() => setActiveTab("proposals")}
           >
-            <i
-              className="fa-light fa-file-contract"
-              style={{ marginRight: "8px" }}
-            ></i>
             Proposals
           </button>
         </div>

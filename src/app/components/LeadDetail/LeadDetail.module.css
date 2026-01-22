@@ -1,73 +1,96 @@
+/* Matching Create Ticket Page Styling */
 .container {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 0;
+  font-family: 'Open Sauce One', sans-serif;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header h1 {
+  font-size: 20px;
+  font-weight: 300;
+  color: #333;
+  margin: 0;
 }
 
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 0.5rem;
+}
+
+.editButton,
+.deleteButton {
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 300;
+  cursor: pointer;
+  border: none;
+  font-family: 'Open Sauce One', sans-serif;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .editButton {
-  padding: 8px 16px;
-  background-color: #2196F3;
+  background: #11a454;
   color: white;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
 }
 
 .editButton:hover {
-  background-color: #0b7dda;
+  background: #0e8a46;
 }
 
 .deleteButton {
-  padding: 8px 16px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
 }
 
 .deleteButton:hover {
-  background-color: #da190b;
+  background: rgba(244, 67, 54, 0.2);
 }
 
 .deleteButton:disabled {
-  background-color: #cccccc;
+  background: #cccccc;
+  color: #666;
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .error {
-  color: #d32f2f;
-  background-color: #ffebee;
-  padding: 10px 15px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border: 1px solid #ef9a9a;
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #fecaca;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .detailCard {
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  border-radius: 0;
+  padding: 1.5rem;
 }
 
 .detailRow {
   display: flex;
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .detailRow:last-child {
@@ -75,92 +98,221 @@
 }
 
 .label {
-  font-weight: bold;
-  width: 150px;
-  color: #555;
+  font-weight: 300;
+  width: 180px;
+  color: #64748b;
+  font-size: 15px;
 }
 
 .value {
   flex: 1;
+  color: #334155;
+  font-size: 15px;
+  font-weight: 300;
 }
 
 .detailSection {
-  margin-top: 20px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f0f0f0;
 }
 
 .sectionTitle {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  color: #334155;
 }
 
 .description {
   white-space: pre-wrap;
   line-height: 1.6;
-  color: #444;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 300;
 }
 
-/* Priority styles */
+/* Priority styles - Faint Pills */
 .priority {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 300;
+  font-size: 15px;
   text-transform: capitalize;
   display: inline-block;
 }
 
 .highPriority {
-  background-color: #ffdddd;
-  color: #d32f2f;
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
 }
 
 .mediumPriority {
-  background-color: #fff4e5;
-  color: #ff9800;
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #b45309;
 }
 
 .lowPriority {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
 }
 
-/* Stage styles */
+/* Stage styles - Faint Pills */
 .stage {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 300;
+  font-size: 15px;
   text-transform: capitalize;
   display: inline-block;
 }
 
 .stageNew {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: rgba(33, 150, 243, 0.1);
+  color: #2196f3;
 }
 
 .stageQualify {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
 }
 
 .stageProposal {
-  background-color: #fff8e1;
-  color: #ffa000;
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #b45309;
 }
 
 .stageReview {
-  background-color: #f3e5f5;
-  color: #8e24aa;
+  background-color: rgba(156, 39, 176, 0.1);
+  color: #9c27b0;
 }
 
 .stageWON {
-  background-color: #e8f5e9;
+  background-color: rgba(76, 175, 80, 0.1);
   color: #2e7d32;
-  font-weight: bold;
 }
 
 .stageDROP {
-  background-color: #ffebee;
-  color: #c62828;
-  text-decoration: line-through;
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.commentsList {
+  margin-top: 1rem;
+}
+
+/* Comment Section Styles */
+.commentSection {
+  margin-top: 20px;
+}
+
+.commentTextarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 0;
+  border: 1px solid #e0e0e0;
+  resize: vertical;
+  font-family: 'Open Sauce One', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  transition: all 0.2s;
+  min-height: 80px;
+}
+
+.commentTextarea:focus {
+  outline: none;
+  border-color: #11a454;
+}
+
+.commentButton {
+  margin-top: 10px;
+  padding: 0.6rem 1.2rem;
+  background: #11a454;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Open Sauce One', sans-serif;
+  transition: all 0.2s;
+}
+
+.commentButton:hover:not(:disabled) {
+  background: #0e8a46;
+}
+
+.commentButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background: #cccccc;
+}
+
+.commentItem {
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 8px;
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.commentAuthor {
+  font-weight: 500;
+}
+
+.commentContent {
+  white-space: pre-wrap;
+  font-size: 14px;
+  color: #334155;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.noComments {
+  color: #64748b;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .editButton,
+  .deleteButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .label {
+    width: 100%;
+    font-weight: 500;
+  }
 }

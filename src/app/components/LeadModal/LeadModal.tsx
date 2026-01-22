@@ -471,38 +471,23 @@ export default function LeadModal({
                     placeholder="Search Contact..."
                     value={contactSearch}
                     onChange={(e) => setContactSearch(e.target.value)}
-                    style={{
-                      marginBottom: '8px',
-                      width: '100%',
-                      padding: '0.4rem 0.8rem',
-                      border: '1px solid #ddd',
-                      borderRadius: '4px',
-                      fontSize: '14px'
-                    }}
+                    className={styles.input}
+                    style={{ marginBottom: '8px' }}
                   />
                   <select
                     id="contact_id"
                     name="contact_id"
                     value={formData.contact_id}
                     onChange={(e) => handleContactDropdownChange(e.target.value)}
-                    style={{
-                      fontFamily: '"Open Sauce One", sans-serif',
-                      padding: '0.55rem 1rem',
-                      border: '1px solid #ddd',
-                      borderRadius: '4px',
-                      fontSize: '15px',
-                      color: '#333',
-                      backgroundColor: 'white',
-                      width: '100%'
-                    }}
+                    className={styles.select}
                   >
-                    <option value="" style={{ color: '#333', backgroundColor: 'white' }}>Select Contact</option>
+                    <option value="">Select Contact</option>
                     {filteredContacts.map(contact => (
-                      <option key={contact.id} value={contact.id} style={{ color: '#333', backgroundColor: 'white' }}>
+                      <option key={contact.id} value={contact.id}>
                         {contact.name}
                       </option>
                     ))}
-                    <option value="__new__" style={{ color: '#333', backgroundColor: 'white' }}>+ Add New Contact</option>
+                    <option value="__new__">+ Add New Contact</option>
                   </select>
                 </>
               )}
@@ -527,38 +512,23 @@ export default function LeadModal({
                     placeholder="Search Company..."
                     value={companySearch}
                     onChange={(e) => setCompanySearch(e.target.value)}
-                    style={{
-                      marginBottom: '8px',
-                      width: '100%',
-                      padding: '0.4rem 0.8rem',
-                      border: '1px solid #ddd',
-                      borderRadius: '4px',
-                      fontSize: '14px'
-                    }}
+                    className={styles.input}
+                    style={{ marginBottom: '8px' }}
                   />
                   <select
                     id="company_id"
                     name="company_id"
                     value={formData.company_id}
                     onChange={(e) => handleCompanyDropdownChange(e.target.value)}
-                    style={{
-                      fontFamily: '"Open Sauce One", sans-serif',
-                      padding: '0.55rem 1rem',
-                      border: '1px solid #ddd',
-                      borderRadius: '4px',
-                      fontSize: '15px',
-                      color: '#333',
-                      backgroundColor: 'white',
-                      width: '100%'
-                    }}
+                    className={styles.select}
                   >
-                    <option value="" style={{ color: '#333', backgroundColor: 'white' }}>Select Company</option>
+                    <option value="">Select Company</option>
                     {filteredCompanies.map(company => (
-                      <option key={company.id} value={company.id} style={{ color: '#333', backgroundColor: 'white' }}>
+                      <option key={company.id} value={company.id}>
                         {company.name}
                       </option>
                     ))}
-                    <option value="__new__" style={{ color: '#333', backgroundColor: 'white' }}>+ Add New Company</option>
+                    <option value="__new__">+ Add New Company</option>
                   </select>
                 </>
               )}

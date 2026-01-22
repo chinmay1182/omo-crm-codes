@@ -1,197 +1,187 @@
-/* LeadForm.module.css */
+/* Matching Create Ticket Page Styling */
 .container {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 0;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+.header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .title {
   font-size: 24px;
-  margin-bottom: 20px;
+  font-weight: 300;
   color: #333;
+  margin: 0;
 }
 
 .error {
-  color: #d32f2f;
-  background-color: #ffebee;
-  padding: 10px 15px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border: 1px solid #ef9a9a;
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #fecaca;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.5rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
 }
 
 .formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 14px;
+  font-weight: 300;
+  color: #444;
+  margin-bottom: 0.5rem;
 }
 
 .formRow {
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
-.formRow > .formGroup {
+.formRow>.formGroup {
   flex: 1;
+  margin-bottom: 0;
 }
 
-.formLabel {
-  font-weight: bold;
-  color: #555;
+/* Input, Select, Textarea - Matching Create Ticket */
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0;
   font-size: 14px;
+  font-family: 'Open Sauce One', sans-serif;
+  font-weight: 300;
+  background: transparent;
+  transition: all 0.2s;
+  box-sizing: border-box;
+  color: #333;
 }
 
-.formInput,
-.formSelect,
-.formTextarea {
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  transition: border-color 0.3s;
-}
-
-.formInput:focus,
-.formSelect:focus,
-.formTextarea:focus {
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
   outline: none;
-  border-color: #2196F3;
+  border-bottom-color: #11a454;
+  box-shadow: none;
 }
 
-.formTextarea {
+.formGroup textarea {
+  min-height: 120px;
   resize: vertical;
-  min-height: 80px;
+  border: 1px solid #e0e0e0;
+  padding: 0.8rem;
 }
 
-.formDateInput {
-  padding: 9px 12px;
+.formGroup textarea:focus {
+  border-color: #11a454;
 }
 
-.formNumberInput {
-  -moz-appearance: textfield;
-}
-
-.formNumberInput::-webkit-outer-spin-button,
-.formNumberInput::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
+/* Form Actions - Matching Create Ticket Buttons */
 .formActions {
   display: flex;
+  gap: 1rem;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  margin-top: 3rem;
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+}
+
+.submitButton,
+.cancelButton {
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 300;
+  cursor: pointer;
+  border: none;
+  font-family: 'Open Sauce One', sans-serif;
+  transition: all 0.2s;
 }
 
 .submitButton {
-  padding: 10px 20px;
-  background-color: #2196F3;
+  background: #11a454;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
 }
 
-.submitButton:hover {
-  background-color: #0b7dda;
+.submitButton:hover:not(:disabled) {
+  background: #0e8a46;
 }
 
 .submitButton:disabled {
-  background-color: #cccccc;
+  background: #cccccc;
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .cancelButton {
-  padding: 10px 20px;
-  background-color: #f5f5f5;
+  background: #f5f5f5;
   color: #333;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
 }
 
-.cancelButton:hover {
-  background-color: #e0e0e0;
+.cancelButton:hover:not(:disabled) {
+  background: #e0e0e0;
 }
 
+/* New Item Form Styling */
 .newItemForm {
   margin-top: 12px;
   padding: 20px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: #f8f9fa;
   border-radius: 8px;
-  border: 2px solid #dee2e6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-}
-
-.newItemForm:hover {
-  border-color: #007bff;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
-}
-
-.newItemForm h4 {
-  margin: 0 0 15px 0;
-  color: #495057;
-  font-size: 16px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.newItemForm h4::before {
-  content: "✨";
-  font-size: 14px;
-}
-
-.newItemFormGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 15px;
-}
-
-.newItemFormGrid.single {
-  grid-template-columns: 1fr;
+  border: 1px solid #e0e0e0;
 }
 
 .newItemForm input,
 .newItemForm select {
-  padding: 12px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0;
   font-size: 14px;
   font-family: 'Open Sauce One', sans-serif;
-
-  transition: all 0.2s ease;
-  background-color: white;
+  font-weight: 300;
+  background: transparent;
+  transition: all 0.2s;
+  width: 100%;
+  margin-bottom: 12px;
 }
 
 .newItemForm input:focus,
 .newItemForm select:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-  transform: translateY(-1px);
-}
-
-.newItemForm input::placeholder {
-  color: #6c757d;
-  font-style: italic;
+  border-bottom-color: #11a454;
 }
 
 .newItemActions {
@@ -199,79 +189,68 @@
   gap: 12px;
   justify-content: flex-end;
   margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #dee2e6;
 }
 
 .createButton {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  padding: 0.6rem 1.2rem;
+  background: #11a454;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 50px;
   cursor: pointer;
   font-size: 14px;
   font-family: 'Open Sauce One', sans-serif;
-
-  font-weight: 600;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  font-weight: 300;
+  transition: all 0.2s;
 }
 
 .createButton:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  background: #0e8a46;
 }
 
 .createButton:disabled {
-  background: #6c757d;
+  background: #cccccc;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-.createButton::before {
-  content: "➕";
-  font-size: 12px;
+  opacity: 0.6;
 }
 
 .newItemCancelButton {
-  padding: 10px 20px;
-  background-color: #f8f9fa;
-  color: #6c757d;
-  border: 1px solid #dee2e6;
-  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  background: #f5f5f5;
+  color: #333;
+  border: none;
+  border-radius: 50px;
   cursor: pointer;
   font-size: 14px;
   font-family: 'Open Sauce One', sans-serif;
-
-  font-weight: 500;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  font-weight: 300;
+  transition: all 0.2s;
 }
 
 .newItemCancelButton:hover {
-  background-color: #e9ecef;
-  border-color: #adb5bd;
-  color: #495057;
-  transform: translateY(-1px);
+  background: #e0e0e0;
 }
 
-.newItemCancelButton::before {
-  content: "✖️";
-  font-size: 12px;
-}
-
-/* Responsive adjustments */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .formGrid,
   .formRow {
-    flex-direction: column;
-    gap: 20px;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: 100%;
   }
 }

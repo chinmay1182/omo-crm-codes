@@ -365,258 +365,246 @@ export default function LeadForm({ initialData }: LeadFormProps) {
 
   return (
     <div className={styles.container}>
-      <h1>{initialData?.id ? 'Edit Lead' : 'Create New Lead'}</h1>
+      <div className={styles.header}>
+        <h1 className={styles.title}>{initialData?.id ? 'Edit Lead' : 'Create New Lead'}</h1>
+      </div>
 
       {error && <div className={styles.error}>{error}</div>}
 
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label htmlFor="assignment_name">Assignment Name *</label>
-          <input
-            type="text"
-            id="assignment_name"
-            name="assignment_name"
-            value={formData.assignment_name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <label htmlFor="contact_id">Contact</label>
-            <select
-              id="contact_id"
-              name="contact_id"
-              value={formData.contact_id}
-              onChange={(e) => handleContactDropdownChange(e.target.value)}
-              style={{
-                padding: '0.55rem 1rem',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                fontSize: '15px',
-                color: '#333 !important',
-                backgroundColor: 'white !important',
-                width: '100%'
-              }}
-            >
-              <option value="" style={{ color: '#333 !important', backgroundColor: 'white !important' }}>Select Contact</option>
-              {contacts.map(contact => (
-                <option key={contact.id} value={contact.id} style={{ color: '#333 !important', backgroundColor: 'white !important' }}>
-                  {contact.name}
-                </option>
-              ))}
-              <option value="__new__" style={{ color: '#333 !important', backgroundColor: 'white !important' }}>+ Add New Contact</option>
-            </select>
-
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="company_id">Company</label>
-            <select
-              id="company_id"
-              name="company_id"
-              value={formData.company_id}
-              onChange={(e) => handleCompanyDropdownChange(e.target.value)}
-              style={{
-                padding: '0.55rem 1rem',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                fontSize: '15px',
-                color: '#333',
-                backgroundColor: 'white',
-                width: '100%'
-              }}
-            >
-              <option value="" style={{ color: '#333', backgroundColor: 'white' }}>Select Company</option>
-              {companies.map(company => (
-                <option key={company.id} value={company.id} style={{ color: '#333', backgroundColor: 'white' }}>
-                  {company.name}
-                </option>
-              ))}
-              <option value="__new__" style={{ color: '#333', backgroundColor: 'white' }}>+ Add New Company</option>
-            </select>
-
-          </div>
-        </div>
-
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <label htmlFor="stage">Stage *</label>
-            <select
-              id="stage"
-              name="stage"
-              value={formData.stage}
+      <form onSubmit={handleSubmit}>
+        <div className={styles.formGrid}>
+          {/* Assignment Name - Full Width */}
+          <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+            <label htmlFor="assignment_name">Assignment Name *</label>
+            <input
+              type="text"
+              id="assignment_name"
+              name="assignment_name"
+              value={formData.assignment_name}
               onChange={handleChange}
               required
-            >
-              <option value="New">New</option>
-              <option value="Qualify">Qualify</option>
-              <option value="Proposal">Proposal</option>
-              <option value="Review">Review</option>
-              <option value="WON">WON</option>
-              <option value="DROP">DROP</option>
-            </select>
+            />
           </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="priority">Priority</label>
-            <select
-              id="priority"
-              name="priority"
-              value={formData.priority}
-              onChange={handleChange}
-            >
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
-          </div>
-        </div>
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="contact_id">Contact</label>
+              <select
+                id="contact_id"
+                name="contact_id"
+                value={formData.contact_id}
+                onChange={(e) => handleContactDropdownChange(e.target.value)}
+              >
+                <option value="">Select Contact</option>
+                {contacts.map(contact => (
+                  <option key={contact.id} value={contact.id}>
+                    {contact.name}
+                  </option>
+                ))}
+                <option value="__new__">+ Add New Contact</option>
+              </select>
 
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <label htmlFor="service">Service</label>
-            <select
-              id="service"
-              name="service"
-              value={formData.service}
-              onChange={handleChange}
-            >
-              <option value="">Select Service</option>
-              {services.flatMap(service =>
-                service.service_names && service.service_names.length > 0
-                  ? service.service_names.map((serviceName, index) => (
-                    <option key={`${service.id}-${index}`} value={serviceName}>
-                      {serviceName} - ₹{service.total_amount?.toFixed(2) || '0.00'}
-                    </option>
-                  ))
-                  : [
-                    <option key={service.id} value={service.service_name}>
-                      {service.service_name} - ₹{service.total_amount?.toFixed(2) || '0.00'}
-                    </option>
-                  ]
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="company_id">Company</label>
+              <select
+                id="company_id"
+                name="company_id"
+                value={formData.company_id}
+                onChange={(e) => handleCompanyDropdownChange(e.target.value)}
+              >
+                <option value="">Select Company</option>
+                {companies.map(company => (
+                  <option key={company.id} value={company.id}>
+                    {company.name}
+                  </option>
+                ))}
+                <option value="__new__">+ Add New Company</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="stage">Stage *</label>
+              <select
+                id="stage"
+                name="stage"
+                value={formData.stage}
+                onChange={handleChange}
+                required
+              >
+                <option value="New">New</option>
+                <option value="Qualify">Qualify</option>
+                <option value="Proposal">Proposal</option>
+                <option value="Review">Review</option>
+                <option value="WON">WON</option>
+                <option value="DROP">DROP</option>
+              </select>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="priority">Priority</label>
+              <select
+                id="priority"
+                name="priority"
+                value={formData.priority}
+                onChange={handleChange}
+              >
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+          </div>
+
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="service">Service</label>
+              <select
+                id="service"
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+              >
+                <option value="">Select Service</option>
+                {services.flatMap(service =>
+                  service.service_names && service.service_names.length > 0
+                    ? service.service_names.map((serviceName, index) => (
+                      <option key={`${service.id}-${index}`} value={serviceName}>
+                        {serviceName} - ₹{service.total_amount?.toFixed(2) || '0.00'}
+                      </option>
+                    ))
+                    : [
+                      <option key={service.id} value={service.service_name}>
+                        {service.service_name} - ₹{service.total_amount?.toFixed(2) || '0.00'}
+                      </option>
+                    ]
+                )}
+                <option value="__new__">+ Add New Service</option>
+              </select>
+
+              {formData.service === '__new__' && (
+                <div className={styles.newItemForm}>
+                  <input
+                    type="text"
+                    placeholder="Service name"
+                    value={newServiceName}
+                    onChange={(e) => setNewServiceName(e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Amount"
+                    value={newServiceAmount}
+                    onChange={(e) => setNewServiceAmount(e.target.value)}
+                    min="0"
+                    step="0.01"
+                  />
+                  <div className={styles.newItemActions}>
+                    <button
+                      type="button"
+                      onClick={handleCreateNewService}
+                      disabled={creatingService}
+                      className={styles.createButton}
+                    >
+                      {creatingService ? 'Creating...' : 'Create'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData(prev => ({ ...prev, service: '' }));
+                        setNewServiceName('');
+                        setNewServiceAmount('');
+                      }}
+                      className={styles.cancelButton}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
               )}
-              <option value="__new__">+ Add New Service</option>
-            </select>
+            </div>
 
-            {formData.service === '__new__' && (
-              <div className={styles.newItemForm}>
-                <input
-                  type="text"
-                  placeholder="Service name"
-                  value={newServiceName}
-                  onChange={(e) => setNewServiceName(e.target.value)}
-                />
-                <input
-                  type="number"
-                  placeholder="Amount"
-                  value={newServiceAmount}
-                  onChange={(e) => setNewServiceAmount(e.target.value)}
-                  min="0"
-                  step="0.01"
-                />
-                <div className={styles.newItemActions}>
-                  <button
-                    type="button"
-                    onClick={handleCreateNewService}
-                    disabled={creatingService}
-                    className={styles.createButton}
-                  >
-                    {creatingService ? 'Creating...' : 'Create'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setFormData(prev => ({ ...prev, service: '' }));
-                      setNewServiceName('');
-                      setNewServiceAmount('');
-                    }}
-                    className={styles.cancelButton}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            )}
+            <div className={styles.formGroup}>
+              <label htmlFor="amount">Amount</label>
+              <input
+                type="number"
+                id="amount"
+                name="amount"
+                value={formData.amount}
+                onChange={handleChange}
+                min="0"
+                step="0.01"
+              />
+            </div>
           </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="amount">Amount</label>
-            <input
-              type="number"
-              id="amount"
-              name="amount"
-              value={formData.amount}
-              onChange={handleChange}
-              min="0"
-              step="0.01"
-            />
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="closing_date">Closing Date</label>
+              <input
+                type="date"
+                id="closing_date"
+                name="closing_date"
+                value={formData.closing_date}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="source">Source</label>
+              <select
+                id="source"
+                name="source"
+                value={formData.source}
+                onChange={handleChange}
+              >
+                <option value="">Select Source</option>
+                {sources.map(source => (
+                  <option key={source.id} value={source.name}>
+                    {source.name}
+                  </option>
+                ))}
+                <option value="__new__">+ Add New Source</option>
+              </select>
+
+              {formData.source === '__new__' && (
+                <div className={styles.newItemForm}>
+                  <input
+                    type="text"
+                    placeholder="Source name"
+                    value={newSourceName}
+                    onChange={(e) => setNewSourceName(e.target.value)}
+                  />
+                  <div className={styles.newItemActions}>
+                    <button
+                      type="button"
+                      onClick={handleCreateNewSource}
+                      disabled={creatingSource}
+                      className={styles.createButton}
+                    >
+                      {creatingSource ? 'Creating...' : 'Create'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData(prev => ({ ...prev, source: '' }));
+                        setNewSourceName('');
+                      }}
+                      className={styles.cancelButton}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <label htmlFor="closing_date">Closing Date</label>
-            <input
-              type="date"
-              id="closing_date"
-              name="closing_date"
-              value={formData.closing_date}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="source">Source</label>
-            <select
-              id="source"
-              name="source"
-              value={formData.source}
-              onChange={handleChange}
-            >
-              <option value="">Select Source</option>
-              {sources.map(source => (
-                <option key={source.id} value={source.name}>
-                  {source.name}
-                </option>
-              ))}
-              <option value="__new__">+ Add New Source</option>
-            </select>
-
-            {formData.source === '__new__' && (
-              <div className={styles.newItemForm}>
-                <input
-                  type="text"
-                  placeholder="Source name"
-                  value={newSourceName}
-                  onChange={(e) => setNewSourceName(e.target.value)}
-                />
-                <div className={styles.newItemActions}>
-                  <button
-                    type="button"
-                    onClick={handleCreateNewSource}
-                    disabled={creatingSource}
-                    className={styles.createButton}
-                  >
-                    {creatingSource ? 'Creating...' : 'Create'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setFormData(prev => ({ ...prev, source: '' }));
-                      setNewSourceName('');
-                    }}
-                    className={styles.cancelButton}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
+        {/* Description - Full Width Outside Grid */}
         <div className={styles.formGroup}>
           <label htmlFor="description">Description</label>
           <textarea

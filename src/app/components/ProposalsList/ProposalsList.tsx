@@ -297,66 +297,57 @@ export default function ProposalsList() {
   });
 
   if (loading)
-    return <div className={styles.loading}>Loading proposals...</div>;
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.loadingSpinner}></div>
+        <p>Loading Proposals...</p>
+      </div>
+    );
   if (error) return <div className={styles.error}>Error: {error}</div>;
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <select
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            style={{
-              padding: '8px 12px',
-              borderRadius: '4px',
-              border: '1px solid #ddd',
-              backgroundColor: 'white',
-              color: '#333',
-              fontSize: '14px',
-              cursor: 'pointer'
-            }}
-          >
-            <option value="All">All Status</option>
-            <option value="created">Created</option>
-            <option value="accepted">Accepted</option>
+      <div className={styles.topNav}>
+        <input
+          type="text"
+          placeholder="Search proposals..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={styles.searchInput}
+          style={{
+            padding: '6px 12px',
+            border: 'none',
+            borderBottom: '1px solid #e0e0e0',
+            borderRadius: 0,
+            width: '200px',
+            fontSize: '14px',
+            fontFamily: 'Open Sauce One, sans-serif',
+            outline: 'none',
+            transition: 'all 0.2s'
+          }}
+        />
 
-            <option value="hold">Hold</option>
-            <option value="drop">Drop</option>
-            <option value="expired">Expired</option>
-          </select>
+        <select
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value)}
+          className={styles.filterSelect}
+        >
+          <option value="All">All Status</option>
+          <option value="created">Created</option>
+          <option value="accepted">Accepted</option>
+          <option value="hold">Hold</option>
+          <option value="drop">Drop</option>
+          <option value="expired">Expired</option>
+        </select>
 
-          <button
-            onClick={() => setExportModalOpen(true)}
-            className={styles.exportButton} // Assuming style exists or global
-            style={{ padding: '8px 16px', background: '#28a745', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-          >
-            <i className="fa-light fa-file-export"></i> Export
-          </button>
-
-          <input
-            type="text"
-            placeholder="Search proposals..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{
-              padding: '8px 12px',
-              borderRadius: '4px',
-              border: '1px solid #ddd',
-              width: '200px'
-            }}
-          />
-
-          {hasPermission('leads', 'proposal_create') && (
-            <button
-              onClick={handleAddNew}
-              className={styles.floatingButton}
-              title="Add New Proposal"
-            >
-              <i className="fa-light fa-plus"></i>
-            </button>
-          )}
-        </div>
+        <button
+          onClick={() => setExportModalOpen(true)}
+          className={styles.tagsButton}
+          title="Export Proposals"
+        >
+          <i className="fa-sharp fa-thin fa-file-export"></i>
+          <span>Export</span>
+        </button>
       </div>
 
       <div className={styles.tableContainer}>
@@ -388,57 +379,51 @@ export default function ProposalsList() {
                     : ""
                 }
               >
-                <td className={styles.proposalId}>
+                <td data-label="Proposal ID" className={styles.proposalId}>
                   {proposal.proposal_number}
                 </td>
-                <td className={styles.leadRef}>
+                <td data-label="Lead Reference" className={styles.leadRef}>
                   {proposal.lead_reference_number}
                 </td>
-                <td>{proposal.proposal_to}</td>
-                <td>{new Date(proposal.proposal_date).toLocaleDateString()}</td>
-                <td>
+                <td data-label="Proposal To">{proposal.proposal_to}</td>
+                <td data-label="Proposal Date">{new Date(proposal.proposal_date).toLocaleDateString()}</td>
+                <td data-label="Status">
                   {proposal.proposal_status === 'expired' ? (
-                    <span className={styles.expiredBadge} style={{ background: '#6f42c1', color: 'white', padding: '4px 12px', borderRadius: '4px', fontSize: '13px', fontWeight: 500 }}>EXPIRED</span>
+                    <span className={styles.expiredBadge}>EXPIRED</span>
                   ) : (
                     <select
                       value={proposal.proposal_status}
                       onChange={(e) =>
                         handleStatusChange(proposal, e.target.value)
                       }
-                      className={styles.statusDropdown}
-                      style={{
-                        backgroundColor: getStatusColor(proposal.proposal_status),
-                        color: "white",
-                        cursor: hasPermission('leads', 'proposal_edit') ? 'pointer' : 'not-allowed',
-                        opacity: hasPermission('leads', 'proposal_edit') ? 1 : 0.6
-                      }}
+                      className={styles.dropdown}
                       disabled={!hasPermission('leads', 'proposal_edit')}
                     >
                       <option value="created">Created</option>
                       <option value="hold">Hold</option>
                       <option value="accepted">Accepted</option>
-
                       <option value="drop">Drop</option>
                       <option value="expired" disabled>Expired</option>
                     </select>
                   )}
                 </td>
-                <td>
+                <td data-label="Amount">
                   {proposal.amount
                     ? `₹${proposal.amount.toLocaleString()}`
                     : "-"}
                 </td>
-                <td>
+                <td data-label="Partial Approved">
                   {proposal.proposal_status === "accepted" && proposal.partial_amount
                     ? `₹${proposal.partial_amount.toLocaleString()}`
                     : "-"}
                 </td>
-                <td>
+                <td data-label="Full Approved">
                   {proposal.proposal_status === "accepted" && !proposal.partial_amount
                     ? `₹${(proposal.amount || 0).toLocaleString()}`
                     : "-"}
                 </td>
                 <td
+                  data-label="Expiry Date"
                   className={
                     isExpired(proposal.expiry_date) ? styles.expiredDate : ""
                   }
@@ -451,20 +436,20 @@ export default function ProposalsList() {
                       <span className={styles.expiredBadge}>EXPIRED</span>
                     )}
                 </td>
-                <td className={styles.actions}>
+                <td className={styles.actions} data-label="Actions">
                   <button
                     onClick={() => handleView(proposal)}
                     className={styles.viewButton}
                     title="View Proposal"
                   >
-                    <i className="fa-light fa-eye"></i>
+                    <span>View</span>
                   </button>
                   <button
                     onClick={() => handleDownload(proposal)}
                     className={styles.downloadButton}
                     title="Download Proposal"
                   >
-                    <i className="fa-light fa-download"></i>
+                    <span>Download</span>
                   </button>
                   {hasPermission('leads', 'proposal_edit') && (
                     <button
@@ -472,7 +457,7 @@ export default function ProposalsList() {
                       className={styles.editButton}
                       title="Edit Proposal"
                     >
-                      <i className="fa-light fa-edit"></i>
+                      <span>Edit</span>
                     </button>
                   )}
                   {hasPermission('leads', 'proposal_delete') && (
@@ -481,7 +466,7 @@ export default function ProposalsList() {
                       className={styles.deleteButton}
                       title="Delete Proposal"
                     >
-                      <i className="fa-light fa-trash"></i>
+                      <span>Delete</span>
                     </button>
                   )}
                 </td>
@@ -505,6 +490,16 @@ export default function ProposalsList() {
           </div>
         )}
       </div>
+
+      {hasPermission('leads', 'proposal_create') && (
+        <button
+          onClick={handleAddNew}
+          className={styles.floatingButton}
+          title="Add New Proposal"
+        >
+          <i className="fa-light fa-plus"></i>
+        </button>
+      )}
 
       <ProposalModal
         isOpen={isModalOpen}

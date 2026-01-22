@@ -214,7 +214,7 @@ export default function LeadDetail({ lead }: LeadDetailProps) {
             }}
             title="Back to Leads"
           >
-            <i className="fa-light fa-arrow-left"></i>
+            <i className="fa-thin fa-sharp fa-arrow-left"></i>
           </button>
           <h1>Lead Details</h1>
         </div>
@@ -224,7 +224,7 @@ export default function LeadDetail({ lead }: LeadDetailProps) {
             className={styles.editButton}
             style={{ backgroundColor: '#6c757d', marginRight: '10px', color: 'white' }}
           >
-            <i className="fa-light fa-print" style={{ marginRight: '5px' }}></i>
+            <i className="fa-sharp fa-thin fa-print" style={{ marginRight: '5px' }}></i>
             Print
           </button>
           <Link href={`/dashboard/lead-management/${lead.id}/edit`} className={styles.editButton}>
@@ -325,34 +325,18 @@ export default function LeadDetail({ lead }: LeadDetailProps) {
       <div className={styles.detailCard} style={{ marginTop: '20px' }}>
         <h3 className={styles.sectionTitle}>Comment History</h3>
 
-        <div style={{ marginBottom: '20px' }}>
+        <div className={styles.commentSection}>
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Add a follow-up comment..."
             rows={3}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '6px',
-              border: '1px solid #ddd',
-              resize: 'vertical',
-              fontFamily: 'inherit'
-            }}
+            className={styles.commentTextarea}
           />
           <button
             onClick={handleAddComment}
             disabled={commentLoading || !newComment.trim()}
-            style={{
-              marginTop: '10px',
-              padding: '8px 16px',
-              background: '#15426d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: commentLoading || !newComment.trim() ? 'not-allowed' : 'pointer',
-              opacity: commentLoading || !newComment.trim() ? 0.7 : 1
-            }}
+            className={styles.commentButton}
           >
             {commentLoading ? 'Adding...' : 'Add Comment'}
           </button>
@@ -360,29 +344,19 @@ export default function LeadDetail({ lead }: LeadDetailProps) {
 
         <div className={styles.commentsList}>
           {comments.length === 0 ? (
-            <p style={{ color: '#666', fontStyle: 'italic' }}>No comments yet.</p>
+            <p className={styles.noComments}>No comments yet.</p>
           ) : (
             comments.map((comment) => (
-              <div key={comment.id} style={{
-                padding: '12px',
-                borderBottom: '1px solid #eee',
-                marginBottom: '8px'
-              }}>
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginBottom: '4px',
-                  fontSize: '12px',
-                  color: '#666'
-                }}>
-                  <span style={{ fontWeight: 600 }}>
+              <div key={comment.id} className={styles.commentItem}>
+                <div className={styles.commentHeader}>
+                  <span className={styles.commentAuthor}>
                     {new Date(comment.created_at).toLocaleString('en-IN', {
                       year: 'numeric', month: 'short', day: 'numeric',
                       hour: '2-digit', minute: '2-digit'
                     })}
                   </span>
                 </div>
-                <div style={{ whiteSpace: 'pre-wrap', fontSize: '14px', color: '#333' }}>
+                <div className={styles.commentContent}>
                   {comment.content}
                 </div>
               </div>

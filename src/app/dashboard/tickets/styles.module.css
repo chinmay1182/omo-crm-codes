@@ -41,6 +41,8 @@
   transition: all 0.2s;
 }
 
+
+
 .navTab.active {
   color: #11a454;
   border-bottom: 2px solid #11a454;

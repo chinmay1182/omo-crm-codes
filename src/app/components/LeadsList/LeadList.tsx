@@ -319,230 +319,211 @@ export default function LeadsList() {
     return matchesSearch && lead.stage?.toLowerCase() === filterStage.toLowerCase();
   });
 
-  if (loading) {
-    return (
-      <div className={styles.tableContainer}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              {[...Array(13)].map((_, i) => (
-                <th key={i}>
-                  <Skeleton width={80} height={20} />
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {[...Array(10)].map((_, i) => (
-              <tr key={i}>
-                {[...Array(13)].map((_, j) => (
-                  <td key={j} style={{ padding: '16px' }}>
-                    <Skeleton width={j === 0 ? 80 : '100%'} height={20} />
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
+
   if (error) return <div className={styles.error}>Error: {error}</div>;
 
   return (
     <div className={styles.container}>
       {/* Add Export Button in a small header row above table if possible, or floating */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px 0', gap: '10px' }}>
-        <select
-          value={filterStage}
-          onChange={(e) => setFilterStage(e.target.value)}
-          style={{
-            padding: '8px 12px',
-            borderRadius: '4px',
-            border: '1px solid #ddd',
-            backgroundColor: 'white',
-            color: '#333',
-            fontSize: '14px',
-            cursor: 'pointer'
-          }}
-        >
-          <option value="All">All Stages</option>
-          <option value="New">New</option>
-          <option value="Qualify">Qualify</option>
-          <option value="Proposal">Proposal</option>
-          <option value="Review">Review</option>
-          <option value="Completed">Completed</option>
-          <option value="WON">WON</option>
-          <option value="DROP">DROP</option>
-        </select>
+      <div className={styles.topNav}>
+        {/* Search, Filter, Export all in one row aligned right */}
+        <div className={styles.searchWrapper}>
+          <i className={`fa-sharp fa-thin fa-search ${styles.searchIcon}`}></i>
+          <input
+            type="text"
+            placeholder="Search leads..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className={styles.searchInput}
+          />
+        </div>
 
-        <input
-          type="text"
-          placeholder="Search leads..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{
-            padding: '8px 12px',
-            borderRadius: '4px',
-            border: '1px solid #ddd',
-            width: '200px'
-          }}
-        />
+        <div className={styles.filterWrapper}>
+          <select
+            value={filterStage}
+            onChange={(e) => setFilterStage(e.target.value)}
+            className={styles.filterSelect}
+          >
+            <option value="All">All Stages</option>
+            <option value="New">New</option>
+            <option value="Qualify">Qualify</option>
+            <option value="Proposal">Proposal</option>
+            <option value="Review">Review</option>
+            <option value="Completed">Completed</option>
+            <option value="WON">WON</option>
+            <option value="DROP">DROP</option>
+          </select>
+        </div>
 
         <button
           onClick={() => setExportModalOpen(true)}
-          style={{ padding: '8px 16px', background: '#28a745', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+          className={styles.tagsButton}
+          title="Export Leads"
         >
-          <i className="fa-light fa-file-export"></i> Export Leads
+          <i className="fa-sharp fa-thin fa-file-export"></i>
+          <span>Export</span>
         </button>
       </div>
 
       <div className={styles.tableContainer}>
-        {/* ... existing table ... */}
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Lead ID</th>
-              <th>Assignment</th>
-              <th>Contact</th>
-              <th>Company</th>
-              <th>Service</th>
-              <th>Source</th>
-              <th>Stage</th>
-              <th>TAT Status</th>
-              <th>Amount</th>
-              <th>Follow-up Date</th>
-              <th>Priority</th>
-              <th>Assigned To</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredLeads.map((lead) => (
-              <tr key={lead.id}>
-                <td className={styles.leadId}>{lead.id.substring(0, 8)}...</td>
-                <td>{lead.assignment_name}</td>
-                <td
-                  onClick={() => lead.contact_name && handleContactCompanyClick('contact', lead.contact_data, lead)}
-                  className={`${styles.clickableCell} ${lead.contact_name ? styles.hasData : ''}`}
-                  style={{ cursor: lead.contact_name ? 'pointer' : 'default' }}
-                >
-                  {lead.contact_name || '-'}
-                </td>
-                <td
-                  onClick={() => lead.company_name && handleContactCompanyClick('company', lead.company_data, lead)}
-                  className={`${styles.clickableCell} ${lead.company_name ? styles.hasData : ''}`}
-                  style={{ cursor: lead.company_name ? 'pointer' : 'default' }}
-                >
-                  {lead.company_name || '-'}
-                </td>
-                <td>{lead.service || '-'}</td>
-                <td>{lead.source || '-'}</td>
-                <td>
-                  {/* Disable stage change if no edit permission */}
-                  {lead.stage === 'Expired' ? (
-                    <span className={styles.expiredBadge} style={{ color: '#dc3545', fontWeight: 'bold', padding: '0 8px' }}>Expired</span>
-                  ) : (
-                    <select
-                      value={lead.stage}
-                      onChange={(e) => updateLeadField(lead.id, 'stage', e.target.value)}
-                      className={styles.dropdown}
-                      disabled={!hasPermission('leads', 'edit')}
-                    >
-                      <option value="New">New</option>
-                      <option value="Qualify">Qualify</option>
-                      <option value="Proposal">Proposal</option>
-                      <option value="Review">Review</option>
-                      <option value="Completed">Completed</option>
-                      <option value="WON">WON</option>
-                      <option value="DROP">DROP</option>
-                      {/* Hidden option for Expired just in case it comes from DB but logic above renders span */}
-                      <option value="Expired" disabled>Expired</option>
-                    </select>
-                  )}
-                </td>
-                <td>
-                  {(() => {
-                    const status = lead.stage;
-                    if (status === 'WON' || status === 'DROP') return '';
-
-                    if (!lead.closing_date) return <span style={{ color: '#6c757d' }}>No Date</span>;
-
-                    const followUpDate = new Date(lead.closing_date);
-                    const now = new Date();
-                    // Difference in hours
-                    const diffHours = (now.getTime() - followUpDate.getTime()) / (1000 * 60 * 60);
-
-                    // Logic: "If follow-up date within 72 Hrs ... In TAT"
-                    // "after 72 Hrs from-up date it’s show Lost"
-                    // Assuming this checks if we have exceeded 72 hours AFTER the follow-up date.
-                    if (diffHours > 72) {
-                      return <span style={{ color: '#dc3545', fontWeight: 'bold' }}>Lost</span>;
-                    } else {
-                      return <span style={{ color: '#28a745', fontWeight: 'bold' }}>In TAT</span>;
-                    }
-                  })()}
-                </td>
-                <td>{lead.amount ? `₹${lead.amount.toLocaleString()}` : '-'}</td>
-                <td>{lead.closing_date ? new Date(lead.closing_date).toLocaleDateString() : '-'}</td>
-                <td>
-                  <select
-                    value={lead.priority}
-                    onChange={(e) => updateLeadField(lead.id, 'priority', e.target.value)}
-                    className={styles.dropdown}
-                    disabled={!hasPermission('leads', 'edit')}
-                  >
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                  </select>
-                </td>
-                <td>
-                  <select
-                    value={lead.assigned_to || ''}
-                    onChange={(e) => updateLeadField(lead.id, 'assigned_to', e.target.value)}
-                    className={styles.dropdown}
-                    disabled={!hasPermission('leads', 'transfer_lead')}
-                  >
-                    <option value="">Unassigned</option>
-                    {agents.map(agent => (
-                      <option key={agent.id} value={agent.id}>
-                        {agent.name} ({agent.username})
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                <td className={styles.actions}>
-                  <button
-                    onClick={() => router.push(`/dashboard/lead-management/${lead.id}`)}
-                    className={styles.viewButton}
-                  >
-                    View
-                  </button>
-                  {hasPermission('leads', 'edit') && (
-                    <button
-                      onClick={() => handleEdit(lead)}
-                      className={styles.editButton}
-                    >
-                      Edit
-                    </button>
-                  )}
-                  {hasPermission('leads', 'delete') && (
-                    <button
-                      onClick={() => handleDelete(lead.id)}
-                      className={styles.deleteButton}
-                    >
-                      Delete
-                    </button>
-                  )}
-                </td>
+        {loading ? (
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingSpinner}></div>
+            <p>Loading Leads...</p>
+          </div>
+        ) : (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Lead ID</th>
+                <th>Assignment</th>
+                <th>Contact</th>
+                <th>Company</th>
+                <th>Service</th>
+                <th>Source</th>
+                <th>Stage</th>
+                <th>TAT Status</th>
+                <th>Amount</th>
+                <th>Follow-up Date</th>
+                <th>Priority</th>
+                <th>Assigned To</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredLeads.length > 0 ? (
+                filteredLeads.map((lead) => (
+                  <tr key={lead.id}>
+                    <td data-label="Lead ID" className={styles.leadId}>{lead.id.substring(0, 8)}...</td>
+                    <td data-label="Assignment">{lead.assignment_name}</td>
+                    <td
+                      data-label="Contact"
+                      onClick={() => lead.contact_name && handleContactCompanyClick('contact', lead.contact_data, lead)}
+                      className={`${styles.clickableCell} ${lead.contact_name ? styles.hasData : ''}`}
+                      style={{ cursor: lead.contact_name ? 'pointer' : 'default' }}
+                    >
+                      {lead.contact_name || '-'}
+                    </td>
+                    <td
+                      data-label="Company"
+                      onClick={() => lead.company_name && handleContactCompanyClick('company', lead.company_data, lead)}
+                      className={`${styles.clickableCell} ${lead.company_name ? styles.hasData : ''}`}
+                      style={{ cursor: lead.company_name ? 'pointer' : 'default' }}
+                    >
+                      {lead.company_name || '-'}
+                    </td>
+                    <td data-label="Service">{lead.service || '-'}</td>
+                    <td data-label="Source">{lead.source || '-'}</td>
+                    <td data-label="Stage">
+                      {/* Disable stage change if no edit permission */}
+                      {lead.stage === 'Expired' ? (
+                        <span className={styles.expiredBadge}>Expired</span>
+                      ) : (
+                        <select
+                          value={lead.stage}
+                          onChange={(e) => updateLeadField(lead.id, 'stage', e.target.value)}
+                          className={styles.dropdown}
+                          disabled={!hasPermission('leads', 'edit')}
+                        >
+                          <option value="New">New</option>
+                          <option value="Qualify">Qualify</option>
+                          <option value="Proposal">Proposal</option>
+                          <option value="Review">Review</option>
+                          <option value="Completed">Completed</option>
+                          <option value="WON">WON</option>
+                          <option value="DROP">DROP</option>
+                          <option value="Expired" disabled>Expired</option>
+                        </select>
+                      )}
+                    </td>
+                    <td data-label="TAT Status">
+                      {(() => {
+                        const status = lead.stage;
+                        if (status === 'WON' || status === 'DROP') return '';
+
+                        if (!lead.closing_date) return <span style={{ color: '#6c757d' }}>No Date</span>;
+
+                        const followUpDate = new Date(lead.closing_date);
+                        const now = new Date();
+                        const diffHours = (now.getTime() - followUpDate.getTime()) / (1000 * 60 * 60);
+
+                        if (diffHours > 72) {
+                          return <span style={{ color: '#dc3545', fontWeight: '300' }}>Lost</span>;
+                        } else {
+                          return <span style={{ color: '#28a745', fontWeight: '300' }}>In TAT</span>;
+                        }
+                      })()}
+                    </td>
+                    <td data-label="Amount">{lead.amount ? `₹${lead.amount.toLocaleString()}` : '-'}</td>
+                    <td data-label="Closing Date">{lead.closing_date ? new Date(lead.closing_date).toLocaleDateString() : '-'}</td>
+                    <td data-label="Priority">
+                      <select
+                        value={lead.priority}
+                        onChange={(e) => updateLeadField(lead.id, 'priority', e.target.value)}
+                        className={styles.dropdown}
+                        disabled={!hasPermission('leads', 'edit')}
+                      >
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                      </select>
+                    </td>
+                    <td data-label="Owner">
+                      <select
+                        value={lead.assigned_to || ''}
+                        onChange={(e) => updateLeadField(lead.id, 'assigned_to', e.target.value)}
+                        className={styles.dropdown}
+                        disabled={!hasPermission('leads', 'transfer_lead')}
+                      >
+                        <option value="">Unassigned</option>
+                        {agents.map(agent => (
+                          <option key={agent.id} value={agent.id}>
+                            {agent.name} ({agent.username})
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                    <td className={styles.actions} data-label="Actions">
+                      <button
+                        onClick={() => router.push(`/dashboard/lead-management/${lead.id}`)}
+                        className={styles.viewButton}
+                        title="View Lead"
+                      >
+                        <span>View</span>
+                      </button>
+                      {hasPermission('leads', 'edit') && (
+                        <button
+                          onClick={() => handleEdit(lead)}
+                          className={styles.editButton}
+                          title="Edit Lead"
+                        >
+                          <span>Edit</span>
+                        </button>
+                      )}
+                      {hasPermission('leads', 'delete') && (
+                        <button
+                          onClick={() => handleDelete(lead.id)}
+                          className={styles.deleteButton}
+                          title="Delete Lead"
+                        >
+                          <span>Delete</span>
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={13} className={styles.noResults}>
+                    No leads found matching your criteria
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
       </div>
 
-      {/* Assuming 'edit' implies ability to create new, since explicit create permission wasn't in spec for Leads, only Enable/Disable, View, Edit, Delete. */}
       {hasPermission('leads', 'edit') && (
         <button
           onClick={handleAddNew}

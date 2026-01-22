@@ -191,180 +191,182 @@ export default function ProposalModal({
         <div className={styles.modalHeader}>
           <h2>{initialData ? "Edit Proposal" : "Create New Proposal"}</h2>
           <button className={styles.closeButton} onClick={onClose}>
-            <i className="fa-light fa-times"></i>
+            <i className="fa-thin fa-times"></i>
           </button>
         </div>
 
-        {error && <div className={styles.error}>{error}</div>}
-
         <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="lead_id">Select Lead *</label>
+          {error && <div className={styles.error}>{error}</div>}
 
-            <input
-              type="text"
-              placeholder="Search lead by Name or Reference ID..."
-              value={leadSearch}
-              onChange={(e) => setLeadSearch(e.target.value)}
-              style={{ marginBottom: '8px', padding: '8px', width: '100%', border: '1px solid #ddd', borderRadius: '4px' }}
-            />
+          <div className={styles.formGrid}>
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+              <label htmlFor="lead_id">Select Lead *</label>
 
-            <select
-              id="lead_id"
-              value={formData.lead_id}
-              onChange={(e) => handleLeadChange(e.target.value)}
-              required
-              disabled={loading || !!initialData}
-            >
-              <option value="">Select a lead...</option>
-              {filteredLeads.map((lead) => (
-                <option key={lead.id} value={lead.id}>
-                  {lead.assignment_name} -{" "}
-                  {lead.contact_name ||
-                    lead.company_name ||
-                    "No contact/company"}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="proposal_to">Proposal To *</label>
-            <input
-              type="text"
-              id="proposal_to"
-              value={formData.proposal_to}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  proposal_to: e.target.value,
-                }))
-              }
-              required
-              disabled={loading}
-              placeholder="Enter recipient name"
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="amount">Proposal Amount</label>
-            <input
-              type="number"
-              id="amount"
-              value={formData.amount}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, amount: e.target.value }))
-              }
-              disabled={loading}
-              placeholder="Enter proposal amount"
-              min="0"
-              step="0.01"
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="discount">Other Associated Expenses (₹)</label>
-            <input
-              type="number"
-              id="discount"
-              value={formData.discount}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, discount: e.target.value }))
-              }
-              disabled={loading}
-              placeholder="Enter discount amount"
-              min="0"
-              step="0.01"
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="validity_days">Validity (Days)</label>
-            <input
-              type="number"
-              id="validity_days"
-              value={formData.validity_days}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, validity_days: e.target.value }))
-              }
-              disabled={loading || !!initialData}
-              placeholder="Enter validity in days"
-              min="1"
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="proposal_status">Status</label>
-            <select
-              id="proposal_status"
-              value={formData.proposal_status}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  proposal_status: e.target.value as any,
-                }))
-              }
-              disabled={loading}
-            >
-              <option value="created">Created</option>
-              <option value="hold">Hold</option>
-              <option value="accepted">Accepted</option>
-
-              <option value="drop">Drop</option>
-
-            </select>
-          </div>
-
-          {(formData.proposal_status === 'accepted' || formData.proposal_status === 'partial') && (
-            <div className={styles.formGroup}>
-              <label htmlFor="order_id">Order ID *</label>
               <input
                 type="text"
-                id="order_id"
-                value={formData.order_id}
+                placeholder="Search lead by Name or Reference ID..."
+                value={leadSearch}
+                onChange={(e) => setLeadSearch(e.target.value)}
+                className={styles.searchInput}
+              />
+
+              <select
+                id="lead_id"
+                value={formData.lead_id}
+                onChange={(e) => handleLeadChange(e.target.value)}
+                required
+                disabled={loading || !!initialData}
+              >
+                <option value="">Select a lead...</option>
+                {filteredLeads.map((lead) => (
+                  <option key={lead.id} value={lead.id}>
+                    {lead.assignment_name} -{" "}
+                    {lead.contact_name ||
+                      lead.company_name ||
+                      "No contact/company"}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="proposal_to">Proposal To *</label>
+              <input
+                type="text"
+                id="proposal_to"
+                value={formData.proposal_to}
                 onChange={(e) =>
                   setFormData((prev) => ({
                     ...prev,
-                    order_id: e.target.value,
+                    proposal_to: e.target.value,
                   }))
                 }
                 required
                 disabled={loading}
-                placeholder="Enter Order ID"
+                placeholder="Enter recipient name"
               />
             </div>
-          )}
 
-          <div className={styles.formGroup}>
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              value={formData.description}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  description: e.target.value,
-                }))
-              }
-              disabled={loading}
-              placeholder="Enter proposal description (optional)"
-              rows={4}
-            />
-          </div>
-          <div className={styles.modalActions}>
-            <button
-              type="submit"
-              className={styles.submitButton}
-              disabled={loading}
-            >
-              {loading
-                ? "Saving..."
-                : initialData
-                  ? "Update Proposal"
-                  : "Create Proposal"}
-            </button>
-          </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="amount">Proposal Amount</label>
+              <input
+                type="number"
+                id="amount"
+                value={formData.amount}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, amount: e.target.value }))
+                }
+                disabled={loading}
+                placeholder="Enter proposal amount"
+                min="0"
+                step="0.01"
+              />
+            </div>
 
+            <div className={styles.formGroup}>
+              <label htmlFor="discount">Other Associated Expenses (₹)</label>
+              <input
+                type="number"
+                id="discount"
+                value={formData.discount}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, discount: e.target.value }))
+                }
+                disabled={loading}
+                placeholder="Enter discount amount"
+                min="0"
+                step="0.01"
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="validity_days">Validity (Days)</label>
+              <input
+                type="number"
+                id="validity_days"
+                value={formData.validity_days}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, validity_days: e.target.value }))
+                }
+                disabled={loading || !!initialData}
+                placeholder="Enter validity in days"
+                min="1"
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="proposal_status">Status</label>
+              <select
+                id="proposal_status"
+                value={formData.proposal_status}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    proposal_status: e.target.value as any,
+                  }))
+                }
+                disabled={loading}
+              >
+                <option value="created">Created</option>
+                <option value="hold">Hold</option>
+                <option value="accepted">Accepted</option>
+
+                <option value="drop">Drop</option>
+
+              </select>
+            </div>
+
+            {(formData.proposal_status === 'accepted' || formData.proposal_status === 'partial') && (
+              <div className={styles.formGroup}>
+                <label htmlFor="order_id">Order ID *</label>
+                <input
+                  type="text"
+                  id="order_id"
+                  value={formData.order_id}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      order_id: e.target.value,
+                    }))
+                  }
+                  required
+                  disabled={loading}
+                  placeholder="Enter Order ID"
+                />
+              </div>
+            )}
+
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }))
+                }
+                disabled={loading}
+                placeholder="Enter proposal description (optional)"
+                rows={4}
+              />
+            </div>
+
+            <div className={styles.modalActions}>
+              <button
+                type="submit"
+                className={styles.submitButton}
+                disabled={loading}
+              >
+                {loading
+                  ? "Saving..."
+                  : initialData
+                    ? "Update Proposal"
+                    : "Create Proposal"}
+              </button>
+            </div>
+          </div>
         </form>
 
       </div>
