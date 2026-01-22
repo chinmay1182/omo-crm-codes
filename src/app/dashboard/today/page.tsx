@@ -86,46 +86,8 @@ export default function TodayPage() {
 
   if (loading) {
     return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <Skeleton width={300} height={40} style={{ marginBottom: '10px' }} />
-          <Skeleton width={200} height={24} />
-        </div>
-
-        {/* Summary Cards Skeleton */}
-        <div className={styles.summaryGrid}>
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className={styles.summaryCard}>
-              <Skeleton width={50} height={50} style={{ borderRadius: '12px' }} />
-              <div className={styles.cardContent} style={{ width: '100%', marginLeft: '16px' }}>
-                <Skeleton width={60} height={32} style={{ marginBottom: '8px' }} />
-                <Skeleton width={100} height={20} />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Sections Skeleton */}
-        <div className={styles.contentGrid}>
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className={styles.section}>
-              <div className={styles.sectionHeader}>
-                <Skeleton width={200} height={28} />
-              </div>
-              <div className={styles.sectionContent}>
-                {[1, 2, 3].map((j) => (
-                  <div key={j} className={styles.item}>
-                    <Skeleton width={40} height={40} style={{ borderRadius: '50%', marginRight: '16px' }} />
-                    <div className={styles.itemContent} style={{ width: '100%' }}>
-                      <Skeleton width="60%" height={20} style={{ marginBottom: '8px' }} />
-                      <Skeleton width="90%" height={16} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className={styles.loading}>
+        <div className={styles.spinner}></div>
       </div>
     );
   }

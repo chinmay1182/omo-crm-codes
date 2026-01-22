@@ -82,15 +82,12 @@ export default function LoginForm() {
             <span>OR</span>
           </div>
 
-          <button type="button" className={styles.googleButton}>
-            <img
-              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-              alt="Google"
-              width="20"
-              height="20"
-              className={styles.googleIcon}
-            />
-            <span>Sign in with Google</span>
+          <button
+            type="button"
+            className={styles.googleButton}
+            onClick={() => router.push('/register')}
+          >
+            <span>Register</span>
           </button>
 
           <p className={styles.termsText}>

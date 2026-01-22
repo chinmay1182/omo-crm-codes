@@ -146,19 +146,7 @@
     gap: 8px;
 }
 
-.submitBtn:hover:not(:disabled) {
-    /* Removed hover effect as requested */
-    background-color: #15426d;
-    color: white !important;
-    transform: none;
-    box-shadow: none;
-    opacity: 1;
-}
 
-.submitBtn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
 
 .footer {
     margin-top: 1.5rem;
@@ -173,9 +161,9 @@
 }
 
 .footer a {
-    color: #15426d;
+    color: #11a454;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 300;
     margin-left: 5px;
 }
 

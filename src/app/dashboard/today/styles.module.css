@@ -22,7 +22,31 @@
   margin-top: 8px;
 }
 
-.loading,
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 200px;
+  background-color: white;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #11a454;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .error {
   text-align: center;
   padding: 3rem;
@@ -70,10 +94,13 @@
   font-size: 1.3rem;
   color: white;
 }
+
 /* Leads - soft green */
 .iconLeads {
-  background-color: #e8f5e9; /* light green */
+  background-color: #e8f5e9;
+  /* light green */
 }
+
 .iconLeads i {
   color: #4caf50;
   opacity: 0.5;
@@ -81,8 +108,10 @@
 
 /* Tasks - soft blue */
 .iconTasks {
-  background-color: #e3f2fd; /* light blue */
+  background-color: #e3f2fd;
+  /* light blue */
 }
+
 .iconTasks i {
   color: #2196f3;
   opacity: 0.5;
@@ -90,8 +119,10 @@
 
 /* Meetings - soft orange */
 .iconMeetings {
-  background-color: #fff3e0; /* light orange */
+  background-color: #fff3e0;
+  /* light orange */
 }
+
 .iconMeetings i {
   color: #fb8c00;
   opacity: 0.5;
@@ -99,8 +130,10 @@
 
 /* Emails - soft purple */
 .iconEmails {
-  background-color: #f3e5f5; /* light purple */
+  background-color: #f3e5f5;
+  /* light purple */
 }
+
 .iconEmails i {
   color: #9c27b0;
   opacity: 0.5;

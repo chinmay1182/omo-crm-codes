@@ -388,7 +388,6 @@ const NotesPage = () => {
     return (
       <div className={styles.loadingContainer}>
         <div className={styles.loadingSpinner}></div>
-        <p>Loading your notes...</p>
       </div>
     );
   }

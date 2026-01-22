@@ -1,29 +1,29 @@
 .container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 2rem;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border-radius: 0;
+    font-family: 'Open Sauce One', sans-serif;
 }
 
 .header {
     margin-bottom: 2rem;
-    border-bottom: 1px solid #e2e8f0;
     padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .title {
     font-size: 24px;
-    font-weight: 700;
-    color: #1e293b;
+    font-weight: 300;
+    color: #333;
     margin: 0;
 }
 
 .formGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 1.5rem 2rem;
 }
 
 .fullWidth {
@@ -37,8 +37,8 @@
 .label {
     display: block;
     font-size: 14px;
-    font-weight: 500;
-    color: #475569;
+    font-weight: 300;
+    color: #444;
     margin-bottom: 0.5rem;
 }
 
@@ -46,11 +46,15 @@
 .select,
 .textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
     font-size: 14px;
-    transition: border-color 0.2s;
+    font-family: 'Open Sauce One', sans-serif;
+    font-weight: 300;
+    background: transparent;
+    transition: all 0.2s;
     box-sizing: border-box;
 }
 
@@ -58,46 +62,77 @@
 .select:focus,
 .textarea:focus {
     outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-bottom-color: #11a454;
+    box-shadow: none;
 }
 
 .textarea {
     min-height: 120px;
     resize: vertical;
+    border: 1px solid #e0e0e0;
+    padding: 0.8rem;
+}
+
+.textarea:focus {
+    border-color: #11a454;
 }
 
 .buttonGroup {
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
-    margin-top: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
 }
 
 .button {
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 300;
     cursor: pointer;
     border: none;
+    font-family: 'Open Sauce One', sans-serif;
     transition: all 0.2s;
 }
 
 .primaryButton {
-    background: #15426d;
+    background: #11a454;
     color: white;
 }
 
 .primaryButton:hover {
-    background: #0f2f4a;
+    background: #0e8a46;
 }
 
 .secondaryButton {
-    background: #f1f5f9;
-    color: #475569;
+    background: #f5f5f5;
+    color: #333;
 }
 
 .secondaryButton:hover {
-    background: #e2e8f0;
+    background: #e0e0e0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .buttonGroup {
+        flex-direction: column-reverse;
+    }
+
+    .button {
+        width: 100%;
+    }
 }

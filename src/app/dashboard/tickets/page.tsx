@@ -494,7 +494,7 @@ export default function TicketsPage() {
                     <div className={styles.tableHeader}>
                         <h2 className={styles.tableTitle}>Recent Tickets</h2>
                         <div className={styles.filters}>
-                            <div style={{ position: 'relative' }}>
+                            <div className={styles.searchWrapper} style={{ position: 'relative' }}>
                                 <input
                                     type="text"
                                     placeholder="Search tickets or FAQs..."
@@ -567,23 +567,15 @@ export default function TicketsPage() {
                                 ) : (
                                     accessibleTickets.map((ticket) => (
                                         <tr key={ticket.id}>
-                                            <td>
+                                            <td data-label="Tier ID">
                                                 <Link href={`/dashboard/tickets/${ticket.id}`} className={styles.link}>
                                                     {ticket.ticket_number || `#${ticket.id.substring(0, 6)}`}
                                                 </Link>
                                             </td>
-                                            <td>
+                                            <td data-label="Subject">
                                                 {ticket.subject}
-                                                {/* Notes Indicator */}
-                                                <i
-                                                    className={`fa-solid fa-sticky-note`}
-                                                    style={{
-                                                        marginLeft: '8px',
-                                                        color: ticket.internal_notes ? '#eab308' : '#cbd5e1', // Yellow if notes exist, gray if empty
-                                                        cursor: hasPermission('tickets', 'edit') ? 'pointer' : 'default',
-                                                        fontSize: '14px'
-                                                    }}
-                                                    title={ticket.internal_notes || "Add Note"}
+                                                {/* Notes Indicator Pill */}
+                                                <button
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         e.stopPropagation();
@@ -591,23 +583,67 @@ export default function TicketsPage() {
                                                             handleAddNote(ticket.id, ticket.internal_notes);
                                                         }
                                                     }}
-                                                ></i>
+                                                    style={{
+                                                        background: ticket.internal_notes ? '#fef9c3' : '#f1f5f9',
+                                                        color: ticket.internal_notes ? '#854d0e' : '#475569',
+                                                        border: '1px solid',
+                                                        borderColor: ticket.internal_notes ? '#fde047' : '#e2e8f0',
+                                                        padding: '4px 8px',
+                                                        borderRadius: '20px',
+                                                        fontSize: '11px',
+                                                        cursor: hasPermission('tickets', 'edit') ? 'pointer' : 'default',
+                                                        display: 'inline-flex',
+                                                        alignItems: 'center',
+                                                        gap: '4px',
+                                                        marginLeft: '8px',
+                                                        fontWeight: 500
+                                                    }}
+                                                    title={ticket.internal_notes || "Add Note"}
+                                                >
+                                                    {ticket.internal_notes ? (
+                                                        <>
+                                                            <i className="fa-solid fa-check" style={{ fontSize: '10px' }}></i>
+                                                            Note Added
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <i className="fa-regular fa-plus" style={{ fontSize: '10px' }}></i>
+                                                            Add Note
+                                                        </>
+                                                    )}
+                                                </button>
                                             </td>
-                                            <td>
+                                            <td data-label="Contact">
                                                 {ticket.contact_name || '-'}
-                                                {/* Flag Indicator */}
+                                                {/* Flag Indicator Pills */}
                                                 {ticket.is_red_flag ? (
-                                                    <i
-                                                        className="fa-solid fa-flag"
-                                                        style={{ color: '#dc2626', marginLeft: '6px', fontSize: '14px' }}
-                                                        title="🔴 Repeat Customer"
-                                                    ></i>
+                                                    <span style={{
+                                                        backgroundColor: '#fee2e2',
+                                                        color: '#991b1b',
+                                                        padding: '2px 8px',
+                                                        borderRadius: '12px',
+                                                        fontSize: '11px',
+                                                        fontWeight: 500,
+                                                        display: 'inline-block',
+                                                        marginLeft: '6px',
+                                                        border: '1px solid #fecaca'
+                                                    }}>
+                                                        Repeat
+                                                    </span>
                                                 ) : (
-                                                    <i
-                                                        className="fa-solid fa-flag"
-                                                        style={{ color: '#16a34a', marginLeft: '6px', fontSize: '14px' }}
-                                                        title="🟢 New Customer"
-                                                    ></i>
+                                                    <span style={{
+                                                        backgroundColor: '#dcfce7',
+                                                        color: '#166534',
+                                                        padding: '2px 8px',
+                                                        borderRadius: '12px',
+                                                        fontSize: '11px',
+                                                        fontWeight: 500,
+                                                        display: 'inline-block',
+                                                        marginLeft: '6px',
+                                                        border: '1px solid #bbf7d0'
+                                                    }}>
+                                                        New
+                                                    </span>
                                                 )}
                                                 {getRepeatCount(ticket) > 1 && (
                                                     <span
@@ -618,8 +654,8 @@ export default function TicketsPage() {
                                                     </span>
                                                 )}
                                             </td>
-                                            <td>{ticket.category}</td>
-                                            <td>
+                                            <td data-label="Category">{ticket.category}</td>
+                                            <td data-label="Priority">
                                                 <select
                                                     className={styles.select}
                                                     value={ticket.priority}
@@ -637,7 +673,7 @@ export default function TicketsPage() {
                                                     <option value="Critical">Critical</option>
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td data-label="Status">
                                                 <select
                                                     className={styles.select}
                                                     value={ticket.status}
@@ -652,7 +688,7 @@ export default function TicketsPage() {
                                                     <option value="Deferred">Deferred</option>
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td data-label="SLA">
                                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                                     {(() => {
                                                         const sla = calculateSLA(ticket);
@@ -669,7 +705,7 @@ export default function TicketsPage() {
                                                     })()}
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td data-label="Assigned To">
                                                 <select
                                                     className={styles.select}
                                                     value={ticket.assigned_to || ''}
@@ -685,8 +721,8 @@ export default function TicketsPage() {
                                                     ))}
                                                 </select>
                                             </td>
-                                            <td>{new Date(ticket.created_at).toLocaleDateString()}</td>
-                                            <td>
+                                            <td data-label="Created">{new Date(ticket.created_at).toLocaleDateString()}</td>
+                                            <td data-label="Last Updated">
                                                 {ticket.updated_at ? (
                                                     <div style={{ fontSize: '11px' }}>
                                                         <div>{new Date(ticket.updated_at).toLocaleDateString()}</div>
@@ -694,7 +730,7 @@ export default function TicketsPage() {
                                                     </div>
                                                 ) : '-'}
                                             </td>
-                                            <td>
+                                            <td data-label="Action">
                                                 <div style={{ display: 'flex', gap: '5px' }}>
                                                     <button
                                                         className={styles.actionButton}

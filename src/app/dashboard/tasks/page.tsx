@@ -191,47 +191,8 @@ export default function TasksPage() {
 
   if (loading) {
     return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <div>
-            <Skeleton width={200} height={32} style={{ marginBottom: '8px' }} />
-            <Skeleton width={400} height={20} />
-          </div>
-        </div>
-
-        {/* Mock Filters */}
-        <div className={styles.filters} style={{ marginBottom: '24px' }}>
-          <Skeleton width={300} height={38} />
-          <Skeleton width={200} height={38} />
-          <Skeleton width={150} height={38} />
-        </div>
-
-        <div className={styles.taskGrid}>
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className={styles.taskCard} style={{ borderLeft: '4px solid #e0e0e0' }}>
-              <div className={styles.taskHeader} style={{ marginBottom: '10px', display: 'flex', justifyContent: 'space-between' }}>
-                <Skeleton width={180} height={24} />
-                <Skeleton width={60} height={20} />
-              </div>
-              <Skeleton width="90%" height={16} style={{ marginBottom: '4px' }} />
-              <Skeleton width="60%" height={16} style={{ marginBottom: '16px' }} />
-              <div className={styles.taskMeta} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
-                <Skeleton width={80} height={16} />
-                <Skeleton width={100} height={16} />
-                <Skeleton width={120} height={16} />
-              </div>
-              <div className={styles.taskFooter} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div className={styles.taskBadges} style={{ display: 'flex', gap: '4px' }}>
-                  <Skeleton width={80} height={24} style={{ borderRadius: '12px' }} />
-                </div>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <Skeleton width={60} height={32} />
-                  <Skeleton width={60} height={32} />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className={styles.loading}>
+        <div className={styles.spinner}></div>
       </div>
     );
   }

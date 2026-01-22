@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import styles from '../styles.module.css';
+import scrollStyles from '../scroll.module.css';
 import modalStyles from './modal.module.css';
 import toast from 'react-hot-toast';
 
@@ -114,7 +116,7 @@ export default function TicketFAQsPage() {
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={{ maxWidth: '700px', margin: '0 auto', width: '100%' }}>
             <header className={styles.header}>
                 <h1>Ticket FAQs</h1>
                 <div style={{ display: 'flex', gap: '10px' }}>
@@ -126,7 +128,8 @@ export default function TicketFAQsPage() {
                     </button>
                     <button
                         onClick={openModal}
-                        className={styles.createButton}
+                        className={styles.actionButton}
+                        style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#11a454', color: 'white' }}
                     >
                         <i className="fa-regular fa-plus"></i>
                         Add FAQ
@@ -199,72 +202,91 @@ export default function TicketFAQsPage() {
                 </div>
             )}
 
-            <div className={styles.tableContainer}>
-                <h2 className={styles.tableTitle}>All FAQs</h2>
-                {loading ? (
-                    <p style={{ padding: '20px' }}>Loading...</p>
-                ) : faqs.length === 0 ? (
-                    <p style={{ padding: '20px', color: '#94a3b8' }}>No FAQs yet. Create one to get started!</p>
-                ) : (
-                    <div style={{ padding: '20px' }}>
-                        {faqs.map((faq) => (
-                            <div
-                                key={faq.id}
-                                style={{
-                                    border: '1px solid #e2e8f0',
-                                    borderRadius: '8px',
-                                    padding: '15px',
-                                    marginBottom: '15px',
-                                    background: '#fff'
-                                }}
-                            >
-                                {faq.category && (
-                                    <span
-                                        style={{
-                                            display: 'inline-block',
-                                            background: '#dbeafe',
-                                            color: '#1e40af',
-                                            padding: '2px 8px',
-                                            borderRadius: '4px',
-                                            fontSize: '12px',
-                                            marginBottom: '8px'
-                                        }}
-                                    >
-                                        {faq.category}
-                                    </span>
-                                )}
-                                <h3 style={{ margin: '8px 0', fontSize: '16px', fontWeight: 600 }}>
-                                    {faq.question}
-                                </h3>
-                                <p style={{ margin: '8px 0', color: '#64748b', lineHeight: '1.6' }}>
-                                    {faq.answer}
-                                </p>
-                                <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
-                                    <button
-                                        onClick={() => handleEdit(faq)}
-                                        className={styles.actionButton}
-                                        style={{ fontSize: '12px', padding: '4px 12px' }}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(faq.id)}
-                                        className={styles.actionButton}
-                                        style={{
-                                            fontSize: '12px',
-                                            padding: '4px 12px',
-                                            background: '#dc2626',
-                                            borderColor: '#dc2626'
-                                        }}
-                                    >
-                                        Delete
-                                    </button>
+            <div style={{ flex: 1, overflowY: 'auto', padding: '2rem' }} className={scrollStyles.noScrollbar}>
+                <div className={styles.tableContainer}>
+                    <h2 className={styles.tableTitle}>All FAQs</h2>
+                    {loading ? (
+                        <div className={styles.loadingContainer}>
+                            <div className={styles.loadingSpinner}></div>
+                        </div>
+                    ) : faqs.length === 0 ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>
+                            <Image
+                                src="/pngegg.png"
+                                alt="No FAQs"
+                                width={120}
+                                height={120}
+                                style={{ marginBottom: '16px' }}
+                            />
+                            <p style={{ fontSize: '20px', fontWeight: '300', marginBottom: '10px', color: '#666' }}>No FAQs Found</p>
+                            <p style={{ fontSize: '16px', marginTop: '4px', fontWeight: '300', color: '#666' }}>Create one to get started!</p>
+                        </div>
+                    ) : (
+                        <div style={{ padding: '20px' }}>
+                            {faqs.map((faq) => (
+                                <div
+                                    key={faq.id}
+                                    style={{
+                                        border: '1px solid #e2e8f0',
+                                        borderRadius: '8px',
+                                        padding: '15px',
+                                        marginBottom: '15px',
+                                        background: '#fff'
+                                    }}
+                                >
+                                    {faq.category && (
+                                        <span
+                                            style={{
+                                                display: 'inline-block',
+                                                background: '#dbeafe',
+                                                color: '#1e40af',
+                                                padding: '2px 8px',
+                                                borderRadius: '4px',
+                                                fontSize: '12px',
+                                                marginBottom: '8px'
+                                            }}
+                                        >
+                                            {faq.category}
+                                        </span>
+                                    )}
+                                    <h3 style={{ margin: '8px 0', fontSize: '16px', fontWeight: 600 }}>
+                                        {faq.question}
+                                    </h3>
+                                    <p style={{ margin: '8px 0', color: '#64748b', lineHeight: '1.6' }}>
+                                        {faq.answer}
+                                    </p>
+                                    <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+                                        <button
+                                            onClick={() => handleEdit(faq)}
+                                            className={styles.actionButton}
+                                            style={{ fontSize: '12px', padding: '4px 12px' }}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(faq.id)}
+                                            className={styles.deleteButton}
+                                            style={{ fontSize: '12px', padding: '4px 12px' }}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
+
+            {/* FAB for Create FAQ */}
+            <button
+                onClick={openModal}
+                className={styles.fab}
+                title="Add FAQ"
+                style={{ zIndex: 9999 }}
+            >
+                <i className="fa-light fa-plus"></i>
+            </button>
         </div>
     );
 }

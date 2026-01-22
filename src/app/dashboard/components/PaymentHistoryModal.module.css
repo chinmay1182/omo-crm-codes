@@ -1,0 +1,285 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+}
+
+.modal {
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modalTitle {
+    margin: 0;
+    color: #333;
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.closeButton {
+    background: #f5f5f5;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.closeButton:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+/* Tabs Styling - Matching Project Top Bar */
+.tabsContainer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 1.5rem;
+    height: 50px;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+}
+
+.tabButton {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 300;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0 4px;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.tabButton:hover {
+    color: #334155;
+}
+
+.activeTab {
+    color: #11a454;
+    border-bottom-color: #11a454;
+}
+
+.modalBody {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.paymentItem {
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.2s;
+}
+
+.paymentItem:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.itemLeft {
+    display: flex;
+    flex-direction: column;
+}
+
+.itemTitle {
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.itemDate {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.itemId {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+.itemRight {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.amount {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.amountRefund {
+    color: #dc2626;
+}
+
+.statusPill {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+.statusSuccess {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.statusPending {
+    background-color: #fef3c7;
+    color: #854d0e;
+}
+
+.statusFailed {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.viewReceiptBtn {
+    margin-top: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.viewReceiptBtn:hover {
+    background: #f8fafc;
+    color: #334155;
+    border-color: #cbd5e1;
+}
+
+.emptyState {
+    color: #64748b;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Receipt Preview Styles */
+.receiptPreviewContainer {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.receiptHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed #cbd5e1;
+}
+
+.receiptTitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.receiptLogo {
+    font-size: 24px;
+    color: #11a454;
+}
+
+.receiptRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.receiptLabel {
+    color: #64748b;
+}
+
+.receiptValue {
+    color: #1e293b;
+    font-weight: 500;
+    text-align: right;
+}
+
+.receiptTotal {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid #1e293b;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    color: #1e293b;
+}
+
+.backButton {
+    margin-bottom: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.backButton:hover {
+    color: #334155;
+}

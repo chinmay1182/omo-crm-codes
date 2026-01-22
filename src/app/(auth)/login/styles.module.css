@@ -138,20 +138,7 @@
     box-shadow: none;
 }
 
-.googleButton:hover {
-    background-color: #ffffff !important;
-    color: #1f1f1f !important;
-    border-color: #e1e5e9 !important;
-    box-shadow: none;
-}
 
-.googleButton:hover span {
-    color: #1f1f1f !important;
-}
-
-.googleIcon {
-    margin-right: 1px;
-}
 
 /* Divider */
 .divider {

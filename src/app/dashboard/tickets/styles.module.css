@@ -82,7 +82,7 @@
 .contentArea {
   flex: 1;
   overflow-y: auto;
-  padding: 24px;
+  padding: 1rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -171,7 +171,6 @@
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: none;
-  margin-bottom: 1.5rem;
 }
 
 .tableHeader {
@@ -436,4 +435,122 @@
 
 .createButton {
   display: none;
+}
+
+/* ===========================
+   MOBILE RESPONSIVENESS
+   =========================== */
+@media (max-width: 768px) {
+  .container {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Top Nav */
+  .topNav {
+    padding: 0 12px;
+    overflow-x: auto;
+  }
+
+  .navTabsContainer {
+    gap: 12px;
+  }
+
+  .navTab {
+    font-size: 14px;
+    white-space: nowrap;
+    padding: 0 2px;
+  }
+
+  /* Hide text on small screens, show only icon for action buttons */
+  .topActionButton span {
+    display: none;
+  }
+
+  .topActionButton {
+    padding: 4px;
+  }
+
+  .topActions {
+    gap: 8px;
+  }
+
+  /* Stats Grid */
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .statCard {
+    padding: 1rem;
+  }
+
+  .statValue {
+    font-size: 2rem;
+  }
+
+  /* Filters */
+  .tableHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .filters {
+    gap: 12px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .searchWrapper {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .searchWrapper input {
+    width: 100%;
+  }
+
+  .select {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .actionButton {
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Table Mobile adjustments - Reverted to scroll */
+  .contentArea {
+    padding: 12px;
+  }
+
+  .tableContainer {
+    padding: 12px;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: none;
+  }
+
+
+  /* FAB */
+  .fab {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  .actionButton,
+  .deleteButton {
+    padding: 4px 10px;
+  }
 }
