@@ -2,59 +2,26 @@
 
 import { useAuth } from '@/app/context/AuthContext';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Spinner from '@/app/components/Spinner/Spinner';
 import styles from './styles.module.css';
 import Image from 'next/image';
 
 import { getPermissionDisplayName, getServiceDisplayName } from '@/app/lib/permissionUtils';
+import { determineAgentType } from '@/app/lib/agentUtils';
 import AccessDeniedTemplate from '@/app/components/ui/AccessDeniedTemplate';
 
 export default function AgentInfo() {
-  const { user, loading } = useAuth();
+  const { user, loading, refreshUser } = useAuth();
+  const router = useRouter();
   const [agentType, setAgentType] = useState<string>('');
   const [permissionsLoading, setPermissionsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-
-  // Determine agent type based on permissions
-  const determineAgentType = (permissions: any) => {
-    if (!permissions || typeof permissions !== 'object') {
-      return 'REGULAR AGENT';
-    }
-
-    const whatsapp = permissions.whatsapp || [];
-    const voip = permissions.voip || [];
-    const admin = permissions.admin || [];
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
-    // Check for Administrator (has admin permissions)
-    if (admin.length > 0 || admin.includes('manage_agents')) {
-      return 'Administrator';
-    }
 
-    // Check for Super Agent (has comprehensive WhatsApp permissions but NO admin permissions)
-    if (whatsapp.includes('view_all') && whatsapp.includes('reply_all')) {
-      return 'Super Agent';
-    }
-
-    // Check for Senior Agent (has transfer capabilities and broader access)
-    if (voip.includes('view_all_calls') && voip.includes('transfer_calls')) {
-      return 'Senior Agent';
-    }
-
-    // Check for Regular Agent (basic permissions)
-    if ((whatsapp.includes('view_assigned') && whatsapp.includes('reply_assigned')) ||
-      voip.includes('make_calls')) {
-      return 'Regular Agent';
-    }
-
-    // Check for View Only Agent
-    if (whatsapp.includes('view_assigned') && !whatsapp.includes('reply_assigned')) {
-      return 'View only Agent';
-    }
-
-    return 'Regular Agent';
-  };
-
+  // Function to refresh permissions
   // Function to refresh permissions
   const refreshPermissions = async () => {
     if (!user || user.type !== 'agent') return;
@@ -69,9 +36,7 @@ export default function AgentInfo() {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        // Update the user data in the context
-        window.location.reload(); // Simple refresh to update the context
+        if (refreshUser) await refreshUser();
       } else {
         console.error('Failed to refresh permissions');
         alert('Failed to refresh permissions. Please try again.');
@@ -85,12 +50,12 @@ export default function AgentInfo() {
   };
 
   useEffect(() => {
-    if (user && user.type === 'agent') {
+    if (!loading && user && user.type === 'agent') {
       setPermissionsLoading(true);
 
-      // Automatically refresh permissions when page loads
       const refreshAndDetermineType = async () => {
         try {
+          // Call refresh endpoint to update backend session
           const response = await fetch('/api/agent-auth/refresh-permissions', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -100,17 +65,16 @@ export default function AgentInfo() {
 
           if (response.ok) {
             const data = await response.json();
-            // Use the refreshed permissions
+            // Data return updated user/permissions
+            // Use local determination or response data
             const type = determineAgentType(data.user.permissions);
             setAgentType(type);
           } else {
-            // Fallback to current permissions if refresh fails
             const type = determineAgentType(user.permissions);
             setAgentType(type);
           }
         } catch (error) {
           console.error('Error refreshing permissions on load:', error);
-          // Fallback to current permissions
           const type = determineAgentType(user.permissions);
           setAgentType(type);
         } finally {
@@ -118,15 +82,14 @@ export default function AgentInfo() {
         }
       };
 
-      const timer = setTimeout(refreshAndDetermineType, 500);
-      return () => clearTimeout(timer);
+      refreshAndDetermineType();
     }
-  }, [user]);
+  }, [loading, user?.id]);
 
   if (loading) {
     return (
       <div className={styles.loadingContainer}>
-        <Spinner size="large" text="Loading agent information..." />
+        <div className={styles.spinner}></div>
       </div>
     );
   }
@@ -140,15 +103,21 @@ export default function AgentInfo() {
   if (permissionsLoading) {
     return (
       <div className={styles.loadingContainer}>
-        <Spinner size="large" text="Refreshing permissions..." />
+        <div className={styles.spinner}></div>
       </div>
     );
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${sidebarOpen ? styles.showSidebar : ''}`}>
       {/* Sidebar - User Info (30%) */}
       <div className={styles.sidebar}>
+        <button
+          className={styles.mobileCloseBtn}
+          onClick={() => setSidebarOpen(false)}
+        >
+          <i className="fa-light fa-xmark"></i>
+        </button>
         <div className={styles.profileHeader}>
           {user.profile_image ? (
             <div className={styles.avatarCircle} >
@@ -168,7 +137,7 @@ export default function AgentInfo() {
           )}
 
           <h2 className={styles.profileName}>
-            {(user.full_name || user.username || '').toLowerCase()}
+            {(user.full_name || user.username || '')}
           </h2>
           <span className={styles.profileEmail}>{user.email || 'No email provided'}</span>
         </div>
@@ -201,7 +170,7 @@ export default function AgentInfo() {
 
           {agentType === 'Administrator' && (
             <button
-              onClick={() => window.location.href = '/dashboard/admin/agent-permissions'}
+              onClick={() => router.push('/dashboard/admin/agent-permissions')}
               className={styles.manageButton}
             >
               Manage All Agents
@@ -212,21 +181,29 @@ export default function AgentInfo() {
 
       {/* Main Content - Permissions (70%) */}
       <div className={styles.mainContent}>
-        <h3 className={styles.sectionTitle}>
-          Assigned Permissions
-        </h3>
+        <div className={styles.contentHeaderMobile}>
+          <button
+            className={styles.mobileMenuBtn}
+            onClick={() => setSidebarOpen(true)}
+          >
+            <i className="fa-light fa-bars"></i>
+          </button>
+          <h3 className={styles.sectionTitle}>
+            Assigned Permissions
+          </h3>
+        </div>
 
         {user.permissions && Object.keys(user.permissions).length > 0 ? (
           <div className={styles.permissionsGrid}>
             {Object.entries(user.permissions).map(([service, perms]) => (
               <div key={service} className={styles.serviceCard}>
                 <div className={styles.serviceHeader}>
-                  <h4 className={styles.serviceName}>{getServiceDisplayName(service).toLowerCase()}</h4>
+                  <h4 className={styles.serviceName}>{getServiceDisplayName(service)}</h4>
                 </div>
                 <div className={styles.permissionList}>
                   {Array.isArray(perms) && perms.map((permission, index) => (
                     <span key={index} className={styles.permissionTag}>
-                      {getPermissionDisplayName(permission).toLowerCase()}
+                      {getPermissionDisplayName(permission)}
                     </span>
                   ))}
                 </div>

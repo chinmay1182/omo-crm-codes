@@ -743,7 +743,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   {/* Support Contact Info */}
                   <div className={styles.supportInfo}>
                     <div className={styles.supportLabel}>Call Support</div>
-                    <div className={styles.supportNumber}>+1 (555) 123-4567</div>
+                    <div className={styles.supportNumber}>+91 98342 25937</div>
                   </div>
 
                   <Notifications className={styles.notificationsButton} />

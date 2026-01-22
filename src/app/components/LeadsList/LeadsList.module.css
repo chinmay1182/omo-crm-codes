@@ -403,7 +403,7 @@
   .searchWrapper {
     width: 100%;
     flex: 0 0 100%;
-    margin: 12px 0 16px 0;
+    margin: 12px 0 0 0;
     /* More spacing top/bottom */
     order: 3;
     box-sizing: border-box;

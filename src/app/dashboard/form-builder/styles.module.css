@@ -491,3 +491,112 @@
 .createButton {
   display: none;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .topNav {
+    padding: 12px;
+    height: auto;
+    min-height: 48px;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .contentArea {
+    padding: 16px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr 1fr;
+    /* 2 cols on mobile */
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .statCard {
+    padding: 12px;
+  }
+
+  .statTitle {
+    font-size: 13px;
+  }
+
+  .statValue {
+    font-size: 1.8rem;
+  }
+
+  .tableContainer {
+    padding: 1rem;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .tableHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .formsGrid {
+    grid-template-columns: 1fr;
+    /* Single col forms */
+    gap: 16px;
+  }
+
+  .fab {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Mobile Modal */
+  .modalOverlay {
+    align-items: flex-end;
+    /* Bottom sheet */
+  }
+
+  .modalContent {
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 85vh;
+    margin: 0;
+    padding-bottom: 20px;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .modalHeader {
+    padding: 16px;
+  }
+
+  .modalBody {
+    padding: 16px;
+  }
+
+  .modalFooter {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .saveBtn,
+  .cancelBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+    /* Stack stats on very small screens */
+  }
+}

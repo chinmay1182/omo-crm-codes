@@ -508,10 +508,23 @@ export default function AgentsPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h4>Team Oversight</h4>
-        <p>Manage agents, monitor performance, and assign roles</p>
+      <div className={styles.topNav}>
+        <div className={styles.navTabsContainer}>
+          <button className={`${styles.navTab} ${styles.active}`}>
+            Team Oversight
+          </button>
+          <button className={styles.navTab}>
+            Roles & Permissions
+          </button>
+        </div>
+        <div className={styles.topActions}>
+          {/* Placeholder for actions if needed */}
+        </div>
       </div>
+
+      {/* Description below nav or inside? LeadsList has no description text usually. 
+          I'll hide the old description to match standard. 
+      */}
 
       {/* Agents Table */}
       <div className={styles.tableContainer}>
@@ -530,9 +543,9 @@ export default function AgentsPage() {
           <tbody>
             {agents.map((agent) => (
               <tr key={agent.id}>
-                <td>{agent.username}</td>
-                <td>{agent.full_name || "-"}</td>
-                <td>
+                <td data-label="Username">{agent.username}</td>
+                <td data-label="Full Name">{agent.full_name || "-"}</td>
+                <td data-label="Email">
                   <div className={styles.maskedField}>
                     <span>
                       {showUnmasked[`${agent.id}-email`]
@@ -560,8 +573,8 @@ export default function AgentsPage() {
                   </div>
                 </td>
 
-                <td>{agent.roles || "No roles"}</td>
-                <td>
+                <td data-label="Roles">{agent.roles || "No roles"}</td>
+                <td data-label="Status">
                   <select
                     value={agent.status}
                     onChange={(e) =>
@@ -574,12 +587,12 @@ export default function AgentsPage() {
                     <option value="suspended">Suspended</option>
                   </select>
                 </td>
-                <td>
+                <td data-label="Last Login">
                   {agent.last_login
                     ? new Date(agent.last_login).toLocaleString()
                     : "Never"}
                 </td>
-                <td>
+                <td data-label="Actions">
                   <div className={styles.actionButtons}>
                     <button
                       className={styles.editButton}

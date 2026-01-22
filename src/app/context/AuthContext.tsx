@@ -9,6 +9,7 @@ type AuthContextType = {
   loading: boolean;
   login: (email: string, password: string, userType?: 'user' | 'agent') => Promise<void>;
   logout: () => void;
+  refreshUser: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -16,6 +17,7 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [refreshKey, setRefreshKey] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -75,7 +77,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     }
     loadUser();
-  }, []);
+  }, [refreshKey]);
+
+  const refreshUser = async () => {
+    setLoading(true);
+    setRefreshKey(prev => prev + 1);
+  };
 
   // Enhanced login with navigation protection
   const login = async (email: string, password: string, userType: 'user' | 'agent' = 'user') => {
@@ -147,7 +154,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );

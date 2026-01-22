@@ -266,146 +266,166 @@
   height: 100vh;
   gap: 16px;
   color: #64748b;
+  width: 100%;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #11a454;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Tablet Layout */
+@media (max-width: 1100px) {
+  .permissionsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ===========================
    AGENT INFO – MOBILE LAYOUT
    Matches Appointments UX
    =========================== */
+/* Default Hidden Elements */
+.contentHeaderMobile,
+.mobileMenuBtn,
+.mobileCloseBtn {
+  display: none;
+}
+
+/* ===========================
+   AGENT INFO – MOBILE LAYOUT
+   Toggle Sidebar Design
+   =========================== */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
-    height: 100vh;
+    position: relative;
+    height: calc(100vh - 80px);
+    /* Adjust for header */
     overflow: hidden;
+    flex-direction: row;
+    /* Keep row for desktop-like structure but hide sidebar */
   }
 
-  /* Sidebar becomes top profile card */
-  .sidebar {
-    width: 100%;
-    min-width: unset;
-    max-width: unset;
-    padding: 16px;
-    border-right: none;
-    border-bottom: 1px solid #e5e7eb;
-    overflow: visible;
-  }
-
-  .profileHeader {
-    margin-bottom: 20px;
-  }
-
-  .avatarCircle {
-    width: 56px;
-    height: 56px;
-    font-size: 24px;
-    margin-bottom: 12px;
-  }
-
-  .profileName {
-    font-size: 18px;
-  }
-
-  .profileEmail {
-    font-size: 13px;
-  }
-
-  /* Info groups become compact cards */
-  .infoGroup {
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-  }
-
-  .label {
-    font-size: 12px;
-  }
-
-  .value {
-    font-size: 14px;
-  }
-
-  .agentTypeBadge {
-    font-size: 12px;
-    padding: 3px 10px;
-  }
-
-  /* Action buttons – full width */
-  .actionButtons {
-    gap: 10px;
-  }
-
-  .refreshButton,
-  .manageButton {
-    width: 100%;
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  /* Main content */
+  /* Main Content - Full Width */
   .mainContent {
+    flex: 1;
+    width: 100%;
     padding: 16px;
     overflow-y: auto;
   }
 
-  .sectionTitle {
-    font-size: 18px;
-    margin-bottom: 16px;
+  .contentHeaderMobile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
   }
 
-  /* Permissions – single column like task cards */
+  .mobileMenuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    background: white;
+    color: #334155;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .sectionTitle {
+    margin-bottom: 0;
+    /* Handled by header */
+    font-size: 18px;
+  }
+
+  /* Sidebar - Off-Canvas */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    max-width: 350px;
+    height: 100%;
+    z-index: 1200;
+    /* Above everything */
+    background: white;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: none;
+    padding-top: 60px;
+    /* Space for close button */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Show Sidebar State */
+  .container.showSidebar .sidebar {
+    left: 0;
+  }
+
+  /* Open Backdrop */
+  .container.showSidebar::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1100;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.3s;
+  }
+
+  /* Mobile Close Button */
+  .mobileCloseBtn {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #475569;
+    cursor: pointer;
+  }
+
+  /* Adjustments inside Sidebar */
+  .profileHeader {
+    margin-top: 0;
+  }
+
+  /* Grid Adjustments */
   .permissionsGrid {
     grid-template-columns: 1fr;
     gap: 16px;
     padding-bottom: 80px;
   }
 
-  .serviceCard {
-    border-radius: 14px;
-    padding: 16px;
-  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
 
-  .serviceHeader {
-    gap: 8px;
-  }
-
-  .serviceIcon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .serviceName {
-    font-size: 15px;
-  }
-
-  .permissionList {
-    gap: 6px;
-  }
-
-  .permissionTag {
-    font-size: 12px;
-    padding: 4px 8px;
-  }
-
-  .noPermissions {
-    padding: 24px;
-    font-size: 14px;
-  }
-}
-
-/* Extra small devices */
-@media (max-width: 480px) {
-  .profileName {
-    font-size: 16px;
-  }
-
-  .sectionTitle {
-    font-size: 16px;
-  }
-
-  .serviceCard {
-    padding: 14px;
-  }
-
-  .permissionTag {
-    font-size: 11px;
+    to {
+      opacity: 1;
+    }
   }
 }

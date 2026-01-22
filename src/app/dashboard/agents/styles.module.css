@@ -1,149 +1,145 @@
+/* Main Container - Split Layout like Agent Info */
 .container {
-  padding: 1.5rem;
-  margin: 0 auto;
-  max-width: 1200px;
+  display: flex;
+  height: calc(100vh - 80px);
+  /* Adjust for header */
+  background-color: #f8fafc;
+  font-family: 'Open Sauce One', sans-serif;
+  overflow: hidden;
 }
 
-.header {
+/* Sidebar (Left) */
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  background-color: white;
+  border-right: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  padding: 24px;
+  overflow-y: auto;
 }
 
-.header h4 {
-  font-size: 1.3rem;
-  margin: 0;
+.sidebarHeader {
+  margin-bottom: 24px;
 }
 
-.header p {
-  font-size: 15px;
-  margin-top: 8px;
+.sidebarTitle {
+  font-size: 18px;
+  font-weight: 400;
+  /* Regular */
+  color: #1e293b;
+  margin: 0 0 8px 0;
 }
 
-.primaryButton {
-  background-color: #15426d;
-  color: white;
-  border: none;
-  padding: 0.55rem 1.3rem;
-  border-radius: 5px;
-  font-size: 15px;
-  transition: background-color 0.3s ease;
+.sidebarSubtitle {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 300;
+  line-height: 1.4;
 }
 
-.primaryButton:hover:not(:disabled) {
-  background-color: #12385a;
+.sidebarSection {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
 }
 
-.primaryButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.sidebarSection:last-child {
+  border-bottom: none;
 }
 
-.tableContainer {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.sectionLabel {
+  display: block;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Main Content (Right) */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  background-color: #f8fafc;
+  position: relative;
+}
+
+/* Top Nav inside Main Content */
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.navTabsContainer {
+  display: flex;
+  gap: 24px;
+}
+
+.navTab {
+  font-size: 14px;
+  color: #64748b;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 300;
+}
+
+.navTab.active {
+  color: #11a454;
+  border-bottom-color: #11a454;
+  font-weight: 400;
+}
+
+/* Table Area */
+.tableContainer {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-}
-
-.table th,
-.table td {
-  padding: 0.75rem;
-  text-align: left;
-  font-size: 15px;
-  border-bottom: 1px solid #eee;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .table th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-  color: #333;
+  text-align: left;
+  padding: 16px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+  position: sticky;
+  top: 0;
 }
 
-.table tbody tr:hover {
-  background-color: #f8f9fa;
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 300;
 }
 
-.statusSelect {
-  padding: 0.25rem 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-
-.statusSelect.active {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.statusSelect.inactive {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-.statusSelect.suspended {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.actionButtons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.editButton,
-.suspendButton,
-.resetButton,
-.deleteButton {
-  padding: 0.25rem 0.75rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-}
-
-.editButton {
-  background-color: #007bff;
-  color: white;
-}
-
-.editButton:hover {
-  background-color: #0056b3;
-}
-
-.suspendButton {
-  background-color: #ffc107;
-  color: #212529;
-}
-
-.suspendButton:hover {
-  background-color: #e0a800;
-}
-
-.deleteButton {
-  background-color: #dc3545;
-  color: white;
-}
-
-.deleteButton:hover {
-  background-color: #c82333;
-}
-
-.resetButton {
-  background-color: #17a2b8;
-  color: white;
-}
-
-.resetButton:hover {
-  background-color: #138496;
-}
-
+/* MODAL STYLES - Matching ServiceModal */
 .modal {
   position: fixed;
   top: 0;
@@ -152,133 +148,142 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.3s ease-out;
 }
 
 .modalContent {
-  background: white;
-  border-radius: 8px;
+  background-color: white;
   width: 90%;
-  max-width: 550px;
+  max-width: 800px;
   max-height: 90vh;
-  overflow-y: auto;
+  padding: 0;
+  border-radius: 0;
+  /* Squared edges like ServiceModal */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
 
-  /* Hide scrollbar for IE, Edge, and Firefox */
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: white;
+}
+
+.modalHeader h2 {
+  font-size: 18px;
+  font-weight: 300;
+  color: #333;
+  margin: 0;
+}
+
+.cancelButton {
+  /* Top close X */
+  background: #f5f5f5;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background: #e0e0e0;
+  color: #333;
 }
 
 .formContent {
   padding: 2rem;
+  overflow-y: auto;
 }
 
-/* Hide scrollbar for Chrome, Safari, and Opera */
-.modalContent::-webkit-scrollbar {
-  display: none;
+/* Form Grid */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem;
 }
 
-.modalContent h2 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.modalHeader {
-  padding: 15px 25px;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  background: #f8f9fa;
-  display: flex;
-}
-
-
+/* Form Group - ServiceModal Style */
 .formGroup {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .formGroup label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #333;
-  font-size: 15px;
+  font-weight: 300;
+  color: #444;
+  font-size: 14px;
 }
 
 .formGroup input,
 .formGroup select {
   width: 100%;
-  padding: 0.55rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
+  padding: 6px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 300;
+  background: transparent;
+  transition: all 0.2s;
   box-sizing: border-box;
 }
 
 .formGroup input:focus,
 .formGroup select:focus {
   outline: none;
-  border-color: #15426d;
+  border-bottom-color: #11a454;
 }
 
-
+/* Checkbox Groups - Custom logic as standard grid */
 .checkboxGroup {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  /* Added gap for better spacing */
-  max-height: 300px;
-  /* Limit height if list is long */
-  overflow-y: auto;
-  /* Scroll if needed */
-  padding: 5px;
-  /* Padding for scrollbar */
-  border: 1px solid #eee;
-  /* Visual boundary */
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #f1f5f9;
   border-radius: 4px;
+  background: #f8fafc;
 }
 
 .checkboxLabel {
   display: flex;
   align-items: center;
-  /* Center align vertically */
-  gap: 0.75rem;
+  gap: 8px;
+  font-size: 13px;
+  color: #475569;
   cursor: pointer;
-  padding: 0.75rem;
+  padding: 4px 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
   border-radius: 4px;
-  background-color: #f8f9fa;
-  /* Light background by default */
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
+  font-weight: 300;
 }
 
-.checkboxLabel:hover {
-  background-color: #e9ecef;
-  border-color: #dee2e6;
-}
-
-.checkboxLabel input[type="checkbox"] {
-  width: 18px;
-  /* Explicit width */
-  height: 18px;
-  /* Explicit height */
+.checkboxLabel input {
+  width: auto;
   margin: 0;
-  cursor: pointer;
-  accent-color: #15426d;
-  /* Brand color check */
 }
 
-.checkboxLabel small {
-  display: block;
-  color: #666;
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
-}
-
+/* Modal Footer Actions */
 .modalActions {
   display: flex;
   justify-content: flex-end;
@@ -286,171 +291,136 @@
   margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid #eee;
+  grid-column: 1 / -1;
+  /* Span full width in grid */
 }
 
-.cancelButton {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-
-/* Masked Field Styles */
-.maskedField {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.maskedField span {
-  font-family: "Courier New", monospace;
-  font-size: 0.9rem;
-}
-
-.toggleButton {
-  background: none;
-  border: none;
-  color: #6c757d;
-  cursor: pointer;
-  padding: 0.25rem;
-  border-radius: 3px;
-  transition: all 0.2s ease;
-  font-size: 0.8rem;
-}
-
-.toggleButton:hover {
-  background-color: #f8f9fa;
-  color: #15426d;
-}
-
-.toggleButton:active {
-  transform: scale(0.95);
-}
-
-.passwordResetInfo {
-  margin-bottom: 1.5rem;
-}
-
-.passwordResetInfo p {
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.credentialsBox {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 6px;
-  padding: 1.5rem;
-  margin: 1rem 0;
-}
-
-.credentialRow {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  gap: 1rem;
-}
-
-.credentialRow:last-child {
-  margin-bottom: 0;
-}
-
-.credentialRow label {
-  font-weight: 600;
-  color: #495057;
-  min-width: 120px;
-  margin-bottom: 0;
-}
-
-.credentialValue {
-  font-family: "Courier New", monospace;
-  background-color: white;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  color: #495057;
-  flex: 1;
-}
-
-.passwordField {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1;
-}
-
-.copyButton {
-  background-color: #28a745;
+.primaryButton {
+  background-color: #11a454;
   color: white;
   border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
+  padding: 0.6rem 2rem;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 300;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
+  transition: all 0.2s;
 }
 
-.copyButton:hover {
-  background-color: #218838;
-  transform: translateY(-1px);
+.primaryButton:hover {
+  background-color: #10964d;
 }
 
-.copyButton:active {
-  transform: translateY(0);
-}
-
-.warningMessage {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  background-color: #fff3cd;
-  border: 1px solid #ffeaa7;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-top: 1.5rem;
-  color: #856404;
-}
-
-.warningMessage i {
-  color: #f39c12;
-  font-size: 1.1rem;
-  margin-top: 0.1rem;
-}
-
-.warningMessage span {
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-/* Add floating button styles */
+/* Floating Button */
 .floatingButton {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 60px;
-  height: 60px;
+  position: absolute;
+  /* In mainContent relative */
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background-color: #15426d;
+  background-color: #11a454;
   color: white;
   border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(17, 164, 84, 0.3);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 20px;
   z-index: 100;
-  transition: all 0.3s ease;
 }
 
-.floatingButton:hover {
-  background-color: #12385a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 16px;
+  }
+
+  .mainContent {
+    width: 100%;
+    flex: 1;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .modalContent {
+    width: 100%;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  /* Table Mobile Card View */
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: block;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    padding: 8px 0;
+    border-bottom: 1px solid #f8fafc;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 500;
+    color: #64748b;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .table td:last-child {
+    border-bottom: none;
+    justify-content: flex-end;
+  }
 }
