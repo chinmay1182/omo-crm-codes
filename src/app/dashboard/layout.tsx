@@ -13,6 +13,7 @@ import Modal from 'react-modal';
 import styles from './styles.module.css';
 import PaymentHistoryModal from './components/PaymentHistoryModal';
 import ProfileSettingsModal from './components/ProfileSettingsModal';
+import CompanySettingsModal from './components/CompanySettingsModal';
 import ThemeSelectorModal from './components/ThemeSelectorModal';
 import GlobalSearch from '../components/ui/GlobalSearch/GlobalSearch';
 
@@ -44,6 +45,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   // ✅ Profile Modal State
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isCompanySettingsModalOpen, setIsCompanySettingsModalOpen] = useState(false);
 
   // ✅ Subscription & Payment States
   const [currentSubscription, setCurrentSubscription] = useState<any>(null);
@@ -130,7 +132,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   const isAgent = user?.type === 'agent';
 
-  // State for full agent data (needed for incoming call routing)
+  // State for agent data (needed for incoming call routing)
   const [agentData, setAgentData] = useState<{
     id: number;
     username: string;
@@ -138,7 +140,52 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     phone_number?: string;
   } | undefined>(undefined);
 
-  // Set agentData from session when user becomes available
+  // ✅ Company Details State
+  const [companyDetails, setCompanyDetails] = useState<any>(null);
+  const [isCompanyDetailsMissing, setIsCompanyDetailsMissing] = useState(false);
+
+  useEffect(() => {
+    if (user?.id && isAgent) {
+      fetch(`/api/agent-company-details?agentId=${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && !data.error) {
+            setCompanyDetails(data);
+            // Check if critical details are missing (e.g., company name or phone)
+            if (!data.company_name || !data.company_email || !data.company_phone) {
+              setIsCompanyDetailsMissing(true);
+            } else {
+              setIsCompanyDetailsMissing(false);
+            }
+          } else {
+            // No data found or error means details are missing
+            setIsCompanyDetailsMissing(true);
+          }
+        })
+        .catch(err => {
+          console.error("Error fetching company details", err);
+          setIsCompanyDetailsMissing(true);
+        });
+    }
+  }, [user, isAgent]);
+
+  // ✅ Notification rotation state
+
+  useEffect(() => {
+    // 3 states now: 0 (Subscription), 1 (ChatGPT), 2 (Company Details Missing - if applicable)
+    const interval = setInterval(() => {
+      setNotificationIndex((prev) => {
+        const nextInfo = prev + 1;
+        // If missing details, cycle 0 -> 1 -> 2 -> 0
+        if (isCompanyDetailsMissing) {
+          return nextInfo % 3;
+        }
+        // If NOT missing details, cycle 0 -> 1 -> 0
+        return nextInfo % 2;
+      });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isCompanyDetailsMissing]);
   useEffect(() => {
     if (user) {
       const initialData = {
@@ -367,7 +414,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   </>
                 )}
               </div>
-            ) : (
+            ) : notificationIndex === 1 ? (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', animation: 'fadeIn 0.5s', height: '28px' }}>
                 <img
                   src="https://img.icons8.com/ios-glyphs/50/chatgpt.png"
@@ -376,8 +423,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   height={20}
                   style={{ filter: 'brightness(0) invert(1)' }}
                 />
-                <span style={{ lineHeight: '1' }}>Gemini Integration coming soon</span>
+                <span style={{ lineHeight: '1' }}>ChatGPT Integration coming soon</span>
                 <span className={styles.trialPill}>Coming Soon</span>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', animation: 'fadeIn 0.5s', height: '28px' }}>
+                <span style={{ lineHeight: '1' }}>Please update your company and profile details</span>
+                <button
+                  className={styles.buyButton} // Reusing buyButton style for pill look
+                  onClick={() => setIsCompanySettingsModalOpen(true)}
+                >
+                  Update Now
+                </button>
               </div>
             )}
           </div>
@@ -502,7 +559,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             style={{ borderRadius: '4px', objectFit: 'contain' }}
                           />
                         }
-                        {user.company_name || 'Company Name'}
+                        {companyDetails?.company_name || user.company_name || 'My Company'}
                       </div>
                     </div>
                   )}
@@ -572,6 +629,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                               }}
                             >
                               Profile Settings
+                            </button>
+                            <button
+                              className={styles.profileDropdownItem}
+                              onClick={() => {
+                                setShowProfileDropdown(false);
+                                setIsCompanySettingsModalOpen(true);
+                              }}
+                            >
+                              Company Settings
                             </button>
                           </div>
 
@@ -649,6 +715,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               onClose={() => setShowThemeModal(false)}
               selectedTheme={selectedTheme}
               setSelectedTheme={setSelectedTheme}
+            />
+
+            {/* Company Settings Modal */}
+            <CompanySettingsModal
+              isOpen={isCompanySettingsModalOpen}
+              onRequestClose={() => setIsCompanySettingsModalOpen(false)}
+              user={user}
             />
 
             <ProfileSettingsModal

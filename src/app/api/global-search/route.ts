@@ -434,7 +434,27 @@ export async function GET(req: Request) {
                     url: item.url,
                     icon: 'fa-cog'
                 }));
-            })()
+            })(),
+
+            // 19. Agent Company Details
+            (async () => {
+                const { data } = await supabase
+                    .from('agent_company_details')
+                    .select('id, company_name, contact_person')
+                    .or(`company_name.ilike.%${query}%,contact_person.ilike.%${query}%`)
+                    .limit(limit);
+
+                if (!data) return [];
+
+                return data.map(item => ({
+                    type: 'company_details',
+                    id: item.id,
+                    title: item.company_name,
+                    subtitle: item.contact_person || 'My Company',
+                    url: '/dashboard', // Would ideally open the modal
+                    icon: 'fa-building-user'
+                }));
+            })().catch(() => [])
 
         ]);
 
