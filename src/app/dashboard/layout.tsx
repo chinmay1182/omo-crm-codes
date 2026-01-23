@@ -267,6 +267,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   tabs.push({ label: 'Documentation', href: 'https://crm-docs.omodigital.io/', icon: 'fa-sharp fa-thin fa-book', svgIcon: '/icons-products/mem_wave-8.svg' } as any);
+  tabs.push({ label: 'Products', href: '/dashboard/products', icon: 'fa-sharp fa-thin fa-box-open', svgIcon: '/icons-products/mem_donut.svg' } as any);
   tabs.push({ label: 'Subscriptions', href: '/dashboard/subscriptions', icon: 'fa-sharp fa-thin fa-credit-card', svgIcon: '/icons-products/mem_3d_block2.svg' });
   tabs.push({ label: 'Feedback', onClick: () => setIsFeedbackModalOpen(true), icon: 'fa-sharp fa-thin fa-bug', svgIcon: '/icons-products/mem_3d_arrow.svg' } as any);
 

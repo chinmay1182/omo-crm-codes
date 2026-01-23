@@ -1,0 +1,92 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    /* Adjust based on header height, usually 64px or 80px */
+    overflow: hidden;
+    font-family: 'Open Sauce One', sans-serif;
+    background-color: white;
+}
+
+/* Replaces old header/tabs with standardized Top Nav */
+.topNav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 24px;
+    height: 40px;
+    /* Standard tab height */
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    flex-shrink: 0;
+}
+
+.navTabsContainer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+}
+
+.navTab {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 300;
+    background: none;
+    border: none;
+    padding: 0 4px;
+    transition: all 0.2s;
+    font-family: 'Open Sauce One', sans-serif;
+}
+
+.navTab i {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.navTab:hover {
+    color: #1e293b;
+}
+
+.activeTab {
+    color: #11a454 !important;
+    border-bottom-color: #11a454 !important;
+    font-weight: 300 !important;
+    border-bottom: 2px solid #11a454 !important;
+}
+
+.tabContent {
+    flex: 1;
+    overflow: hidden;
+    /* Child components handle their own scrolling */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        height: 100vh;
+    }
+
+    .topNav {
+        padding: 0 12px;
+        height: 44px;
+        overflow-x: auto;
+    }
+
+    .navTabsContainer {
+        gap: 16px;
+    }
+
+    .navTab {
+        font-size: 14px;
+        white-space: nowrap;
+        padding: 0 4px;
+    }
+}
