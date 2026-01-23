@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 import PaymentHistoryModal from './components/PaymentHistoryModal';
 import ProfileSettingsModal from './components/ProfileSettingsModal';
 import CompanySettingsModal from './components/CompanySettingsModal';
+import MeetingsApiSettingsModal from './components/MeetingsApiSettingsModal';
 import ThemeSelectorModal from './components/ThemeSelectorModal';
 import GlobalSearch from '../components/ui/GlobalSearch/GlobalSearch';
 
@@ -43,9 +44,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   // ✅ New Theme state
   const [useNewTheme, setUseNewTheme] = useState(true);
 
+
+  // ...
+
   // ✅ Profile Modal State
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isCompanySettingsModalOpen, setIsCompanySettingsModalOpen] = useState(false);
+  const [isMeetingsApiModalOpen, setIsMeetingsApiModalOpen] = useState(false);
 
   // ✅ Subscription & Payment States
   const [currentSubscription, setCurrentSubscription] = useState<any>(null);
@@ -615,30 +620,35 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             </button>
                           </div>
 
-                          <div className={styles.profileDropdownContent}>
-                            {isAgent && (
-                              <Link href="/dashboard/agent-info" className={styles.profileDropdownItem} onClick={() => setShowProfileDropdown(false)}>
-                                My Profile
-                              </Link>
-                            )}
-                            <button
-                              className={styles.profileDropdownItem}
-                              onClick={() => {
-                                setShowProfileDropdown(false);
-                                setIsProfileModalOpen(true);
-                              }}
-                            >
-                              Profile Settings
-                            </button>
-                            <button
-                              className={styles.profileDropdownItem}
-                              onClick={() => {
-                                setShowProfileDropdown(false);
-                                setIsCompanySettingsModalOpen(true);
-                              }}
-                            >
-                              Company Settings
-                            </button>
+                          <div style={{ padding: '20px' }}>
+                            <div style={{ fontWeight: '300', color: '#212121', marginBottom: '10px', fontSize: '16px' }}>
+                              Quick Settings
+                            </div>
+                            <div style={{ backgroundColor: '#f9fafb', borderRadius: '12px', padding: '6px', border: 'none' }}>
+                              {isAgent && (
+                                <Link href="/dashboard/agent-info" className={styles.profileDropdownItem} onClick={() => setShowProfileDropdown(false)}>
+                                  My Profile
+                                </Link>
+                              )}
+                              <button
+                                className={styles.profileDropdownItem}
+                                onClick={() => {
+                                  setShowProfileDropdown(false);
+                                  setIsProfileModalOpen(true);
+                                }}
+                              >
+                                Profile Settings
+                              </button>
+                              <button
+                                className={styles.profileDropdownItem}
+                                onClick={() => {
+                                  setShowProfileDropdown(false);
+                                  setIsCompanySettingsModalOpen(true);
+                                }}
+                              >
+                                Company Settings
+                              </button>
+                            </div>
                           </div>
 
                           <div className={styles.themeToggleContainer}>
@@ -678,18 +688,40 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             </div>
                           </div>
 
-                          <div className={styles.profileDropdownDivider}></div>
 
-                          <button
-                            onClick={() => {
-                              setShowPaymentHistory(true);
-                              setShowProfileDropdown(false);
-                            }}
-                            className={styles.profileDropdownItem}
-                          >
-                            <i className="fa-sharp fa-thin fa-receipt"></i>
-                            Payment History
-                          </button>
+                          <div style={{ padding: '20px', borderBottom: '1px solid #e5e7eb' }}>
+                            <div style={{ fontSize: '16px', fontWeight: '300', color: '#212121', marginBottom: '10px' }}>
+                              Payment Settings
+                            </div>
+                            <div style={{ backgroundColor: '#f9fafb', borderRadius: '12px', padding: '6px', border: 'none' }}>
+                              <button
+                                onClick={() => {
+                                  setShowPaymentHistory(true);
+                                  setShowProfileDropdown(false);
+                                }}
+                                className={styles.profileDropdownItem}
+                              >
+                                Payment History
+                              </button>
+                            </div>
+                          </div>
+
+                          <div style={{ padding: '20px' }}>
+                            <div style={{ fontSize: '16px', fontWeight: '300', color: '#212121', marginBottom: '10px' }}>
+                              Meetings API Settings
+                            </div>
+                            <div style={{ backgroundColor: '#f9fafb', borderRadius: '12px', padding: '6px', border: 'none' }}>
+                              <button
+                                onClick={() => {
+                                  setIsMeetingsApiModalOpen(true);
+                                  setShowProfileDropdown(false);
+                                }}
+                                className={styles.profileDropdownItem}
+                              >
+                                Meetings API Settings
+                              </button>
+                            </div>
+                          </div>
 
                           <button onClick={handleLogout} className={`${styles.profileDropdownItem} ${styles.logoutItem}`}>
                             <i className="fa-sharp fa-thin fa-sign-out-alt"></i>
@@ -721,6 +753,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <CompanySettingsModal
               isOpen={isCompanySettingsModalOpen}
               onRequestClose={() => setIsCompanySettingsModalOpen(false)}
+              user={user}
+            />
+
+            <MeetingsApiSettingsModal
+              isOpen={isMeetingsApiModalOpen}
+              onRequestClose={() => setIsMeetingsApiModalOpen(false)}
               user={user}
             />
 
