@@ -16,11 +16,15 @@ const INDIAN_STATES = [
 ];
 
 export default function CompanySettingsModal({ isOpen, onRequestClose, user }: CompanySettingsModalProps) {
-    const [activeTab, setActiveTab] = useState<'company' | 'company_details'>('company');
+    const [activeTab, setActiveTab] = useState<'company' | 'company_seal' | 'company_details'>('company');
 
     // Company Logo States
     const [selectedCompanyLogo, setSelectedCompanyLogo] = useState<string | null>(null);
     const [isCompanyLogoUploading, setIsCompanyLogoUploading] = useState(false);
+
+    // Company Seal States
+    const [selectedCompanySeal, setSelectedCompanySeal] = useState<string | null>(null);
+    const [isCompanySealUploading, setIsCompanySealUploading] = useState(false);
 
     // Company Details States
     const [companyDetailsData, setCompanyDetailsData] = useState({
@@ -42,6 +46,9 @@ export default function CompanySettingsModal({ isOpen, onRequestClose, user }: C
             // Load initial values from user prop
             if (user?.company_logo) {
                 setSelectedCompanyLogo(user.company_logo);
+            }
+            if (user?.company_seal) {
+                setSelectedCompanySeal(user.company_seal);
             }
 
             // Fetch Company Details
@@ -100,6 +107,66 @@ export default function CompanySettingsModal({ isOpen, onRequestClose, user }: C
             toast.error('Error uploading logo');
         } finally {
             setIsCompanyLogoUploading(false);
+        }
+    };
+
+    // Handle company seal upload
+    const handleCompanySealUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        setIsCompanySealUploading(true);
+        try {
+            const res = await fetch('/api/company-profile-icons/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                setSelectedCompanySeal(`/company-profile-icons/${data.filename}`);
+                toast.success('Seal uploaded successfully');
+            } else {
+                toast.error('Failed to upload seal');
+            }
+        } catch (error) {
+            console.error('Upload error:', error);
+            toast.error('Error uploading seal');
+        } finally {
+            setIsCompanySealUploading(false);
+        }
+    };
+
+    const saveCompanySeal = async () => {
+        if (!selectedCompanySeal) return;
+        if (!user || !user.id) {
+            toast.error('User not identified');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/agent-auth/update-company-seal', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    agentId: user.id,
+                    companySeal: selectedCompanySeal
+                })
+            });
+
+            if (res.ok) {
+                toast.success('Company seal updated successfully! Refreshing...');
+                onRequestClose();
+                window.location.reload();
+            } else {
+                toast.error('Failed to update company seal');
+            }
+        } catch (error) {
+            console.error('Save error:', error);
+            toast.error('Error updating company seal');
         }
     };
 
@@ -199,6 +266,12 @@ export default function CompanySettingsModal({ isOpen, onRequestClose, user }: C
                     Company Logo
                 </button>
                 <button
+                    onClick={() => setActiveTab('company_seal')}
+                    className={`${styles.tabButton} ${activeTab === 'company_seal' ? styles.activeTab : ''}`}
+                >
+                    Company Seal
+                </button>
+                <button
                     onClick={() => setActiveTab('company_details')}
                     className={`${styles.tabButton} ${activeTab === 'company_details' ? styles.activeTab : ''}`}
                 >
@@ -236,6 +309,46 @@ export default function CompanySettingsModal({ isOpen, onRequestClose, user }: C
                                     <Image
                                         src={selectedCompanyLogo}
                                         alt="Selected Logo"
+                                        width={80}
+                                        height={80}
+                                        style={{ objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' }}
+                                        unoptimized
+                                    />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {activeTab === 'company_seal' && (
+                    <div className={styles.uploadSection}>
+                        <p className={styles.uploadLabel}>Upload Company Seal</p>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleCompanySealUpload}
+                            disabled={isCompanySealUploading}
+                            className={styles.fileInput}
+                        />
+                        {isCompanySealUploading && <span className={styles.uploadingText}>Uploading...</span>}
+
+                        {selectedCompanySeal && (
+                            <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                                <p className={styles.sectionTitle}>Preview:</p>
+                                <div style={{
+                                    width: '100px',
+                                    height: '100px',
+                                    border: '1px solid #eee',
+                                    borderRadius: '8px',
+                                    margin: '0 auto',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    padding: '10px'
+                                }}>
+                                    <Image
+                                        src={selectedCompanySeal}
+                                        alt="Selected Seal"
                                         width={80}
                                         height={80}
                                         style={{ objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' }}
@@ -379,6 +492,7 @@ export default function CompanySettingsModal({ isOpen, onRequestClose, user }: C
                     className={styles.saveBtn}
                     onClick={() => {
                         if (activeTab === 'company') saveCompanyLogo();
+                        else if (activeTab === 'company_seal') saveCompanySeal();
                         else saveCompanyDetails();
                     }}
                 >

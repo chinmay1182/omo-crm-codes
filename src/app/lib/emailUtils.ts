@@ -1,5 +1,6 @@
 
 import nodemailer from 'nodemailer';
+import { getPlatformLogo } from '@/app/lib/branding/logo';
 
 // Helper function to create transporter with user's credentials
 function createUserTransporter(userEmail: string, userPassword: string, smtpHost?: string, smtpPort?: number) {
@@ -103,6 +104,9 @@ export async function sendMeetingInvite(
     });
 
     const subject = `Meeting Schedule Confirmation - "${meeting.title}"`;
+    const platformLogo = await getPlatformLogo();
+    // Ensure full URL for email clients
+    const logoUrl = platformLogo.startsWith('http') ? platformLogo : `${process.env.NEXT_PUBLIC_APP_URL || 'https://crm.consolegal.com'}${platformLogo}`;
 
     const html = `
     <!DOCTYPE html>
@@ -119,9 +123,11 @@ export async function sendMeetingInvite(
                         <!-- Header with Logo -->
                         <tr>
                             <td style="background: linear-gradient(135deg, #15426d 0%, #1a5280 100%); padding: 30px; text-align: center;">
-                                <img src="https://crm.consolegal.com/consolegal.jpeg" 
+                                ${logoUrl ? `
+                                <img src="${logoUrl}" 
                                      alt="Consolegal Logo" 
                                      style="height: 60px; margin-bottom: 15px;">
+                                ` : ''}
                                 <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 600;">
                                     Meeting Schedule Confirmation
                                 </h1>
@@ -271,6 +277,8 @@ export async function sendBookingConfirmation(
     });
 
     const subject = `Booking Schedule Intimation - "${eventType?.title || booking.title}"`;
+    const platformLogo = await getPlatformLogo();
+    const logoUrl = platformLogo.startsWith('http') ? platformLogo : `${process.env.NEXT_PUBLIC_APP_URL || 'https://crm.consolegal.com'}${platformLogo}`;
 
     const html = `
     <!DOCTYPE html>
@@ -287,9 +295,11 @@ export async function sendBookingConfirmation(
                         <!-- Header with Logo -->
                         <tr>
                             <td style="background: linear-gradient(135deg, #15426d 0%, #1a5280 100%); padding: 30px; text-align: center;">
-                                <img src="https://crm.consolegal.com/consolegal.jpeg" 
+                                ${logoUrl ? `
+                                <img src="${logoUrl}" 
                                      alt="Consolegal Logo" 
                                      style="height: 60px; margin-bottom: 15px;">
+                                ` : ''}
                                 <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 600;">
                                     Booking Schedule Intimation
                                 </h1>

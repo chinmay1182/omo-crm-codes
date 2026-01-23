@@ -6,6 +6,7 @@ import chromium from '@sparticuz/chromium';
 import { cookies } from 'next/headers';
 import fs from 'fs';
 import path from 'path';
+import { getPlatformLogo, getPlatformSeal } from '@/app/lib/branding/logo';
 
 export async function GET(
   request: Request,
@@ -246,21 +247,51 @@ export async function GET(
 
 
     // Read images for embedding
-    let logoUrl = 'https://crm.consolegal.com/consolegal.jpeg';
-    let sealUrl = 'https://crm.consolegal.com/seal.jpeg';
+    let logoUrl = '';
+    let sealUrl = '';
 
     try {
-      const logoPath = path.join(process.cwd(), 'public', 'consolegal.jpeg');
-      const sealPath = path.join(process.cwd(), 'public', 'seal.jpeg');
+      const dbLogoPath = await getPlatformLogo();
+      // Remove leading slash if present for path joining, but ensure we check 'public'
+      const relativeLogoPath = dbLogoPath.startsWith('/') ? dbLogoPath.substring(1) : dbLogoPath;
+
+      // Try to find the dynamic logo
+      let logoPath = path.join(process.cwd(), 'public', relativeLogoPath);
+      // Fallback to default if dynamic not found or is default
+      if (!fs.existsSync(logoPath)) {
+        // No logo found
+      }
 
       if (fs.existsSync(logoPath)) {
         const logoBuffer = fs.readFileSync(logoPath);
-        logoUrl = `data:image/jpeg;base64,${logoBuffer.toString('base64')}`;
+        // Detect mime type simple check
+        const ext = path.extname(logoPath).toLowerCase();
+        const mime = ext === '.png' ? 'image/png' : 'image/jpeg';
+        logoUrl = `data:${mime};base64,${logoBuffer.toString('base64')}`;
       }
+
+      // SEAL LOGIC
+      const dbSealPath = await getPlatformSeal();
+      const relativeSealPath = dbSealPath.startsWith('/') ? dbSealPath.substring(1) : dbSealPath;
+      let sealPath = path.join(process.cwd(), 'public', relativeSealPath);
+
+      // Fallback to default 'seal.jpeg' only if dynamic not found AND we want a default (User asked to "upload", implying replacement. But if not uploaded, maybe keep default? The request says "replace sealUrl". I will default to empty if not found, OR keep usage of seal.jpeg if specifically requested. The request says "upload option... update dynamically HERE". Probably means replace hardcoded one.
+
+      // Wait, the user provided old code: `let sealUrl = 'https://crm.consolegal.com/seal.jpeg';` and wants it updated.
+      // If I return empty string, the seal disappears. I should probably fallback to `seal.jpeg` if getPlatformSeal returns empty, OR just trust getPlatformSeal.
+      // Given "update dynamically", I'll fetch it. If not set, I'll fallback to seal.jpeg to maintain backward compatibility unless user specifically wants no seal.
+      if (!dbSealPath) {
+        sealPath = path.join(process.cwd(), 'public', 'seal.jpeg');
+      }
+
       if (fs.existsSync(sealPath)) {
         const sealBuffer = fs.readFileSync(sealPath);
-        sealUrl = `data:image/jpeg;base64,${sealBuffer.toString('base64')}`;
+        // Detect mime type simple check
+        const ext = path.extname(sealPath).toLowerCase();
+        const mime = ext === '.png' ? 'image/png' : 'image/jpeg';
+        sealUrl = `data:${mime};base64,${sealBuffer.toString('base64')}`;
       }
+
     } catch (imgError) {
       console.error("Error embedding images:", imgError);
     }
@@ -607,7 +638,7 @@ export async function GET(
               </div>
             </div>
             <div class="header-right">
-              <img src="${logoUrl}" class="logo" alt="ConsoLegal" />
+              ${logoUrl ? `<img src="${logoUrl}" class="logo" alt="ConsoLegal" />` : ''}
               <div class="proposal-badge">PROPOSAL</div>
             </div>
           </div>

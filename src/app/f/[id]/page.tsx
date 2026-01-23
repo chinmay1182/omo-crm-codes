@@ -18,8 +18,17 @@ export default function PublicFormPage() {
     const [submitted, setSubmitted] = useState(false);
     const [formValues, setFormValues] = useState<Record<string, string>>({});
     const [formErrors, setFormErrors] = useState<Record<string, boolean>>({});
+    const [logoUrl, setLogoUrl] = useState('');
 
     useEffect(() => {
+        // Fetch branding
+        fetch('/api/public/branding')
+            .then(res => res.json())
+            .then(data => {
+                if (data.logoUrl) setLogoUrl(data.logoUrl);
+            })
+            .catch(e => console.error("Could not load branding", e));
+
         if (id) {
             fetchForm();
         }
@@ -209,14 +218,16 @@ export default function PublicFormPage() {
             }}>
                 {/* Logo Area */}
                 <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0 16px 0' }}>
-                    <Image
-                        src="/consolegal.jpeg"
-                        alt="Consolegal Logo"
-                        width={150}
-                        height={100}
-                        style={{ objectFit: 'contain', maxHeight: '80px' }}
-                        priority
-                    />
+                    {logoUrl && (
+                        <Image
+                            src={logoUrl}
+                            alt="Consolegal Logo"
+                            width={150}
+                            height={100}
+                            style={{ objectFit: 'contain', maxHeight: '80px' }}
+                            priority
+                        />
+                    )}
                 </div>
 
                 {/* Header */}

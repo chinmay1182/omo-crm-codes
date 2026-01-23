@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { supabase } from '@/app/lib/supabase';
 import { supabaseAdmin, hasAdminClient } from '@/app/lib/supabase-admin';
 import { cookies } from 'next/headers';
+import { getPlatformLogo } from '@/app/lib/branding/logo';
 
 export async function GET(
   request: Request,
@@ -252,7 +253,9 @@ export async function GET(
 
     // Use absolute URL for the logo 
     // In View mode (browser), relative URL works if public asset exists.
-    const logoUrl = '/consolegal.jpeg';
+    // Use absolute URL for the logo 
+    // In View mode (browser), relative URL works if public asset exists.
+    const logoUrl = await getPlatformLogo();
     const sealUrl = '/seal.jpeg';
 
     const html = `
@@ -604,7 +607,7 @@ export async function GET(
               </div>
             </div>
             <div class="header-right">
-              <img src="${logoUrl}" class="logo" alt="ConsoLegal" />
+              ${logoUrl ? `<img src="${logoUrl}" class="logo" alt="ConsoLegal" />` : ''}
               <div class="proposal-badge">PROPOSAL</div>
             </div>
           </div>

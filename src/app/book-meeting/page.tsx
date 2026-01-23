@@ -1,12 +1,13 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export default function BookMeetingPage() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [logoUrl, setLogoUrl] = useState('');
     const [formData, setFormData] = useState({
         client_name: '',
         client_email: '',
@@ -14,6 +15,15 @@ export default function BookMeetingPage() {
         preferred_date: '',
         description: ''
     });
+
+    useEffect(() => {
+        fetch('/api/public/branding')
+            .then(res => res.json())
+            .then(data => {
+                if (data.logoUrl) setLogoUrl(data.logoUrl);
+            })
+            .catch(e => console.error("Could not load branding", e));
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -59,8 +69,8 @@ export default function BookMeetingPage() {
         <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f3f4f6', padding: '20px' }}>
             <div style={{ background: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', width: '100%', maxWidth: '600px' }}>
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                    {/* Logo Placeholder - You can uncomment if needed */}
-                    {/* <img src="/consolegal.jpeg" alt="Logo" style={{height: '60px', marginBottom: '16px'}} /> */}
+                    {/* Logo */}
+                    {logoUrl && <img src={logoUrl} alt="Logo" style={{ height: '60px', marginBottom: '16px', objectFit: 'contain' }} />}
                     <h1 style={{ fontSize: '28px', fontWeight: 'bold', color: '#1a1a1a' }}>Book a Meeting</h1>
                     <p style={{ color: '#666' }}>Schedule a consultation or follow-up with us.</p>
                 </div>

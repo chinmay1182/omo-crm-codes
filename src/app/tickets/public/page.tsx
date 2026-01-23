@@ -19,8 +19,17 @@ export default function PublicTicketPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [ticketData, setTicketData] = useState<any>(null);
+    const [logoUrl, setLogoUrl] = useState('');
 
     useEffect(() => {
+        // Fetch branding
+        fetch('/api/public/branding')
+            .then(res => res.json())
+            .then(data => {
+                if (data.logoUrl) setLogoUrl(data.logoUrl);
+            })
+            .catch(e => console.error("Could not load branding", e));
+
         // Fetch categories directly from the public settings endpoint (we need to ensure settings are readable)
         // If we haven't made a public settings endpoint, we can try the main settings one if we opened RLS
         fetch('/api/tickets/settings')
@@ -100,15 +109,17 @@ export default function PublicTicketPage() {
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                        <img
-                            src="/consolegal.jpeg"
-                            alt="ConsoLegal"
-                            style={{
-                                maxWidth: '200px',
-                                height: 'auto',
-                                objectFit: 'contain'
-                            }}
-                        />
+                        {logoUrl && (
+                            <img
+                                src={logoUrl}
+                                alt="ConsoLegal"
+                                style={{
+                                    maxWidth: '200px',
+                                    height: 'auto',
+                                    objectFit: 'contain'
+                                }}
+                            />
+                        )}
                     </div>
                     <h1 className={styles.title}>Submit a Support Ticket</h1>
                     <p className={styles.subtitle}>Fill out the form below and our team will assist you.</p>

@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
-import Spinner from '@/app/components/Spinner/Spinner';
 import styles from './styles.module.css';
 import { useAuth } from '@/app/context/AuthContext';
 
@@ -15,8 +14,18 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [logoUrl, setLogoUrl] = useState('');
   const router = useRouter();
   const { login } = useAuth();
+
+  // Wait, imports must be at top. I will assuming imports are handled or use React.useEffect if 'useEffect' is not imported. 
+  // 'useEffect' is NOT imported in the original file (only useState). I see 'import { useState } from 'react';'
+  // I need to add useEffect to imports first.
+
+  // Actually, I should update imports first. But replace_file_content is convenient.
+  // I will restart imports in a separate call or do it carefully.
+  // Let's assume I will add useEffect in a separate step or modify imports now.
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +51,7 @@ export default function LoginForm() {
       <div className={styles.formSection}>
         <form onSubmit={handleLogin} className={styles.form}>
           <Image
-            src="/consolegal.jpeg"
+            src={logoUrl}
             alt="Consolegal Logo"
             width={120}
             height={120}

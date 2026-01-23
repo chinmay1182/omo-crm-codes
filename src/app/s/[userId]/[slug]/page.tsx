@@ -34,6 +34,16 @@ export default function BookingPage() {
         notes: ''
     });
     const [bookingStatus, setBookingStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [logoUrl, setLogoUrl] = useState('');
+
+    useEffect(() => {
+        fetch('/api/public/branding')
+            .then(res => res.json())
+            .then(data => {
+                if (data.logoUrl) setLogoUrl(data.logoUrl);
+            })
+            .catch(e => console.error("Could not load branding", e));
+    }, []);
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -145,7 +155,7 @@ export default function BookingPage() {
         return (
             <div className={styles.bookingContainer}>
                 <div className={styles.successContainer}>
-                    <img src="/consolegal.jpeg" alt="Logo" className={styles.successLogo} />
+                    {logoUrl && <img src={logoUrl} alt="Logo" className={styles.successLogo} />}
 
                     <div className={styles.successIcon}>
                         ✓
@@ -175,7 +185,7 @@ export default function BookingPage() {
                 {/* Left Panel: Details */}
                 <div className={styles.leftPanel}>
                     <div>
-                        <img src="/consolegal.jpeg" alt="Consolegal Logo" className={styles.logo} />
+                        {logoUrl && <img src={logoUrl} alt="Logo" style={{ height: '60px', marginBottom: '16px', objectFit: 'contain' }} />}
                     </div>
 
                     <p className={styles.headerText}>
