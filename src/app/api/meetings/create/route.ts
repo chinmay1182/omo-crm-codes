@@ -16,7 +16,7 @@ export async function POST(req: Request) {
         let agentId;
         try {
             const sessionData = JSON.parse(agentSession.value);
-        const agent = sessionData.user || sessionData;
+            const agent = sessionData.user || sessionData;
             agentId = agent.id;
             const permissions = agent.permissions;
             if (!permissions?.meetings?.includes('enable_disable')) {
@@ -89,6 +89,21 @@ export async function POST(req: Request) {
             } : undefined;
 
             await sendMeetingInvite(data, userCredentials);
+        }
+
+        // Create notification
+        try {
+            await supabase.from('notifications').insert([
+                {
+                    title: 'New Meeting Scheduled',
+                    message: `Meeting "${title}" scheduled with ${client_name || client_email || 'Client'}.`,
+                    type: 'info',
+                    related_id: data.id,
+                    related_type: 'meeting'
+                }
+            ]);
+        } catch (notifError) {
+            console.error('Error creating notification for meeting:', notifError);
         }
 
         return NextResponse.json(data);

@@ -136,6 +136,24 @@ export async function POST(request: Request) {
       contact_last_name: newNote.contacts?.last_name
     };
 
+    // Create notification
+    try {
+      await supabase.from('notifications').insert([
+        {
+          title: 'New Note Added',
+          message: `Note "${title || 'Untitled'}" added to ${insertData.related_to || 'General'}.`,
+          type: 'info',
+          related_id: newNote.id,
+          related_type: 'note',
+          // Optional: assigning user_id (or letting RLS handle it, or broadcasting to team if applicable)
+          // For notes, maybe notifications are less critical unless shared? 
+          // But request says "notes ke bhi notifications ayenge".
+        }
+      ]);
+    } catch (notifError) {
+      console.error('Error creating notification for note:', notifError);
+    }
+
     return NextResponse.json({ note: formattedNote }, { status: 201 });
   } catch (error) {
     console.error('Error creating note:', error);

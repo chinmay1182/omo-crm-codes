@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import styles from './Notifications.module.css';
+import { supabase } from '@/app/lib/supabase';
+import { useAuth } from '@/app/context/AuthContext';
 
 interface Notification {
   id: number;
@@ -26,14 +28,40 @@ export default function Notifications({ className }: NotificationsProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { user } = useAuth(); // Needed for filtering if RLS isn't enough or for channel logic
 
+  // Initial Fetch
   useEffect(() => {
     fetchNotifications();
 
-    // Poll for new notifications every 30 seconds
-    const interval = setInterval(fetchNotifications, 30000);
+    // Subscribe to realtime changes
+    const channel = supabase
+      .channel('realtime_notifications')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'notifications',
+          // Optionally filter by user_id if column exists, or just listen to all and filter if needed
+          // Assuming RLS handles visibility in fetch, but subscription sees all authorized changes?
+          // If notifications table has RLS, 'postgres_changes' respects it if using correct auth token,
+          // but client-side supabase usually listens to public changes unless we use secure channels.
+          // For now, let's just listen to INSERT and refetch to be safe/secure.
+        },
+        (payload) => {
+          // New notification inserted!
+          // Ideally we check if it belongs to us.
+          // Since payload has the new record, we can just add it if it matches our user logic.
+          // But simpliest robust way: just refetch or increment.
+          fetchNotifications();
+        }
+      )
+      .subscribe();
 
-    return () => clearInterval(interval);
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   useEffect(() => {
@@ -62,21 +90,25 @@ export default function Notifications({ className }: NotificationsProps) {
 
   const markAsRead = async (notificationId: number) => {
     try {
+      // Optimistic update
+      setNotifications(prev =>
+        prev.map(notif =>
+          notif.id === notificationId
+            ? { ...notif, is_read: true }
+            : notif
+        )
+      );
+      setUnreadCount(prev => Math.max(0, prev - 1));
+
       const response = await fetch('/api/notifications', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: notificationId, is_read: true })
       });
 
-      if (response.ok) {
-        setNotifications(prev =>
-          prev.map(notif =>
-            notif.id === notificationId
-              ? { ...notif, is_read: true }
-              : notif
-          )
-        );
-        setUnreadCount(prev => Math.max(0, prev - 1));
+      if (!response.ok) {
+        // Revert if failed (optional, but good practice)
+        fetchNotifications();
       }
     } catch (error) {
       console.error('Error marking notification as read:', error);
@@ -103,17 +135,6 @@ export default function Notifications({ className }: NotificationsProps) {
     }
   };
 
-  const getNotificationIcon = (type: string) => {
-    switch (type) {
-      case 'success': return '✅';
-      case 'warning': return '⚠️';
-      case 'error': return '❌';
-      case 'lead_assigned': return '👤';
-      case 'lead_updated': return '📝';
-      default: return 'ℹ️';
-    }
-  };
-
   const formatTimeAgo = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -133,7 +154,6 @@ export default function Notifications({ className }: NotificationsProps) {
         aria-label="Notifications"
       >
         <i className="fa-sharp fa-thin fa-comment" style={{ fontSize: '20px' }}></i>
-        {/* <FontAwesomeIcon icon={faBell} className={styles.bellIcon} /> */}
         {unreadCount > 0 && (
           <span className={styles.badge}></span>
         )}
@@ -158,19 +178,15 @@ export default function Notifications({ className }: NotificationsProps) {
           <div className={styles.notificationsList}>
             {notifications.length === 0 ? (
               <div className={styles.emptyState}>
-                <p>No notifications yet</p>
+                <p>No new notifications</p>
               </div>
             ) : (
               notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`${styles.notificationItem} ${!notification.is_read ? styles.unread : ''
-                    }`}
+                  className={`${styles.notificationItem} ${!notification.is_read ? styles.unread : ''}`}
                   onClick={() => !notification.is_read && markAsRead(notification.id)}
                 >
-                  <div className={styles.notificationIcon}>
-                    {getNotificationIcon(notification.type)}
-                  </div>
                   <div className={styles.notificationContent}>
                     <div className={styles.notificationTitle}>
                       {notification.title}
@@ -199,13 +215,13 @@ export default function Notifications({ className }: NotificationsProps) {
             )}
           </div>
 
-          {notifications.length > 0 && (
-            <div className={styles.dropdownFooter}>
-              <button className={styles.viewAllButton}>
-                View all notifications
-              </button>
-            </div>
-          )}
+          {/* Optional Footer 
+          <div className={styles.dropdownFooter}>
+            <button className={styles.viewAllButton}>
+              View All
+            </button>
+          </div>
+          */}
         </div>
       )}
     </div>

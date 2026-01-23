@@ -49,6 +49,21 @@ export async function POST(req: Request) {
 
         if (error) throw error;
 
+        // Create notification
+        try {
+            await supabase.from('notifications').insert([
+                {
+                    title: 'New Form Created',
+                    message: `Form "${name}" has been created.`,
+                    type: 'info',
+                    related_id: data.id,
+                    related_type: 'form'
+                }
+            ]);
+        } catch (notifError) {
+            console.error('Error creating notification for form:', notifError);
+        }
+
         return NextResponse.json(data);
     } catch (error) {
         console.error('Error creating form:', error);

@@ -185,6 +185,23 @@ export async function POST(request: Request) {
 
       if (error) throw error;
 
+      // Create notification
+      try {
+        if (assigned_to) {
+          await supabase.from('notifications').insert([
+            {
+              title: 'New Task Assigned',
+              message: `Task "${title}" assigned to you`,
+              type: 'info',
+              related_id: newTasks[0].id,
+              related_type: 'task'
+            }
+          ]);
+        }
+      } catch (notifError) {
+        console.error('Error creating notification for task:', notifError);
+      }
+
       return NextResponse.json(
         {
           message: `Successfully created ${tasksToInsert.length} task(s)`,

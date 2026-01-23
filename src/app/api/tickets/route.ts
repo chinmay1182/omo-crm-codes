@@ -155,6 +155,31 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: error.message, details: error }, { status: 500 });
         }
 
+        // Create notification if assigned
+        if (data.assigned_to) {
+            try {
+                const { data: agent } = await supabase
+                    .from('agents')
+                    .select('full_name, username')
+                    .eq('id', data.assigned_to)
+                    .single();
+
+                if (agent) {
+                    await supabase.from('notifications').insert([
+                        {
+                            title: 'New Ticket Assigned',
+                            message: `Ticket #${data.ticket_number || data.id} "${data.subject}" assigned to you`,
+                            type: 'info',
+                            related_id: data.id,
+                            related_type: 'ticket'
+                        }
+                    ]);
+                }
+            } catch (notifError) {
+                console.error('Error creating notification for ticket:', notifError);
+            }
+        }
+
         return NextResponse.json(data);
     } catch (error: any) {
         console.error('Error creating ticket:', error);
