@@ -18,14 +18,17 @@ export default function LoginForm() {
   const router = useRouter();
   const { login } = useAuth();
 
-  // Wait, imports must be at top. I will assuming imports are handled or use React.useEffect if 'useEffect' is not imported. 
-  // 'useEffect' is NOT imported in the original file (only useState). I see 'import { useState } from 'react';'
-  // I need to add useEffect to imports first.
-
-  // Actually, I should update imports first. But replace_file_content is convenient.
-  // I will restart imports in a separate call or do it carefully.
-  // Let's assume I will add useEffect in a separate step or modify imports now.
-
+  // Fetch branding on mount
+  useEffect(() => {
+    fetch('/api/public/branding')
+      .then(res => res.json())
+      .then(data => {
+        if (data.logoUrl) {
+          setLogoUrl(data.logoUrl);
+        }
+      })
+      .catch(e => console.error("Could not load branding", e));
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,14 +53,17 @@ export default function LoginForm() {
       <div className={styles.imageSection}></div>
       <div className={styles.formSection}>
         <form onSubmit={handleLogin} className={styles.form}>
-          <Image
-            src={logoUrl}
-            alt="Consolegal Logo"
-            width={120}
-            height={120}
-            className={styles.logo}
-            unoptimized
-          />
+          {logoUrl ? (
+            <Image
+              src={logoUrl}
+              alt="Consolegal Logo"
+              width={120}
+              height={120}
+              className={styles.logo}
+              style={{ objectFit: 'contain' }}
+              unoptimized
+            />
+          ) : null}
           <h2 style={{ fontSize: '24px', fontWeight: 300, marginBottom: '10px' }}>Log in to your account</h2>
           {error && <div className={styles.error}>{error}</div>}
           <div>
