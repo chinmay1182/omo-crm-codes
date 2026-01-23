@@ -19,6 +19,8 @@ import ThemeSelectorModal from './components/ThemeSelectorModal';
 import GlobalSearch from '../components/ui/GlobalSearch/GlobalSearch';
 import Reminders from '../components/ui/Reminders/Reminders';
 
+import FeedbackModal from '../components/FeedbackModal/FeedbackModal';
+
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -33,6 +35,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // ✅ Feedback Modal State
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
 
   // ✅ Profile dropdown state
@@ -261,8 +266,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     tabs.push({ label: 'Manage Agents', href: '/dashboard/agents', icon: 'fa-sharp fa-thin fa-users', svgIcon: '/icons-products/mem_st_fill_circle.svg' });
   }
 
-  tabs.push({ label: 'Documentation', href: 'https://docs.consolegal.com/', icon: 'fa-sharp fa-thin fa-book', svgIcon: '/icons-products/mem_wave-8.svg' } as any);
+  tabs.push({ label: 'Documentation', href: 'https://crm-docs.omodigital.io/', icon: 'fa-sharp fa-thin fa-book', svgIcon: '/icons-products/mem_wave-8.svg' } as any);
   tabs.push({ label: 'Subscriptions', href: '/dashboard/subscriptions', icon: 'fa-sharp fa-thin fa-credit-card', svgIcon: '/icons-products/mem_3d_block2.svg' });
+  tabs.push({ label: 'Feedback', onClick: () => setIsFeedbackModalOpen(true), icon: 'fa-sharp fa-thin fa-bug', svgIcon: '/icons-products/mem_3d_arrow.svg' } as any);
 
   const handleLogout = async () => {
     try {
@@ -774,6 +780,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               isOpen={showPaymentHistory}
               onRequestClose={() => setShowPaymentHistory(false)}
               userId={user?.id}
+            />
+
+            <FeedbackModal
+              isOpen={isFeedbackModalOpen}
+              onClose={() => setIsFeedbackModalOpen(false)}
+              user={user}
+              companyDetails={companyDetails}
             />
           </div>
         </div>
