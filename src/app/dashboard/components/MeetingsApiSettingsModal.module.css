@@ -315,7 +315,5 @@
     min-height: 100px;
     resize: vertical;
     border: 1px solid #e0e0e0;
-    /* Textarea keeps full border or specify otherwise */
     border-radius: 4px;
-    /* Optional for textarea */
 }
