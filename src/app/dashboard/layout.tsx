@@ -17,6 +17,7 @@ import CompanySettingsModal from './components/CompanySettingsModal';
 import MeetingsApiSettingsModal from './components/MeetingsApiSettingsModal';
 import ThemeSelectorModal from './components/ThemeSelectorModal';
 import GlobalSearch from '../components/ui/GlobalSearch/GlobalSearch';
+import Reminders from '../components/ui/Reminders/Reminders';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -549,6 +550,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <div className={styles.supportNumber}>+91 98342 25937</div>
                   </div>
 
+                  <Reminders />
                   <Notifications className={styles.notificationsButton} />
 
                   {user && (

@@ -132,12 +132,10 @@ export default function Notifications({ className }: NotificationsProps) {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Notifications"
       >
-        <i className="fa-sharp fa-thin fa-comment" style={{ color: 'black', fontSize: '20px' }}></i>
+        <i className="fa-sharp fa-thin fa-comment" style={{ fontSize: '20px' }}></i>
         {/* <FontAwesomeIcon icon={faBell} className={styles.bellIcon} /> */}
         {unreadCount > 0 && (
-          <span className={styles.badge}>
-            {unreadCount > 99 ? '99+' : unreadCount}
-          </span>
+          <span className={styles.badge}></span>
         )}
       </button>
 

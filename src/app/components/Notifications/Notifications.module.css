@@ -8,37 +8,38 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   transition: background-color 0.2s ease;
-  color: #666;
+  color: #333;
+  padding: 0;
 }
 
 .notificationButton:hover {
-  background-color: #f5f5f5;
+  background-color: #f3f4f6;
+  /* Match Reminders hover */
   color: #333;
-}
-
-.bellIcon {
-  font-size: 18px;
 }
 
 .badge {
   position: absolute;
-  top: 2px;
-  right: 2px;
-  background-color: #ff4757;
-  color: white;
-  border-radius: 10px;
-  padding: 2px 6px;
-  font-size: 11px;
-  font-weight: bold;
-  min-width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  top: 8px;
+  right: 8px;
+  background-color: #ef4444;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid white;
+  padding: 0;
+  color: transparent;
+  min-width: unset;
+  display: block;
+  z-index: 10;
+  pointer-events: none;
 }
 
 .dropdown {
@@ -219,11 +220,11 @@
     width: 320px;
     right: -20px;
   }
-  
+
   .notificationItem {
     padding: 10px 16px;
   }
-  
+
   .dropdownHeader {
     padding: 12px 16px;
   }

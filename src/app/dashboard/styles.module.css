@@ -147,6 +147,7 @@
 .headerRight {
     display: flex;
     align-items: center;
+    gap: 5px;
     position: relative;
 }
 
@@ -1103,7 +1104,6 @@
     border-radius: 50px;
     font-weight: 500;
     font-size: 12px;
-    margin-right: 10px;
 }
 
 .buyButton {

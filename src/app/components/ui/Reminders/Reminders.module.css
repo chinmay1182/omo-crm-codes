@@ -1,0 +1,218 @@
+/* Wrapper matching GlobalSearch */
+.reminderWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+    /* Spacing from notifications */
+}
+
+.reminderIconBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    /* Matches GlobalSearch icon color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.reminderIconBtn:hover {
+    background-color: #f3f4f6;
+}
+
+.reminderBadge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Dropdown - Matches GlobalSearch styles */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 350px;
+    /* Match GlobalSearch width */
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    max-height: 450px;
+    overflow-y: auto;
+    margin-top: 10px;
+    /* Match GlobalSearch padding */
+    font-family: 'Open Sauce One', sans-serif;
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* Match GlobalSearch Item Styling */
+.item {
+    display: flex;
+    /* GlobalSearch uses flex */
+    flex-direction: column;
+    /* But our content is vertical mostly? No GlobalSearch is row usually but content is col */
+    padding: 12px 16px;
+    border-bottom: 1px solid #f3f4f6;
+    /* GlobalSearch doesn't seem to have border-bottom on items, only sections? GlobalSearch: border-top on section */
+    /* GlobalSearch item doesn't have border bottom. Let's remove it if we want exact match, or keep it for separation */
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* GlobalSearch doesn't have borders between items, just hover effect */
+.item {
+    border-bottom: none;
+}
+
+.item:hover {
+    background-color: #f8fafc;
+}
+
+.itemTitle {
+    color: #334155;
+    /* Match GlobalSearch */
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+}
+
+.itemMeta {
+    color: #94a3b8;
+    /* Match GlobalSearch subtitle */
+    font-size: 12px;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .dropdown {
+        right: -50px;
+        width: 300px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    padding: 10px 16px 6px 16px;
+    font-size: 15px;
+    color: #9ca3af;
+    font-weight: 300;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.closeParams {
+    cursor: pointer;
+    font-size: 18px;
+    color: #9ca3af;
+    transition: color 0.2s;
+}
+
+.closeParams:hover {
+    color: #64748b;
+}
+
+.sectionTitle {
+    padding: 8px 16px;
+    font-size: 11px;
+    color: #9ca3af;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    display: block;
+    /* Link is block */
+    padding: 12px 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.item:hover {
+    background-color: #f8fafc;
+}
+
+.itemTitle {
+    color: #334155;
+    /* Match GlobalSearch */
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+    /* Match subtitle spacing */
+}
+
+.itemMeta {
+    color: #94a3b8;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 300;
+    overflow: hidden;
+}
+
+.dueUrgent {
+    color: #ef4444;
+    font-weight: 500;
+}
+
+.dueSoon {
+    color: #f59e0b;
+}
+
+.emptyState {
+    padding: 24px;
+    text-align: center;
+    color: #6b7280;
+    font-weight: 300;
+    font-size: 14px;
+}
