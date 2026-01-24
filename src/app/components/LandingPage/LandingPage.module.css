@@ -195,8 +195,8 @@
 
 .heroBadge {
     padding: 0.4rem 1rem;
-    background: rgba(17, 164, 84, 0.1);
-    color: #11a454;
+    background: rgba(139, 92, 246, 0.1);
+    color: #8B5CF6;
     border-radius: 50px;
     font-size: 0.8rem;
     font-weight: 600;
@@ -206,10 +206,17 @@
     z-index: 1;
 }
 
+.gradientText {
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
 .heroTitle {
     font-size: 50px;
     font-weight: 400;
-
     font-family: 'Instrument Serif', serif;
     font-style: italic;
     font-size: 4rem;
@@ -285,8 +292,8 @@
 }
 
 .secondaryBtn:hover {
-    border-color: #11a454;
-    color: #11a454;
+    border-color: #8B5CF6;
+    color: #8B5CF6;
 }
 
 /* Features Section (Now replaced/renamed by products/content blocks ideally, but keeping generic class if needed) */
@@ -689,6 +696,7 @@
     outline: none;
     transition: all 0.3s ease;
     height: 50px;
+    font-weight: 300;
     /* Fixed height can sometimes help with alignment */
     line-height: normal;
     /* Reset line-height */
@@ -821,21 +829,7 @@
     margin-bottom: 1.5rem;
 }
 
-.talkToExpertBtn {
-    background: #11a454;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background 0.3s;
-}
 
-.talkToExpertBtn:hover {
-    background: #0e8a46;
-}
 
 .socialGrid {
     display: grid;
@@ -1321,9 +1315,40 @@
     box-shadow: 0 0 0 2px rgba(21, 66, 109, 0.1);
 }
 
+/* Gradient styles inspired by omo-transparent.png (Purple/Pink/Blue) */
+.gradientBtn {
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+}
+
+.gradientBtn:hover {
+    background: linear-gradient(135deg, #7C3AED 0%, #DB2777 100%);
+    transform: translateY(-2px);
+}
+
+.talkToExpertBtn {
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.talkToExpertBtn:hover {
+    background: linear-gradient(135deg, #7C3AED 0%, #DB2777 100%);
+    transform: translateY(-2px);
+}
+
 .submitBtn {
     padding: 0.6rem 2rem;
-    background: #11a454;
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
     color: white;
     border: none;
     border-radius: 50px;
@@ -1339,9 +1364,9 @@
 }
 
 .submitBtn:hover {
-    background: #0e8c46;
+    background: linear-gradient(135deg, #7C3AED 0%, #DB2777 100%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(17, 164, 84, 0.3);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
 }
 
 /* Responsive adjustments */

@@ -192,7 +192,7 @@ export default function LandingPage({ user }: LandingPageProps) {
             {/* Navbar */}
             <nav className={styles.navbar}>
                 <div className={styles.logo}>
-                    OMO CRM<span style={{ color: 'var(--foreground)' }}>.</span>
+                    <img src="/omo.jpg" alt="OMO CRM" style={{ height: '46px', width: 'auto' }} />
                 </div>
 
                 <div className={styles.navLinks}>
@@ -305,7 +305,7 @@ export default function LandingPage({ user }: LandingPageProps) {
                 </div>
                 <h1 className={styles.heroTitle}>
                     Manage <span className={styles.titlePill}><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Team" /></span> Customers, <br />
-                    Grow <span className={styles.titlePill}><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Business" /></span> <span style={{ color: '#11a454' }}>Business Faster</span>
+                    Grow <span className={styles.titlePill}><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Business" /></span> <span className={styles.gradientText}>Business Faster</span>
                 </h1>
                 <p className={styles.heroSubtitle}>
                     The all-in-one CRM built for modern businesses. Manage contacts, schedule appointments, communicate via WhatsApp & VoIP, and track everything in one place.
@@ -321,7 +321,7 @@ export default function LandingPage({ user }: LandingPageProps) {
                                 Get Started Free
                             </button>
                             <button className={styles.secondaryBtn} onClick={() => { }}>
-                                View Live Demo
+                                Access Dashboard
                             </button>
                         </>
                     )}
@@ -493,17 +493,7 @@ export default function LandingPage({ user }: LandingPageProps) {
                                 <input type="text" className={styles.inputField} required />
                             </div>
 
-                            <div className={styles.inputGroup}>
-                                <label>Area of Responsibility *</label>
-                                <select className={styles.inputField} required>
-                                    <option value="">Select...</option>
-                                    <option value="c-level">C-Level</option>
-                                    <option value="vp">VP</option>
-                                    <option value="director">Director</option>
-                                    <option value="manager">Manager</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
+
 
                             <div className={styles.inputGroup}>
                                 <label>Country *</label>
@@ -624,9 +614,12 @@ export default function LandingPage({ user }: LandingPageProps) {
             <footer className={styles.footer}>
                 <div className={styles.footerContent}>
                     <div className={styles.footerBrand}>
-                        <div className={styles.logo}>OMO CRM.</div>
+                        <div className={styles.logo}>
+                            <img src="/omo-transparent.png" alt="OMO CRM" style={{ height: '70px', width: 'auto' }} />
+                        </div>
                         <div className={styles.contactInfo}>
-                            <p>123 North Street, Tech Park, Pune, India 411014</p>
+
+                            <p>C 32/22, B 1/3, Vidyapeeth Rd, Annapurna Nagar Colony, Varanasi, Uttar Pradesh 221002</p>
                             <p>+91 98342 25937</p>
                             <p>support@omodigital.io</p>
                         </div>
