@@ -36,10 +36,23 @@ export async function POST(request: Request) {
         // Generate unique product code
         const product_code = `PRD-${generateProductCode()}`;
 
+        const sanitizedBody = {
+            ...body,
+            sale_price: body.sale_price === '' ? null : body.sale_price,
+            purchase_price: body.purchase_price === '' ? null : body.purchase_price,
+            qty_in_numbers: body.qty_in_numbers === '' ? null : body.qty_in_numbers,
+            alt_qty_in_numbers: body.alt_qty_in_numbers === '' ? null : body.alt_qty_in_numbers,
+            discount_value: body.discount_value === '' ? null : body.discount_value,
+            opening_qty: body.opening_qty === '' ? null : body.opening_qty,
+            best_before_months: body.best_before_months === '' ? null : body.best_before_months,
+            expiry_date: body.expiry_date === '' ? null : body.expiry_date,
+            unit_type_na: body.unit_type_na || false
+        };
+
         const { data, error } = await supabase
             .from('products')
             .insert([{
-                ...body,
+                ...sanitizedBody,
                 product_code,
                 agent_id: agentId
             }])
@@ -49,6 +62,7 @@ export async function POST(request: Request) {
         if (error) throw error;
         return NextResponse.json(data);
     } catch (error: any) {
+        console.error("Error saving product:", error);
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

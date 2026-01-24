@@ -120,7 +120,8 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
 
             const payload = {
                 ...formData,
-                received_amount: finalReceivedAmount,
+                amount: formData.amount ? Number(formData.amount) : 0,
+                received_amount: finalReceivedAmount ? Number(finalReceivedAmount) : null,
                 products: selectedProducts
             };
 

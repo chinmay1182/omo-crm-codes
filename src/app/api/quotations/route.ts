@@ -36,10 +36,16 @@ export async function POST(request: Request) {
 
         const quotation_id = `QT-${generateQuoteId()}`;
 
+        const sanitizedBody = {
+            ...body,
+            amount: body.amount === '' ? 0 : body.amount,
+            received_amount: body.received_amount === '' ? null : body.received_amount
+        };
+
         const { data, error } = await supabase
             .from('product_quotations')
             .insert([{
-                ...body,
+                ...sanitizedBody,
                 quotation_id,
                 agent_id: agentId
             }])
@@ -49,6 +55,7 @@ export async function POST(request: Request) {
         if (error) throw error;
         return NextResponse.json(data);
     } catch (error: any) {
+        console.error("Error saving quotation:", error);
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

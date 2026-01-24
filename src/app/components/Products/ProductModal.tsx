@@ -75,19 +75,38 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
         e.preventDefault();
         setIsSubmitting(true);
         try {
+            // Sanitize payload
+            const payload = {
+                ...formData,
+                // Convert to numbers or null if empty
+                qty_in_numbers: formData.qty_in_numbers ? Number(formData.qty_in_numbers) : 0,
+                alt_qty_in_numbers: formData.alt_qty_in_numbers ? Number(formData.alt_qty_in_numbers) : null,
+                purchase_price: formData.purchase_price ? Number(formData.purchase_price) : null,
+                sale_price: formData.sale_price ? Number(formData.sale_price) : 0,
+                discount_value: formData.discount_value ? Number(formData.discount_value) : 0,
+                opening_qty: formData.opening_qty ? Number(formData.opening_qty) : 0,
+                best_before_months: formData.best_before_months ? Number(formData.best_before_months) : null,
+                // Handle empty date strings
+                expiry_date: formData.expiry_date || null
+            };
+
             const url = initialData ? `/api/products/${initialData.id}` : '/api/products';
             const method = initialData ? 'PUT' : 'POST';
             const response = await fetch(url, {
                 method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(payload)
             });
 
-            if (!response.ok) throw new Error('Failed to save product');
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to save product');
+            }
 
             toast.success(initialData ? 'Product updated' : 'Product created');
             onSuccess();
         } catch (error: any) {
+            console.error("Form submission error:", error);
             toast.error(error.message);
         } finally {
             setIsSubmitting(false);

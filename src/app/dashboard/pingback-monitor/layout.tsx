@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Lead Management - Leads & Proposals',
-    description: 'Track leads and manage proposals efficiently.',
+    title: 'Pingback Monitor - Real-time Call Events',
+    description: 'Monitor, test, and analyze real-time pingback events and connectivity status.',
 };
 
 export default function Layout({

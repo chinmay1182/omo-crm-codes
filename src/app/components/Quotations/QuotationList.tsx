@@ -25,6 +25,16 @@ export default function QuotationList() {
     const [currentQuotation, setCurrentQuotation] = useState<Quotation | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
 
+    const [statusModalOpen, setStatusModalOpen] = useState(false);
+    const [statusData, setStatusData] = useState<{
+        id: string;
+        stage: string;
+        amount?: number;
+    } | null>(null);
+    const [paymentType, setPaymentType] = useState<'Full' | 'Partial'>('Full');
+    const [paymentAmount, setPaymentAmount] = useState('');
+    const [transactionId, setTransactionId] = useState('');
+
     const fetchQuotations = async () => {
         try {
             setLoading(true);
@@ -57,6 +67,64 @@ export default function QuotationList() {
             } catch (err: any) {
                 toast.error(err.message);
             }
+        }
+    };
+
+    const handleStatusChange = (quotation: Quotation, newStage: string) => {
+        if (newStage === 'Payment Receipt') {
+            setStatusData({ id: quotation.id, stage: newStage, amount: quotation.amount });
+            setPaymentType('Full');
+            setPaymentAmount(quotation.amount ? quotation.amount.toString() : '');
+            setTransactionId('');
+            setStatusModalOpen(true);
+        } else {
+            updateQuotationStatus(quotation.id, newStage);
+        }
+    };
+
+    const updateQuotationStatus = async (quotationId: string, stage: string, extraData: any = {}) => {
+        try {
+            const response = await fetch(`/api/quotations/${quotationId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ stage, ...extraData })
+            });
+
+            if (response.ok) {
+                toast.success('Status updated');
+                fetchQuotations();
+                setStatusModalOpen(false);
+                setStatusData(null);
+            } else {
+                throw new Error('Failed to update status');
+            }
+        } catch (error: any) {
+            toast.error(error.message);
+        }
+    };
+
+    const handleStatusConfirm = () => {
+        if (!transactionId.trim()) {
+            toast.error("Transaction ID is required");
+            return;
+        }
+
+        if (statusData) {
+            const finalAmount = parseFloat(paymentAmount);
+
+            if (paymentType === 'Partial' && statusData.amount && finalAmount >= statusData.amount) {
+                toast.error(`Partial amount must be less than total amount (₹${statusData.amount})`);
+                return;
+            }
+
+            // Prepare payload matching QuotationModal logic
+            const payload = {
+                payment_status: paymentType,
+                transaction_id: transactionId,
+                received_amount: paymentType === 'Full' ? statusData.amount : finalAmount
+            };
+
+            updateQuotationStatus(statusData.id, 'Payment Receipt', payload);
         }
     };
 
@@ -153,7 +221,34 @@ export default function QuotationList() {
                                     <td>{quotation.contact_name}</td>
                                     <td>{quotation.company_name}</td>
                                     <td>{quotation.source}</td>
-                                    <td>{quotation.stage}</td>
+                                    <td>
+                                        {quotation.stage === 'Drop' || quotation.stage === 'Payment Receipt' || quotation.stage === 'Converted' ? ( // Assuming these are terminal states where 'Payment Receipt' is final for this flow? User said "expired or dropped". Let's check user request: "expired ya dropped ho toh option na aaye".
+                                            // The user request says "expired ya sropped".
+                                            // Quotation doesn't have "Expired" in options, but has "Drop". (Step 96: Created, Confirm, Dispatch, Billed, Payment Receipt, Drop, Hold)
+                                            // If "Drop" is selected, dropdown should be disabled or replaced by text.
+                                            // Also "Payment Receipt" is effectively "Closed/Paid", maybe that too?
+                                            // User specifically said "expired ya sropped". Quotations usually don't have "Expired" status in the dropdown list I saw (it was calculated in Proposals).
+                                            // Wait, Quotation interface has `stage` (string).
+                                            // If stage is 'Drop', render text instead of select.
+                                            <span style={{ fontSize: '14px', color: quotation.stage === 'Drop' ? '#dc2626' : '#15803d', paddingLeft: '0' }}>
+                                                {quotation.stage}
+                                            </span>
+                                        ) : (
+                                            <select
+                                                value={quotation.stage}
+                                                onChange={(e) => handleStatusChange(quotation, e.target.value)}
+                                                className={styles.dropdown}
+                                            >
+                                                <option value="Created">Created</option>
+                                                <option value="Confirm">Confirm</option>
+                                                <option value="Dispatch">Dispatch</option>
+                                                <option value="Billed">Billed</option>
+                                                <option value="Payment Receipt">Payment Receipt</option>
+                                                <option value="Drop">Drop</option>
+                                                <option value="Hold">Hold</option>
+                                            </select>
+                                        )}
+                                    </td>
                                     <td>
                                         {(quotation as any).products && (quotation as any).products.length > 0
                                             ? (
@@ -188,6 +283,88 @@ export default function QuotationList() {
                 initialData={currentQuotation}
                 onSuccess={handleCloseModal}
             />
+
+            {/* Payment Status Modal */}
+            {statusModalOpen && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent}>
+                        <div className={styles.modalHeader}>
+                            <h3 className={styles.modalTitle}>Payment Details</h3>
+                            <button onClick={() => setStatusModalOpen(false)} className={styles.closeButton}>
+                                <i className="fa-light fa-xmark"></i>
+                            </button>
+                        </div>
+
+                        <div className={styles.modalBody}>
+                            <div className={styles.formGroup}>
+                                <div style={{ display: 'flex', gap: '20px', marginBottom: '8px' }}>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: 0 }}>
+                                        <input
+                                            type="radio"
+                                            name="paymentType"
+                                            value="Full"
+                                            checked={paymentType === 'Full'}
+                                            onChange={() => {
+                                                setPaymentType('Full');
+                                                setPaymentAmount(statusData?.amount?.toString() || '');
+                                            }}
+                                        />
+                                        <span style={{ fontSize: '14px', fontWeight: '300' }}>Full Payment</span>
+                                    </label>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: 0 }}>
+                                        <input
+                                            type="radio"
+                                            name="paymentType"
+                                            value="Partial"
+                                            checked={paymentType === 'Partial'}
+                                            onChange={() => setPaymentType('Partial')}
+                                        />
+                                        <span style={{ fontSize: '14px', fontWeight: '300' }}>Partial Payment</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className={styles.formGroup}>
+                                <label>Received Amount</label>
+                                <input
+                                    type="number"
+                                    value={paymentAmount}
+                                    onChange={(e) => setPaymentAmount(e.target.value)}
+                                    disabled={paymentType === 'Full'}
+                                    className={styles.input}
+                                    style={paymentType === 'Full' ? { background: '#f8fafc', color: '#94a3b8' } : {}}
+                                />
+                            </div>
+
+                            <div className={styles.formGroup}>
+                                <label>Transaction ID <span style={{ color: 'red' }}>*</span></label>
+                                <input
+                                    type="text"
+                                    value={transactionId}
+                                    onChange={(e) => setTransactionId(e.target.value)}
+                                    placeholder="Enter Transaction/Reference ID"
+                                    className={styles.input}
+                                />
+                            </div>
+
+                            <div className={styles.formActions}>
+                                <button
+                                    onClick={() => setStatusModalOpen(false)}
+                                    className={styles.cancelButton}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={handleStatusConfirm}
+                                    className={styles.submitButton}
+                                >
+                                    Confirm Payment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -242,6 +242,28 @@
     text-align: center;
 }
 
+.dropdown {
+    padding: 6px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
+    background-color: transparent;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: 'Open Sauce One', sans-serif;
+    outline: none;
+    transition: all 0.2s;
+    min-width: 120px;
+    cursor: pointer;
+}
+
+/* No hover needed to match tickets style */
+
+.dropdown:focus {
+    border-bottom-color: #11a454;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .container {
@@ -299,5 +321,182 @@
         border-bottom: 1px solid #f1f5f9;
         text-align: right;
         font-size: 13px;
+    }
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.3s ease-out;
+    font-family: 'Open Sauce One', sans-serif;
+}
+
+.modalContent {
+    background-color: white;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0;
+    border-radius: 0;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease-out;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.closeButton {
+    background: #f5f5f5;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.closeButton:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.modalTitle {
+    margin: 0;
+    color: #333;
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.modalBody {
+    padding: 1.5rem;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+    font-family: 'Open Sauce One', sans-serif;
+    color: #444;
+    font-size: 14px;
+}
+
+.input,
+.select {
+    width: 100%;
+    font-weight: 300;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
+    font-size: 14px;
+    font-family: 'Open Sauce One', sans-serif;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.input:focus,
+.select:focus {
+    outline: none;
+    font-weight: 300;
+    border-bottom-color: #11a454;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.submitButton {
+    background-color: #11a454;
+    color: white;
+    border: none;
+    font-family: 'Open Sauce One', sans-serif;
+    padding: .6rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 300;
+    transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+    background-color: #0e8a46;
+}
+
+.cancelButton {
+    background-color: #f5f5f5;
+    color: #333;
+    font-family: 'Open Sauce One', sans-serif;
+    border: none;
+    padding: .7rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.cancelButton:hover {
+    background-color: #e0e0e0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

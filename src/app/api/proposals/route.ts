@@ -196,8 +196,8 @@ export async function POST(request: Request) {
         proposal_to: body.proposal_to,
         proposal_date: proposalDate,
         proposal_status: body.proposal_status || 'hold',
-        amount: body.amount || null,
-        discount: body.discount || 0,
+        amount: body.amount === '' ? null : body.amount,
+        discount: body.discount === '' ? 0 : body.discount,
         expiry_date: expiryDate,
         description: body.description || null
       }]);

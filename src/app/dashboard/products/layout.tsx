@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Lead Management - Leads & Proposals',
-    description: 'Track leads and manage proposals efficiently.',
+    title: 'Products - Products & Quotations',
+    description: 'Manage your products inventory and handle client quotations efficiently.',
 };
 
 export default function Layout({
