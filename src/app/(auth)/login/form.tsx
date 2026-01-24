@@ -106,7 +106,7 @@ export default function LoginForm() {
           </button>
 
           <p className={styles.termsText}>
-            By logging in, I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a> of Consolegal.
+            By logging in, I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a> of Omo CRM.
           </p>
         </form>
       </div>

@@ -24,6 +24,7 @@ interface LandingPageProps {
 export default function LandingPage({ user }: LandingPageProps) {
     const router = useRouter();
     const [notificationIndex, setNotificationIndex] = useState(0);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -116,41 +117,41 @@ export default function LandingPage({ user }: LandingPageProps) {
 
     const testimonials = [
         {
-            content: "Consolegal has completely transformed how I manage my law practice. The email integration and smart notes are game-changers.",
-            author: "Adv. Rajesh Kumar",
-            role: "Senior Partner, Kumar Associates",
+            content: "This CRM has completely transformed how we manage our business. The VoIP calling and WhatsApp integration are game-changers for our sales team.",
+            author: "Rajesh Kumar",
+            role: "Sales Director, TechVentures",
             avatar: "https://i.pravatar.cc/150?u=rajesh"
         },
         {
-            content: "The WhatsApp integration is seamless. I can communicate with clients directly from the CRM without switching devices.",
+            content: "The appointment scheduling and task management features have streamlined our operations. We can now focus more on growing our business.",
             author: "Priya Sharma",
-            role: "Legal Consultant",
+            role: "Operations Manager, GrowthHub",
             avatar: "https://i.pravatar.cc/150?u=priya"
         },
         {
-            content: "Highly recommended for any legal professional looking to streamline their workflow and increase productivity.",
+            content: "Highly recommended for any business looking to streamline their workflow and increase productivity. The product and service management is excellent.",
             author: "Amit Patel",
-            role: "Immigration Lawyer",
+            role: "CEO, InnovateCo",
             avatar: "https://i.pravatar.cc/150?u=amit"
         }
     ];
 
     const blogs = [
         {
-            title: "5 Tips for Managing Legal Case Files Efficiently",
-            excerpt: "Learn how to organize your digital workspace to save time and reduce stress.",
+            title: "5 Tips for Managing Customer Relationships Effectively",
+            excerpt: "Learn how to organize your CRM workspace to boost sales and improve customer satisfaction.",
             date: "Oct 12, 2025",
             image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80"
         },
         {
-            title: "The Future of Legal Tech: AI and Automation",
-            excerpt: "Discover how AI tools are reshaping the legal industry and what it means for your practice.",
+            title: "The Future of CRM: AI and Automation",
+            excerpt: "Discover how AI tools are reshaping customer relationship management and what it means for your business.",
             date: "Sep 28, 2025",
             image: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=800&q=80"
         },
         {
-            title: "Client Communication Best Practices",
-            excerpt: "Master the art of client communication with these essential tips for lawyers.",
+            title: "Customer Communication Best Practices",
+            excerpt: "Master the art of customer communication with these essential tips for modern businesses.",
             date: "Sep 15, 2025",
             image: "https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=800&q=80"
         }
@@ -191,7 +192,7 @@ export default function LandingPage({ user }: LandingPageProps) {
             {/* Navbar */}
             <nav className={styles.navbar}>
                 <div className={styles.logo}>
-                    Consolegal<span style={{ color: 'var(--foreground)' }}>.</span>
+                    OMO CRM<span style={{ color: 'var(--foreground)' }}>.</span>
                 </div>
 
                 <div className={styles.navLinks}>
@@ -219,20 +220,95 @@ export default function LandingPage({ user }: LandingPageProps) {
                         </>
                     )}
                 </div>
+
+                {/* Hamburger Menu Button */}
+                <button
+                    className={styles.hamburger}
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    <i className="fa-sharp fa-thin fa-bars"></i>
+                </button>
             </nav>
+
+            {/* Mobile Menu Overlay */}
+            {mobileMenuOpen && (
+                <div className={styles.mobileMenu}>
+                    <div className={styles.mobileMenuContent}>
+                        <div className={styles.mobileNavLink} onClick={() => {
+                            document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
+                            setMobileMenuOpen(false);
+                        }}>Home</div>
+                        <div className={styles.mobileNavLink} onClick={() => {
+                            document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+                            setMobileMenuOpen(false);
+                        }}>Products</div>
+                        <div className={styles.mobileNavLink} onClick={() => {
+                            document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                            setMobileMenuOpen(false);
+                        }}>Pricing</div>
+                        <div className={styles.mobileNavLink} onClick={() => {
+                            document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' });
+                            setMobileMenuOpen(false);
+                        }}>Testimonials</div>
+                        <div className={styles.mobileNavLink} onClick={() => {
+                            document.getElementById('insights')?.scrollIntoView({ behavior: 'smooth' });
+                            setMobileMenuOpen(false);
+                        }}>Insights</div>
+                        <div className={styles.mobileNavLink} onClick={() => {
+                            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                            setMobileMenuOpen(false);
+                        }}>Contact Us</div>
+
+                        <div className={styles.mobileMenuButtons}>
+                            {user ? (
+                                <button className={styles.signupBtn} onClick={() => {
+                                    handleDashboard();
+                                    setMobileMenuOpen(false);
+                                }}>
+                                    Go to Dashboard
+                                </button>
+                            ) : (
+                                <>
+                                    <button className={styles.loginBtn} onClick={() => {
+                                        handleLogin();
+                                        setMobileMenuOpen(false);
+                                    }}>
+                                        Log in
+                                    </button>
+                                    <button className={styles.signupBtn} onClick={() => {
+                                        handleSignup();
+                                        setMobileMenuOpen(false);
+                                    }}>
+                                        Start Free Trial
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Hero Section */}
             <section id="hero" className={styles.hero}>
+                {/* Floating Background Icons */}
+                <div className={styles.heroBackgroundIcons}>
+                    <img src="/footer/plus2.svg" alt="" className={styles.floatingIcon} style={{ top: '15%', left: '8%', width: '60px', animationDelay: '0s' }} />
+                    <img src="/footer/square stretch2.svg" alt="" className={styles.floatingIcon} style={{ top: '25%', right: '12%', width: '70px', animationDelay: '1s' }} />
+                    <img src="/footer/triangle pair.svg" alt="" className={styles.floatingIcon} style={{ bottom: '20%', left: '15%', width: '65px', animationDelay: '2s' }} />
+                    <img src="/footer/triangle pair1.svg" alt="" className={styles.floatingIcon} style={{ bottom: '30%', right: '10%', width: '55px', animationDelay: '1.5s' }} />
+                </div>
+
                 <div className={styles.heroBadge}>
                     <FontAwesomeIcon icon={faBolt} style={{ marginRight: '8px' }} />
-                    All-in-One CRM for Legal Professionals
+                    All-in-One CRM for Modern Businesses
                 </div>
                 <h1 className={styles.heroTitle}>
-                    Manage <span className={styles.titlePill}><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Lawyer" /></span> Practice, <br />
-                    Grow <span className={styles.titlePill}><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Client" /></span> <span style={{ color: '#11a454' }}>Business Faster</span>
+                    Manage <span className={styles.titlePill}><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Team" /></span> Customers, <br />
+                    Grow <span className={styles.titlePill}><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Business" /></span> <span style={{ color: '#11a454' }}>Business Faster</span>
                 </h1>
                 <p className={styles.heroSubtitle}>
-                    The all-in-one CRM built for moden law firms. Automate client intake, track cases, and communicate seamlessly on WhatsApp & Email.
+                    The all-in-one CRM built for modern businesses. Manage contacts, schedule appointments, communicate via WhatsApp & VoIP, and track everything in one place.
                 </p>
                 <div className={styles.heroButtons}>
                     {user ? (
@@ -367,7 +443,7 @@ export default function LandingPage({ user }: LandingPageProps) {
             <section id="insights" className={styles.blogsSection}>
                 <div className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>Latest Insights</h2>
-                    <p className={styles.sectionSubtitle}>Stay updated with the latest trends in legal tech.</p>
+                    <p className={styles.sectionSubtitle}>Stay updated with the latest trends in CRM and business growth.</p>
                 </div>
                 <div className={styles.blogsGrid}>
                     {blogs.map((blog, index) => (
@@ -377,7 +453,7 @@ export default function LandingPage({ user }: LandingPageProps) {
                                 <span className={styles.blogDate}>{blog.date}</span>
                                 <h3 className={styles.blogTitle}>{blog.title}</h3>
                                 <p className={styles.blogExcerpt}>{blog.excerpt}</p>
-                                <a href="#" className={styles.readMoreBtn}>Read more <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.8rem', marginLeft: '5px' }} /></a>
+                                <a href="#" className={styles.readMoreBtn}>Read more <i className="fa-sharp fa-thin fa-arrow-right" style={{ fontSize: '0.8rem', marginLeft: '5px' }} /></a>
                             </div>
                         </div>
                     ))}
@@ -455,14 +531,14 @@ export default function LandingPage({ user }: LandingPageProps) {
                             <div className={styles.checkboxGroup}>
                                 <label className={styles.checkboxLabel}>
                                     <input type="checkbox" />
-                                    <span>Connect me with an expert! I’d like to get more information about Consolegal products or see a custom demo. *</span>
+                                    <span style={{ fontWeight: '300' }}>Connect me with an expert! I’d like to get more information about Consolegal products or see a custom demo. *</span>
                                 </label>
                             </div>
 
                             <div className={styles.checkboxGroup}>
                                 <label className={styles.checkboxLabel}>
                                     <input type="checkbox" />
-                                    <span>Sign me up for news from Consolegal (products, services, blogs, and events). I can update my preferences or unsubscribe at any time.</span>
+                                    <span style={{ fontWeight: '300' }}>Sign me up for news from Consolegal (products, services, blogs, and events). I can update my preferences or unsubscribe at any time.</span>
                                 </label>
                             </div>
 
@@ -480,7 +556,7 @@ export default function LandingPage({ user }: LandingPageProps) {
             <section className={styles.faqSection}>
                 <div className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
-                    <p className={styles.sectionSubtitle}>Find answers to common questions about Consolegal.</p>
+                    <p className={styles.sectionSubtitle}>Find answers to common questions about our CRM.</p>
                 </div>
 
                 <div className={styles.faqContainer}>
@@ -510,13 +586,13 @@ export default function LandingPage({ user }: LandingPageProps) {
                         {[
                             { q: "Can I cancel my subscription anytime?", a: "Yes, you can cancel your subscription at any time. There are no long-term contracts or cancellation fees. Your data will be preserved for 30 days after cancellation." },
                             { q: "Is there a free trial available?", a: "Absolutely! We offer a 14-day free trial on all paid plans so you can explore the features before committing. No credit card required to start." },
-                            { q: "How secure is my client data?", a: "We use enterprise-grade 256-bit SSL encryption to keep your client data safe. We are compliant with legal industry standards and perform regular security audits." },
-                            { q: "Can I import my existing contacts?", a: "Yes, Consolegal offers easy import tools for CSV and Excel files. You can migrate your specific client database in just a few clicks." },
-                            { q: "Does it integrate with Outlook/Gmail?", a: "Yes, we have native integrations for both Gmail and Outlook. Emails are automatically synced efficiently to respective client case files." },
-                            { q: "Is the mobile app included?", a: "Yes, the Consolegal mobile app is available for both iOS and Android and is included with all subscription plans, allowing you to manage your practice on the go." },
-                            { q: "How does the WhatsApp integration work?", a: "You can connect your WhatsApp Business API or scan a QR code. Messages sync directly to client profiles, allowing you to chat without leaving the CRM." },
+                            { q: "How secure is my customer data?", a: "We use enterprise-grade 256-bit SSL encryption to keep your data safe. We are compliant with industry standards and perform regular security audits." },
+                            { q: "Can I import my existing contacts?", a: "Yes, our CRM offers easy import tools for CSV and Excel files. You can migrate your customer database in just a few clicks." },
+                            { q: "Does it integrate with Outlook/Gmail?", a: "Yes, we have native integrations for both Gmail and Outlook. Emails are automatically synced to respective customer profiles." },
+                            { q: "Is the mobile app included?", a: "Yes, the mobile app is available for both iOS and Android and is included with all subscription plans, allowing you to manage your business on the go." },
+                            { q: "How does the WhatsApp integration work?", a: "You can connect your WhatsApp Business API or scan a QR code. Messages sync directly to customer profiles, allowing you to chat without leaving the CRM." },
                             { q: "Do you offer training/onboarding?", a: "We provide comprehensive video tutorials, documentation, and live webinars. Enterprise plans include dedicated onboarding specialists." },
-                            { q: "Can I customize the dashboard?", a: "Yes, the dashboard is modular. You can pin your most-used widgets like Calendar, Tasks, or Recent Emails to the top for easy access." },
+                            { q: "Can I customize the dashboard?", a: "Yes, the dashboard is modular. You can pin your most-used widgets like Calendar, Tasks, Meetings, or Recent Activities to the top for easy access." },
                             { q: "What methods of payment do you accept?", a: "We accept all major credit cards (Visa, Mastercard, Amex), UPI, and net banking. For Enterprise plans, invoice-based billing is available." },
                         ].map((faq, index) => (
                             <div key={index} className={styles.faqItem} onClick={(e) => {
@@ -548,14 +624,11 @@ export default function LandingPage({ user }: LandingPageProps) {
             <footer className={styles.footer}>
                 <div className={styles.footerContent}>
                     <div className={styles.footerBrand}>
-                        <div className={styles.logo}>Consolegal.</div>
-                        <p>
-                            Empowering legal professionals with the tools they need to succeed in the modern world.
-                        </p>
+                        <div className={styles.logo}>OMO CRM.</div>
                         <div className={styles.contactInfo}>
-                            <p>123 Legal Street, Tech Park, Pune, India 411014</p>
+                            <p>123 North Street, Tech Park, Pune, India 411014</p>
                             <p>+91 98342 25937</p>
-                            <p>support@consolegal.com</p>
+                            <p>support@omodigital.io</p>
                         </div>
                     </div>
 
@@ -603,7 +676,7 @@ export default function LandingPage({ user }: LandingPageProps) {
 
                 <div className={styles.footerBottom}>
                     <div className={styles.footerCopyright}>
-                        © {new Date().getFullYear()} Consolegal. All rights reserved.
+                        © {new Date().getFullYear()} Omo CRM. All rights reserved.
                     </div>
                     <div className={styles.footerBottomLinks}>
                         <a href="#">Privacy Policy</a>
