@@ -266,6 +266,34 @@
     color: #333;
 }
 
+.iconButton {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background-color: white;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 15px;
+    margin-left: 8px;
+}
+
+.iconButton:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-color: #cbd5e1;
+}
+
+.iconButton:active {
+    transform: translateY(0);
+}
+
 .modalBody {
     padding: 24px;
     display: flex;
@@ -483,6 +511,7 @@
 .searchBar i {
     font-size: 18px !important;
     left: 10px !important;
+    width: auto !important;
 }
 
 .searchBar input {
@@ -602,7 +631,6 @@
     opacity: 0.5;
 }
 
-/* Floating Action Button */
 /* Floating Action Button */
 .fab {
     position: absolute;

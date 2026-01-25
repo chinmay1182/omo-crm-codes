@@ -67,7 +67,12 @@ export default function RegisterPage() {
   return (
     <Gatekeeper>
       <div className={styles.container}>
-        <div className={styles.imageSection}></div>
+        <div className={styles.imageSection}>
+          <div className={styles.imageContent}>
+            <h2>Join Omo CRM</h2>
+            <p>Start your journey to better business management today.</p>
+          </div>
+        </div>
         <div className={styles.formSection}>
           <div className={styles.contentWrapper}>
             <div className={styles.header}>

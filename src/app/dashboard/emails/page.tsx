@@ -69,6 +69,8 @@ type Email = {
 
 const EmailsPage = () => {
   const [emails, setEmails] = useState<Email[]>([]);
+  const [allEmails, setAllEmails] = useState<Email[]>([]); // Backup for search
+
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
   const [threadMessages, setThreadMessages] = useState<Email[]>([]); // Conversation thread
   const [searchQuery, setSearchQuery] = useState('');
@@ -176,6 +178,8 @@ const EmailsPage = () => {
 
       if (res.ok) {
         setEmails(data.emails);
+        setAllEmails(data.emails);
+
       } else {
         console.error('Failed to load emails from DB:', data.error);
         toast.error('Failed to load emails');
@@ -593,6 +597,7 @@ const EmailsPage = () => {
       if (res.ok) {
         toast.success('Email deleted');
         setEmails(prev => prev.filter(e => e.id !== selectedEmail.id));
+        setAllEmails(prev => prev.filter(e => e.id !== selectedEmail.id));
         setIsEmailModalOpen(false);
       } else {
         toast.error('Failed to delete email');
@@ -663,12 +668,12 @@ const EmailsPage = () => {
 
   const searchEmails = () => {
     if (!searchQuery.trim()) {
-      fetchImapEmails();
+      setEmails(allEmails);
     } else {
-      const filtered = emails.filter((email: Email) =>
-        email.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        email.from.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        email.snippet.toLowerCase().includes(searchQuery.toLowerCase())
+      const filtered = allEmails.filter((email: Email) =>
+        (email.subject || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (email.from || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (email.snippet || '').toLowerCase().includes(searchQuery.toLowerCase())
       );
       setEmails(filtered);
     }
@@ -1109,7 +1114,7 @@ const EmailsPage = () => {
                   className={styles.iconButton}
                   title="Print Entire Thread"
                 >
-                  <i className="fa-light fa-print-search"></i>
+                  <i className="fa-light fa-print"></i>
                 </button>
 
                 {/* Print Single Email Button */}
@@ -1306,7 +1311,8 @@ const EmailsPage = () => {
                                 setReplyBody((signature ? `<br><br><br>--<br>${cleanSig}` : '') + trailMail);
                               }}
                               className={styles.iconButton}
-                              style={{ width: '32px', height: '32px', backgroundColor: 'white', border: '1px solid #cbd5e1' }}
+
+
                               title="Reply"
                             >
                               <i className="fa-light fa-reply"></i>
@@ -1362,7 +1368,8 @@ const EmailsPage = () => {
                                 setReplyBody((signature ? `<br><br><br>--<br>${cleanSig}` : '') + trailMail);
                               }}
                               className={styles.iconButton}
-                              style={{ width: '32px', height: '32px', backgroundColor: 'white', border: '1px solid #cbd5e1' }}
+
+
                               title="Reply All"
                             >
                               <i className="fa-light fa-reply-all"></i>
@@ -1435,7 +1442,8 @@ const EmailsPage = () => {
                                 }
                               }}
                               className={styles.iconButton}
-                              style={{ width: '32px', height: '32px', backgroundColor: 'white', border: '1px solid #cbd5e1' }}
+
+
                               title="Print This Email"
                             >
                               <i className="fa-light fa-print"></i>

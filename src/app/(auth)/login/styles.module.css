@@ -9,7 +9,7 @@
 .imageSection {
     width: 70%;
     height: 100%;
-    background-image: url("/Group%205.svg");
+    background-image: url("/codioful-formerly-gradienta-bKESVqfxass-unsplash.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -215,4 +215,28 @@
         width: 100%;
         padding: 1.5rem;
     }
+}/* Image Overlay Content */
+.imageContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    height: 100%;
+    padding: 60px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+}
+
+.imageContent h2 {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    font-family: 'Open Sauce One', sans-serif;
+}
+
+.imageContent p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+    max-width: 600px;
 }

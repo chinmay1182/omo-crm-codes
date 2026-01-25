@@ -8,7 +8,7 @@
 .imageSection {
     width: 70%;
     height: 100%;
-    background-image: url("/Group%205.svg");
+    background-image: url("/codioful-formerly-gradienta-bKESVqfxass-unsplash.jpg");
     /* Ensure matched with login page or use appropriate image */
     background-repeat: no-repeat;
     background-position: center;
@@ -189,4 +189,245 @@
         height: auto;
         min-height: 100vh;
     }
+}/* Layout Containers */
+.loginContainer {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.imageSection {
+    width: 70%;
+    height: 100%;
+    background-image: url("/codioful-formerly-gradienta-bKESVqfxass-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-right: 1px solid #e1e5e9;
+}
+
+.formSection {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 2rem;
+}
+
+/* Form Styles */
+.form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 2rem;
+}
+
+.form h2 {
+    color: #212121;
+    margin-bottom: 2rem;
+    text-align: left;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -1px;
+    width: 100%;
+    /* Ensure heading aligns left relative to container */
+}
+
+.error {
+    background-color: #ffe6e6;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.form>div {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.form input {
+    width: 100%;
+    padding: 0.5rem 0;
+    font-family: 'Open Sauce One', sans-serif;
+    font-size: 1rem;
+    letter-spacing: -0.5px;
+    border: none;
+    border-bottom: 1px solid #e1e5e9;
+    border-radius: 0;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.form input:focus {
+    outline: none;
+    border-bottom-color: #212121;
+    box-shadow: none;
+}
+
+.form input::placeholder {
+    color: #aaa;
+    font-weight: 300;
+}
+
+/* Primary Button */
+.form button {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #11a454;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Open Sauce One', sans-serif;
+    font-weight: 300;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+
+/* Google Button Styling */
+.googleButton {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #ffffff !important;
+    color: #1f1f1f !important;
+    border: 1px solid #e1e5e9 !important;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 15px;
+    font-family: 'Open Sauce One', sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+    margin-top: 0 !important;
+    transition: none;
+    box-shadow: none;
+}
+
+
+
+/* Divider */
+.divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.divider span {
+    padding: 0 10px;
+    color: #888;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+/* Terms Text */
+.termsText {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    color: #888;
+    text-align: center;
+    line-height: 1.4;
+    width: 100%;
+}
+
+.termsText a {
+    color: #11a454;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.termsText a:hover {
+    text-decoration: underline;
+}
+
+/* Spinner */
+.inlineSpinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .loginContainer {
+        flex-direction: column;
+    }
+
+    .imageSection {
+        display: none;
+    }
+
+    .formSection {
+        width: 100%;
+        padding: 1.5rem;
+    }
+}/* Image Overlay Content */
+.imageContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    height: 100%;
+    padding: 60px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+}
+
+.imageContent h2 {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    font-family: 'Open Sauce One', sans-serif;
+}
+
+.imageContent p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+    max-width: 600px;
 }

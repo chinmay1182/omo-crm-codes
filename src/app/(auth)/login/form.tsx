@@ -50,7 +50,12 @@ export default function LoginForm() {
 
   return (
     <div className={styles.loginContainer}>
-      <div className={styles.imageSection}></div>
+      <div className={styles.imageSection}>
+        <div className={styles.imageContent}>
+          <h2>Empower Your Business</h2>
+          <p>Experience the future of customer relationship management.</p>
+        </div>
+      </div>
       <div className={styles.formSection}>
         <form onSubmit={handleLogin} className={styles.form}>
           {logoUrl ? (
