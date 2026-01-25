@@ -22,7 +22,9 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
         products: [],
         payment_status: 'Full',
         received_amount: '',
-        transaction_id: ''
+        transaction_id: '',
+        discount_type: 'All',
+        discount_value: 0
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -53,7 +55,9 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 ...initialData,
                 payment_status: initialData.payment_status || 'Full',
                 received_amount: initialData.received_amount || '',
-                transaction_id: initialData.transaction_id || ''
+                transaction_id: initialData.transaction_id || '',
+                discount_type: initialData.discount_type || 'All',
+                discount_value: initialData.discount_value || 0
             });
             if (initialData.products) {
                 // Check if it's already an array; if it's JSON string in some setups, parse it.
@@ -71,7 +75,9 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 products: [],
                 payment_status: 'Full',
                 received_amount: '',
-                transaction_id: ''
+                transaction_id: '',
+                discount_type: 'All',
+                discount_value: 0
             });
             setSelectedProducts([]);
         }
@@ -122,6 +128,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 ...formData,
                 amount: formData.amount ? Number(formData.amount) : 0,
                 received_amount: finalReceivedAmount ? Number(finalReceivedAmount) : null,
+                discount_value: formData.discount_value ? Number(formData.discount_value) : 0,
                 products: selectedProducts
             };
 
@@ -141,6 +148,20 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
             setIsSubmitting(false);
         }
     };
+
+    // Auto-calculate amount
+    useEffect(() => {
+        if (selectedProducts.length > 0) {
+            const total = selectedProducts.reduce((sum, p) => sum + (Number(p.sale_price || 0) * (p.qty || 1)), 0);
+            let final = total;
+
+            if (formData.discount_value && Number(formData.discount_value) > 0) {
+                final = total - (total * (Number(formData.discount_value) / 100));
+            }
+
+            setFormData(prev => ({ ...prev, amount: Math.round(final).toString() }));
+        }
+    }, [selectedProducts, formData.discount_value]);
 
     if (!isOpen) return null;
 
@@ -282,6 +303,23 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                 </div>
                             </div>
                         )}
+
+                        <div className={styles.formGroup}>
+                            <label>Discount Type</label>
+                            <select name="discount_type" value={formData.discount_type} onChange={handleChange}>
+                                <option value="All">All</option>
+                                <option value="Retailer">Retailer</option>
+                                <option value="Wholesaler">Wholesaler</option>
+                                <option value="Online">Online</option>
+                                <option value="Franchise">Franchise</option>
+                                <option value="Agent">Agent</option>
+                                <option value="Prime">Prime</option>
+                            </select>
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label>Discount (%)</label>
+                            <input type="number" name="discount_value" value={formData.discount_value} onChange={handleChange} />
+                        </div>
 
                         <div className={styles.formGroup}>
                             <label>Amount</label>

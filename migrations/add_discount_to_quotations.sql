@@ -1,0 +1,3 @@
+ALTER TABLE product_quotations 
+ADD COLUMN IF NOT EXISTS discount_type TEXT DEFAULT 'All',
+ADD COLUMN IF NOT EXISTS discount_value NUMERIC DEFAULT 0;

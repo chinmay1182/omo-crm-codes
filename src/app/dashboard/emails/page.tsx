@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from './styles.module.css';
 import { toast } from 'react-hot-toast';
+import DOMPurify from 'isomorphic-dompurify';
+
 
 import dynamic from 'next/dynamic';
 import 'react-quill-new/dist/quill.snow.css';
@@ -1062,7 +1064,7 @@ const EmailsPage = () => {
                               <div class="meta"><span class="label">Date:</span> ${new Date(msg.date).toLocaleString()}</div>
                               <div class="meta"><span class="label">Subject:</span> ${msg.subject}</div>
                             </div>
-                            <div class="content">${msg.body || msg.snippet}</div>
+                            <div class="content">${DOMPurify.sanitize(msg.body || msg.snippet)}</div>
                             ${attsHtml}
                           </div>
                           <hr/>
@@ -1162,7 +1164,7 @@ const EmailsPage = () => {
                               <div class="meta"><span class="label">Date:</span> ${new Date(fullEmail.date).toLocaleString()}</div>
                             </div>
                             <div class="content">
-                              ${fullEmail.body || fullEmail.snippet}
+                              ${DOMPurify.sanitize(fullEmail.body || fullEmail.snippet)}
                             </div>
                             ${attachmentHtml}
                           </body>
@@ -1452,7 +1454,7 @@ const EmailsPage = () => {
 
                         <div className={styles.messageBody}>
                           {String(msg.id).startsWith('reply-') ? (
-                            <div className="ql-editor" dangerouslySetInnerHTML={{ __html: msg.body || '' }} style={{ padding: 0 }} />
+                            <div className="ql-editor" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(msg.body || '') }} style={{ padding: 0 }} />
                           ) : (
                             <iframe
                               title={`Email Content ${index}`}

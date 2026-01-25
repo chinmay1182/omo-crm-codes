@@ -1,0 +1,36 @@
+import { NextResponse } from 'next/server';
+import { supabase } from '@/app/lib/supabase';
+
+export async function DELETE(
+    request: Request,
+    { params }: { params: { id: string } }
+) {
+    try {
+        const { id } = params;
+
+        const { error: deleteError, count: deletedCount } = await supabase
+            .from('product_tags')
+            .delete({ count: 'exact' }) // Request count of deleted rows
+            .eq('id', id);
+
+        if (deleteError) throw deleteError;
+
+        if (deletedCount === 0) {
+            return NextResponse.json(
+                { error: 'Product tag not found' },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json(
+            { message: 'Product tag deleted successfully' },
+            { status: 200 }
+        );
+    } catch (error) {
+        console.error('Error deleting product tag:', error);
+        return NextResponse.json(
+            { error: 'Failed to delete product tag' },
+            { status: 500 }
+        );
+    }
+}

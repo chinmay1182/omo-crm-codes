@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ProductModal from './ProductModal';
+import ProductSettingsModal from '../ProductSettingsModal/ProductSettingsModal';
 import styles from './ProductList.module.css';
 import toast from 'react-hot-toast';
 
@@ -26,6 +27,21 @@ export default function ProductList() {
     const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
 
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+    const [productTags, setProductTags] = useState<any[]>([]);
+
+    const fetchTags = async () => {
+        try {
+            const response = await fetch('/api/product-tags');
+            if (response.ok) {
+                const data = await response.json();
+                setProductTags(data);
+            }
+        } catch (error) {
+            console.error('Error fetching tags:', error);
+        }
+    };
+
     const fetchProducts = async () => {
         try {
             setLoading(true);
@@ -43,6 +59,7 @@ export default function ProductList() {
 
     useEffect(() => {
         fetchProducts();
+        fetchTags();
     }, []);
 
     const handleDelete = async (id: string) => {
@@ -121,10 +138,18 @@ export default function ProductList() {
                     />
                 </div>
                 <button
+                    onClick={() => setIsSettingsModalOpen(true)}
+                    className={styles.tagsButton}
+                    title="Manage Product Tags"
+                    style={{ marginLeft: 'auto', marginRight: '10px' }}
+                >
+                    <i className="fa-sharp fa-thin fa-gears"></i>
+                    <span>Manage Products</span>
+                </button>
+                <button
                     onClick={handleExport}
                     className={styles.tagsButton}
                     title="Export Products"
-                    style={{ marginLeft: 'auto' }}
                 >
                     <i className="fa-sharp fa-thin fa-file-export"></i>
                     <span>Export</span>
@@ -176,6 +201,16 @@ export default function ProductList() {
                 onClose={handleCloseModal}
                 initialData={currentProduct}
                 onSuccess={handleCloseModal}
+                productTags={productTags}
+            />
+
+            <ProductSettingsModal
+                isOpen={isSettingsModalOpen}
+                onClose={() => setIsSettingsModalOpen(false)}
+                onSuccess={() => {
+                    fetchTags();
+                }}
+                productTags={productTags}
             />
         </div>
     );

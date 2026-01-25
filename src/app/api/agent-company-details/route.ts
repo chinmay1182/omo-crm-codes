@@ -72,7 +72,8 @@ export async function POST(request: NextRequest) {
             company_email: details.email,
             company_phone: details.companyPhone,
             contact_person: details.contactPerson,
-            cin: details.cin
+            cin: details.cin,
+            gstin: details.gstin
         };
 
         // Check if exists

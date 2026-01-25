@@ -38,7 +38,8 @@ export default function CompanySettingsModal({ isOpen, onRequestClose, user }: C
         email: '',
         companyPhone: '',
         contactPerson: '',
-        cin: ''
+        cin: '',
+        gstin: ''
     });
 
     useEffect(() => {
@@ -71,7 +72,8 @@ export default function CompanySettingsModal({ isOpen, onRequestClose, user }: C
                                 email: data.company_email || '',
                                 companyPhone: data.company_phone || '',
                                 contactPerson: data.contact_person || '',
-                                cin: data.cin || ''
+                                cin: data.cin || '',
+                                gstin: data.gstin || ''
                             });
                         }
                     })
@@ -475,6 +477,17 @@ export default function CompanySettingsModal({ isOpen, onRequestClose, user }: C
                                 value={companyDetailsData.cin}
                                 onChange={handleInputChange}
                                 placeholder="Corporate Identification Number"
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label>GSTIN</label>
+                            <input
+                                type="text"
+                                name="gstin"
+                                value={companyDetailsData.gstin}
+                                onChange={handleInputChange}
+                                placeholder="GST Identification Number"
                             />
                         </div>
                     </div>

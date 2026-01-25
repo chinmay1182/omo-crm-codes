@@ -14,6 +14,7 @@ interface Quotation {
     stage: string;
     amount: number;
     created_at: string;
+    notes?: string;
     // ... other fields
 }
 
@@ -128,6 +129,14 @@ export default function QuotationList() {
         }
     };
 
+    const handleView = (quotation: Quotation) => {
+        window.open(`/api/quotations/${quotation.id}/view`, "_blank");
+    };
+
+    const handleDownload = (quotation: Quotation) => {
+        window.open(`/api/quotations/${quotation.id}/download`, "_blank");
+    };
+
     const handleEdit = (quotation: Quotation) => {
         setCurrentQuotation(quotation);
         setIsModalOpen(true);
@@ -210,6 +219,7 @@ export default function QuotationList() {
                             <th>Stage</th>
                             <th>Products</th>
                             <th>Amount</th>
+                            <th>Notes</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -260,7 +270,18 @@ export default function QuotationList() {
                                         }
                                     </td>
                                     <td>₹{quotation.amount}</td>
+                                    <td>
+                                        <div title={quotation.notes} style={{ maxWidth: '150px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                            {quotation.notes || '-'}
+                                        </div>
+                                    </td>
                                     <td className={styles.actions}>
+                                        <button onClick={() => handleView(quotation)} className={styles.viewButton} title="View PDF">
+                                            <i className="fa-light fa-eye"></i>
+                                        </button>
+                                        <button onClick={() => handleDownload(quotation)} className={styles.downloadButton} title="Download PDF">
+                                            <i className="fa-light fa-download"></i>
+                                        </button>
                                         <button onClick={() => handleEdit(quotation)} className={styles.editButton}>Edit</button>
                                         <button onClick={() => handleDelete(quotation.id)} className={styles.deleteButton}>Delete</button>
                                     </td>

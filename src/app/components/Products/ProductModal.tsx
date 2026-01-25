@@ -9,9 +9,10 @@ interface ProductModalProps {
     onClose: () => void;
     initialData: any;
     onSuccess: () => void;
+    productTags: any[];
 }
 
-const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialData, onSuccess }) => {
+const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialData, onSuccess, productTags }) => {
     const [formData, setFormData] = useState({
         unique_code_manual: '',
         product_name: '',
@@ -135,26 +136,65 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
 
                         <div className={styles.formGroup}>
                             <label>Category Tag</label>
-                            <input name="product_category_tag" value={formData.product_category_tag} onChange={handleChange} />
+                            <div className={styles.tagContainer}>
+                                {productTags?.filter((t: any) => t.type === 'product_category').map((tag: any) => (
+                                    <button
+                                        key={tag.id}
+                                        type="button"
+                                        className={`${styles.tagButton} ${formData.product_category_tag === tag.name ? styles.tagSelected : ''}`}
+                                        onClick={() => setFormData(prev => ({ ...prev, product_category_tag: tag.name }))}
+                                    >
+                                        {tag.name}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                         <div className={styles.formGroup}>
                             <label>Name Tag</label>
-                            <input name="product_name_tag" value={formData.product_name_tag} onChange={handleChange} />
+                            <div className={styles.tagContainer}>
+                                {productTags?.filter((t: any) => t.type === 'product_name').map((tag: any) => (
+                                    <button
+                                        key={tag.id}
+                                        type="button"
+                                        className={`${styles.tagButton} ${formData.product_name_tag === tag.name ? styles.tagSelected : ''}`}
+                                        onClick={() => setFormData(prev => ({ ...prev, product_name_tag: tag.name }))}
+                                    >
+                                        {tag.name}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
 
-                        <div className={styles.formGroup}>
-                            <label>Unit Type</label>
-                            <select name="unit_type" value={formData.unit_type} onChange={handleChange}>
-                                <option value="Pcs">Pcs</option>
-                                <option value="Kgs">Kgs</option>
-                                <option value="Ltr">Ltr</option>
-                                <option value="Box">Box</option>
-                            </select>
+                        <div className={styles.formGroup} style={{ alignSelf: 'end', marginBottom: '10px' }}>
+                            <label className={styles.checkboxLabel}>
+                                <input
+                                    type="checkbox"
+                                    name="unit_type_na"
+                                    checked={formData.unit_type_na}
+                                    onChange={handleChange}
+                                    className={styles.checkboxInput}
+                                />
+                                Unit Type N.A.
+                            </label>
                         </div>
-                        <div className={styles.formGroup}>
-                            <label>Qty (Numbers)</label>
-                            <input type="number" name="qty_in_numbers" value={formData.qty_in_numbers} onChange={handleChange} />
-                        </div>
+
+                        {!formData.unit_type_na && (
+                            <>
+                                <div className={styles.formGroup}>
+                                    <label>Unit Type</label>
+                                    <select name="unit_type" value={formData.unit_type} onChange={handleChange}>
+                                        <option value="Pcs">Pcs</option>
+                                        <option value="Kgs">Kgs</option>
+                                        <option value="Ltr">Ltr</option>
+                                        <option value="Box">Box</option>
+                                    </select>
+                                </div>
+                                <div className={styles.formGroup}>
+                                    <label>Qty (Numbers)</label>
+                                    <input type="number" name="qty_in_numbers" value={formData.qty_in_numbers} onChange={handleChange} />
+                                </div>
+                            </>
+                        )}
 
                         <div className={styles.formGroup}>
                             <label>Sale Price *</label>
@@ -196,18 +236,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
                             <input type="number" name="opening_qty" value={formData.opening_qty} onChange={handleChange} />
                         </div>
 
-                        <div className={styles.formGroup} style={{ alignSelf: 'end' }}>
-                            <label className={styles.checkboxLabel}>
-                                <input
-                                    type="checkbox"
-                                    name="unit_type_na"
-                                    checked={formData.unit_type_na}
-                                    onChange={handleChange}
-                                    className={styles.checkboxInput}
-                                />
-                                Unit Type N.A.
-                            </label>
-                        </div>
+
                     </div>
 
                     <div className={styles.formActions}>
