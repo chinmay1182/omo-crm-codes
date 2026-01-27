@@ -7,67 +7,78 @@ import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
 
 export async function GET(
-    request: Request,
-    { params }: { params: Promise<{ id: string }> }
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  try {
+    const { id } = await params;
+
+    const { data: quotation, error } = await supabase
+      .from('product_quotations')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error || !quotation) {
+      return NextResponse.json({ error: 'Quotation not found' }, { status: 404 });
+    }
+
+    // Fetch Bank Details
+    let bankDetails = null;
+    if (quotation.agent_id) {
+      const { data: bank } = await supabase
+        .from('agent_payment_details')
+        .select('*')
+        .eq('agent_id', quotation.agent_id)
+        .single();
+      bankDetails = bank;
+    }
+
+    const products = Array.isArray(quotation.products) ? quotation.products : [];
+    const discountValue = Number(quotation.discount_value || 0);
+    let subtotal = 0;
+
+    products.forEach((p: any) => {
+      subtotal += (Number(p.sale_price) || 0) * (Number(p.qty) || 1);
+    });
+
+    // Calculation Logic
+    let calculatedTotal = subtotal;
+    let discountAmount = 0;
+    if (discountValue > 0) {
+      discountAmount = subtotal * (discountValue / 100);
+      calculatedTotal = subtotal - discountAmount;
+    }
+    const grandTotal = Number(quotation.amount || 0);
+
+    // Branding
+    let logoUrl = '';
+    let sealUrl = '';
     try {
-        const { id } = await params;
+      const dbLogoPath = await getPlatformLogo();
+      const relativeLogoPath = dbLogoPath.startsWith('/') ? dbLogoPath.substring(1) : dbLogoPath;
+      const logoPath = path.join(process.cwd(), 'public', relativeLogoPath);
+      if (fs.existsSync(logoPath)) {
+        const logoBuffer = fs.readFileSync(logoPath);
+        const ext = path.extname(logoPath).toLowerCase();
+        const mime = ext === '.png' ? 'image/png' : 'image/jpeg';
+        logoUrl = `data:${mime};base64,${logoBuffer.toString('base64')}`;
+      }
 
-        const { data: quotation, error } = await supabase
-            .from('product_quotations')
-            .select('*')
-            .eq('id', id)
-            .single();
+      const dbSealPath = await getPlatformSeal();
+      const relativeSealPath = dbSealPath.startsWith('/') ? dbSealPath.substring(1) : dbSealPath;
+      let sealPath = path.join(process.cwd(), 'public', relativeSealPath);
+      if (!dbSealPath) sealPath = path.join(process.cwd(), 'public', 'seal.jpeg');
 
-        if (error || !quotation) {
-            return NextResponse.json({ error: 'Quotation not found' }, { status: 404 });
-        }
+      if (fs.existsSync(sealPath)) {
+        const sealBuffer = fs.readFileSync(sealPath);
+        const ext = path.extname(sealPath).toLowerCase();
+        const mime = ext === '.png' ? 'image/png' : 'image/jpeg';
+        sealUrl = `data:${mime};base64,${sealBuffer.toString('base64')}`;
+      }
+    } catch (e) { console.error('Image load error', e); }
 
-        const products = Array.isArray(quotation.products) ? quotation.products : [];
-        const discountValue = Number(quotation.discount_value || 0);
-        let subtotal = 0;
-
-        products.forEach((p: any) => {
-            subtotal += (Number(p.sale_price) || 0) * (Number(p.qty) || 1);
-        });
-
-        // Calculation Logic
-        let calculatedTotal = subtotal;
-        let discountAmount = 0;
-        if (discountValue > 0) {
-            discountAmount = subtotal * (discountValue / 100);
-            calculatedTotal = subtotal - discountAmount;
-        }
-        const grandTotal = Number(quotation.amount || 0);
-
-        // Branding
-        let logoUrl = '';
-        let sealUrl = '';
-        try {
-            const dbLogoPath = await getPlatformLogo();
-            const relativeLogoPath = dbLogoPath.startsWith('/') ? dbLogoPath.substring(1) : dbLogoPath;
-            const logoPath = path.join(process.cwd(), 'public', relativeLogoPath);
-            if (fs.existsSync(logoPath)) {
-                const logoBuffer = fs.readFileSync(logoPath);
-                const ext = path.extname(logoPath).toLowerCase();
-                const mime = ext === '.png' ? 'image/png' : 'image/jpeg';
-                logoUrl = `data:${mime};base64,${logoBuffer.toString('base64')}`;
-            }
-
-            const dbSealPath = await getPlatformSeal();
-            const relativeSealPath = dbSealPath.startsWith('/') ? dbSealPath.substring(1) : dbSealPath;
-            let sealPath = path.join(process.cwd(), 'public', relativeSealPath);
-            if (!dbSealPath) sealPath = path.join(process.cwd(), 'public', 'seal.jpeg');
-
-            if (fs.existsSync(sealPath)) {
-                const sealBuffer = fs.readFileSync(sealPath);
-                const ext = path.extname(sealPath).toLowerCase();
-                const mime = ext === '.png' ? 'image/png' : 'image/jpeg';
-                sealUrl = `data:${mime};base64,${sealBuffer.toString('base64')}`;
-            }
-        } catch (e) { console.error('Image load error', e); }
-
-        const html = `
+    const html = `
     <!DOCTYPE html>
     <html lang="en">
       <head>
@@ -171,12 +182,15 @@ export async function GET(
           ` : ''}
 
           <div class="footer">
+            ${bankDetails ? `
             <div class="bank-details">
               <strong>Bank Details:</strong><br>
-              Bank: BANK OF BARODA<br>
-              Account: CONSOLEGAL PRIVATE LIMITED<br>
-              A/C No: 28650200000627 | IFSC: BARB0SAMOBS
+              Bank: ${bankDetails.bank_name || '-'}<br>
+              Account: ${bankDetails.account_holder_name || '-'}<br>
+              A/C No: ${bankDetails.account_number || '-'} | IFSC: ${bankDetails.ifsc_code || '-'}<br>
+              ${bankDetails.upi_id ? `UPI: ${bankDetails.upi_id}` : ''}
             </div>
+            ` : ''}
             <div class="signature">
                ${sealUrl ? `<img src="${sealUrl}" class="seal" />` : ''}
                <p><strong>Authorized Signatory</strong></p>
@@ -187,38 +201,38 @@ export async function GET(
     </html>
         `;
 
-        let browser = null;
-        try {
-            browser = await puppeteer.launch({
-                args: chromium.args,
-                defaultViewport: chromium.defaultViewport,
-                executablePath: await chromium.executablePath(),
-                headless: chromium.headless,
-                ignoreHTTPSErrors: true
-            });
+    let browser = null;
+    try {
+      browser = await puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport as any,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless as any,
+        ignoreHTTPSErrors: true
+      } as any);
 
-            const page = await browser.newPage();
-            await page.setContent(html);
-            const pdf = await page.pdf({
-                format: 'A4',
-                printBackground: true,
-                margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' }
-            });
+      const page = await browser.newPage();
+      await page.setContent(html);
+      const pdf = await page.pdf({
+        format: 'A4',
+        printBackground: true,
+        margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' }
+      });
 
-            await browser.close();
+      await browser.close();
 
-            return new NextResponse(pdf, {
-                headers: {
-                    'Content-Type': 'application/pdf',
-                    'Content-Disposition': `attachment; filename="Quotation-${quotation.quotation_id}.pdf"`
-                }
-            });
-        } catch (error: any) {
-            if (browser) await browser.close();
-            return NextResponse.json({ error: error.message }, { status: 500 });
+      return new NextResponse(pdf as any, {
+        headers: {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': `attachment; filename="Quotation-${quotation.quotation_id}.pdf"`
         }
-
-    } catch (e: any) {
-        return NextResponse.json({ error: e.message }, { status: 500 });
+      });
+    } catch (error: any) {
+      if (browser) await browser.close();
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
+
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message }, { status: 500 });
+  }
 }
