@@ -619,7 +619,8 @@ export default function LandingPage({ user }: LandingPageProps) {
                         </div>
                         <div className={styles.contactInfo}>
 
-                            <p>C 32/22, B 1/3, Vidyapeeth Rd, Annapurna Nagar Colony, Varanasi, Uttar Pradesh 221002</p>
+                            <p style={{ fontWeight: 400 }}>Omo Digital Private Limited</p>
+                            <p>Varanasi, India</p>
                             <p>+91 98342 25937</p>
                             <p>support@omodigital.io</p>
                         </div>
@@ -639,7 +640,7 @@ export default function LandingPage({ user }: LandingPageProps) {
                         <h4>Company</h4>
                         <ul>
                             <li><a href="#">About Us</a></li>
-                            <li><a href="#">Careers</a></li>
+                            <li><a href="https://pear-viscose-93f.notion.site/Careers-at-OMO-DIGITAL-acf89ea9e6ac43b09e6b52f8c5f425d2?pvs=74" target="_blank" rel="noopener noreferrer">Careers</a></li>
                             <li><a href="#">Blog</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
@@ -648,10 +649,10 @@ export default function LandingPage({ user }: LandingPageProps) {
                     <div className={styles.footerCol}>
                         <h4>Documentation</h4>
                         <ul>
-                            <li><a href="#">Help Center<i className="fa-sharp fa-thin fa-arrow-up-right" style={{ marginLeft: '0.5rem' }}></i></a></li>
-                            <li><a href="#">API Reference<i className="fa-sharp fa-thin fa-arrow-up-right" style={{ marginLeft: '0.5rem' }}></i></a></li>
-                            <li><a href="#">System Status<i className="fa-sharp fa-thin fa-arrow-up-right" style={{ marginLeft: '0.5rem' }}></i></a></li>
-                            <li><a href="#">Changelog<i className="fa-sharp fa-thin fa-arrow-up-right" style={{ marginLeft: '0.5rem' }}></i></a></li>
+                            <li><a href="https://pear-viscose-93f.notion.site/OMO-CRM-Help-Center-f8d2334a15f8410fa21a446309eea51d" target="_blank" rel="noopener noreferrer">Help Center<i className="fa-sharp fa-thin fa-arrow-up-right" style={{ marginLeft: '0.5rem' }}></i></a></li>
+                            <li><a href="https://pear-viscose-93f.notion.site/API-Reference-20ca8424e8b646ee9b1266dcb604a58a" target="_blank" rel="noopener noreferrer">API Reference<i className="fa-sharp fa-thin fa-arrow-up-right" style={{ marginLeft: '0.5rem' }}></i></a></li>
+                            <li><a href="https://pear-viscose-93f.notion.site/System-Logs-b5ff7f797a054d5991a0d975e6212890?pvs=74" target="_blank" rel="noopener noreferrer">System Status<i className="fa-sharp fa-thin fa-arrow-up-right" style={{ marginLeft: '0.5rem' }}></i></a></li>
+                            <li><a href="https://pear-viscose-93f.notion.site/Change-Logs-7bd815ba886247f984c81ebb955c5f40?pvs=73" target="_blank" rel="noopener noreferrer">Changelog<i className="fa-sharp fa-thin fa-arrow-up-right" style={{ marginLeft: '0.5rem' }}></i></a></li>
                         </ul>
                     </div>
 
@@ -672,10 +673,10 @@ export default function LandingPage({ user }: LandingPageProps) {
                         © {new Date().getFullYear()} Omo CRM. All rights reserved.
                     </div>
                     <div className={styles.footerBottomLinks}>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Cookies</a>
+                        <a href="https://pear-viscose-93f.notion.site/Privacy-Policy-ebbd16145a764490819799a1287f8099?pvs=74" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                        <a href="https://pear-viscose-93f.notion.site/Cookie-Policy-2de8b931e5c84702b4a49ac3bab50f84?pvs=74" target="_blank" rel="noopener noreferrer">Cookies</a>
                         <a href="#">Refunds</a>
-                        <a href="#">Terms & Conditions</a>
+                        <a href="https://pear-viscose-93f.notion.site/Terms-and-Conditions-0a6274944fcc4aeda3dbc1207f68998d?pvs=73" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
                     </div>
                 </div>
             </footer>
