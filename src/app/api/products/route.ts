@@ -42,6 +42,7 @@ export async function POST(request: Request) {
             purchase_price: body.purchase_price === '' ? null : body.purchase_price,
             qty_in_numbers: body.qty_in_numbers === '' ? null : body.qty_in_numbers,
             alt_qty_in_numbers: body.alt_qty_in_numbers === '' ? null : body.alt_qty_in_numbers,
+            alt_unit_value: body.alt_unit_value === '' ? null : body.alt_unit_value,
             discount_value: body.discount_value === '' ? null : body.discount_value,
             opening_qty: body.opening_qty === '' ? null : body.opening_qty,
             best_before_months: body.best_before_months === '' ? null : body.best_before_months,

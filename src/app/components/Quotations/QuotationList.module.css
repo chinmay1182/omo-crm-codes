@@ -146,7 +146,9 @@
 }
 
 .editButton,
-.deleteButton {
+.deleteButton,
+.viewButton,
+.downloadButton {
     border: none;
     padding: 6px 12px;
     border-radius: 50px;
@@ -178,6 +180,26 @@
 .deleteButton:hover {
     background: rgba(244, 67, 54, 0.2);
 }
+
+/* New Styles for View and Download Buttons */
+.viewButton {
+    background: rgba(33, 150, 243, 0.1);
+    color: #1976d2;
+}
+
+.viewButton:hover {
+    background: rgba(33, 150, 243, 0.2);
+}
+
+.downloadButton {
+    background: rgba(103, 58, 183, 0.1);
+    color: #673ab7;
+}
+
+.downloadButton:hover {
+    background: rgba(103, 58, 183, 0.2);
+}
+
 
 /* Floating Action Button */
 .floatingButton {

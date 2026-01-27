@@ -18,6 +18,7 @@ import MeetingsApiSettingsModal from './components/MeetingsApiSettingsModal';
 import ThemeSelectorModal from './components/ThemeSelectorModal';
 import GlobalSearch from '../components/ui/GlobalSearch/GlobalSearch';
 import Reminders from '../components/ui/Reminders/Reminders';
+import PaymentDetailsModal from './components/PaymentDetailsModal';
 
 import FeedbackModal from '../components/FeedbackModal/FeedbackModal';
 
@@ -63,6 +64,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [trialDaysRemaining, setTrialDaysRemaining] = useState<number>(0);
 
   const [showPaymentHistory, setShowPaymentHistory] = useState(false);
+  const [showPaymentDetails, setShowPaymentDetails] = useState(false);
 
   // ✅ Notification rotation state
   const [notificationIndex, setNotificationIndex] = useState(0);
@@ -705,6 +707,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             <div style={{ backgroundColor: '#f9fafb', borderRadius: '12px', padding: '6px', border: 'none' }}>
                               <button
                                 onClick={() => {
+                                  setShowPaymentDetails(true);
+                                  setShowProfileDropdown(false);
+                                }}
+                                className={styles.profileDropdownItem}
+                              >
+                                Payment Details
+                              </button>
+                              <button
+                                onClick={() => {
                                   setShowPaymentHistory(true);
                                   setShowProfileDropdown(false);
                                 }}
@@ -781,6 +792,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               isOpen={showPaymentHistory}
               onRequestClose={() => setShowPaymentHistory(false)}
               userId={user?.id}
+            />
+
+            <PaymentDetailsModal
+              isOpen={showPaymentDetails}
+              onRequestClose={() => setShowPaymentDetails(false)}
+              user={user}
             />
 
             <FeedbackModal

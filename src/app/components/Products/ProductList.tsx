@@ -15,6 +15,9 @@ interface Product {
     unit_type: string;
     sale_price: number;
     qty_in_numbers: number;
+    alt_unit_type?: string;
+    alt_qty_in_numbers?: number;
+    alt_unit_value?: number;
     created_at: string;
     // ... other fields
 }
@@ -137,23 +140,26 @@ export default function ProductList() {
                         className={styles.searchInput}
                     />
                 </div>
-                <button
-                    onClick={() => setIsSettingsModalOpen(true)}
-                    className={styles.tagsButton}
-                    title="Manage Product Tags"
-                    style={{ marginLeft: 'auto', marginRight: '10px' }}
-                >
-                    <i className="fa-sharp fa-thin fa-gears"></i>
-                    <span>Manage Products</span>
-                </button>
-                <button
-                    onClick={handleExport}
-                    className={styles.tagsButton}
-                    title="Export Products"
-                >
-                    <i className="fa-sharp fa-thin fa-file-export"></i>
-                    <span>Export</span>
-                </button>
+                <div style={{ marginLeft: 'auto', display: 'flex' }}>
+
+                    <button
+                        onClick={() => setIsSettingsModalOpen(true)}
+                        className={styles.tagsButton}
+                        title="Manage Product Tags"
+                        style={{ marginRight: '10px' }}
+                    >
+                        <i className="fa-sharp fa-thin fa-gears"></i>
+                        <span>Manage Products</span>
+                    </button>
+                    <button
+                        onClick={handleExport}
+                        className={styles.tagsButton}
+                        title="Export Products"
+                    >
+                        <i className="fa-sharp fa-thin fa-file-export"></i>
+                        <span>Export</span>
+                    </button>
+                </div>
             </div>
 
             <div className={styles.tableContainer}>
@@ -164,6 +170,7 @@ export default function ProductList() {
                             <th>Name</th>
                             <th>Category</th>
                             <th>Unit</th>
+                            <th>Alt Unit</th>
                             <th>Sale Price</th>
                             <th>Qty</th>
                             <th>Actions</th>
@@ -177,6 +184,13 @@ export default function ProductList() {
                                     <td>{product.product_name}</td>
                                     <td>{product.product_category_tag}</td>
                                     <td>{product.unit_type}</td>
+                                    <td>
+                                        {product.alt_unit_type ? (
+                                            <span style={{ fontSize: '12px', background: '#f0fdf4', color: '#166534', padding: '2px 8px', borderRadius: '10px', border: '1px solid #bbf7d0' }}>
+                                                {product.alt_unit_type} : {product.alt_qty_in_numbers} {product.alt_unit_value ? `(${product.alt_unit_value})` : ''}
+                                            </span>
+                                        ) : '-'}
+                                    </td>
                                     <td>₹{product.sale_price}</td>
                                     <td>{product.qty_in_numbers}</td>
                                     <td className={styles.actions}>

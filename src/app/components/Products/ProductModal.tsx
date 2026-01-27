@@ -22,6 +22,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
         qty_in_numbers: 1,
         alt_unit_type: '',
         alt_qty_in_numbers: '',
+        alt_unit_value: '',
         purchase_price: '',
         sale_price: '',
         discount_type: 'All',
@@ -49,6 +50,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
                 qty_in_numbers: 1,
                 alt_unit_type: '',
                 alt_qty_in_numbers: '',
+                alt_unit_value: '',
                 purchase_price: '',
                 sale_price: '',
                 discount_type: 'All',
@@ -82,6 +84,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
                 // Convert to numbers or null if empty
                 qty_in_numbers: formData.qty_in_numbers ? Number(formData.qty_in_numbers) : 0,
                 alt_qty_in_numbers: formData.alt_qty_in_numbers ? Number(formData.alt_qty_in_numbers) : null,
+                alt_unit_value: formData.alt_unit_value ? Number(formData.alt_unit_value) : null,
                 purchase_price: formData.purchase_price ? Number(formData.purchase_price) : null,
                 sale_price: formData.sale_price ? Number(formData.sale_price) : 0,
                 discount_value: formData.discount_value ? Number(formData.discount_value) : 0,
@@ -187,11 +190,62 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
                                         <option value="Kgs">Kgs</option>
                                         <option value="Ltr">Ltr</option>
                                         <option value="Box">Box</option>
+                                        <option value="Packet">Packet</option>
+                                        <option value="Dozen">Dozen</option>
+                                        <option value="Gm">Gm</option>
+                                        <option value="Ml">Ml</option>
                                     </select>
                                 </div>
                                 <div className={styles.formGroup}>
                                     <label>Qty (Numbers)</label>
                                     <input type="number" name="qty_in_numbers" value={formData.qty_in_numbers} onChange={handleChange} />
+                                </div>
+
+                                <div className={styles.formGroupFull} style={{ marginTop: '10px' }}>
+                                    <label>Add Alternative Quantities</label>
+                                    <div className={styles.tagContainer}>
+                                        {['Box', 'Packet', 'Dozen', 'Gm', 'Kg', 'Ltr', 'Ml', 'Pcs'].map((unit) => (
+                                            <button
+                                                key={unit}
+                                                type="button"
+                                                className={`${styles.tagButton} ${formData.alt_unit_type === unit ? styles.tagSelected : ''}`}
+                                                onClick={() => setFormData(prev => ({ ...prev, alt_unit_type: unit }))}
+                                            >
+                                                {unit}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className={styles.formGroup}>
+                                    <label>Alt Unit Type</label>
+                                    <input
+                                        type="text"
+                                        name="alt_unit_type"
+                                        value={formData.alt_unit_type}
+                                        onChange={handleChange}
+                                        placeholder="Select or type unit"
+                                    />
+                                </div>
+                                <div className={styles.formGroup}>
+                                    <label>Alt Qty (Numbers)</label>
+                                    <input
+                                        type="number"
+                                        name="alt_qty_in_numbers"
+                                        value={formData.alt_qty_in_numbers}
+                                        onChange={handleChange}
+                                        placeholder="e.g. 10"
+                                    />
+                                </div>
+                                <div className={styles.formGroup}>
+                                    <label>Alt Unit Value</label>
+                                    <input
+                                        type="number"
+                                        name="alt_unit_value"
+                                        value={formData.alt_unit_value}
+                                        onChange={handleChange}
+                                        placeholder="Value"
+                                    />
                                 </div>
                             </>
                         )}
