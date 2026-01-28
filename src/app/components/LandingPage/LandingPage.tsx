@@ -621,7 +621,7 @@ export default function LandingPage({ user }: LandingPageProps) {
 
                             <p style={{ fontWeight: 400 }}>Omo Digital Private Limited</p>
                             <p>Varanasi, India</p>
-                            <p>+91 98342 25937</p>
+                            <p>+91 88811 16074</p>
                             <p>support@omodigital.io</p>
                         </div>
                     </div>
