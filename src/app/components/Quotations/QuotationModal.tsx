@@ -24,8 +24,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
         received_amount: '',
         transaction_id: '',
         discount_type: 'All',
-        discount_value: 0,
-        gst_rate: 18
+        discount_value: 0
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -98,8 +97,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 received_amount: '',
                 transaction_id: '',
                 discount_type: 'All',
-                discount_value: 0,
-                gst_rate: 18
+                discount_value: 0
             });
             setSelectedProducts([]);
         }
@@ -145,6 +143,8 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
         setShowCompanySuggestions(false);
     };
 
+
+
     const handleProductSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const productId = e.target.value;
         if (!productId) return;
@@ -158,7 +158,19 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
             // If duplicate, maybe increase quantity? 
             // Let's prevent strict duplicate ID in array for UI simplicity first. 
             if (!selectedProducts.find(p => p.id === product.id)) {
-                setSelectedProducts([...selectedProducts, { ...product, qty: 1 }]);
+
+                // Default to 'All' (Standard) discount type when adding new product
+                const defaultType = 'All';
+                const category = defaultType.toLowerCase();
+                const discount = product.category_discounts?.[category] ?? product.category_discounts?.all ?? 0;
+
+                setSelectedProducts([...selectedProducts, {
+                    ...product,
+                    qty: 1,
+                    discount_type: defaultType,
+                    discount: discount,
+                    gst_rate: product.gst_rate || 0
+                }]);
             } else {
                 toast('Product already added');
             }
@@ -172,8 +184,14 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
     const handleProductChange = (productId: string, field: string, value: string) => {
         setSelectedProducts(prev => prev.map(p => {
             if (p.id === productId) {
-                // If it's discount_type, value is string. If it's numeric field, convert.
-                const val = (field === 'qty' || field === 'discount') ? Number(value) : value;
+                if (field === 'discount_type') {
+                    const cat = value.toLowerCase();
+                    const newDiscount = p.category_discounts?.[cat] ?? p.category_discounts?.all ?? 0;
+                    return { ...p, discount_type: value, discount: newDiscount };
+                }
+
+                // If it's numeric field, convert.
+                const val = (field === 'qty') ? Number(value) : value;
                 return { ...p, [field]: val };
             }
             return p;
@@ -218,26 +236,23 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
     };
 
     // Auto-calculate amount
-    // Auto-calculate amount
     useEffect(() => {
         if (selectedProducts.length > 0) {
-            const subtotal = selectedProducts.reduce((sum, p) => {
+            const final = selectedProducts.reduce((sum, p) => {
                 const price = Number(p.sale_price || 0);
                 const qty = Number(p.qty || 1);
                 const discount = Number(p.discount || 0);
-                const itemTotal = (price * qty) * (1 - discount / 100);
-                return sum + itemTotal;
+                const gst = Number(p.gst_rate || 0);
+
+                const taxableValue = (price * qty) * (1 - discount / 100);
+                const taxAmount = taxableValue * (gst / 100);
+
+                return sum + taxableValue + taxAmount;
             }, 0);
-
-            let final = subtotal;
-
-            if (formData.gst_rate) {
-                final = final + (final * (Number(formData.gst_rate) / 100));
-            }
 
             setFormData(prev => ({ ...prev, amount: Math.round(final).toString() }));
         }
-    }, [selectedProducts, formData.gst_rate]);
+    }, [selectedProducts]);
 
     if (!isOpen) return null;
 
@@ -507,23 +522,24 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                                             />
                                                         </td>
                                                         <td style={{ padding: '12px', textAlign: 'center', borderBottom: isLast ? 'none' : '1px solid #f3f4f6' }}>
-                                                            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', alignItems: 'center' }}>
+
+                                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center' }}>
                                                                 <select
                                                                     value={p.discount_type || 'All'}
                                                                     onChange={(e) => handleProductChange(p.id, 'discount_type', e.target.value)}
                                                                     style={{
                                                                         width: '100px',
-                                                                        padding: '6px',
+                                                                        padding: '4px',
                                                                         border: '1px solid #e5e7eb',
                                                                         borderRadius: '6px',
-                                                                        fontSize: '12px',
+                                                                        fontSize: '11px',
                                                                         color: '#374151',
                                                                         background: '#fff',
                                                                         outline: 'none',
                                                                         cursor: 'pointer'
                                                                     }}
                                                                 >
-                                                                    <option value="All">All</option>
+                                                                    <option value="All">Standard</option>
                                                                     <option value="Retailer">Retailer</option>
                                                                     <option value="Wholesaler">Wholesaler</option>
                                                                     <option value="Online">Online</option>
@@ -531,26 +547,9 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                                                     <option value="Agent">Agent</option>
                                                                     <option value="Prime">Prime</option>
                                                                 </select>
-                                                                <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                                                                    <input
-                                                                        type="number"
-                                                                        min="0"
-                                                                        max="100"
-                                                                        value={discount}
-                                                                        onChange={(e) => handleProductChange(p.id, 'discount', e.target.value)}
-                                                                        style={{
-                                                                            width: '50px',
-                                                                            padding: '6px 20px 6px 6px',
-                                                                            border: '1px solid #e5e7eb',
-                                                                            borderRadius: '6px',
-                                                                            textAlign: 'center',
-                                                                            fontSize: '13px',
-                                                                            outline: 'none',
-                                                                            color: '#374151'
-                                                                        }}
-                                                                    />
-                                                                    <span style={{ position: 'absolute', right: '6px', fontSize: '11px', color: '#9ca3af', pointerEvents: 'none' }}>%</span>
-                                                                </div>
+                                                                <span style={{ fontSize: '11px', color: '#6b7280' }}>
+                                                                    {p.discount || 0}% Off
+                                                                </span>
                                                             </div>
                                                         </td>
                                                         <td style={{ padding: '12px', textAlign: 'right', fontWeight: '500', color: '#111827', borderBottom: isLast ? 'none' : '1px solid #f3f4f6' }}>₹{Math.round(total)}</td>
@@ -584,6 +583,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                                 <td colSpan={4} style={{ padding: '12px 16px', textAlign: 'right', fontWeight: '600', color: '#374151', borderBottomLeftRadius: '8px' }}>Sub Total:</td>
                                                 <td style={{ padding: '12px', textAlign: 'right', fontWeight: '700', color: '#111827' }}>
                                                     ₹{Math.round(selectedProducts.reduce((sum, p) => sum + ((Number(p.sale_price || 0) * (Number(p.qty || 1))) * (1 - (Number(p.discount || 0) / 100))), 0))}
+                                                    <div style={{ fontSize: '10px', color: '#9ca3af', fontWeight: '400' }}>(Excl. GST)</div>
                                                 </td>
                                                 <td style={{ borderBottomRightRadius: '8px' }}></td>
                                             </tr>
@@ -592,21 +592,6 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                 </div>
                             </div>
                         )}
-
-                        <div className={styles.formGroup}>
-                            <label>GST Rate</label>
-                            <select
-                                name="gst_rate"
-                                value={(formData as any).gst_rate}
-                                onChange={handleChange}
-                            >
-                                <option value="0">GST @ 0%</option>
-                                <option value="5">GST @ 5%</option>
-                                <option value="12">GST @ 12%</option>
-                                <option value="18">GST @ 18%</option>
-                                <option value="28">GST @ 28%</option>
-                            </select>
-                        </div>
 
                         <div className={styles.formGroup}>
                             <label>Amount</label>

@@ -508,7 +508,7 @@ export default function LandingPage({ user }: LandingPageProps) {
                             <div className={styles.inputGroup}>
                                 <label>Phone *</label>
                                 <div style={{ display: 'flex', gap: '10px' }}>
-                                    <input type="text" className={styles.inputField} defaultValue="+ 1" style={{ width: '80px', textAlign: 'center' }} readOnly />
+                                    <input type="text" className={styles.inputField} defaultValue="+ 91" style={{ width: '80px', textAlign: 'center' }} readOnly />
                                     <input type="tel" className={styles.inputField} placeholder="1234567890" required />
                                 </div>
                             </div>
