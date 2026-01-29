@@ -187,7 +187,7 @@ export default function ProductList() {
                                     <td>
                                         {product.alt_unit_type ? (
                                             <span style={{ fontSize: '12px', background: '#f0fdf4', color: '#166534', padding: '2px 8px', borderRadius: '10px', border: '1px solid #bbf7d0' }}>
-                                                {product.alt_unit_type} : {product.alt_qty_in_numbers}
+                                                {product.alt_unit_type} : {(Number(product.qty_in_numbers || 0) * Number(product.alt_qty_in_numbers || 0))}
                                             </span>
                                         ) : '-'}
                                     </td>

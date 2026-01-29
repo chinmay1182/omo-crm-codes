@@ -24,7 +24,8 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
         received_amount: '',
         transaction_id: '',
         discount_type: 'All',
-        discount_value: 0
+        discount_value: 0,
+        validity_days: '30'
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -97,7 +98,8 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 received_amount: '',
                 transaction_id: '',
                 discount_type: 'All',
-                discount_value: 0
+                discount_value: 0,
+                validity_days: '30'
             });
             setSelectedProducts([]);
         }
@@ -391,9 +393,23 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                             </select>
                         </div>
 
+                        <div className={styles.formGroup}>
+                            <label>Validity (Days)</label>
+                            <input
+                                type="number"
+                                name="validity_days"
+                                value={formData.validity_days}
+                                onChange={handleChange}
+                                placeholder="e.g. 30"
+                            />
+                        </div>
+
                         {formData.stage === 'Payment Receipt' && (
                             <div className={styles.formGroupFull} style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e0e0e0', marginTop: '10px' }}>
                                 <label style={{ marginBottom: '10px', fontWeight: '500', color: '#15426d' }}>Payment Details</label>
+                                <div style={{ fontSize: '14px', marginBottom: '10px', color: '#333' }}>
+                                    <strong>Total Approved Amount:</strong> ₹{formData.amount}
+                                </div>
 
                                 <div style={{ display: 'flex', gap: '20px', marginBottom: '15px' }}>
                                     <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'normal', cursor: 'pointer' }}>
@@ -582,8 +598,27 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                             <tr style={{ background: '#f9fafb', borderTop: '1px solid #e5e7eb' }}>
                                                 <td colSpan={4} style={{ padding: '12px 16px', textAlign: 'right', fontWeight: '600', color: '#374151', borderBottomLeftRadius: '8px' }}>Sub Total:</td>
                                                 <td style={{ padding: '12px', textAlign: 'right', fontWeight: '700', color: '#111827' }}>
-                                                    ₹{Math.round(selectedProducts.reduce((sum, p) => sum + ((Number(p.sale_price || 0) * (Number(p.qty || 1))) * (1 - (Number(p.discount || 0) / 100))), 0))}
-                                                    <div style={{ fontSize: '10px', color: '#9ca3af', fontWeight: '400' }}>(Excl. GST)</div>
+                                                    ₹{Math.round(selectedProducts.reduce((sum, p) => {
+                                                        const price = Number(p.sale_price || 0);
+                                                        const qty = Number(p.qty || 1);
+                                                        const discount = Number(p.discount || 0);
+                                                        const gst = Number(p.gst_rate || 0);
+                                                        const isInclusive = p.gst_inclusive;
+
+                                                        const discountedPricePerUnit = price * (1 - discount / 100);
+
+                                                        if (isInclusive) {
+                                                            return sum + (discountedPricePerUnit * qty);
+                                                        } else {
+                                                            return sum + (discountedPricePerUnit * qty * (1 + gst / 100)); // Calculate approximate final with tax for visual subtotal?
+                                                            // Usually Subtotal is Taxable Value.
+                                                            // But user logic in previous code was: P*Q*(1-d) + P*Q*(1-d)*gst. That is GRAND TOTAL.
+                                                            // The table footer label says "Sub Total".
+                                                            // If I remove "(Excl GST)", then this amounts to Grand Total.
+                                                            // Let's ensure this matches the logic in useEffect.
+                                                        }
+                                                    }, 0))}
+                                                    <div style={{ fontSize: '10px', color: '#9ca3af', fontWeight: '400' }}>(Total)</div>
                                                 </td>
                                                 <td style={{ borderBottomRightRadius: '8px' }}></td>
                                             </tr>

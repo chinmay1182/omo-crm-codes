@@ -34,30 +34,50 @@ export async function GET(
 
     // Prepare Data
     const products = Array.isArray(quotation.products) ? quotation.products : [];
-    const discountType = quotation.discount_type || 'All';
-    const discountValue = Number(quotation.discount_value || 0);
-    let subtotal = 0;
+    const validityDays = quotation.validity_days || 15;
 
-    products.forEach((p: any) => {
-      subtotal += (Number(p.sale_price) || 0) * (Number(p.qty) || 1);
-    });
+    let totalTaxable = 0;
+    let totalTax = 0;
+    let grandTotalCalc = 0;
 
-    // If amount is manually overridden, we trust quotation.amount as final total?
-    // Let's try to reconstruct for display:
-    // If discount exists, show subtotal and discount.
-    // If not, show total.
+    const productsRows = products.map((p: any) => {
+      const price = Number(p.sale_price || 0);
+      const qty = Number(p.qty || 1);
+      const discount = Number(p.discount || 0);
+      const gstRate = Number(p.gst_rate || 0);
+      const isInclusive = p.gst_inclusive;
 
-    // Let's recalculate logic to match Modal
-    let calculatedTotal = subtotal;
-    let discountAmount = 0;
-    if (discountValue > 0) {
-      discountAmount = subtotal * (discountValue / 100);
-      calculatedTotal = subtotal - discountAmount;
-    }
+      const discountedPricePerUnit = price * (1 - discount / 100);
 
-    // Use saved amount if it matches roughly, else use calculated? 
-    // Or just use saved amount as Grand Total.
-    const grandTotal = Number(quotation.amount || 0);
+      let taxable = 0;
+      let tax = 0;
+      let total = 0;
+
+      if (isInclusive) {
+        total = discountedPricePerUnit * qty;
+        taxable = total / (1 + gstRate / 100);
+        tax = total - taxable;
+      } else {
+        taxable = discountedPricePerUnit * qty;
+        tax = taxable * (gstRate / 100);
+        total = taxable + tax;
+      }
+
+      totalTaxable += taxable;
+      totalTax += tax;
+      grandTotalCalc += total;
+
+      return `
+      <tr>
+        <td>${p.product_name} <br><span style="font-size:10px;color:#777">${p.description || ''}</span></td>
+        <td class="text-right">₹${price.toLocaleString()}</td>
+        <td class="text-right">${qty}</td>
+        <td class="text-right">${discount}%</td>
+        <td class="text-right">₹${taxable.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td class="text-right">${gstRate}%<br><span style="font-size:9px">₹${tax.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></td>
+        <td class="text-right">₹${total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+      </tr>`;
+    }).join('');
 
     // Branding
     let logoUrl = '';
@@ -114,11 +134,11 @@ export async function GET(
           .value { color: #555; }
 
           table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-          th { background: #343a40; color: white; padding: 8px; text-align: left; font-size: 12px; }
-          td { padding: 8px; border: 1px solid #dee2e6; font-size: 12px; }
+          th { background: #343a40; color: white; padding: 8px; text-align: left; font-size: 11px; }
+          td { padding: 8px; border: 1px solid #dee2e6; font-size: 11px; }
           .text-right { text-align: right; }
 
-          .totals { width: 40%; margin-left: auto; margin-bottom: 30px; }
+          .totals { width: 45%; margin-left: auto; margin-bottom: 30px; }
           .total-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 12px; }
           .total-row.grand { font-size: 16px; font-weight: 700; color: #2c3e50; border-top: 2px solid #eee; padding-top: 10px; margin-top: 5px; }
 
@@ -148,7 +168,7 @@ export async function GET(
             <div class="info-col">
               <div class="info-row"><span class="label">Quote #:</span> <span class="value">${quotation.quotation_id}</span></div>
               <div class="info-row"><span class="label">Date:</span> <span class="value">${new Date(quotation.created_at).toLocaleDateString()}</span></div>
-              <div class="info-row"><span class="label">Valid Until:</span> <span class="value">${new Date(new Date(quotation.created_at).getTime() + 15 * 24 * 60 * 60 * 1000).toLocaleDateString()}</span></div>
+              <div class="info-row"><span class="label">Valid Until:</span> <span class="value">${new Date(new Date(quotation.created_at).getTime() + validityDays * 24 * 60 * 60 * 1000).toLocaleDateString()}</span></div>
             </div>
             <div class="info-col">
               <div class="info-row"><span class="label">To:</span> <span class="value">${quotation.contact_name}</span></div>
@@ -162,25 +182,21 @@ export async function GET(
                 <th>Product</th>
                 <th class="text-right">Price</th>
                 <th class="text-right">Qty</th>
+                <th class="text-right">Disc %</th>
+                <th class="text-right">Taxable</th>
+                <th class="text-right">GST</th>
                 <th class="text-right">Total</th>
               </tr>
             </thead>
             <tbody>
-              ${products.map((p: any) => `
-              <tr>
-                <td>${p.product_name} <br><span style="font-size:10px;color:#777">${p.description || ''}</span></td>
-                <td class="text-right">₹${Number(p.sale_price).toLocaleString()}</td>
-                <td class="text-right">${p.qty}</td>
-                <td class="text-right">₹${(Number(p.sale_price) * Number(p.qty)).toLocaleString()}</td>
-              </tr>
-              `).join('')}
+              ${productsRows}
             </tbody>
           </table>
 
           <div class="totals">
-            <div class="total-row"><span>Subtotal</span> <span>₹${subtotal.toLocaleString()}</span></div>
-            ${discountValue > 0 ? `<div class="total-row"><span style="color:green">Discount (${discountValue}%)</span> <span style="color:green">-₹${discountAmount.toLocaleString()}</span></div>` : ''}
-            <div class="total-row grand"><span>Total</span> <span>₹${grandTotal.toLocaleString()}</span></div>
+            <div class="total-row"><span>Total Taxable Amount</span> <span>₹${totalTaxable.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div>
+            <div class="total-row"><span>Total Tax (GST)</span> <span>₹${totalTax.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div>
+            <div class="total-row grand"><span>Grand Total</span> <span>₹${Math.round(grandTotalCalc).toLocaleString()}</span></div>
           </div>
 
           ${quotation.notes ? `

@@ -39,7 +39,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
         best_before_months: '',
         opening_qty: 0,
         opening_qty_unit: 'Pcs',
-        unit_type_na: false
+        unit_type_na: false,
+        gst_inclusive: false
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [activeTab, setActiveTab] = useState<'general' | 'discounts'>('general');
@@ -75,7 +76,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
                 best_before_months: '',
                 opening_qty: 0,
                 opening_qty_unit: 'Pcs',
-                unit_type_na: false
+                unit_type_na: false,
+                gst_inclusive: false
             });
         }
     }, [initialData, isOpen]);
@@ -267,6 +269,11 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
                                             onChange={handleChange}
                                             placeholder="e.g. 10"
                                         />
+                                        {formData.qty_in_numbers && formData.alt_qty_in_numbers && (
+                                            <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
+                                                Total Units: {Number(formData.qty_in_numbers) * Number(formData.alt_qty_in_numbers)}
+                                            </div>
+                                        )}
                                     </div>
                                 </>
                             )}
@@ -278,6 +285,19 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, initialDat
                             <div className={styles.formGroup}>
                                 <label>Purchase Price</label>
                                 <input type="number" name="purchase_price" value={formData.purchase_price} onChange={handleChange} />
+                            </div>
+
+                            <div className={styles.formGroup} style={{ alignSelf: 'end', marginBottom: '10px' }}>
+                                <label className={styles.checkboxLabel}>
+                                    <input
+                                        type="checkbox"
+                                        name="gst_inclusive"
+                                        checked={Boolean(formData.gst_inclusive)}
+                                        onChange={handleChange}
+                                        className={styles.checkboxInput}
+                                    />
+                                    Inclusive GST
+                                </label>
                             </div>
 
                             <div className={styles.formGroup}>

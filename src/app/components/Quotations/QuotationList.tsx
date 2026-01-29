@@ -219,6 +219,7 @@ export default function QuotationList() {
                             <th>Stage</th>
                             <th>Products</th>
                             <th>Amount</th>
+                            <th>Received</th>
                             <th>Notes</th>
                             <th>Actions</th>
                         </tr>
@@ -271,6 +272,12 @@ export default function QuotationList() {
                                     </td>
                                     <td>₹{quotation.amount}</td>
                                     <td>
+                                        {quotation.stage === 'Payment Receipt' || quotation.stage === 'Converted'
+                                            ? <span style={{ color: '#15803d', fontWeight: '500' }}>₹{(quotation as any).received_amount || quotation.amount}</span>
+                                            : '-'
+                                        }
+                                    </td>
+                                    <td>
                                         <div title={quotation.notes} style={{ maxWidth: '150px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                             {quotation.notes || '-'}
                                         </div>
@@ -317,6 +324,9 @@ export default function QuotationList() {
                         </div>
 
                         <div className={styles.modalBody}>
+                            <div style={{ marginBottom: '15px', padding: '10px', background: '#f0f9ff', borderRadius: '4px', border: '1px solid #bae6fd', color: '#0369a1', fontSize: '14px' }}>
+                                <strong style={{ fontWeight: '600' }}>Total Approved Amount:</strong> ₹{Number(statusData?.amount || 0).toLocaleString()}
+                            </div>
                             <div className={styles.formGroup}>
                                 <div style={{ display: 'flex', gap: '20px', marginBottom: '8px' }}>
                                     <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: 0 }}>
