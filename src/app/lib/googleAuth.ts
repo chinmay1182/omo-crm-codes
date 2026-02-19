@@ -3,7 +3,7 @@ import { google } from 'googleapis';
 export const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID || '748305760307-j2eu9ks5kauci3uv09ob3rmik8ffcvme.apps.googleusercontent.com',
   process.env.GOOGLE_CLIENT_SECRET!,
-  process.env.GOOGLE_MEET_REDIRECT_URI || 'https://crm.consolegal.com/api/google/callback'
+  process.env.GOOGLE_MEET_REDIRECT_URI || 'https://crm.omodigital.io/api/google/callback'
 );
 
 export const getAuthUrl = (pendingMeetingId: string) => {

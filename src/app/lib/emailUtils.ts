@@ -19,8 +19,8 @@ function createUserTransporter(userEmail: string, userPassword: string, smtpHost
 }
 
 // Email configuration - Google Workspace SMTP
-const DEFAULT_EMAIL_USER = 'cso@consolegal.com';
-const DEFAULT_EMAIL_PASSWORD = 'kcnwmlxptfrrcbuo'; // Google App Password (spaces removed)
+const DEFAULT_EMAIL_USER = process.env.EMAIL_USER || '';
+const DEFAULT_EMAIL_PASSWORD = process.env.EMAIL_PASSWORD || '';
 
 // Try multiple SMTP configurations for Google Workspace
 const createGmailTransporter = () => {
@@ -106,7 +106,7 @@ export async function sendMeetingInvite(
     const subject = `Meeting Schedule Confirmation - "${meeting.title}"`;
     const platformLogo = await getPlatformLogo();
     // Ensure full URL for email clients
-    const logoUrl = platformLogo.startsWith('http') ? platformLogo : `${process.env.NEXT_PUBLIC_APP_URL || 'https://crm.consolegal.com'}${platformLogo}`;
+    const logoUrl = platformLogo.startsWith('http') ? platformLogo : `${process.env.NEXT_PUBLIC_APP_URL || 'https://crm.omodigital.io'}${platformLogo}`;
 
     const html = `
     <!DOCTYPE html>
@@ -227,7 +227,7 @@ export async function sendMeetingInvite(
 export async function sendAdminNotification(meeting: any) {
     // Notify admin about new public booking request
     // Default to cso@consolegal.com if valid env var is not present
-    const adminEmail = process.env.ADMIN_EMAIL || 'cso@consolegal.com';
+    const adminEmail = process.env.ADMIN_EMAIL || '';
 
     if (!adminEmail) return;
 
@@ -278,7 +278,7 @@ export async function sendBookingConfirmation(
 
     const subject = `Booking Schedule Intimation - "${eventType?.title || booking.title}"`;
     const platformLogo = await getPlatformLogo();
-    const logoUrl = platformLogo.startsWith('http') ? platformLogo : `${process.env.NEXT_PUBLIC_APP_URL || 'https://crm.consolegal.com'}${platformLogo}`;
+    const logoUrl = platformLogo.startsWith('http') ? platformLogo : `${process.env.NEXT_PUBLIC_APP_URL || 'https://crm.omodigital.io'}${platformLogo}`;
 
     const html = `
     <!DOCTYPE html>
