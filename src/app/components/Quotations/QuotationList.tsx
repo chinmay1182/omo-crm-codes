@@ -148,10 +148,8 @@ export default function QuotationList() {
                 payment_notes: notesText
             };
         } else if (statusData.stage === 'Dispatch') {
-            if (!referenceText.trim()) { toast.error("Dispatch Reference is required"); return; }
             extraData = { dispatch_reference: referenceText, dispatch_notes: notesText };
         } else if (statusData.stage === 'Billed') {
-            if (!referenceText.trim()) { toast.error("Bill Reference is required"); return; }
             extraData = { billed_reference: referenceText, billed_notes: notesText };
         }
 
@@ -523,7 +521,6 @@ export default function QuotationList() {
                                     {statusData?.stage === 'Payment Receipt' && 'Transaction ID'}
                                     {statusData?.stage === 'Dispatch' && 'Dispatch Reference ID'}
                                     {statusData?.stage === 'Billed' && 'Bill Reference Number'}
-                                    <span style={{ color: 'red' }}> *</span>
                                 </label>
                                 <input
                                     type="text"

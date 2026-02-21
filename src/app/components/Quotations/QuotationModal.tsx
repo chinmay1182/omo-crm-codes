@@ -464,13 +464,12 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                         />
                                     </div>
                                     <div className={styles.formGroup}>
-                                        <label>Transaction ID *</label>
+                                        <label>Transaction ID</label>
                                         <input
                                             name="transaction_id"
                                             value={formData.transaction_id}
                                             onChange={handleChange}
                                             placeholder="Enter Transaction/Order ID"
-                                            required={formData.stage === 'Payment Receipt'}
                                         />
                                     </div>
                                     <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
@@ -492,13 +491,12 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                 <label style={{ marginBottom: '10px', fontWeight: '500', color: '#15426d' }}>Dispatch Details</label>
                                 <div className={styles.formGrid} style={{ gap: '1rem' }}>
                                     <div className={styles.formGroup}>
-                                        <label>Dispatch Reference ID *</label>
+                                        <label>Dispatch Reference ID</label>
                                         <input
                                             name="dispatch_reference"
                                             value={formData.dispatch_reference}
                                             onChange={handleChange}
                                             placeholder="Enter Dispatch Reference"
-                                            required={formData.stage === 'Dispatch'}
                                         />
                                     </div>
                                     <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
@@ -520,13 +518,12 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                 <label style={{ marginBottom: '10px', fontWeight: '500', color: '#15426d' }}>Billing Details</label>
                                 <div className={styles.formGrid} style={{ gap: '1rem' }}>
                                     <div className={styles.formGroup}>
-                                        <label>Bill Reference Number *</label>
+                                        <label>Bill Reference Number</label>
                                         <input
                                             name="billed_reference"
                                             value={formData.billed_reference}
                                             onChange={handleChange}
                                             placeholder="Enter Bill Reference Number"
-                                            required={formData.stage === 'Billed'}
                                         />
                                     </div>
                                     <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
