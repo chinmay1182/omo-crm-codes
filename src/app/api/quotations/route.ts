@@ -36,11 +36,13 @@ export async function POST(request: Request) {
 
         const quotation_id = `QT-${generateQuoteId()}`;
 
-        const sanitizedBody = {
-            ...body,
-            amount: body.amount === '' ? 0 : body.amount,
-            received_amount: body.received_amount === '' ? null : body.received_amount
-        };
+        const sanitizedBody = { ...body };
+        for (const key in sanitizedBody) {
+            if (sanitizedBody[key] === '') {
+                sanitizedBody[key] = null;
+            }
+        }
+        sanitizedBody.amount = sanitizedBody.amount ?? 0;
 
         const { data, error } = await supabase
             .from('product_quotations')

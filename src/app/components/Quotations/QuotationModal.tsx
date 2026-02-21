@@ -232,6 +232,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 amount: formData.amount ? Number(formData.amount) : 0,
                 received_amount: finalReceivedAmount ? Number(finalReceivedAmount) : null,
                 discount_value: formData.discount_value ? Number(formData.discount_value) : 0,
+                validity_days: formData.validity_days ? Number(formData.validity_days) : 30,
                 products: selectedProducts
             };
 
@@ -241,7 +242,10 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 body: JSON.stringify(payload)
             });
 
-            if (!response.ok) throw new Error('Failed to save quotation');
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.error || 'Failed to save quotation');
+            }
 
             toast.success(initialData ? 'Quotation updated' : 'Quotation created');
             onSuccess();

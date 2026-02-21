@@ -6,9 +6,16 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         const { id } = await params;
         const body = await request.json();
 
+        const sanitizedBody = { ...body };
+        for (const key in sanitizedBody) {
+            if (sanitizedBody[key] === '') {
+                sanitizedBody[key] = null;
+            }
+        }
+
         const { data, error } = await supabase
             .from('product_quotations')
-            .update(body)
+            .update(sanitizedBody)
             .eq('id', id)
             .select()
             .single();
