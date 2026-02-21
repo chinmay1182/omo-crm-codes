@@ -23,6 +23,11 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
         payment_status: 'Full',
         received_amount: '',
         transaction_id: '',
+        payment_notes: '',
+        dispatch_reference: '',
+        dispatch_notes: '',
+        billed_reference: '',
+        billed_notes: '',
         discount_type: 'All',
         discount_value: 0,
         validity_days: '30'
@@ -77,6 +82,11 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 payment_status: initialData.payment_status || 'Full',
                 received_amount: initialData.received_amount || '',
                 transaction_id: initialData.transaction_id || '',
+                payment_notes: initialData.payment_notes || '',
+                dispatch_reference: initialData.dispatch_reference || '',
+                dispatch_notes: initialData.dispatch_notes || '',
+                billed_reference: initialData.billed_reference || '',
+                billed_notes: initialData.billed_notes || '',
                 discount_type: initialData.discount_type || 'All',
                 discount_value: initialData.discount_value || 0
             });
@@ -97,6 +107,11 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                 payment_status: 'Full',
                 received_amount: '',
                 transaction_id: '',
+                payment_notes: '',
+                dispatch_reference: '',
+                dispatch_notes: '',
+                billed_reference: '',
+                billed_notes: '',
                 discount_type: 'All',
                 discount_value: 0,
                 validity_days: '30'
@@ -456,6 +471,72 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                             onChange={handleChange}
                                             placeholder="Enter Transaction/Order ID"
                                             required={formData.stage === 'Payment Receipt'}
+                                        />
+                                    </div>
+                                    <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
+                                        <label>Payment Notes</label>
+                                        <textarea
+                                            name="payment_notes"
+                                            value={formData.payment_notes}
+                                            onChange={handleChange}
+                                            placeholder="Add any extra notes..."
+                                            rows={2}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {formData.stage === 'Dispatch' && (
+                            <div className={styles.formGroupFull} style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e0e0e0', marginTop: '10px' }}>
+                                <label style={{ marginBottom: '10px', fontWeight: '500', color: '#15426d' }}>Dispatch Details</label>
+                                <div className={styles.formGrid} style={{ gap: '1rem' }}>
+                                    <div className={styles.formGroup}>
+                                        <label>Dispatch Reference ID *</label>
+                                        <input
+                                            name="dispatch_reference"
+                                            value={formData.dispatch_reference}
+                                            onChange={handleChange}
+                                            placeholder="Enter Dispatch Reference"
+                                            required={formData.stage === 'Dispatch'}
+                                        />
+                                    </div>
+                                    <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
+                                        <label>Dispatch Notes</label>
+                                        <textarea
+                                            name="dispatch_notes"
+                                            value={formData.dispatch_notes}
+                                            onChange={handleChange}
+                                            placeholder="Add any extra notes..."
+                                            rows={2}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {formData.stage === 'Billed' && (
+                            <div className={styles.formGroupFull} style={{ backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '8px', border: '1px solid #e0e0e0', marginTop: '10px' }}>
+                                <label style={{ marginBottom: '10px', fontWeight: '500', color: '#15426d' }}>Billing Details</label>
+                                <div className={styles.formGrid} style={{ gap: '1rem' }}>
+                                    <div className={styles.formGroup}>
+                                        <label>Bill Reference Number *</label>
+                                        <input
+                                            name="billed_reference"
+                                            value={formData.billed_reference}
+                                            onChange={handleChange}
+                                            placeholder="Enter Bill Reference Number"
+                                            required={formData.stage === 'Billed'}
+                                        />
+                                    </div>
+                                    <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
+                                        <label>Billing Notes</label>
+                                        <textarea
+                                            name="billed_notes"
+                                            value={formData.billed_notes}
+                                            onChange={handleChange}
+                                            placeholder="Add any extra notes..."
+                                            rows={2}
                                         />
                                     </div>
                                 </div>

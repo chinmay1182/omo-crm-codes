@@ -15,7 +15,13 @@ interface Quotation {
     amount: number;
     created_at: string;
     notes?: string;
-    // ... other fields
+    dispatch_reference?: string;
+    dispatch_notes?: string;
+    billed_reference?: string;
+    billed_notes?: string;
+    payment_notes?: string;
+    transaction_id?: string;
+    received_amount?: number;
 }
 
 export default function QuotationList() {
@@ -31,10 +37,21 @@ export default function QuotationList() {
         id: string;
         stage: string;
         amount?: number;
+        dispatch_reference?: string;
+        dispatch_notes?: string;
+        billed_reference?: string;
+        billed_notes?: string;
+        payment_notes?: string;
+        transaction_id?: string;
     } | null>(null);
     const [paymentType, setPaymentType] = useState<'Full' | 'Partial'>('Full');
     const [paymentAmount, setPaymentAmount] = useState('');
-    const [transactionId, setTransactionId] = useState('');
+    const [referenceText, setReferenceText] = useState('');
+    const [notesText, setNotesText] = useState('');
+
+    // Extra states for viewing/editing details modal
+    const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+    const [currentDetails, setCurrentDetails] = useState<any>(null);
 
     const fetchQuotations = async () => {
         try {
@@ -72,11 +89,15 @@ export default function QuotationList() {
     };
 
     const handleStatusChange = (quotation: Quotation, newStage: string) => {
-        if (newStage === 'Payment Receipt') {
+        if (newStage === 'Dispatch' || newStage === 'Billed' || newStage === 'Payment Receipt') {
             setStatusData({ id: quotation.id, stage: newStage, amount: quotation.amount });
-            setPaymentType('Full');
-            setPaymentAmount(quotation.amount ? quotation.amount.toString() : '');
-            setTransactionId('');
+            if (newStage === 'Payment Receipt') {
+                setPaymentType('Full');
+                setPaymentAmount(quotation.amount ? quotation.amount.toString() : '');
+            }
+            // Clear default values
+            setReferenceText('');
+            setNotesText('');
             setStatusModalOpen(true);
         } else {
             updateQuotationStatus(quotation.id, newStage);
@@ -95,6 +116,7 @@ export default function QuotationList() {
                 toast.success('Status updated');
                 fetchQuotations();
                 setStatusModalOpen(false);
+                setDetailsModalOpen(false);
                 setStatusData(null);
             } else {
                 throw new Error('Failed to update status');
@@ -105,28 +127,70 @@ export default function QuotationList() {
     };
 
     const handleStatusConfirm = () => {
-        if (!transactionId.trim()) {
-            toast.error("Transaction ID is required");
-            return;
-        }
+        if (!statusData) return;
 
-        if (statusData) {
+        let extraData: any = {};
+
+        if (statusData.stage === 'Payment Receipt') {
+            if (!referenceText.trim()) {
+                toast.error("Transaction ID is required");
+                return;
+            }
             const finalAmount = parseFloat(paymentAmount);
-
             if (paymentType === 'Partial' && statusData.amount && finalAmount >= statusData.amount) {
                 toast.error(`Partial amount must be less than total amount (₹${statusData.amount})`);
                 return;
             }
-
-            // Prepare payload matching QuotationModal logic
-            const payload = {
+            extraData = {
                 payment_status: paymentType,
-                transaction_id: transactionId,
-                received_amount: paymentType === 'Full' ? statusData.amount : finalAmount
+                transaction_id: referenceText,
+                received_amount: paymentType === 'Full' ? statusData.amount : finalAmount,
+                payment_notes: notesText
             };
-
-            updateQuotationStatus(statusData.id, 'Payment Receipt', payload);
+        } else if (statusData.stage === 'Dispatch') {
+            if (!referenceText.trim()) { toast.error("Dispatch Reference is required"); return; }
+            extraData = { dispatch_reference: referenceText, dispatch_notes: notesText };
+        } else if (statusData.stage === 'Billed') {
+            if (!referenceText.trim()) { toast.error("Bill Reference is required"); return; }
+            extraData = { billed_reference: referenceText, billed_notes: notesText };
         }
+
+        updateQuotationStatus(statusData.id, statusData.stage, extraData);
+    };
+
+    const handleRemoveDetails = async (quotationId: string, type: string) => {
+        if (!confirm(`Are you sure you want to remove ${type} details?`)) return;
+        let extraData: any = {};
+        if (type === 'Dispatch') extraData = { dispatch_reference: null, dispatch_notes: null };
+        if (type === 'Billed') extraData = { billed_reference: null, billed_notes: null };
+        if (type === 'Payment') extraData = { transaction_id: null, payment_notes: null };
+
+        try {
+            const response = await fetch(`/api/quotations/${quotationId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(extraData)
+            });
+            if (response.ok) {
+                toast.success('Details removed');
+                fetchQuotations();
+                setDetailsModalOpen(false);
+            } else {
+                throw new Error('Failed to update details');
+            }
+        } catch (error: any) {
+            toast.error(error.message);
+        }
+    };
+
+    const handleUpdateDetails = (type: string) => {
+        if (!currentDetails) return;
+        let extraData: any = {};
+        if (type === 'Dispatch') extraData = { dispatch_reference: referenceText, dispatch_notes: notesText };
+        if (type === 'Billed') extraData = { billed_reference: referenceText, billed_notes: notesText };
+        if (type === 'Payment') extraData = { transaction_id: referenceText, payment_notes: notesText };
+
+        updateQuotationStatus(currentDetails.id, currentDetails.stage, extraData);
     };
 
     const handleView = (quotation: Quotation) => {
@@ -283,6 +347,19 @@ export default function QuotationList() {
                                         </div>
                                     </td>
                                     <td className={styles.actions}>
+                                        {(quotation.dispatch_reference || quotation.billed_reference || quotation.transaction_id) && (
+                                            <button
+                                                onClick={() => {
+                                                    setCurrentDetails(quotation);
+                                                    setDetailsModalOpen(true);
+                                                }}
+                                                className={styles.viewButton}
+                                                title="View Details"
+                                                style={{ color: '#0369a1' }}
+                                            >
+                                                <i className="fa-light fa-circle-info"></i>
+                                            </button>
+                                        )}
                                         <button onClick={() => handleView(quotation)} className={styles.viewButton} title="View PDF">
                                             <i className="fa-light fa-eye"></i>
                                         </button>
@@ -295,7 +372,7 @@ export default function QuotationList() {
                                 </tr>
                             ))
                         ) : (
-                            <tr><td colSpan={7} className={styles.noResults}>No quotations found</td></tr>
+                            <tr><td colSpan={10} className={styles.noResults}>No quotations found</td></tr>
                         )}
                     </tbody>
                 </table>
@@ -312,69 +389,159 @@ export default function QuotationList() {
                 onSuccess={handleCloseModal}
             />
 
-            {/* Payment Status Modal */}
+            {/* Status Details View/Edit/Remove Modal */}
+            {detailsModalOpen && currentDetails && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent}>
+                        <div className={styles.modalHeader}>
+                            <h3 className={styles.modalTitle}>Stage Details for {currentDetails.quotation_id}</h3>
+                            <button onClick={() => setDetailsModalOpen(false)} className={styles.closeButton}>
+                                <i className="fa-light fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            {currentDetails.dispatch_reference && (
+                                <div style={{ marginBottom: '15px', padding: '15px', border: '1px solid #e2e8f0', borderRadius: '8px' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                        <h4 style={{ margin: 0, color: '#334155' }}>Dispatch Details</h4>
+                                        <button onClick={() => handleRemoveDetails(currentDetails.id, 'Dispatch')} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><i className="fa-light fa-trash"></i></button>
+                                    </div>
+                                    <div style={{ marginBottom: '10px' }}>
+                                        <label style={{ fontSize: '13px', color: '#64748b' }}>Reference ID</label>
+                                        <div style={{ fontSize: '14px', color: '#0f172a' }}>{currentDetails.dispatch_reference}</div>
+                                    </div>
+                                    <div>
+                                        <label style={{ fontSize: '13px', color: '#64748b' }}>Notes</label>
+                                        <div style={{ fontSize: '14px', color: '#0f172a' }}>{currentDetails.dispatch_notes || '-'}</div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {currentDetails.billed_reference && (
+                                <div style={{ marginBottom: '15px', padding: '15px', border: '1px solid #e2e8f0', borderRadius: '8px' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                        <h4 style={{ margin: 0, color: '#334155' }}>Billed Details</h4>
+                                        <button onClick={() => handleRemoveDetails(currentDetails.id, 'Billed')} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><i className="fa-light fa-trash"></i></button>
+                                    </div>
+                                    <div style={{ marginBottom: '10px' }}>
+                                        <label style={{ fontSize: '13px', color: '#64748b' }}>Reference ID</label>
+                                        <div style={{ fontSize: '14px', color: '#0f172a' }}>{currentDetails.billed_reference}</div>
+                                    </div>
+                                    <div>
+                                        <label style={{ fontSize: '13px', color: '#64748b' }}>Notes</label>
+                                        <div style={{ fontSize: '14px', color: '#0f172a' }}>{currentDetails.billed_notes || '-'}</div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {currentDetails.transaction_id && (
+                                <div style={{ marginBottom: '15px', padding: '15px', border: '1px solid #e2e8f0', borderRadius: '8px' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                        <h4 style={{ margin: 0, color: '#334155' }}>Payment Details</h4>
+                                        <button onClick={() => handleRemoveDetails(currentDetails.id, 'Payment')} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><i className="fa-light fa-trash"></i></button>
+                                    </div>
+                                    <div style={{ marginBottom: '10px' }}>
+                                        <label style={{ fontSize: '13px', color: '#64748b' }}>Transaction ID</label>
+                                        <div style={{ fontSize: '14px', color: '#0f172a' }}>{currentDetails.transaction_id}</div>
+                                    </div>
+                                    <div>
+                                        <label style={{ fontSize: '13px', color: '#64748b' }}>Notes</label>
+                                        <div style={{ fontSize: '14px', color: '#0f172a' }}>{currentDetails.payment_notes || '-'}</div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Status Action Modal (Dispatch, Billed, Payment Receipt) */}
             {statusModalOpen && (
                 <div className={styles.modalOverlay}>
                     <div className={styles.modalContent}>
                         <div className={styles.modalHeader}>
-                            <h3 className={styles.modalTitle}>Payment Details</h3>
+                            <h3 className={styles.modalTitle}>
+                                {statusData?.stage === 'Payment Receipt' && 'Payment Details'}
+                                {statusData?.stage === 'Dispatch' && 'Dispatch Details'}
+                                {statusData?.stage === 'Billed' && 'Billing Details'}
+                            </h3>
                             <button onClick={() => setStatusModalOpen(false)} className={styles.closeButton}>
                                 <i className="fa-light fa-xmark"></i>
                             </button>
                         </div>
 
                         <div className={styles.modalBody}>
-                            <div style={{ marginBottom: '15px', padding: '10px', background: '#f0f9ff', borderRadius: '4px', border: '1px solid #bae6fd', color: '#0369a1', fontSize: '14px' }}>
-                                <strong style={{ fontWeight: '600' }}>Total Approved Amount:</strong> ₹{Number(statusData?.amount || 0).toLocaleString()}
-                            </div>
-                            <div className={styles.formGroup}>
-                                <div style={{ display: 'flex', gap: '20px', marginBottom: '8px' }}>
-                                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: 0 }}>
+                            {statusData?.stage === 'Payment Receipt' && (
+                                <>
+                                    <div style={{ marginBottom: '15px', padding: '10px', background: '#f0f9ff', borderRadius: '4px', border: '1px solid #bae6fd', color: '#0369a1', fontSize: '14px' }}>
+                                        <strong style={{ fontWeight: '600' }}>Total Approved Amount:</strong> ₹{Number(statusData?.amount || 0).toLocaleString()}
+                                    </div>
+                                    <div className={styles.formGroup}>
+                                        <div style={{ display: 'flex', gap: '20px', marginBottom: '8px' }}>
+                                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: 0 }}>
+                                                <input
+                                                    type="radio"
+                                                    name="paymentType"
+                                                    value="Full"
+                                                    checked={paymentType === 'Full'}
+                                                    onChange={() => {
+                                                        setPaymentType('Full');
+                                                        setPaymentAmount(statusData?.amount?.toString() || '');
+                                                    }}
+                                                />
+                                                <span style={{ fontSize: '14px', fontWeight: '300' }}>Full Payment</span>
+                                            </label>
+                                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: 0 }}>
+                                                <input
+                                                    type="radio"
+                                                    name="paymentType"
+                                                    value="Partial"
+                                                    checked={paymentType === 'Partial'}
+                                                    onChange={() => setPaymentType('Partial')}
+                                                />
+                                                <span style={{ fontSize: '14px', fontWeight: '300' }}>Partial Payment</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div className={styles.formGroup}>
+                                        <label>Received Amount</label>
                                         <input
-                                            type="radio"
-                                            name="paymentType"
-                                            value="Full"
-                                            checked={paymentType === 'Full'}
-                                            onChange={() => {
-                                                setPaymentType('Full');
-                                                setPaymentAmount(statusData?.amount?.toString() || '');
-                                            }}
+                                            type="number"
+                                            value={paymentAmount}
+                                            onChange={(e) => setPaymentAmount(e.target.value)}
+                                            disabled={paymentType === 'Full'}
+                                            className={styles.input}
+                                            style={paymentType === 'Full' ? { background: '#f8fafc', color: '#94a3b8' } : {}}
                                         />
-                                        <span style={{ fontSize: '14px', fontWeight: '300' }}>Full Payment</span>
-                                    </label>
-                                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: 0 }}>
-                                        <input
-                                            type="radio"
-                                            name="paymentType"
-                                            value="Partial"
-                                            checked={paymentType === 'Partial'}
-                                            onChange={() => setPaymentType('Partial')}
-                                        />
-                                        <span style={{ fontSize: '14px', fontWeight: '300' }}>Partial Payment</span>
-                                    </label>
-                                </div>
-                            </div>
+                                    </div>
+                                </>
+                            )}
 
                             <div className={styles.formGroup}>
-                                <label>Received Amount</label>
+                                <label>
+                                    {statusData?.stage === 'Payment Receipt' && 'Transaction ID'}
+                                    {statusData?.stage === 'Dispatch' && 'Dispatch Reference ID'}
+                                    {statusData?.stage === 'Billed' && 'Bill Reference Number'}
+                                    <span style={{ color: 'red' }}> *</span>
+                                </label>
                                 <input
-                                    type="number"
-                                    value={paymentAmount}
-                                    onChange={(e) => setPaymentAmount(e.target.value)}
-                                    disabled={paymentType === 'Full'}
+                                    type="text"
+                                    value={referenceText}
+                                    onChange={(e) => setReferenceText(e.target.value)}
+                                    placeholder="Enter Reference/Transaction ID"
                                     className={styles.input}
-                                    style={paymentType === 'Full' ? { background: '#f8fafc', color: '#94a3b8' } : {}}
                                 />
                             </div>
 
                             <div className={styles.formGroup}>
-                                <label>Transaction ID <span style={{ color: 'red' }}>*</span></label>
-                                <input
-                                    type="text"
-                                    value={transactionId}
-                                    onChange={(e) => setTransactionId(e.target.value)}
-                                    placeholder="Enter Transaction/Reference ID"
+                                <label>Notes (Optional)</label>
+                                <textarea
+                                    value={notesText}
+                                    onChange={(e) => setNotesText(e.target.value)}
+                                    placeholder="Add any extra notes..."
                                     className={styles.input}
+                                    style={{ minHeight: '80px', resize: 'vertical' }}
                                 />
                             </div>
 
@@ -389,7 +556,7 @@ export default function QuotationList() {
                                     onClick={handleStatusConfirm}
                                     className={styles.submitButton}
                                 >
-                                    Confirm Payment
+                                    Confirm
                                 </button>
                             </div>
                         </div>
