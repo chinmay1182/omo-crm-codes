@@ -268,7 +268,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     tabs.push({ label: 'Manage Agents', href: '/dashboard/agents', icon: 'fa-sharp fa-thin fa-users', svgIcon: '/icons-products/mem_st_fill_circle.svg' });
   }
 
-  tabs.push({ label: 'Documentation', href: 'https://crm-docs.omodigital.io/', icon: 'fa-sharp fa-thin fa-book', svgIcon: '/icons-products/mem_wave-8.svg' } as any);
+  tabs.push({ label: 'Documentation', href: 'https://omo-documentation.hashnode.dev', icon: 'fa-sharp fa-thin fa-book', svgIcon: '/icons-products/mem_wave-8.svg' } as any);
   tabs.push({ label: 'Products', href: '/dashboard/products', icon: 'fa-sharp fa-thin fa-box-open', svgIcon: '/icons-products/mem_donut.svg' } as any);
   tabs.push({ label: 'Subscriptions', href: '/dashboard/subscriptions', icon: 'fa-sharp fa-thin fa-credit-card', svgIcon: '/icons-products/mem_3d_block2.svg' });
   tabs.push({ label: 'Feedback', onClick: () => setIsFeedbackModalOpen(true), icon: 'fa-sharp fa-thin fa-bug', svgIcon: '/icons-products/mem_3d_arrow.svg' } as any);
@@ -392,7 +392,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     </Link>
                   )}
 
-                  <Link href="https://docs.consolegal.com/" target="_blank" className={styles.appDropdownItem} onClick={() => setShowAppDropdown(false)}>
+                  <Link href="https://omo-documentation.hashnode.dev" target="_blank" className={styles.appDropdownItem} onClick={() => setShowAppDropdown(false)}>
                     <Image src="/icons-products/mem_wave-8.svg" alt="Documentation" width={32} height={32} />
                     <span>Docs</span>
                   </Link>
