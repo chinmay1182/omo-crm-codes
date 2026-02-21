@@ -629,11 +629,6 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                         )}
 
                         <div className={styles.formGroup}>
-                            <label>Amount</label>
-                            <input type="number" name="amount" value={formData.amount} onChange={handleChange} />
-                        </div>
-
-                        <div className={styles.formGroup}>
                             <label>Notes</label>
                             <textarea name="notes" value={formData.notes} onChange={handleChange} />
                         </div>

@@ -56,7 +56,7 @@ export default function RegisterPage() {
 
       // Success - redirect to login
       alert('Super Admin account created successfully! Please login.');
-      router.push('/agent-login');
+      router.push('/login');
     } catch (err: any) {
       setError(err.message || 'Failed to create account');
     } finally {

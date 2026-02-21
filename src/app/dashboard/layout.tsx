@@ -536,6 +536,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                       }
                     }}
                     className={styles.sidebarToggle}
+                    aria-label="Toggle Sidebar"
+                    title="Toggle Sidebar"
                   >
                     <i className="fa-sharp fa-thin fa-bars"></i>
                   </button>
@@ -556,7 +558,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
                   <div className={styles.supportInfo}>
                     <div className={styles.supportLabel}>Call Support</div>
-                    <div className={styles.supportNumber}>+91 98342 25937</div>
+                    <div className={styles.supportNumber}>+91 88080 22200</div>
                   </div>
 
                   <Reminders />
@@ -626,6 +628,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             <button
                               onClick={() => setShowProfileDropdown(false)}
                               style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '24px', color: '#6b7280' }}
+                              aria-label="Close Profile Menu"
+                              title="Close Profile Menu"
                             >
                               <i className="fa-sharp fa-thin fa-times"></i>
                             </button>
@@ -667,6 +671,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             <label className={styles.themeToggleSwitch}>
                               <input
                                 type="checkbox"
+                                aria-label="Switch to Old Theme"
+                                title="Switch to Old Theme"
                                 checked={!useNewTheme}
                                 onChange={(e) => {
                                   const isChecked = e.target.checked;
