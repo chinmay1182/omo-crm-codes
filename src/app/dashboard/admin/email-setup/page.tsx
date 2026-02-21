@@ -19,7 +19,7 @@ function EmailSetupContent() {
     });
 
     const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tztohhabbvoftwaxgues.supabase.co',
+        process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tuftfxfuleznzrzgxjhj.supabase.co',
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
     );
 

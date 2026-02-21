@@ -66,8 +66,8 @@
 //         if (isAdmin || isSuperAgent || hasReplyAll) {
 //           isSessionAuthorized = true;
 //         } else if (hasReplyAssigned) {
-//           // For reply_assigned, we ideally check assignment. 
-//           // But for media, let's allow it if they have the permission, 
+//           // For reply_assigned, we ideally check assignment.
+//           // But for media, let's allow it if they have the permission,
 //           // as we do the assignment check below only if needed or just auto-assign.
 //           // Actually, let's rely on the DB assignment check part if we want to be strict,
 //           // but for "Access Denied" errors, usually the issue is missing general permissions.
@@ -81,8 +81,8 @@
 
 //         // Method 2: DB Check (Fallback)
 //         // Initialize Admin Client for Permission Checks (Bypass RLS)
-//         const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tztohhabbvoftwaxgues.supabase.co';
-//         const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6dG9oaGFiYnZvZnR3YXhndWVzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NTk4Njc4MSwiZXhwIjoyMDgxNTYyNzgxfQ.PuO_4uvcV1yN0v3ZIHa8e1lEcPOQgnBaFjYof235bCk';
+//         const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tuftfxfuleznzrzgxjhj.supabase.co';
+//         const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1ZnRmeGZ1bGV6bnpyemd4amhqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTU1ODA4NiwiZXhwIjoyMDg3MTM0MDg2fQ.H4lvW3v7c0Pc1c3evisn4HtLM_8S8ShmVt2OMEWGqrw';
 
 //         const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
 //           auth: { persistSession: false }
@@ -299,8 +299,8 @@
 //     const dbMediaType = contentType === 'text' ? null : contentType;
 
 //     // Try to use Service Role Key for DB insert to bypass RLS
-//     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tztohhabbvoftwaxgues.supabase.co';
-//     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6dG9oaGFiYnZvZnR3YXhndWVzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NTk4Njc4MSwiZXhwIjoyMDgxNTYyNzgxfQ.PuO_4uvcV1yN0v3ZIHa8e1lEcPOQgnBaFjYof235bCk';
+//     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tuftfxfuleznzrzgxjhj.supabase.co';
+//     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1ZnRmeGZ1bGV6bnpyemd4amhqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTU1ODA4NiwiZXhwIjoyMDg3MTM0MDg2fQ.H4lvW3v7c0Pc1c3evisn4HtLM_8S8ShmVt2OMEWGqrw';
 
 //     try {
 

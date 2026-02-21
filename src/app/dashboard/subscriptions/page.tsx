@@ -6,8 +6,8 @@ import toast from 'react-hot-toast';
 import { useAuth } from '@/app/context/AuthContext';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tztohhabbvoftwaxgues.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6dG9oaGFiYnZvZnR3YXhndWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ0NDA3NTUsImV4cCI6MjA1MDAxNjc1NX0.TqJOJzHMo-Iy7ggRQTTlHwFHYUCrRIqfJmNnJYXfvzk';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tuftfxfuleznzrzgxjhj.supabase.co';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1ZnRmeGZ1bGV6bnpyemd4amhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NTgwODYsImV4cCI6MjA4NzEzNDA4Nn0.vDdT3gPAXH4-1BHwMAIk_jXh3lsOsw5-NN3yOODDGL8';
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
