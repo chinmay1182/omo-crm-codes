@@ -84,7 +84,6 @@ jobs:
                         -e NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} \
                         -e SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }} \
                         -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-
                         -e EMAIL_USER=${{ secrets.EMAIL_USER }} \
                         -e ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }} \
                         -e NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }} \
