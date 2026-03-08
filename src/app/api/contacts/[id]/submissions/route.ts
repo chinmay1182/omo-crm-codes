@@ -15,7 +15,21 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
 
         if (contactError) throw contactError;
 
-        // 2. Fetch Recent Submissions (Limit 200 for performance)
+        // 2. Fetch submissions directly linked by contact_id column
+        const { data: directSubmissions, error: directError } = await supabase
+            .from('form_submissions')
+            .select(`
+                *,
+                forms (
+                    name
+                )
+            `)
+            .eq('contact_id', id)
+            .order('created_at', { ascending: false });
+
+        if (directError) throw directError;
+
+        // 3. Fetch Recent Submissions to fuzzy-match (for legacy/unlinked submissions)
         const { data: submissions, error: subError } = await supabase
             .from('form_submissions')
             .select(`
@@ -24,34 +38,43 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
                     name
                 )
             `)
+            .is('contact_id', null) // Only check unlinked ones for fuzzy match
             .order('created_at', { ascending: false })
             .limit(200);
 
         if (subError) throw subError;
 
-        // 3. Filter Matches
+        // 4. Fuzzy-match unlinked submissions by email/phone in content
         const contactEmail = contactData.email?.toLowerCase();
-        const contactPhone = contactData.phone?.replace(/\D/g, ''); // Digits only
+        const contactPhone = contactData.phone?.replace(/\D/g, '');
         const contactMobile = contactData.mobile?.replace(/\D/g, '');
 
-        const matchedSubmissions = submissions.filter(sub => {
+        const fuzzyMatched = (submissions || []).filter(sub => {
+            const contentObj = sub.content || {};
+
+            // Match Explicit Contact ID (from URL parameter stored inside content)
+            if (contentObj.contact_id && String(contentObj.contact_id) === String(id)) return true;
+
             const contentStr = JSON.stringify(sub.content).toLowerCase();
 
             // Match Email
             if (contactEmail && contentStr.includes(contactEmail)) return true;
 
-            // Match Phone/Mobile (Strict checks inside content values ideally, but loose check for now)
-            // We check if the DIGITS of the phone exist in the stringified content
-            // Assuming content might have phone: "123-456"
-            // Simple string include might match partials, but it's better than nothing.
-
+            // Match Phone/Mobile
             if (contactPhone && contentStr.replace(/\D/g, '').includes(contactPhone)) return true;
             if (contactMobile && contentStr.replace(/\D/g, '').includes(contactMobile)) return true;
 
             return false;
         });
 
-        return NextResponse.json(matchedSubmissions);
+        // 5. Merge direct + fuzzy (deduplicate by id)
+        const allIds = new Set((directSubmissions || []).map(s => s.id));
+        const merged = [
+            ...(directSubmissions || []),
+            ...fuzzyMatched.filter(s => !allIds.has(s.id))
+        ];
+
+        return NextResponse.json(merged);
     } catch (error: any) {
         console.error("Error matching submissions:", error);
         return NextResponse.json({ error: error.message }, { status: 500 });

@@ -1,13 +1,14 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tuftfxfuleznzrzgxjhj.supabase.co'
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6dG9oaGFiYnZvZnR3YXhndWVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5ODY3ODEsImV4cCI6MjA4MTU2Mjc4MX0.3u9B6t8iKye_58zg77aCDvm9BBEAcXgVcB7jpT0zRJ4'
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from '@/app/lib/supabase';
+import { getSessionOrAgent } from '@/app/lib/auth-helper';
 
 export async function GET(req: Request) {
   try {
+    const session = await getSessionOrAgent(req);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { searchParams } = new URL(req.url);
     const contactId = searchParams.get('contactId');
 
@@ -19,7 +20,7 @@ export async function GET(req: Request) {
     }
 
     const { data: notes, error } = await supabase
-      .from('contact_notes')
+      .from('notes')
       .select('*')
       .eq('contact_id', contactId)
       .order('created_at', { ascending: false });
@@ -38,6 +39,11 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
+    const session = await getSessionOrAgent(req);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { contactId, title = '', content = '' } = await req.json();
 
     if (!contactId) {
@@ -47,22 +53,15 @@ export async function POST(req: Request) {
       );
     }
 
-    // Construct the note content based on available fields
-    let noteContent = '';
-    if (title && content) {
-      noteContent = `**${title}**\n\n${content}`;
-    } else if (title) {
-      noteContent = `**${title}**`;
-    } else {
-      noteContent = content;
-    }
-
     // Insert note
     const { data: note, error: noteError } = await supabase
-      .from('contact_notes')
+      .from('notes')
       .insert({
+        title: title || null,
+        content: content,
         contact_id: contactId,
-        content: noteContent,
+        related_to: 'contact',
+        user_id: String(session.user.id),
         created_at: new Date().toISOString()
       })
       .select()

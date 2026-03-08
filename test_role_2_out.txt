@@ -1,0 +1,6 @@
+{
+  code: '23503',
+  details: 'Key (assigned_by)=(999999) is not present in table "users".',
+  hint: null,
+  message: 'insert or update on table "agent_roles" violates foreign key constraint "agent_roles_assigned_by_fkey"'
+}

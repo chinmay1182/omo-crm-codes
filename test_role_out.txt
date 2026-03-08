@@ -1,0 +1,6 @@
+{
+  code: '23505',
+  details: 'Key (agent_id, role_id)=(1, 1) already exists.',
+  hint: null,
+  message: 'duplicate key value violates unique constraint "agent_roles_agent_id_role_id_key"'
+}

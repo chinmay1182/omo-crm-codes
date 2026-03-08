@@ -65,6 +65,20 @@ export async function GET(req: NextRequest) {
     // Original code for fetching all agents with optional permissions
     // Fetch agents with roles and creator info
     // Assuming relations are: agents(created_by) -> users, agent_roles(agent_id, role_id) -> roles
+
+    // First, determine the admin (owner) of the current agent to isolate their company/tenant
+    const { data: myAgentData } = await supabase
+      .from('agents')
+      .select('created_by, imap_settings')
+      .eq('id', currentAgent.id)
+      .single();
+
+    // The current admin is myself, unless I was created by someone else (or have an admin_id in imap_settings)
+    let myAdminId = myAgentData?.created_by || currentAgent.id;
+    if (myAgentData?.imap_settings && typeof myAgentData.imap_settings === 'object' && myAgentData.imap_settings.admin_id) {
+      myAdminId = myAgentData.imap_settings.admin_id;
+    }
+
     const { data: agents, error } = await supabase
       .from('agents')
       .select(`
@@ -76,6 +90,7 @@ export async function GET(req: NextRequest) {
         agent_permissions(service_type, permission_type),
         agent_cli_assignments(cli_id)
       `)
+      .or(`created_by.eq.${myAdminId},id.eq.${myAdminId},imap_settings->>admin_id.eq.${myAdminId}`)
       .order('created_at', { ascending: false });
 
     if (error) throw error;
@@ -189,7 +204,13 @@ export async function POST(req: NextRequest) {
         }
       } catch (e) {
       }
-    } else {
+    }
+
+    // Capture the agent ID for tenancy isolation via JSONB field (imap_settings)
+    let adminIdForTenancy = null;
+    if (session.user?.type === 'agent') {
+      const parsedId = parseInt(String(session.user.id));
+      if (!isNaN(parsedId) && parsedId > 0) adminIdForTenancy = parsedId;
     }
 
     // Insert Agent
@@ -202,7 +223,8 @@ export async function POST(req: NextRequest) {
         full_name: full_name || null,
         phone_number: phone_number || null,
         profile_image: '/profile-icons/Sample.svg', // Set default profile picture
-        created_by: createdBy
+        created_by: createdBy, // Typically null if creating agent is an agent, avoiding foreign key constraint to users
+        imap_settings: adminIdForTenancy ? { admin_id: adminIdForTenancy } : null // Store multi-tenancy parent mapping here
       }])
       .select('id')
       .single();

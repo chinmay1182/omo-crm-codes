@@ -20,7 +20,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         const submissionData = {
             form_id: id,
             content: body, // Pass object directly, Supabase handles JSON mapping
-            // contact_id: body.contact_id || null, // Removed as column does not exist in DB
+            contact_id: body.contact_id || null, // Save contact_id if provided via URL param
         };
 
         const { error: submissionError } = await supabase

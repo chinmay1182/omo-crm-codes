@@ -1,0 +1,23 @@
+[
+  {
+    id: 1,
+    username: 'chinmayawade21',
+    password: '$2b$10$.OHvkVIVXNueNu96e7dTO.Uz/GjSwUMB7rEv3HwOhpvjlIlFG16.y',
+    email: 'chinmayawade21@gmail.com',
+    full_name: 'Chinmay',
+    status: 'active',
+    created_by: null,
+    created_at: '2026-02-21T12:55:34.17379+00:00',
+    updated_at: '2026-02-21T12:55:34.17379+00:00',
+    last_login: '2026-02-21T12:57:49.655+00:00',
+    phone_number: '9834225937',
+    imap_settings: { admin_id: 123 },
+    google_access_token: null,
+    google_refresh_token: null,
+    google_token_expiry: null,
+    google_connected: false,
+    profile_image: null,
+    company_seal: null,
+    company_logo: null
+  }
+]

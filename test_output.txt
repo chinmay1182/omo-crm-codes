@@ -1,0 +1,12 @@
+[
+  'id',                  'username',
+  'password',            'email',
+  'full_name',           'status',
+  'created_by',          'created_at',
+  'updated_at',          'last_login',
+  'phone_number',        'imap_settings',
+  'google_access_token', 'google_refresh_token',
+  'google_token_expiry', 'google_connected',
+  'profile_image',       'company_seal',
+  'company_logo'
+]
