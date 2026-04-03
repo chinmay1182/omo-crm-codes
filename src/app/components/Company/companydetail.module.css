@@ -48,7 +48,7 @@
 .tab {
   padding: 0 4px;
   height: 40px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: none;
   border: none;
   cursor: pointer;
@@ -68,7 +68,7 @@
   background-color: #11a454;
   color: white;
   border: none;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: .6rem 1.5rem;
   border-radius: 50px;
   cursor: pointer;
@@ -93,7 +93,7 @@
 .cancelButton {
   background-color: white;
   color: #333;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   border: none;
   padding: .7rem 1.5rem;
   border-radius: 50px;
@@ -115,7 +115,7 @@
 }
 
 .tabContent {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   flex: 1;
   overflow-y: auto;
 }
@@ -230,7 +230,7 @@
   border-bottom: 1px solid #e0e0e0;
   border-radius: 0;
   font-size: 14px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: transparent;
   transition: all 0.2s;
   box-shadow: none !important;
@@ -247,7 +247,7 @@
 .formGroup textarea {
   min-height: 100px;
   resize: vertical;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   border: 1px solid #e0e0e0;
   padding: 0.8rem;
   font-weight: 300;
@@ -264,7 +264,7 @@
   border-radius: 0;
   font-size: 14px;
   /* Larger for header */
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: transparent;
   transition: all 0.2s;
   box-shadow: none !important;
@@ -278,7 +278,7 @@
 
 /* Tab Panel Styles */
 .tabPanel {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .tabPanel h3 {
@@ -291,7 +291,7 @@
 .tabActions {
   display: flex;
   justify-content: flex-end;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   gap: 0.75rem;
   margin-bottom: 1rem;
 }
@@ -389,7 +389,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 4px;
   width: 70%;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   transition: border-color 0.2s;
 }
 
@@ -405,7 +405,7 @@
   color: white;
   border: none;
   border-radius: 50px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-weight: 300;
   margin-left: 12px;
@@ -420,7 +420,7 @@
   color: #4a5568;
   border: none;
   border-radius: 50px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-weight: 300;
   cursor: pointer;
@@ -437,7 +437,7 @@
   color: white;
   border: none;
   border-radius: 4px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   margin-left: 12px;
@@ -467,7 +467,7 @@
   align-items: center;
   gap: 8px;
   /* Space between icon and text */
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .editButton {
@@ -514,7 +514,7 @@
   border-radius: 50px;
   font-size: 12px;
   transition: background-color 0.2s;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
 }

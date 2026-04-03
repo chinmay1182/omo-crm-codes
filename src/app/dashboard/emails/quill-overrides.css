@@ -6,7 +6,7 @@
   background-color: #f8f9fa;
   /* Match Tickets */
   min-height: 100vh;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .header {
@@ -402,7 +402,7 @@
 }
 
 :global(.ql-font-plus-jakarta-sans) {
-  font-family: 'Open Sauce One', sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 /* Quill Font Picker Labels */
@@ -449,8 +449,8 @@
 
 :global(.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="plus-jakarta-sans"]::before),
 :global(.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="plus-jakarta-sans"]::before) {
-  content: 'Open Sauce One';
-  font-family: 'Open Sauce One', sans-serif;
+  content: 'Poppins';
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Responsive */

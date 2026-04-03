@@ -1,5 +1,5 @@
 .container {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 80px);
@@ -400,7 +400,7 @@
   border-radius: 0;
   font-size: 14px;
   font-weight: 300;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: transparent;
   transition: all 0.2s;
   color: #1e293b;
@@ -437,7 +437,7 @@
   cursor: pointer;
   font-weight: 300;
   font-size: 14px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   transition: all 0.2s;
 }
 
@@ -455,7 +455,7 @@
   cursor: pointer;
   font-weight: 300;
   font-size: 14px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   transition: all 0.2s;
   display: flex;
   align-items: center;

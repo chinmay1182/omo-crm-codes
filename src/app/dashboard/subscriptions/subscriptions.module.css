@@ -20,7 +20,7 @@
   font-weight: 600;
   color: #1e293b;
   margin-bottom: 1rem;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .subtitle {
@@ -59,7 +59,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   color: #6c757d;
   position: relative;
@@ -213,7 +213,7 @@
   font-weight: 300;
   color: #212121;
   margin-bottom: 1rem;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .planPrice {
@@ -304,7 +304,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .planButton.primary {
@@ -371,7 +371,7 @@
   font-weight: 600;
   color: #1e293b;
   margin-bottom: 2rem;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .faqGrid {
@@ -399,7 +399,7 @@
   font-weight: 400;
   color: #1e293b;
   margin: 0;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .faqItem p {

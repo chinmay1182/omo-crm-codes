@@ -739,7 +739,7 @@ ${meetingNotes || 'No notes added yet'}
                       alignItems: 'center',
                       gap: '6px',
                       fontSize: '14px',
-                      fontFamily: 'Open Sauce One',
+                      fontFamily: 'Poppins',
                       fontWeight: 300,
                       transition: 'background-color 0.2s'
                     }}
@@ -762,7 +762,7 @@ ${meetingNotes || 'No notes added yet'}
                       alignItems: 'center',
                       gap: '6px',
                       fontSize: '14px',
-                      fontFamily: 'Open Sauce One',
+                      fontFamily: 'Poppins',
                       fontWeight: 300,
                       transition: 'background-color 0.2s'
                     }}

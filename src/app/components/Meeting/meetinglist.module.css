@@ -2,7 +2,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   overflow: hidden;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   background-color: white;
@@ -31,7 +31,7 @@
 
 .meetingList {
   list-style: none;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   padding: 0;
@@ -52,7 +52,7 @@
 }
 
 .meetingTitle {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   margin: 0 0 0.5rem 0;
@@ -64,7 +64,7 @@
   display: flex;
   gap: 0.5rem;
   font-size: 0.875rem;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   color: #64748b;
@@ -80,7 +80,7 @@
 .meetingDescription {
   margin: 0.5rem 0;
   font-size: 0.875rem;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   color: #475569;
@@ -103,7 +103,7 @@
   background-color: #ef4444;
   color: white;
   border: none;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   border-radius: 4px;
@@ -118,7 +118,7 @@
 .meetLink {
   color: #1a73e8;
   text-decoration: none;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   font-weight: 500;

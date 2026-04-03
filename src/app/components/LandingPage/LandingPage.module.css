@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
 .container {
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: var(--foreground);
     background: var(--background);
     min-height: 100vh;
@@ -17,7 +16,7 @@
     justify-content: center;
     align-items: center;
     gap: 12px;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: white;
     /* Force white text */
@@ -215,13 +214,9 @@
 }
 
 .heroTitle {
-    font-size: 50px;
-    font-weight: 400;
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
     font-size: 4rem;
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     line-height: 1.4;
     margin-bottom: 1.5rem;
     max-width: 900px;
@@ -307,10 +302,9 @@
 }
 
 .sectionTitle {
-    font-size: 40px;
-    font-weight: 400;
     font-size: 3rem;
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
@@ -360,8 +354,8 @@
 
 .featureTitle {
     font-size: 1.25rem;
-    font-weight: 700;
-    font-family: 'Instrument Serif', serif;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 1rem;
 }
 
@@ -449,8 +443,8 @@
 
 .productName {
     font-size: 1.1rem;
-    font-weight: 700;
-    font-family: 'Instrument Serif', serif;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
     color: var(--foreground);
 }
 
@@ -522,7 +516,7 @@
     font-weight: 300;
     color: var(--foreground);
     margin-bottom: 1rem;
-    font-family: 'Open Sauce One', sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .pricingPrice {
@@ -530,7 +524,7 @@
     align-items: baseline;
     justify-content: center;
     margin-bottom: 0.5rem;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: var(--foreground);
 }
 
@@ -602,7 +596,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-top: auto;
 }
 
@@ -649,7 +643,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 15px;
     color: #6c757d;
     position: relative;
@@ -760,7 +754,7 @@
     margin: 0;
     /* Remove default margin */
     color: var(--foreground);
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .faqToggleIcon {
@@ -825,7 +819,7 @@
     /* Increased size */
     font-weight: 400;
     /* Lighter weight to match titles */
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 1.5rem;
 }
 
@@ -901,24 +895,6 @@
     color: #11a454;
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    .container {
-        --navbar-bg: rgba(10, 10, 10, 0.8);
-        --border-color: rgba(255, 255, 255, 0.1);
-        --card-bg: #171717;
-        --hero-gradient-start: rgba(17, 164, 84, 0.15);
-        --hero-gradient-end: rgba(10, 10, 10, 0);
-        --text-muted: #a1a1aa;
-        --footer-bg: #111;
-    }
-
-    .featureCard {
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    }
-}
-
-@media (prefers-color-scheme: light) {
     .container {
         --navbar-bg: rgba(255, 255, 255, 0.8);
         --border-color: rgba(0, 0, 0, 0.05);
@@ -928,7 +904,6 @@
         --text-muted: #666;
         --footer-bg: #f9fafb;
     }
-}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -1356,7 +1331,7 @@
     font-size: 1rem;
     font-weight: 300;
     /* Match other buttons */
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     /* Match other buttons */
     cursor: pointer;
     transition: all 0.3s ease;

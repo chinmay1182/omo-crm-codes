@@ -1,5 +1,5 @@
 .taskListContainer {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   width: 100%;
@@ -119,7 +119,7 @@
 .markAsSelect {
   padding: 0.4rem;
   border: 1px solid #ddd;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   border-radius: 4px;
@@ -130,7 +130,7 @@
 .deleteButtonTwo {
   padding: 0.4rem 1rem;
   color: white;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 
   background-color: #d32f2f;

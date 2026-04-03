@@ -43,7 +43,7 @@ const ThemeSelectorModal: React.FC<ThemeSelectorModalProps> = ({ isOpen, onClose
                 onClick={(e) => e.stopPropagation()}
             >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                    <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 300, fontFamily: 'Open Sauce One' }}>Select Theme</h2>
+                    <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 300, fontFamily: 'Poppins' }}>Select Theme</h2>
                     <button
                         onClick={onClose}
                         style={{
@@ -122,7 +122,7 @@ const ThemeSelectorModal: React.FC<ThemeSelectorModalProps> = ({ isOpen, onClose
                             padding: '10px 20px',
                             borderRadius: '50px',
                             cursor: 'pointer',
-                            fontFamily: 'Open Sauce One',
+                            fontFamily: 'Poppins',
                             fontSize: '14px',
                             fontWeight: 300
                         }}
@@ -142,7 +142,7 @@ const ThemeSelectorModal: React.FC<ThemeSelectorModalProps> = ({ isOpen, onClose
                             padding: '10px 20px',
                             borderRadius: '50px',
                             cursor: 'pointer',
-                            fontFamily: 'Open Sauce One',
+                            fontFamily: 'Poppins',
                             fontSize: '14px',
                             fontWeight: 300
                         }}

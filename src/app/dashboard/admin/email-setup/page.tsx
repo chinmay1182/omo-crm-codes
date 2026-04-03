@@ -113,7 +113,7 @@ function EmailSetupContent() {
     };
 
     return (
-        <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: '"Open Sauce One", sans-serif' }}>
+        <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: '"Poppins", sans-serif' }}>
             <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px', color: '#1e293b' }}>
                 Workspace Email Setup (Authority)
             </h1>

@@ -6,7 +6,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   margin: 0 auto;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   height: 100%;
   display: flex;
@@ -57,7 +57,7 @@
 .tab {
   padding: 0 4px;
   height: 40px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: none;
   border: none;
   cursor: pointer;
@@ -79,7 +79,7 @@
 }
 
 .tabContent {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   flex: 1;
   overflow-y: auto;
 }
@@ -135,7 +135,7 @@
 
 /* Tab Panel Styles */
 .tabPanel {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .tabPanel h3 {
@@ -150,7 +150,7 @@
 .meetingsContainer,
 .filesContainer,
 .locationsContainer {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .myHeadingTwo {
@@ -182,7 +182,7 @@
   align-items: center;
   gap: 8px;
   /* Space between icon and text */
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .editButton {
@@ -221,7 +221,7 @@
   border-radius: 50px;
   font-size: 12px;
   transition: background-color 0.2s;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 }
 
@@ -234,7 +234,7 @@
   border-radius: 50px;
   font-size: 12px;
   transition: background-color 0.2s;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Responsive adjustments */
@@ -310,7 +310,7 @@
   border-bottom: 1px solid #e0e0e0;
   border-radius: 0;
   font-size: 14px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: transparent;
   transition: all 0.2s;
   box-shadow: none !important;
@@ -331,7 +331,7 @@
   background-color: #11a454;
   color: white;
   border: none;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: .6rem;
   border-radius: 50px;
   cursor: pointer;
@@ -356,7 +356,7 @@
 .cancelButton {
   background-color: #f5f5f5;
   color: #333;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   border: none;
   padding: .6rem;
   border-radius: 50px;
@@ -418,7 +418,7 @@
   border-bottom: 1px solid #e0e0e0;
   border-radius: 0;
   font-size: 14px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: transparent;
   transition: all 0.2s;
   box-shadow: none !important;

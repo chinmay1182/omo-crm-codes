@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 .container {
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -65,7 +65,7 @@
     gap: 6px;
     font-size: 14px;
     font-weight: 300;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     padding: 4px 8px;
     transition: color 0.2s;
     height: 100%;
@@ -524,7 +524,7 @@
     font-size: 14px;
     width: 250px;
     transition: border-color 0.2s;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
 }
 
@@ -544,7 +544,7 @@
     cursor: pointer;
     outline: none;
     font-weight: 300;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .loading {

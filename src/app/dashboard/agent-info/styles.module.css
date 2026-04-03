@@ -5,7 +5,7 @@
   /* Adjust for header if needed, or 100vh if nested correctly */
   width: 100%;
   background-color: #fff;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
 
@@ -139,7 +139,7 @@
   padding: 0.6rem;
   font-size: 15px;
   font-weight: 300;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -157,7 +157,7 @@
   padding: 0.6rem;
   font-size: 15px;
   font-weight: 300;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;

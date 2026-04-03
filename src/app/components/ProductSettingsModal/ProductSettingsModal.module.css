@@ -12,7 +12,7 @@
     z-index: 1000;
     backdrop-filter: blur(2px);
     animation: fadeIn 0.3s ease-out;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .modalOverlay::-webkit-scrollbar {
@@ -121,7 +121,7 @@
     border-bottom: 1px solid #e0e0e0;
     border-radius: 0;
     font-size: 14px;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: transparent;
     transition: all 0.2s;
 }
@@ -214,7 +214,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #f44336;
     background-color: rgba(244, 67, 54, 0.1);
     font-weight: 400;
@@ -256,7 +256,7 @@
 .cancelButton {
     background-color: #f5f5f5;
     color: #333;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     border: none;
     padding: 0.6rem;
     border-radius: 50px;

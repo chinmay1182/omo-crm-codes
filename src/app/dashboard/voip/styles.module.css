@@ -1,5 +1,5 @@
 .dashboardContainer {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: 2rem;
   margin: 0 auto;
   color: #333;
@@ -257,7 +257,7 @@
 
 /* Keypad Button Styles - Rounded */
 .keypadButton {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.25rem;
   padding: 0.75rem 0;
   border-radius: 50%;
@@ -321,7 +321,7 @@
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   margin-bottom: 0.5rem;
   letter-spacing: -1px;
@@ -364,7 +364,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 15px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   margin-bottom: 0.5rem;
   transition: all 0.2s;
@@ -385,7 +385,7 @@
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;

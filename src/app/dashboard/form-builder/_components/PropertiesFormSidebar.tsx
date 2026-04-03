@@ -71,7 +71,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: 0,
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             background: 'transparent',
                             outline: 'none',
                             transition: 'all 0.2s'
@@ -96,7 +96,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: 0,
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             background: 'transparent',
                             outline: 'none',
                             transition: 'all 0.2s'
@@ -121,7 +121,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: 0,
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             background: 'transparent',
                             outline: 'none',
                             transition: 'all 0.2s'
@@ -159,7 +159,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: 0,
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             background: 'transparent',
                             outline: 'none',
                             transition: 'all 0.2s'
@@ -184,7 +184,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: '4px',
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             resize: 'vertical',
                             outline: 'none',
                             transition: 'all 0.2s'
@@ -210,7 +210,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: 0,
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             background: 'transparent',
                             outline: 'none',
                             transition: 'all 0.2s'
@@ -236,7 +236,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: 0,
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             background: 'transparent',
                             outline: 'none',
                             transition: 'all 0.2s'
@@ -261,7 +261,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: '4px',
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             resize: 'vertical',
                             outline: 'none',
                             transition: 'all 0.2s'
@@ -290,7 +290,7 @@ function GenericPropertiesForm({ elementInstance }: { elementInstance: FormEleme
                             borderRadius: 0,
                             width: '100%',
                             fontSize: '14px',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             background: 'transparent',
                             outline: 'none',
                             transition: 'all 0.2s'

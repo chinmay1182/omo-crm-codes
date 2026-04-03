@@ -121,7 +121,7 @@ export default function PublicFormPage() {
                     borderRadius: '50%',
                     animation: 'spin 1s linear infinite'
                 }}></div>
-                <p style={{ color: '#64748b', fontSize: '14px', fontWeight: 300, fontFamily: 'Open Sauce One, sans-serif' }}>
+                <p style={{ color: '#64748b', fontSize: '14px', fontWeight: 300, fontFamily: 'Poppins, sans-serif' }}>
                     Loading form...
                 </p>
                 <style jsx>{`
@@ -143,7 +143,7 @@ export default function PublicFormPage() {
             flexDirection: 'column',
             gap: '16px',
             background: '#f8f9fa',
-            fontFamily: 'Open Sauce One, sans-serif'
+            fontFamily: 'Poppins, sans-serif'
         }}>
             <i className="fa-light fa-file-slash" style={{ fontSize: '64px', color: '#cbd5e1' }}></i>
             <h1 style={{ fontSize: '24px', fontWeight: 300, color: '#1e293b' }}>Form Not Found</h1>
@@ -160,7 +160,7 @@ export default function PublicFormPage() {
             flexDirection: 'column',
             gap: '16px',
             background: '#f8f9fa',
-            fontFamily: 'Open Sauce One, sans-serif'
+            fontFamily: 'Poppins, sans-serif'
         }}>
             <i className="fa-light fa-lock" style={{ fontSize: '64px', color: '#cbd5e1' }}></i>
             <h1 style={{ fontSize: '24px', fontWeight: 300, color: '#1e293b' }}>Form Not Accessible</h1>
@@ -175,7 +175,7 @@ export default function PublicFormPage() {
             justifyContent: 'center',
             minHeight: '100vh',
             background: '#f8f9fa',
-            fontFamily: 'Open Sauce One, sans-serif'
+            fontFamily: 'Poppins, sans-serif'
         }}>
             <div style={{
                 background: 'white',
@@ -206,7 +206,7 @@ export default function PublicFormPage() {
             backgroundPosition: 'left center, right center',
             minHeight: '100vh',
             padding: '40px 16px',
-            fontFamily: 'Open Sauce One, sans-serif'
+            fontFamily: 'Poppins, sans-serif'
         }}>
             <div style={{
                 maxWidth: '600px',
@@ -291,7 +291,7 @@ export default function PublicFormPage() {
                             fontSize: '14px',
                             fontWeight: 300,
                             cursor: 'pointer',
-                            fontFamily: 'Open Sauce One, sans-serif',
+                            fontFamily: 'Poppins, sans-serif',
                             transition: 'all 0.2s',
                             boxShadow: '0 2px 4px rgba(17, 164, 84, 0.2)'
                         }}

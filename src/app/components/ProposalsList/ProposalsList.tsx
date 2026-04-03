@@ -321,7 +321,7 @@ export default function ProposalsList() {
             borderRadius: 0,
             width: '200px',
             fontSize: '14px',
-            fontFamily: 'Open Sauce One, sans-serif',
+            fontFamily: 'Poppins, sans-serif',
             outline: 'none',
             transition: 'all 0.2s'
           }}

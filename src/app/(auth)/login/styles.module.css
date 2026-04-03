@@ -79,7 +79,7 @@
 .form input {
     width: 100%;
     padding: 0.5rem 0;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     letter-spacing: -0.5px;
     border: none;
@@ -107,7 +107,7 @@
     background-color: #11a454;
     color: white;
     font-size: 1rem;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     border: none;
     border-radius: 50px;
@@ -130,7 +130,7 @@
     justify-content: center;
     gap: 12px;
     font-size: 15px;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     cursor: pointer;
     margin-top: 0 !important;
@@ -231,7 +231,7 @@
     font-size: 3rem;
     font-weight: 300;
     margin-bottom: 1rem;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .imageContent p {

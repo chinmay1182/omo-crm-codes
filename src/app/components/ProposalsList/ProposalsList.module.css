@@ -1,6 +1,6 @@
 /* Main Container */
 .container {
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -44,7 +44,7 @@
   border: none;
   padding: 0 4px;
   transition: all 0.2s;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .navTab i {
@@ -92,7 +92,7 @@
   padding: 6px 0 6px 30px;
   border: none;
   border-bottom: 1px solid #e1e5e9;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   outline: none;
   background: transparent;
@@ -122,7 +122,7 @@
   padding: 6px 24px 6px 0;
   border: none;
   border-bottom: 1px solid #e2e8f0;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   outline: none;
   background: transparent;
@@ -157,7 +157,7 @@
   color: #212121;
   gap: 6px;
   transition: all 0.2s;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .tagsButton:hover {
@@ -224,7 +224,7 @@
   border-radius: 50px;
   font-size: 13px;
   font-weight: 300;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -281,7 +281,7 @@
   font-size: 14px;
   font-weight: 300;
   cursor: pointer;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #334155;
   transition: all 0.2s;
 }
@@ -401,7 +401,7 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   transition: all 0.2s;
 }
 
@@ -413,7 +413,7 @@
   border-radius: 50px;
   font-size: 13px;
   font-weight: 300;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -492,7 +492,7 @@
   border-radius: 50px;
   font-size: 14px;
   font-weight: 300;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;

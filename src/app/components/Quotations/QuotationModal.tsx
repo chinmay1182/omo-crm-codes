@@ -328,7 +328,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                                 cursor: 'pointer',
                                                 borderBottom: '1px solid #f0f0f0',
                                                 fontSize: '14px',
-                                                fontFamily: 'Open Sauce One, sans-serif'
+                                                fontFamily: 'Poppins, sans-serif'
                                             }}
                                             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f9fafb'}
                                             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
@@ -382,7 +382,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                                 cursor: 'pointer',
                                                 borderBottom: '1px solid #f0f0f0',
                                                 fontSize: '14px',
-                                                fontFamily: 'Open Sauce One, sans-serif'
+                                                fontFamily: 'Poppins, sans-serif'
                                             }}
                                             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f9fafb'}
                                             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
@@ -556,7 +556,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                                     border: 'none',
                                     borderBottom: '1px solid #e0e0e0',
                                     borderRadius: '0',
-                                    fontFamily: 'Open Sauce One, sans-serif',
+                                    fontFamily: 'Poppins, sans-serif',
                                     fontSize: '14px',
                                     fontWeight: '300',
                                     color: '#444',
@@ -575,7 +575,7 @@ const QuotationModal: React.FC<QuotationModalProps> = ({ isOpen, onClose, initia
                         {selectedProducts.length > 0 && (
                             <div className={styles.formGroupFull}>
                                 <div style={{ overflowX: 'auto', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
-                                    <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0', fontSize: '13px', fontFamily: 'Open Sauce One, sans-serif' }}>
+                                    <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0', fontSize: '13px', fontFamily: 'Poppins, sans-serif' }}>
                                         <thead>
                                             <tr style={{ background: '#f9fafb' }}>
                                                 <th style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', color: '#6b7280', textTransform: 'uppercase', fontSize: '11px', letterSpacing: '0.05em', borderBottom: '1px solid #e5e7eb', borderTopLeftRadius: '8px' }}>Product</th>

@@ -6,7 +6,7 @@
     margin: 0;
     overflow: hidden;
     background-color: #f3f3f3;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Top Navigation Bar */
@@ -86,7 +86,7 @@
     padding: 6px 16px;
     border-radius: 6px;
     transition: all 0.2s;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .navTab:hover {
@@ -120,7 +120,7 @@
     gap: 8px;
     font-size: 14px;
     font-weight: 300;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     transition: all 0.2s;
 }
 
@@ -141,7 +141,7 @@
     gap: 8px;
     font-size: 14px;
     font-weight: 300;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     transition: all 0.2s;
 }
 
@@ -166,7 +166,7 @@
     gap: 8px;
     font-size: 14px;
     font-weight: 300;
-    font-family: 'Open Sauce One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     transition: all 0.2s;
 }
 

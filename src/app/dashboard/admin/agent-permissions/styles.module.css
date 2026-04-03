@@ -4,7 +4,7 @@
   height: calc(100vh - 100px);
   /* Adjusted for Notification Bar + Header */
   background-color: #f8fafc;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
 
@@ -138,7 +138,7 @@
   background-position: right 0 center;
   background-size: 16px;
   font-weight: 300;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .permissionLevels select:focus {
@@ -233,7 +233,7 @@
   cursor: pointer;
   border: none;
   transition: all 0.2s;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;

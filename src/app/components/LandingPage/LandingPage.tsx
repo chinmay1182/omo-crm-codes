@@ -387,7 +387,7 @@ export default function LandingPage({ user }: LandingPageProps) {
                         <div key={index} className={`${styles.pricingCard} ${plan.popular ? styles.popular : ''}`}>
                             {plan.popular && <div className={styles.popularBadge}>Most Popular</div>}
                             <div className={styles.pricingHeader}>
-                                <h3 className={styles.planName} style={{ fontSize: '1.3rem', fontFamily: "'Open Sauce One', sans-serif" }}>{plan.name}</h3>
+                                <h3 className={styles.planName} style={{ fontSize: '1.3rem', fontFamily: "'Poppins', sans-serif" }}>{plan.name}</h3>
                                 <div className={styles.pricingPrice}>
                                     <span>₹</span>
                                     <span>{getDiscountedPrice(plan.price)}</span>

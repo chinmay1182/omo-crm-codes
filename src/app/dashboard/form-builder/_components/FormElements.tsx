@@ -92,7 +92,7 @@ export const FormElements: FormElementsType = {
                         width: '100%',
                         background: 'transparent',
                         fontSize: '14px',
-                        fontFamily: 'Open Sauce One, sans-serif',
+                        fontFamily: 'Poppins, sans-serif',
                         color: '#1e293b'
                     }}
                 />
@@ -293,7 +293,7 @@ export const FormElements: FormElementsType = {
                         width: '100%',
                         background: 'transparent',
                         fontSize: '14px',
-                        fontFamily: 'Open Sauce One, sans-serif',
+                        fontFamily: 'Poppins, sans-serif',
                         color: '#1e293b'
                     }}
                 />
@@ -373,7 +373,7 @@ export const FormElements: FormElementsType = {
                         background: 'transparent',
                         resize: 'vertical',
                         fontSize: '14px',
-                        fontFamily: 'Open Sauce One, sans-serif',
+                        fontFamily: 'Poppins, sans-serif',
                         color: '#1e293b'
                     }}
                 />
@@ -448,7 +448,7 @@ export const FormElements: FormElementsType = {
                     alignItems: 'center',
                     gap: '8px',
                     fontSize: '14px',
-                    fontFamily: 'Open Sauce One, sans-serif'
+                    fontFamily: 'Poppins, sans-serif'
                 }}>
                     <i className="fa-sharp fa-thin fa-calendar" />
                     <span>Pick a date</span>
@@ -525,7 +525,7 @@ export const FormElements: FormElementsType = {
                         borderRadius: 0,
                         background: 'transparent',
                         fontSize: '14px',
-                        fontFamily: 'Open Sauce One, sans-serif',
+                        fontFamily: 'Poppins, sans-serif',
                         color: '#1e293b'
                     }}
                 >

@@ -1,6 +1,6 @@
 .numbersContainer {
   max-width: 1400px;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   margin: 0 auto;
   padding: 1rem;
@@ -29,7 +29,7 @@
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   font-weight: 500;
   display: flex;
@@ -60,7 +60,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
 }
 
@@ -75,7 +75,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   min-width: 200px;
 }
@@ -218,7 +218,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.85rem;
-  font-family: 'Open Sauce One', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   display: flex;
   align-items: center;
