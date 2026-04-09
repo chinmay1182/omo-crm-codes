@@ -1,93 +1,89 @@
 name: Deploy to VPS
 
 on:
-push:
-branches:
-- main
-workflow_dispatch:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
 
 env:
-REGISTRY: ghcr.io
+    REGISTRY: ghcr.io
 
 jobs:
-build-and-push:
-runs-on: ubuntu-latest
+    build-and-push:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
 
-```
-permissions:
-  contents: read
-  packages: write
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
+            - name: Log in to the Container registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ${{ env.REGISTRY }}
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
 
-  - name: Log in to Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ${{ env.REGISTRY }}
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+            - name: Extract metadata (tags, labels) for Docker
+              id: meta
+              uses: docker/metadata-action@v5
+              with:
+                  images: ${{ env.REGISTRY }}/${{ github.repository }}
+                  tags: |
+                      type=raw,value=latest
+                      type=sha
 
-  - name: Extract metadata
-    id: meta
-    uses: docker/metadata-action@v5
-    with:
-      images: ${{ env.REGISTRY }}/${{ github.repository }}
-      tags: |
-        type=raw,value=latest
-        type=sha
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v5
+              with:
+                  context: .
+                  push: true
+                  tags: ${{ steps.meta.outputs.tags }}
+                  labels: ${{ steps.meta.outputs.labels }}
+                  build-args: |
+                      NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+                      NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
-  - name: Build and push Docker image
-    uses: docker/build-push-action@v5
-    with:
-      context: .
-      push: true
-      tags: ${{ steps.meta.outputs.tags }}
-      labels: ${{ steps.meta.outputs.labels }}
-      build-args: |
-        NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-        NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-```
+    deploy:
+        needs: build-and-push
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy to VPS
+              uses: appleboy/ssh-action@v1.0.3
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.PASSWORD }}
+                  script: |
+                      # Set image name (lowercase)
+                      IMAGE_NAME=$(echo "ghcr.io/${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
 
-deploy:
-needs: build-and-push
-runs-on: ubuntu-latest
+                      # Login to GHCR using the action's token
+                      echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-```
-steps:
-  - name: Deploy to VPS
-    uses: appleboy/ssh-action@v1.0.3
-    with:
-      host: ${{ secrets.HOST }}
-      username: ${{ secrets.USERNAME }}
-      password: ${{ secrets.PASSWORD }}
-      script: |
-        IMAGE_NAME=$(echo "ghcr.io/${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+                      # Pull the new image
+                      docker pull "$IMAGE_NAME:latest"
 
-        echo "Using image: $IMAGE_NAME"
+                      # Stop and remove the old container if it exists
+                      if [ "$(docker ps -a -q -f name=crm-app)" ]; then
+                          docker stop crm-app
+                          docker rm crm-app
+                      fi
 
-        echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+                      # Run the new container
+                      docker run -d \
+                        --name crm-app \
+                        --restart unless-stopped \
+                        -p 3027:3027 \
+                        -e PORT=3027 \
+                        -e NODE_ENV=production \
+                        -e NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }} \
+                        -e NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} \
+                        -e SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }} \
+                        "$IMAGE_NAME:latest"
 
-        docker pull "$IMAGE_NAME:latest"
-
-        if [ "$(docker ps -aq -f name=crm-app)" ]; then
-          docker stop crm-app || true
-          docker rm crm-app || true
-        fi
-
-        docker run -d \
-          --name crm-app \
-          --restart unless-stopped \
-          -p 3027:3027 \
-          -e PORT=3027 \
-          -e NODE_ENV=production \
-          -e NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }} \
-          -e NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} \
-          -e SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }} \
-          "$IMAGE_NAME:latest"
-
-        docker image prune -f
-
-        echo "Deployment done"
-```
+                      # Cleanup unused images to save space
+                      docker image prune -f
